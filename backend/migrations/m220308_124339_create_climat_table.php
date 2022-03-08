@@ -13,9 +13,9 @@ class m220308_124339_create_climat_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%climat}}', [
-            'code' => $this->string(2)->unique(),
-            'name' => $this->string(64)->unique(),
-            'icon' => $this->string(256)->unique(),
+            'code' => $this->string(8)->unique()->notNull(),
+            'name' => $this->string(64)->unique()->notNull(),
+            'icon' => $this->string(256)->notNull(),
         ]);
 
         $this->addPrimaryKey(

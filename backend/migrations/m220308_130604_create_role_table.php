@@ -14,6 +14,7 @@ class m220308_130604_create_role_table extends Migration
     {
         $this->createTable('{{%role}}', [
             'id' => $this->primaryKey(),
+            'name' => $this->string(32)->unique()->notNull(),
         ]);
     }
 

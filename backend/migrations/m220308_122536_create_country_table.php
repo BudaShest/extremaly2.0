@@ -13,7 +13,7 @@ class m220308_122536_create_country_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%country}}', [
-            'code' => $this->string(2)->unique(),
+            'code' => $this->string(2)->unique()->notNull(),
             'name' => $this->string(64)->unique()->notNull(),
             'flag' => $this->string(256)->notNull(),
         ]);
