@@ -16,8 +16,9 @@ class m220308_165848_create_junction_table_for_event_and_person extends Migratio
             'event_id' => $this->integer()->notNull(),
             'person_id' => $this->integer()->notNull(),
             'created_at' => $this->dateTime(),
-            'PRIMARY_KEY(event_id, person_id)',
         ]);
+
+        $this->addPrimaryKey('pk-event_person','event_person', ['event_id','person_id']);
 
         $this->createIndex(
             'idx-event_person-event_id',

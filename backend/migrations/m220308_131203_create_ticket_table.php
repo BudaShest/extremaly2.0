@@ -12,7 +12,7 @@ class m220308_131203_create_ticket_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('{{%event_price}}', [
+        $this->createTable('{{%ticket}}', [
             'id' => $this->primaryKey(),
             'event_id' => $this->integer()->notNull(),
             'price' => $this->integer(8)->notNull(),
@@ -20,7 +20,7 @@ class m220308_131203_create_ticket_table extends Migration
         ]);
 
         $this->createIndex(
-        'idx-ticket-event_id',
+            'idx-ticket-event_id',
             'ticket',
             'event_id'
         );
@@ -46,8 +46,8 @@ class m220308_131203_create_ticket_table extends Migration
             'event_price'
         );
 
-        $this->dropIndex('idx-event_price-event_id','event_price');
+        $this->dropIndex('idx-event_price-event_id','ticket');
 
-        $this->dropTable('{{%event_price}}');
+        $this->dropTable('{{%ticket}}');
     }
 }

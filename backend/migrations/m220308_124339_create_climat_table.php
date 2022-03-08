@@ -20,7 +20,7 @@ class m220308_124339_create_climat_table extends Migration
 
         $this->addPrimaryKey(
         'pk-climat-code',
-            'cilmat',
+            'climat',
             'code',
         );
     }

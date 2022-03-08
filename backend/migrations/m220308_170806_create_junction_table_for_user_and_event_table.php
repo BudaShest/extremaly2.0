@@ -19,8 +19,9 @@ class m220308_170806_create_junction_table_for_user_and_event_table extends Migr
         $this->createTable('{{%user_event}}', [
             'user_id' => $this->integer(),
             'event_id' => $this->integer(),
-            'PRIMARY KEY(user_id, event_id)',
         ]);
+
+        $this->addPrimaryKey('pk-user_event','user_event',['user_id','event_id']);
 
         // creates index for column `user_id`
         $this->createIndex(
