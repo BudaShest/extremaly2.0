@@ -1,0 +1,17 @@
+.person{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border:20px solid #111111;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+}
+
+
+.personActive{
+    width: 300px;
+    height: 300px;
+}

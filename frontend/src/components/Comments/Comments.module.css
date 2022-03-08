@@ -1,0 +1,19 @@
+.comments{
+    margin:90px 0;
+}
+.commentsContainer{
+    background-color: #111111;
+    padding: 20px;
+}
+.commentsText{
+    color: #a2a2a2;
+    padding-right: 30px !important;
+
+}
+.commentsText>*{
+    margin: 30px 0;
+}
+
+.pagination{
+    padding: 15px;
+}

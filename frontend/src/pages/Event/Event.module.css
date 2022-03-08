@@ -1,0 +1,27 @@
+.eventSlider{
+    height: 600px;
+}
+
+.eventDescription{
+    padding: 20px;
+    color:white;
+}
+
+.eventDescription_headlines{
+    padding: 10px;
+    text-align: center;
+    border-bottom:2px solid white;
+}
+
+.commentForm{
+    display: flex;
+    flex-direction: column;
+    background-color: #111111;
+    padding: 10px;
+}
+
+.commentForm_title{
+    margin: 10px 0;
+    text-align: center;
+
+}

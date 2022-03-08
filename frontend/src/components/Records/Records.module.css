@@ -1,0 +1,46 @@
+
+.filterBlock{
+    background-color: #111;
+    padding: 24px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.filterBlock_headlines{
+    text-align: center;
+    padding: 10px;
+    border-bottom:2px solid white;
+}
+
+.filterBlock_input{
+    color:white;
+}
+/*TODO сделать так, чтобы при выборе фильта сбоку, он подсвечивался оранжевым*/
+/*.filterBlock_input_active{*/
+/*    color: #F2733C;*/
+/*}*/
+
+.filterBadge{
+    display: flex;
+    justify-content: center;
+    background-color: #111;
+    color:lightgrey;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+.filterBadge_active{
+    color: #F2733C;
+}
+
+
+
+.record{
+    background-color: #111;
+    color:lightgrey;
+}
+
+.pagination{
+    padding: 14px 0;
+}

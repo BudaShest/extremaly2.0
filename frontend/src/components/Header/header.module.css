@@ -1,0 +1,32 @@
+/*------Файл со стилями для шапки страницы*/
+/*1)Навбар*/
+.navbar{
+    background-color: #101010;
+    padding: 0 10px;
+    border-bottom: 20px solid #101010;
+    height: 100px;
+}
+
+/*2)Логотип*/
+.logo{
+    width: 100%;
+    max-width: 360px;
+
+}
+
+.logoSpan{
+    color:#DE4564;
+}
+
+.logoText{
+    position: relative;
+    top:-40px;
+    font-size: 0.4em;
+}
+
+
+/*3)Кнопка входа*/
+.loginBtn{
+    background-color: #42A379 !important;
+    color:white;
+}

@@ -1,0 +1,20 @@
+/* Глобальные стили */
+body{
+    background-color: #222;
+}
+.select-dropdown{
+    color: white;
+}
+.datepicker{
+    color:white;
+}
+
+.datepicker-row>*{
+    color:gray;
+}
+.datepicker-row>.is_selected{
+    color:white;
+}
+.materialize-textarea{
+    color: lightgrey;
+}
