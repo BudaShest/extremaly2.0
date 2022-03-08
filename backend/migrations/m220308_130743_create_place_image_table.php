@@ -40,6 +40,8 @@ class m220308_130743_create_place_image_table extends Migration
     {
         $this->dropForeignKey('fk-place_image_place_id','place_image');
 
+        $this->dropIndex('idx-place_image-place_id', 'place_image');
+
         $this->dropTable('{{%place_image}}');
     }
 }

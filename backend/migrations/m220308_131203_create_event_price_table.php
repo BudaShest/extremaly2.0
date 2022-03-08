@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%event_price}}`.
+ * Handles the creation of table `{{%ticket}}`.
  */
-class m220308_131203_create_event_price_table extends Migration
+class m220308_131203_create_ticket_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -20,14 +20,14 @@ class m220308_131203_create_event_price_table extends Migration
         ]);
 
         $this->createIndex(
-        'idx-event_price-event_id',
-            'event_price',
+        'idx-ticket-event_id',
+            'ticket',
             'event_id'
         );
 
         $this->addForeignKey(
-            'fk-event_price_event_id',
-            'event_price',
+            'fk-ticket-event_id',
+            'ticket',
             'event_id',
             'event',
             'id',
