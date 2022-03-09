@@ -19,9 +19,9 @@ class m220308_130950_create_event_table extends Migration
             'from' => $this->dateTime(),
             'until' => $this->dateTime(),
             'description' => $this->text(),
-            'age_restrictions' => $this->integer(2)->notNull(),
+            'age_restrictions' => $this->integer(2)->notNull()->defaultValue(12),
             'priority' => $this->integer(1)->notNull()->defaultValue(1),
-            'is_horizontal' => $this->boolean()->defaultValue(true),
+            'is_horizontal' => $this->boolean()->notNull()->defaultValue(true),
             'place_id' => $this->integer()->notNull(),
             'type_id' => $this->integer()->notNull(),
         ]);

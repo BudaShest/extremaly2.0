@@ -10,8 +10,8 @@ services:
   db:
     image: postgres
     restart: always
-    ports:
-      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
@@ -20,4 +20,8 @@ services:
     image: adminer
     restart: always
     ports:
-       - '8080:8080'
+       - '8081:8080'
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
