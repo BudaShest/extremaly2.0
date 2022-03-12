@@ -1,5 +1,7 @@
 <?php
 
+namespace app\models;
+
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -8,9 +10,9 @@ class Place extends ActiveRecord
     public function rules(): array
     {
         return [
-          [['name','address','description','country_code','climat_code'],'required'],
-          [['name','address','description'],'string'],
-          [['name', 'address'], 'unique']
+            [['name', 'address', 'description', 'country_code', 'climat_code'], 'required'],
+            [['name', 'address', 'description'], 'string'],
+            [['name', 'address'], 'unique']
         ];
     }
 

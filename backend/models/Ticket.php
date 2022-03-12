@@ -1,5 +1,7 @@
 <?php
 
+namespace app\models;
+
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -8,9 +10,9 @@ class Ticket extends ActiveRecord
     public function rules(): array
     {
         return [
-          [['event_id','price','privilege'], 'required'],
-          [['event_id', 'price'], 'integer'],
-          [['privilege'], 'string'],
+            [['event_id', 'price', 'privilege'], 'required'],
+            [['event_id', 'price'], 'integer'],
+            [['privilege'], 'string'],
         ];
     }
 

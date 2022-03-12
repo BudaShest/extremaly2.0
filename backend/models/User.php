@@ -1,5 +1,7 @@
 <?php
 
+namespace app\models;
+
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -13,9 +15,9 @@ class User extends ActiveRecord
     public function rules(): array
     {
         return [
-          [['login', 'password','confirmPassword','role_id'],'required'],
-          [['login', 'password','confirmPassword', 'avatar'], 'string'],
-          [['login'], 'unique'],
+            [['login', 'password', 'confirmPassword', 'role_id'], 'required'],
+            [['login', 'password', 'confirmPassword', 'avatar'], 'string'],
+            [['login'], 'unique'],
         ];
     }
 

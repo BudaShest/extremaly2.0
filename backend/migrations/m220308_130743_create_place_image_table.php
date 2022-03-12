@@ -19,13 +19,13 @@ class m220308_130743_create_place_image_table extends Migration
         ]);
 
         $this->createIndex(
-        'idx-place_image-place_id',
+            'idx-place_image-place_id',
             'place_image',
             'place_id',
         );
 
         $this->addForeignKey(
-        'fk-place_image_place_id',
+            'fk-place_image_place_id',
             'place_image',
             'place_id',
             'place',
@@ -38,7 +38,7 @@ class m220308_130743_create_place_image_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-place_image_place_id','place_image');
+        $this->dropForeignKey('fk-place_image_place_id', 'place_image');
 
         $this->dropIndex('idx-place_image-place_id', 'place_image');
 

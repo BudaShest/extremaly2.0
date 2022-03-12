@@ -25,7 +25,7 @@ class m220308_131300_create_person_image_table extends Migration
         );
 
         $this->addForeignKey(
-        'fk-person_image-person_id',
+            'fk-person_image-person_id',
             'person_image',
             'person_id',
             'person',

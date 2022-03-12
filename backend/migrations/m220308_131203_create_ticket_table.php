@@ -46,7 +46,7 @@ class m220308_131203_create_ticket_table extends Migration
             'event_price'
         );
 
-        $this->dropIndex('idx-event_price-event_id','ticket');
+        $this->dropIndex('idx-event_price-event_id', 'ticket');
 
         $this->dropTable('{{%ticket}}');
     }

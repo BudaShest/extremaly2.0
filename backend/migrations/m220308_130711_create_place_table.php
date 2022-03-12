@@ -22,13 +22,13 @@ class m220308_130711_create_place_table extends Migration
         ]);
 
         $this->createIndex(
-        'idx-place-climat_code',
+            'idx-place-climat_code',
             'place',
             'climat_code',
         );
 
         $this->addForeignKey(
-        'fk-place-climat_code',
+            'fk-place-climat_code',
             'place',
             'climat_code',
             'climat',
@@ -59,13 +59,13 @@ class m220308_130711_create_place_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-place-country_code','place');
+        $this->dropForeignKey('fk-place-country_code', 'place');
 
-        $this->dropIndex('idx-place-country_code','place');
+        $this->dropIndex('idx-place-country_code', 'place');
 
         $this->dropForeignKey('fk-place-climat_code', 'place');
 
-        $this->dropIndex('idx-place-climat_code','place');
+        $this->dropIndex('idx-place-climat_code', 'place');
 
         $this->dropTable('{{%place}}');
     }

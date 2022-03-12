@@ -27,13 +27,13 @@ class m220308_130950_create_event_table extends Migration
         ]);
 
         $this->createIndex(
-        'idx-event-place_id',
+            'idx-event-place_id',
             'event',
             'place_id'
         );
 
         $this->addForeignKey(
-        'fk-event-place_id',
+            'fk-event-place_id',
             'event',
             'place_id',
             'place',
@@ -64,13 +64,13 @@ class m220308_130950_create_event_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-event-type_id','event');
+        $this->dropForeignKey('fk-event-type_id', 'event');
 
-        $this->dropIndex('idx-event-type_id','event');
+        $this->dropIndex('idx-event-type_id', 'event');
 
-        $this->dropForeignKey('fk-event-place_id','event');
+        $this->dropForeignKey('fk-event-place_id', 'event');
 
-        $this->dropIndex('idx-event-place_id','event');
+        $this->dropIndex('idx-event-place_id', 'event');
 
         $this->dropTable('{{%event}}');
     }

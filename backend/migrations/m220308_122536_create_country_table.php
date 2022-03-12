@@ -19,9 +19,9 @@ class m220308_122536_create_country_table extends Migration
         ]);
 
         $this->addPrimaryKey(
-        'pk-country-code',
-        'country',
-        'code'
+            'pk-country-code',
+            'country',
+            'code'
         );
     }
 

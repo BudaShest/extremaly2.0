@@ -21,51 +21,51 @@ class m220308_131524_create_application_table extends Migration
         ]);
 
         $this->createIndex(
-        'idx-application-user_id',
-        'application',
-        'user_id'
+            'idx-application-user_id',
+            'application',
+            'user_id'
         );
 
         $this->addForeignKey(
-        'fk-application-user_id',
-        'application',
-        'user_id',
-        'user',
-        'id',
-        'CASCADE',
-        'CASCADE'
+            'fk-application-user_id',
+            'application',
+            'user_id',
+            'user',
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         $this->createIndex(
-        'idx-application-ticket_id',
-        'application',
-    'ticket_id'
+            'idx-application-ticket_id',
+            'application',
+            'ticket_id'
         );
 
         $this->addForeignKey(
-        'fk-application-ticket_id',
-        'application',
-        'ticket_id',
-        'ticket',
-        'id',
-        'CASCADE',
-        'CASCADE'
+            'fk-application-ticket_id',
+            'application',
+            'ticket_id',
+            'ticket',
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         $this->createIndex(
-        'idx-application-status_id',
-        'application',
-        'status_id'
+            'idx-application-status_id',
+            'application',
+            'status_id'
         );
 
         $this->addForeignKey(
-        'fk-application-status_id',
-        'application',
-        'status_id',
-        'status',
-        'id',
-        'CASCADE',
-        'CASCADE'
+            'fk-application-status_id',
+            'application',
+            'status_id',
+            'status',
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace app\models;
+
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -8,7 +10,7 @@ class Role extends ActiveRecord
     public function rules(): array
     {
         return [
-            [['name'],'required'],
+            [['name'], 'required'],
             [['name'], 'unique'],
         ];
     }

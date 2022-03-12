@@ -23,13 +23,13 @@ class m220308_131432_create_user_table extends Migration
         ]);
 
         $this->createIndex(
-        'idx-user-role_id',
+            'idx-user-role_id',
             'user',
             'role_id'
         );
 
         $this->addForeignKey(
-        'fk-user-role_id',
+            'fk-user-role_id',
             'user',
             'role_id',
             'role',
@@ -44,9 +44,9 @@ class m220308_131432_create_user_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-user-role_id','user');
+        $this->dropForeignKey('fk-user-role_id', 'user');
 
-        $this->dropIndex('idx-user-role_id','user');
+        $this->dropIndex('idx-user-role_id', 'user');
 
         $this->dropTable('{{%user}}');
     }
