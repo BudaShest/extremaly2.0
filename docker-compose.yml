@@ -15,7 +15,7 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRESS_DB: extremaly
+      POSTGRES_DB: extremaly
   adminer:
     image: adminer
     restart: always

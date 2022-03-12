@@ -1,12 +1,13 @@
 <?php
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 class PersonImage extends ActiveRecord
 {
     public $uploads;
 
-    public function rules()
+    public function rules(): array
     {
         return [
           [['person_id', 'image', 'uploads'], 'required'],
@@ -16,7 +17,7 @@ class PersonImage extends ActiveRecord
         ];
     }
 
-    public function getPerson()
+    public function getPerson(): ActiveQuery
     {
         return $this->hasOne(Person::class, ['id'  => 'person_id']);
     }

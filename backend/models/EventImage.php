@@ -1,12 +1,13 @@
 <?php
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 class EventImage extends ActiveRecord
 {
     public $uploads;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['event_id','image','uploads'],'required'],
@@ -16,7 +17,7 @@ class EventImage extends ActiveRecord
         ];
     }
 
-    public function getEvent()
+    public function getEvent(): ActiveQuery
     {
         return $this->hasOne(Event::class, ['id' => 'event_id']);
     }

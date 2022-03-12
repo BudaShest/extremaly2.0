@@ -1,10 +1,11 @@
 <?php
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 class Event extends ActiveRecord
 {
-    public function rules()
+    public function rules(): array
     {
         return [
           [['name', 'place_id', 'type_id'], 'required'],
@@ -16,22 +17,22 @@ class Event extends ActiveRecord
         ];
     }
 
-    public function getPlace()
+    public function getPlace(): ActiveQuery
     {
         return $this->hasOne(Place::class, ['id' => 'place_id']);
     }
 
-    public function getType()
+    public function getType(): ActiveQuery
     {
         return $this->hasOne(EventType::class, ['id' => 'type_id']);
     }
 
-    public function getImages()
+    public function getImages(): ActiveQuery
     {
         return $this->hasMany(EventImage::class, ['event_id' => 'id']);
     }
 
-    public function getTickets()
+    public function getTickets(): ActiveQuery
     {
         return $this->hasMany(Ticket::class, ['event_id' => 'id']);
     }

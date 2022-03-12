@@ -1,10 +1,11 @@
 <?php
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 class Ticket extends ActiveRecord
 {
-    public function rules()
+    public function rules(): array
     {
         return [
           [['event_id','price','privilege'], 'required'],
@@ -13,7 +14,7 @@ class Ticket extends ActiveRecord
         ];
     }
 
-    public function getEvent()
+    public function getEvent(): ActiveQuery
     {
         return $this->hasOne(Event::class, ['id' => 'event_id']);
     }

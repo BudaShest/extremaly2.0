@@ -12,7 +12,6 @@ class m220308_131524_create_application_table extends Migration
      */
     public function safeUp()
     {
-        //todo
         $this->createTable('{{%application}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
@@ -20,6 +19,54 @@ class m220308_131524_create_application_table extends Migration
             'num' => $this->integer()->notNull(),
             'status_id' => $this->integer()->notNull()->defaultValue(1)
         ]);
+
+        $this->createIndex(
+        'idx-application-user_id',
+        'application',
+        'user_id'
+        );
+
+        $this->addForeignKey(
+        'fk-application-user_id',
+        'application',
+        'user_id',
+        'user',
+        'id',
+        'CASCADE',
+        'CASCADE'
+        );
+
+        $this->createIndex(
+        'idx-application-ticket_id',
+        'application',
+    'ticket_id'
+        );
+
+        $this->addForeignKey(
+        'fk-application-ticket_id',
+        'application',
+        'ticket_id',
+        'ticket',
+        'id',
+        'CASCADE',
+        'CASCADE'
+        );
+
+        $this->createIndex(
+        'idx-application-status_id',
+        'application',
+        'status_id'
+        );
+
+        $this->addForeignKey(
+        'fk-application-status_id',
+        'application',
+        'status_id',
+        'status',
+        'id',
+        'CASCADE',
+        'CASCADE'
+        );
     }
 
     /**
@@ -27,6 +74,18 @@ class m220308_131524_create_application_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk-application-status_id', 'application');
+
+        $this->dropIndex('idx-application-status_id', 'application');
+
+        $this->dropForeignKey('fk-application-ticket_id', 'application');
+
+        $this->dropIndex('idx-application-ticket_id', 'application');
+
+        $this->dropForeignKey('fk-application-user_id', 'application');
+
+        $this->dropIndex('idx-application-user_id', 'application');
+
         $this->dropTable('{{%application}}');
     }
 }

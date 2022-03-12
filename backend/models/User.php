@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 class User extends ActiveRecord
 {
@@ -9,7 +10,7 @@ class User extends ActiveRecord
     public $confirmPassword;
 
     //TODO возможно сценарии
-    public function rules()
+    public function rules(): array
     {
         return [
           [['login', 'password','confirmPassword','role_id'],'required'],
@@ -18,7 +19,7 @@ class User extends ActiveRecord
         ];
     }
 
-    public function getRole()
+    public function getRole(): ActiveQuery
     {
         return $this->hasOne(Role::class, ['id' => 'role_id']);
     }

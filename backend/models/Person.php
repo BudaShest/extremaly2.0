@@ -1,10 +1,11 @@
 <?php
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 class Person extends ActiveRecord
 {
-    public function rules()
+    public function rules(): array
     {
         return [
           [['firstname', 'age'], 'required'],
@@ -13,7 +14,7 @@ class Person extends ActiveRecord
         ];
     }
 
-    public function getImages()
+    public function getImages(): ActiveQuery
     {
         return $this->hasMany(PersonImage::class, ['person_id' => 'id']);
     }

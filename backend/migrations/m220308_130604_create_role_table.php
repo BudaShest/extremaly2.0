@@ -16,6 +16,12 @@ class m220308_130604_create_role_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(32)->unique()->notNull(),
         ]);
+
+        $this->batchInsert('role', ['name'], [
+            ['админ'],
+            ['модератор'],
+            ['пользователь']
+        ]);
     }
 
     /**

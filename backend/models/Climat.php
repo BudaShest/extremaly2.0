@@ -1,13 +1,14 @@
 <?php
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 class Climat extends ActiveRecord
 {
     //TODO уточнить тип и потом чекнуть все AR-модели
     public $uploads;
 
-    public function rules()
+    public function rules(): array
     {
         return [
           [['code', 'name', 'icon','uploads'], 'required'],
@@ -18,7 +19,7 @@ class Climat extends ActiveRecord
     }
 
 
-    public function getPlaces()
+    public function getPlaces(): ActiveQuery
     {
         return $this->hasMany(Place::class, ['climat_code' => 'code']);
     }

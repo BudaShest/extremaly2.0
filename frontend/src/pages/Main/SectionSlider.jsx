@@ -20,7 +20,7 @@ const SectionSlider = () => {
                     <div className="valign-wrapper hoverable" style={{backgroundImage:"url('https://img5.goodfon.ru/original/1366x768/4/db/actor-dwayne-johnson-smile-dwayne-the-rock-johnson.jpg')",width:"400px", height:"300px", backgroundSize:"cover", backgroundPosition:"center"}}>
                         <p style={{backgroundColor:"rgba(0,0,0,0.6)", textAlign:'center', fontSize:"2em", width:'100%', padding:'14px'}}>Персонажи</p>
                     </div>
-                    <div className="valign-wrapper hoverable" style={{backgroundImage:"url('https://styleinsider.com.ua/wp-content/uploads/2019/09/Bezymyannyj-kollazh-2019-09-03T153149.451.jpg')",width:"400px", height:"300px", backgroundSize:"cover", backgroundPosition:"center"}}>
+                    <div className="valign-wrapper hoverable" style={{backgroundImage:"url('https://cdnn11.img.sputnik.by/img/07e6/03/09/1061150074_0:0:3073:1728_2072x0_60_0_0_de97fc371295e6b51d855ba9ac6f7f6d.jpg')",width:"400px", height:"300px", backgroundSize:"cover", backgroundPosition:"center"}}>
                         <p style={{backgroundColor:"rgba(0,0,0,0.6)", textAlign:'center', fontSize:"2em", width:'100%', padding:'14px'}}>События</p>
                     </div>
                 </Carousel>
