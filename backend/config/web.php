@@ -11,7 +11,12 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
+    'language'=>'ru',
     'components' => [
+        'assetManager' => [
+          'class' => 'yii\web\AssetManager',
+          'forceCopy' => true, //TODO потом разобраться с кэшированием
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'aroundTheWorld',
@@ -56,6 +61,11 @@ $config = [
 
     ],
     'params' => $params,
+    'modules' => [
+        'admin' => [
+            'class' => \app\modules\admin\AdminModule::class
+        ]
+    ]
 ];
 
 if (YII_ENV_DEV) {
