@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Container} from 'react-materialize';
+import {Container, Row, Col} from 'react-materialize';
 import CountryBadge from "../../components/CountryBadge/CountryBadge";
-// const axios = require('axios');
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchCountries} from "../../asyncActions/places/fetchCountries";
+import {fetchClimates} from "../../asyncActions/places/fetchClimates";
+import ClimateBadge from "../../components/ClimateBadge/ClimateBadge";
+import Records from "../../components/Records/Records";
 
 const Places = () => {
-    const [countries, setCountries] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(async ()=>{
         const script = document.createElement('script');
@@ -13,14 +17,14 @@ const Places = () => {
         script.async = true;
 
         document.querySelector('#mapContainer').append(script);
+        dispatch(fetchCountries());
+        dispatch(fetchClimates());
 
-        // axios.get('http://localhost:8000/countries')
-        //     .then(response=>setCountries(response.data))
-        //     .catch(error=>console.error(error))
-
-
-        //TODO пока по убогому, потом подключаем edux
     },[])
+
+    const countries = useSelector(state => state.placesReducer.countries);
+
+    const climates = useSelector(state => state.placesReducer.climates);
 
     return (
         <main>
@@ -30,6 +34,13 @@ const Places = () => {
             <Container>
                 <p>test</p>
                 <CountryBadge countries={countries}/>
+                <Row>
+                    <Col s={2}>
+                        <ClimateBadge climates={climates}/>
+                    </Col>
+                    <Col s={10}>
+                    </Col>
+                </Row>
             </Container>
         </main>
     );

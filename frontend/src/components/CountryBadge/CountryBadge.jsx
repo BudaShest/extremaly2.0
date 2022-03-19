@@ -9,7 +9,7 @@ const CountryBadge = ({countries}) => {
         <Row>
             {
                 countries.map(country=>{
-                    return <a className="col hoverable"><img className={style.countryIcon} src={country.flag} alt=""/></a>
+                    return <a className="col"><img className={`${style.countryIcon} hoverable`} src={country.flag} alt=""/></a>
                 })
             }
         </Row>
