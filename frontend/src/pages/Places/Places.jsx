@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Container} from 'react-materialize';
 import CountryBadge from "../../components/CountryBadge/CountryBadge";
-const axios = require('axios');
+// const axios = require('axios');
 
 const Places = () => {
     const [countries, setCountries] = useState([]);
@@ -14,9 +14,9 @@ const Places = () => {
 
         document.querySelector('#mapContainer').append(script);
 
-        axios.get('http://localhost:8000/countries')
-            .then(response=>setCountries(response.data))
-            .catch(error=>console.error(error))
+        // axios.get('http://localhost:8000/countries')
+        //     .then(response=>setCountries(response.data))
+        //     .catch(error=>console.error(error))
 
 
         //TODO пока по убогому, потом подключаем edux

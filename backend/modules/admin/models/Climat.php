@@ -15,4 +15,13 @@ class Climat extends BaseClimat
         $rules[] = [['uploads'], 'file', 'extensions'=>['png', 'jpg', 'gif'], 'maxSize' => 1024*1024];
         return $rules;
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'code' => 'Код климата (HOT, COLD...)',
+            'name' => 'Имя',
+            'uploads' => 'Иконка'
+        ];
+    }
 }
