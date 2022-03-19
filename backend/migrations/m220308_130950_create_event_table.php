@@ -20,7 +20,7 @@ class m220308_130950_create_event_table extends Migration
             'until' => $this->dateTime(),
             'description' => $this->text(),
             'age_restrictions' => $this->integer(2)->notNull()->defaultValue(12),
-            'priority' => $this->integer(1)->notNull()->defaultValue(1),
+            'priority' => $this->integer(1)->notNull()->defaultValue(1), //card-size also
             'is_horizontal' => $this->boolean()->notNull()->defaultValue(true),
             'place_id' => $this->integer()->notNull(),
             'type_id' => $this->integer()->notNull(),

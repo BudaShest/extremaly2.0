@@ -19,6 +19,7 @@ class m220308_170806_create_junction_table_for_user_and_event_table extends Migr
         $this->createTable('{{%user_event}}', [
             'user_id' => $this->integer(),
             'event_id' => $this->integer(),
+            'created_at' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP', //не факт что будет робить
         ]);
 
         $this->addPrimaryKey('pk-user_event', 'user_event', ['user_id', 'event_id']);

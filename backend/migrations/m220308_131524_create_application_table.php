@@ -15,9 +15,10 @@ class m220308_131524_create_application_table extends Migration
         $this->createTable('{{%application}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
-            'ticket_id' => $this->integer()->notNull(),
+            'ticket_id' => $this->integer()->notNull()->unique(),
             'num' => $this->integer()->notNull(),
-            'status_id' => $this->integer()->notNull()->defaultValue(1)
+            'status_id' => $this->integer()->notNull()->defaultValue(1),
+            'created_at' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP', //не факт что будет робить
         ]);
 
         $this->createIndex(
