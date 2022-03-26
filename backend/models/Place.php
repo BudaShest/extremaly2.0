@@ -11,7 +11,7 @@ class Place extends ActiveRecord
     {
         return [
             [['name', 'address', 'description', 'country_code', 'climat_code'], 'required'],
-            [['name', 'address', 'description'], 'string'],
+            [['name', 'address', 'description', 'country_code', 'climat_code'], 'string'],
             [['name', 'address'], 'unique']
         ];
     }

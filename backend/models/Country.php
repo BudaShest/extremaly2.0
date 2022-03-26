@@ -14,6 +14,7 @@ class Country extends ActiveRecord
             [['code', 'name'], 'unique'],
             [['code'], 'string'],
             [['name'], 'string'],
+            [['flag'], 'default', 'value'=>'ss']
         ];
     }
 

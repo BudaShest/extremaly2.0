@@ -17,6 +17,7 @@ AdminAssetBundle::register($this);
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <?= Html::csrfMetaTags(); ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -27,7 +28,11 @@ AdminAssetBundle::register($this);
   'items' => [
       [
           'label' => 'Места',
-          'url' => 'admin/place'
+          'url' => '/admin/place'
+      ],
+      [
+          'label' => 'Страны и климат',
+          'url' => 'country'
       ]
   ]
 ])?>

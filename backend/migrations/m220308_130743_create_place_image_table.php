@@ -30,6 +30,8 @@ class m220308_130743_create_place_image_table extends Migration
             'place_id',
             'place',
             'id',
+            'CASCADE',
+            'CASCADE',
         );
     }
 

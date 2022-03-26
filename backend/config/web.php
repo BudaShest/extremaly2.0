@@ -32,7 +32,7 @@ $config = [
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'admin/main/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
