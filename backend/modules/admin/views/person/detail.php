@@ -1,23 +1,23 @@
 <?php
-/** @var yii\web\View $this */
-/** @var Place $model */
+/** @var \yii\web\View $this */
+/** @var \app\modules\admin\models\Person $model */
 
 use yii\widgets\DetailView;
-use app\modules\admin\models\Place;
 use yii\helpers\Html;
 
-$this->title = 'Место ' . $model->name;
+$this->title = 'Создать персону';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <h1><?= $this->title ?></h1>
 <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
-        'name',
+        'firstname',
+        'lastname',
+        'patronymic',
+        'age',
         'description',
-        'country_code',
-        'climat_code',
+        'profession',
         [
             'label' => 'Изображения',
             'value' => function ($data) {
@@ -30,10 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'html'
         ],
     ]
-])?>
-
+]) ?>
 <div class="btn-group">
-    <?= Html::a('Обновить', ['/admin/place/update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
-    <?= Html::a('Удалить', ['/admin/place/delete', 'id' => $model->id], ['class' => 'btn-danger']) ?>
+    <?= Html::a('Обновить', ['/admin/person/update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+    <?= Html::a('Удалить', ['/admin/person/delete', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
 </div>
-

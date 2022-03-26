@@ -4,6 +4,8 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+$this->title = 'Добавить страну';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3 data-target="expandFormCountry" class="expand-toggler hoverable">Добавить страну</h3>
 <?php $form = ActiveForm::begin(['options' => ['class' => 'expand-form', 'id' => 'expandFormCountry', 'enctype' => 'multipart/form-data']]); ?>

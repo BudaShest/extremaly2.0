@@ -5,25 +5,25 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap4\ButtonDropdown;
 
-$this->title = 'Ввесь климат';
+$this->title = 'Вcе типы событий';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3>Климат</h3>
-<?= Html::a('Создать климат', ['climat/create'], ['class' => 'btn btn-success']) ?>
+<h3><?= $this->title ?></h3>
+<?= Html::a('Создать тип событий', ['event-type/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
-    'dataProvider' => $climatesProvider,
+    'dataProvider' => $eventTypesProvider,
     'columns' => [
         [
-            'label' => 'Код',
+            'label' => 'Номер ',
             'value' => function($data){
-                return Html::a($data->code, ['climat/view', 'code'=>$data->code]);
+                return Html::a($data->id, ['event-type/view', 'id'=>$data->id]);
             },
             'format' => 'raw'
         ],
         [
             'label' => 'Название',
             'value' => function($data){
-                return Html::a($data->name, ['climat/view', 'code'=>$data->code]);
+                return Html::a($data->name, ['event-type/view', 'id'=>$data->id]);
             },
             'format' => 'raw'
         ],
@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => 'climat/update?code='.$data->code],
-                            ['label' => 'Удалить', 'url' => 'climat/delete?code='.$data->code],
+                            ['label' => 'Обновить', 'url' => 'event-type/update?id='.$data->id],
+                            ['label' => 'Удалить', 'url' => 'event-type/delete?id='.$data->id],
                         ],
                     ],
                 ]);

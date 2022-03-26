@@ -35,6 +35,7 @@ $climatesProvider = new ActiveDataProvider([
 ]);
 
 $this->title = "Все места";
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h1><?= $this->title ?></h1>
@@ -87,91 +88,9 @@ $this->title = "Все места";
 <h2>Страны и климаты</h2>
 <div class="row">
     <div class="col">
-        <h3>Страны</h3>
-        <?= GridView::widget([
-            'dataProvider' => $countriesProvider,
-            'columns' => [
-                [
-                    'label' => 'Код',
-                    'value' => function($data){
-                        return Html::a($data->code, ['country/view', 'code'=>$data->code]);
-                    },
-                    'format' => 'raw'
-                ],
-                [
-                    'label' => 'Название',
-                    'value' => function($data){
-                        return Html::a($data->name, ['country/view', 'code'=>$data->code]);
-                    },
-                    'format' => 'raw'
-                ],
-                [
-                    'label' => 'Изображения',
-                    'value' => function ($data) {
-                        return Html::img('/uploads/' . $data->flag, ['class' => 'img-thumbnail']);
-                    },
-                    'format' => 'html'
-                ],
-                [
-                    'label' => 'Действия',
-                    'value' => function ($data) {
-                        return ButtonDropdown::widget([
-                            'label' => 'Действия',
-                            'dropdown' => [
-                                'items' => [
-                                    ['label' => 'Обновить', 'url' => 'country/update?code='.$data->code],
-                                    ['label' => 'Удалить', 'url' => 'country/delete?code='.$data->code],
-                                ],
-                            ],
-                        ]);
-                    },
-                    'format' => 'raw'
-                ]
-            ]
-        ]) ?>
+        <?= $this->render('/country/index', compact('countriesProvider')) ?>
     </div>
     <div class="col">
-        <h3>Климаты</h3>
-        <?= GridView::widget([
-            'dataProvider' => $climatesProvider,
-            'columns' => [
-                [
-                    'label' => 'Код',
-                    'value' => function($data){
-                        return Html::a($data->code, ['climat/view', 'code'=>$data->code]);
-                    },
-                    'format' => 'raw'
-                ],
-                [
-                    'label' => 'Название',
-                    'value' => function($data){
-                        return Html::a($data->name, ['climat/view', 'code'=>$data->code]);
-                    },
-                    'format' => 'raw'
-                ],
-                [
-                    'label' => 'Изображения',
-                    'value' => function ($data) {
-                        return Html::img('/uploads/' . $data->icon, ['class' => 'img-thumbnail']);
-                    },
-                    'format' => 'html'
-                ],
-                [
-                    'label' => 'Действия',
-                    'value' => function ($data) {
-                        return ButtonDropdown::widget([
-                            'label' => 'Действия',
-                            'dropdown' => [
-                                'items' => [
-                                    ['label' => 'Обновить', 'url' => 'climat/update?code='.$data->code],
-                                    ['label' => 'Удалить', 'url' => 'climat/create?code='.$data->code],
-                                ],
-                            ],
-                        ]);
-                    },
-                    'format' => 'raw'
-                ]
-            ]
-        ]) ?>
+        <?= $this->render('/climat/index', compact('climatesProvider')) ?>
     </div>
 </div>

@@ -12,6 +12,7 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'language'=>'ru',
+    'version' => '0.7 beta',
     'components' => [
         'assetManager' => [
           'class' => 'yii\web\AssetManager',

@@ -6,13 +6,21 @@ use app\modules\admin\components\FileWorker;
 use yii\web\Controller;
 use app\modules\admin\models\Country;
 use yii\web\NotFoundHttpException;
+use yii\data\ActiveDataProvider;
 use Yii;
 
 class CountryController extends Controller
 {
     public function actionIndex()
     {
+        $countriesProvider = new ActiveDataProvider([
+            'query' => Country::find(),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
 
+        return $this->render('index', compact('countriesProvider'));
     }
 
     public function actionDelete(string $code)

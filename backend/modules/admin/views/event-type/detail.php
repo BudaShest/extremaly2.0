@@ -1,19 +1,25 @@
 <?php
 /** @var yii\web\View $this */
 
-/** @var \app\modules\admin\models\Climat $model */
+/** @var \app\modules\admin\models\EventType $model */
 
 use yii\widgets\DetailView;
 use yii\helpers\Html;
 
-$this->title = 'Климат ' . $model->name;
+$this->title = 'Тип событий ' . $model->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
 <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
-        'code',
+        [
+            'label' => 'Номер ',
+            'value' => function($data){
+                return Html::a($data->id, ['event-type/view', 'id'=>$data->id]);
+            },
+            'format' => 'raw'
+        ],
         'name',
         [
             'label' => 'Иконка',

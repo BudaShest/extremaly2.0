@@ -31,9 +31,21 @@ AdminAssetBundle::register($this);
           'url' => '/admin/place'
       ],
       [
-          'label' => 'Страны и климат',
-          'url' => 'country'
-      ]
+          'label' => 'Страны',
+          'url' => '/admin/country'
+      ],
+      [
+          'label' => 'Климат',
+          'url' => '/admin/climat'
+      ],
+      [
+          'label' => 'Персоны',
+          'url' => '/admin/person'
+      ],
+      [
+          'label' => 'Типы событий',
+          'url' => '/admin/event-type'
+      ],
   ]
 ])?>
 </header>
@@ -45,7 +57,24 @@ AdminAssetBundle::register($this);
         <?= $content ?>
     </div>
 </main>
-<footer class="footer"></footer>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul>
+                    <li>Версия: <?= Yii::$app->version ?> stable</li>
+                    <li>Окружение: <?= YII_ENV == 'dev'?'<b>тестовое</b>':'<b>продуктивное</b>' ?></li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul>
+                    <li>Разработал студент ЮУрГТк <a href="https://vk.com/kotanjam" target="_blank">Титов Александр</a></li>
+                    <li><i>from <b>Russia</b> with <b>big</b> love!</i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 <?php $this->endBody() ?>
 </body>
 </html>
