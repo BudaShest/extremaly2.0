@@ -17,6 +17,7 @@ class m220308_131203_create_ticket_table extends Migration
             'event_id' => $this->integer()->notNull(),
             'price' => $this->integer(8)->notNull(),
             'privilege' => $this->string(256)->notNull(),
+            'description' => $this->text()->null(),
         ]);
 
         $this->createIndex(

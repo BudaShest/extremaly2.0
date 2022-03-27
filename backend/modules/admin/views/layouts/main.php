@@ -50,6 +50,10 @@ AdminAssetBundle::register($this);
           'label' => 'События',
           'url' => '/admin/event'
       ],
+      [
+          'label' => 'Билеты',
+          'url' => '/admin/ticket'
+      ]
   ]
 ])?>
 </header>
