@@ -7,10 +7,8 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Accordion;
 use yii\helpers\ArrayHelper;
 
-//TODO сделать дополнительные формы DropDown-ом
 
 $this->title = "Места";
 $this->params['breadcrumbs'][] = $this->title;

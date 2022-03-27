@@ -12,7 +12,8 @@ class Event extends ActiveRecord
         return [
           [['name', 'place_id', 'type_id'], 'required'],
             [['name', 'offer', 'description'], 'string'],
-            [['from', 'until'], 'date'],
+            [['from'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'from'],
+            [['until'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'until'],
             [['age_restrictions','priority','place_id','type_id'],'integer'],
             [['is_horizontal'],'boolean'],
             [['name'], 'unique'],

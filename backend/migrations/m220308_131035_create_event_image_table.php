@@ -29,7 +29,9 @@ class m220308_131035_create_event_image_table extends Migration
             'event_image',
             'event_id',
             'event',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE',
         );
     }
 

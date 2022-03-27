@@ -24,7 +24,7 @@ AdminAssetBundle::register($this);
 <body>
 <?php $this->beginBody() ?>
 <header class="header">
-<?= Nav::widget([
+<?= Nav::widget([ //todo меню с дропдауном
   'items' => [
       [
           'label' => 'Места',
@@ -45,6 +45,10 @@ AdminAssetBundle::register($this);
       [
           'label' => 'Типы событий',
           'url' => '/admin/event-type'
+      ],
+      [
+          'label' => 'События',
+          'url' => '/admin/event'
       ],
   ]
 ])?>

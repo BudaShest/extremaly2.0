@@ -24,13 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'label' => 'Иконка',
             'value' => function ($data) {
-                return Html::img('/uploads/' . $data->icon);
+                return Html::img('/uploads/' . $data->icon, ['class'=> 'img-thumbnail']);
             },
             'format' => 'html'
         ]
     ]
 ]) ?>
 <div class="btn-group">
-    <?= Html::a('Обновить', ['/admin/climat/update', 'id' => $model->code], ['class' => 'btn btn-warning']) ?>
-    <?= Html::a('Удалить', ['/admin/climat/delete', 'id' => $model->code], ['class' => 'btn btn-danger']) ?>
+    <?= Html::a('Обновить', ['/admin/event-type/update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+    <?= Html::a('Удалить', ['/admin/event-type/delete', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
 </div>
