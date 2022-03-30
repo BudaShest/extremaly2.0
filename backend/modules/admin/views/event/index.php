@@ -20,6 +20,7 @@ $this->title = 'Все события';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <div>
     <?= Html::a('Добавить событие', ['create'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
 </div>

@@ -6,6 +6,7 @@ use yii\web\Controller;
 use app\modules\admin\models\User;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
+use Yii;
 
 class UserController extends Controller
 {
@@ -27,5 +28,19 @@ class UserController extends Controller
         ]);
 
         return $this->render('index', compact('dataProvider'));
+    }
+
+    public function actionDelete(int $id){
+        $model = $this->loadModel($id);
+        if($model->delete()){
+            Yii::$app->session->setFlash('success', 'Пользователь был успешно удалён');
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionView(int $id)
+    {
+        $model = $this->loadModel($id);
+        return $this->render('detail', compact('model'));
     }
 }

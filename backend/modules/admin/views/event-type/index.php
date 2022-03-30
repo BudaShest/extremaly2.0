@@ -9,6 +9,7 @@ $this->title = 'Вcе типы событий';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?= $this->title ?></h3>
+<?= $this->render('/partials/flashBadge') ?>
 <?= Html::a('Создать тип событий', ['event-type/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
     'dataProvider' => $eventTypesProvider,

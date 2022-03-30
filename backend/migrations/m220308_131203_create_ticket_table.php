@@ -44,7 +44,7 @@ class m220308_131203_create_ticket_table extends Migration
     {
         $this->dropForeignKey(
             'fk-ticket_event_id',
-            'event_price'
+            'ticket'
         );
 
         $this->dropIndex('idx-ticket-event_id', 'ticket');

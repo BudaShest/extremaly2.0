@@ -4,11 +4,12 @@ const defaultValueState = {
     climates: []
 }
 
+
 const GET_COUNTRIES = 'GET_COUNTRIES';
 const GET_PLACES = 'GET_PLACES';
 const GET_CLIMATES = 'GET_CLIMATES';
 
-export const placesReducer = (state = defaultValueState, action) =>{
+export const placesReducer = (state = defaultValueState, action) => {
     switch (action.type) {
         case GET_COUNTRIES:
             return {...state, countries: [...action.payload]};

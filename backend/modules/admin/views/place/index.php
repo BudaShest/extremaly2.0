@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <div>
     <?= Html::a('Создать место', ['create'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
 </div>

@@ -10,6 +10,7 @@ $this->title = 'Добавить страну';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3>Страны</h3>
+<?= $this->render('/partials/flashBadge') ?>
 <?= Html::a('Создать страну', ['country/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
     'dataProvider' => $countriesProvider,

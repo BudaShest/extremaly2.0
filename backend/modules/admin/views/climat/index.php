@@ -9,6 +9,7 @@ $this->title = 'Ввесь климат';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3>Климат</h3>
+<?= $this->render('/partials/flashBadge') ?>
 <?= Html::a('Создать климат', ['climat/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
     'dataProvider' => $climatesProvider,

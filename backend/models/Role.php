@@ -7,6 +7,8 @@ use yii\db\ActiveQuery;
 
 class Role extends ActiveRecord
 {
+    const DEFAULT_ROLE_ID = 3;
+
     public function rules(): array
     {
         return [
