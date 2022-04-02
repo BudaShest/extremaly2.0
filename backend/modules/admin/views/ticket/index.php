@@ -28,7 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'raw'
         ],
         'privilege',
-        'total',
+        [
+            'label' => 'Всего',
+            'value' => function($data){
+
+            }
+        ],
         [
             'label' => 'Начало',
             'value' => function ($data){

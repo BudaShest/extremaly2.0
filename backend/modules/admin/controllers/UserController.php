@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Banned;
 use yii\web\Controller;
 use app\modules\admin\models\User;
 use yii\web\NotFoundHttpException;
@@ -20,6 +21,7 @@ class UserController extends Controller
 
     public function actionIndex()
     {
+        $model = new User();
         $dataProvider = new ActiveDataProvider([
             'query' => User::find(),
             'pagination' => [
@@ -27,7 +29,7 @@ class UserController extends Controller
             ]
         ]);
 
-        return $this->render('index', compact('dataProvider'));
+        return $this->render('index', compact('dataProvider', 'model'));
     }
 
     public function actionDelete(int $id){
@@ -42,5 +44,22 @@ class UserController extends Controller
     {
         $model = $this->loadModel($id);
         return $this->render('detail', compact('model'));
+    }
+
+    public function actionBan(int $id){
+        $model = User::findIdentity($id);
+        $banned = new Banned();
+        $model->link('banned', $banned);
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionUnban(int $id){
+        if($model = Banned::findOne(['user_id' => $id])){
+            $model->delete();
+        }else{
+            Yii::$app->session->setFlash('error', 'Ошибка разбана');
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

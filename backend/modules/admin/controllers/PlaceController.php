@@ -38,9 +38,8 @@ class PlaceController extends Controller
         $climat = new Climat();
         $climatFileWorker = new FileWorker(['model' => $climat]);
         if($place->load(Yii::$app->request->post())){
-//            var_dump($place);die;
             if(!$place->save()){
-//                var_dump($place->errors);die;
+                var_dump($place->errors);die;
             }
             if(!$placeFileWorker->attachFiles() || !$placeFileWorker->upload()){
                 Yii::$app->session->setFlash('error', 'Ошибка загрузки файлов');
@@ -71,15 +70,16 @@ class PlaceController extends Controller
 
     public function actionUpdate(int $id)
     {
-        if($model = Place::findOne($id)){
+        if(!$model = Place::findOne($id)){
             throw new NotFoundHttpException('Место с таким идентификатором отсутствует');
         }
         if($model->load(Yii::$app->request->post())){
             if(!$model->save){
-
+                var_dump($model->errors);die;
             }
-            return $this->render('');
+            return $this->redirect(Yii::$app->request->referrer);
         }
+        return $this->render('create', ['place' => $model]);
     }
 
 

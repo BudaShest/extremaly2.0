@@ -37,7 +37,17 @@ class Climat extends BaseClimat implements IFileWorkable
 
     public function deleteFiles(string $fileFolder = 'uploads'): bool
     {
-        return unlink($fileFolder.'/'.$this->icon);
+        try{
+            if(!unlink($fileFolder.'/'.$this->icon)){
+                $this->addError('uploads', 'Ошибка удаления файлов');
+                return false;
+            }
+            return true;
+        }catch (\Exception $e){
+            $this->addError('uploads', $e);
+            return false;
+        }
+//        return unlink($fileFolder.'/'.$this->icon);
     }
 
     public function attributeLabels(): array

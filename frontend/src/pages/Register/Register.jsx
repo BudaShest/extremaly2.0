@@ -7,16 +7,18 @@ import {registerUser} from "../../asyncActions/user/registerUser";
 import style from './Register.module.css';
 
 const Register = () => {
-    const [userState, setUserState] = useState({login: '', password: '', confirmPassword: ''});
+    const [userState, setUserState] = useState({login: '', password: '', confirmPassword: '', email:'', phone: ''});
 
     const loginRef = useRef();
     const passwordRef = useRef();
     const confirmPasswordRef = useRef();
+    const phoneRef = useRef();
+    const emailRef = useRef();
     const avatarRef = useRef();
 
     const register = (e) => {
         e.preventDefault();
-        let user = {login: loginRef.current.value, password: passwordRef.current.value, confirmPassword: confirmPasswordRef.current.value};
+        let user = {login: loginRef.current.value, password: passwordRef.current.value, confirmPassword: confirmPasswordRef.current.value, email:emailRef.current.value, phone: phoneRef.current.value};
         setUserState(prevState => {setUserState(user)});
         registerUser(userState);
     }
@@ -33,16 +35,16 @@ const Register = () => {
                                 <TextInput
                                     className={style.regFormInput}
                                     s={8}
-                                    icon={<Icon>email</Icon>}
-                                    id="TextInput-0"
-                                    label="Email:"
+                                    icon={<Icon>login</Icon>}
+                                    id="loginInput"
+                                    label="Login:"
                                     ref={loginRef}
                                 />
                                 <TextInput
                                     className={style.regFormInput}
                                     s={8}
                                     icon={<Icon>password</Icon>}
-                                    id="TextInput-1"
+                                    id="passwordInput"
                                     label="Пароль:"
                                     password
                                     ref={passwordRef}
@@ -51,16 +53,33 @@ const Register = () => {
                                     className={style.regFormInput}
                                     s={8}
                                     icon={<Icon>password</Icon>}
-                                    id="TextInput-2"
+                                    id="confirmInput"
                                     label="Повторите пароль:"
                                     password
                                     ref={confirmPasswordRef}
                                 />
                                 <TextInput
+                                    className={style.regFormInput}
                                     s={8}
-                                    id="TextInput-3"
+                                    icon={<Icon>phone</Icon>}
+                                    id=''
+                                    label="Телефон"
+                                    ref={phoneRef}
+                                />
+                                <TextInput
+                                    className={style.regFormInput}
+                                    s={8}
+                                    icon={<Icon>email</Icon>}
+                                    id="emailInput"
+                                    label="Email:"
+                                    ref={emailRef}
+                                />
+                                <TextInput
+                                    s={8}
+                                    id="fileInpue"
                                     label="Аватар профиля:"
                                     type="file"
+                                    ref={avatarRef}
                                 />
                                 <Col style={{margin: 40}} s={8}>
                                     <Col l={4} push={"s2"}>

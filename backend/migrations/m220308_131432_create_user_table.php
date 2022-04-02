@@ -20,8 +20,8 @@ class m220308_131432_create_user_table extends Migration
             'phone' => $this->string(16)->unique(),
             'avatar' => $this->string(256),
             'role_id' => $this->integer()->notNull(),
-            'access_token' => $this->string(256)->notNull(),
-            ''
+            'access_token' => $this->string(256),
+            'ip' => $this->string(15)->null(),
         ]);
 
         $this->createIndex(

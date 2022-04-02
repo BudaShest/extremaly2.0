@@ -8,4 +8,5 @@ class AdminModule extends Module
 {
     public $layoutPath = '@app\modules\admin\views\layouts';
     public $layout = 'main';
+    public $defaultRoute = 'main';
 }

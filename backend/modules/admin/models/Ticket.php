@@ -6,7 +6,7 @@ use app\models\Ticket as BaseTicket;
 
 class Ticket extends BaseTicket
 {
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'event_id' => 'Событие',

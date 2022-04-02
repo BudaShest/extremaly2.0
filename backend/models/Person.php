@@ -20,4 +20,17 @@ class Person extends ActiveRecord
     {
         return $this->hasMany(PersonImage::class, ['person_id' => 'id']);
     }
+
+    public function fields(): array
+    {
+        $fields = parent::fields();
+        $fields['images'] = function () {
+            $images = [];
+            foreach ($this->images as $image) {
+                $images[] = $image['image'];
+            }
+            return $images;
+        };
+        return $fields;
+    }
 }

@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'label' => 'Изображения',
             'value' => function ($data) {
-                return Html::img('/uploads/' . $data->flag, ['class' => 'img-thumbnail']);
+                return Html::img($data->flag, ['class' => 'img-thumbnail']);
             },
             'format' => 'html'
         ],

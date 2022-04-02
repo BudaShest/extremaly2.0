@@ -13,10 +13,12 @@ class User extends BaseUser implements IFileWorkable
     public function attributeLabels()
     {
         return [
-          'login' => 'Логин',
-          'avatar' =>  'Аватар',
-          'email' => 'Email',
-          'phone' => 'Номер телефона'
+            'login' => 'Логин',
+            'avatar' => 'Аватар',
+            'email' => 'Email',
+            'phone' => 'Номер телефона',
+            'role_id' => 'Роль',
+            'ip' => 'IP-адрес',
         ];
     }
 
@@ -30,8 +32,8 @@ class User extends BaseUser implements IFileWorkable
 
     public function upload(string $fileFolder = 'uploads'): bool
     {
-        $newName = time().$this->uploads->name;
-        if(!$this->uploads->saveAs($fileFolder . "/" .$newName)){
+        $newName = time() . $this->uploads->name;
+        if (!$this->uploads->saveAs($fileFolder . "/" . $newName)) {
             return false;
         }
         $this->uploads = null;
@@ -41,15 +43,16 @@ class User extends BaseUser implements IFileWorkable
 
     public function deleteFiles(string $fileFolder = 'uploads'): bool
     {
-        try{
-            if(!unlink($fileFolder.'/'.$this->flag)){
+        try {
+            if (!unlink($fileFolder . '/' . $this->flag)) {
                 $this->addError('uploads', 'Ошибка удаления файлов');
                 return false;
             }
             return true;
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->addError('uploads', $e);
             return false;
         }
     }
+
 }

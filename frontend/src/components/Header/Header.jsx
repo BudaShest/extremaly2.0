@@ -41,7 +41,7 @@ const Header = () => {
                     <NavLink to="/events">События</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink to="/places">Личности</NavLink>
+                    <NavLink to="/persons">Личности</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink className={`${style.loginBtn} btn waves-effect waves-light`} to="/login">Войти</NavLink>

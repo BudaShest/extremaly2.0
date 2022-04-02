@@ -13,7 +13,7 @@ class ClimatController extends ActiveController
     {
         $behaviors = parent::behaviors();
 
-        $behaviors['corsFilter'] = [ //TODO создать общий класс для контроллеров и вынести его туда
+        $behaviors['corsFilter'] = [
             'class' => Cors::class
         ];
 

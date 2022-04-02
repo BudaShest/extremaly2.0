@@ -16,6 +16,31 @@ class Place extends ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        $fields =  parent::fields();
+        $fields['country_name'] = function (){
+            return $this->country->name;
+        };
+        $fields['climat_name'] = function (){
+            return $this->climat->name;
+        };
+        $fields['images'] = function (){
+            $images = [];
+            foreach ($this->images as $image){
+                $images[] = $image['image'];
+            }
+            return $images;
+        };
+        $fields['climat_icon'] = function (){
+            return $this->climat->icon;
+        };
+        $fields['country_flag'] = function (){
+            return $this->country->flag;
+        };
+        return $fields;
+    }
+
     public function getCountry(): ActiveQuery
     {
         return $this->hasOne(Country::class, ['code' => 'country_code']);

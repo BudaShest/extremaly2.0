@@ -2,8 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
-use SebastianBergmann\CodeCoverage\TestFixture\C;
 use yii\web\Controller;
+use app\models\User;
+use Yii;
 
 class MainController extends Controller
 {
@@ -18,4 +19,22 @@ class MainController extends Controller
             ],
         ];
     }
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
+    public function actionLogin()
+    {
+        $model = new User();
+        if($request = Yii::$app->request->post()){
+            if(!$model->login($request)) {
+                var_dump($model->errors);
+            }
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        return $this->render('login', compact('model'));
+    }
+
 }

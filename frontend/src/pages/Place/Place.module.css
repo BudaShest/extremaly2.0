@@ -1,0 +1,21 @@
+.placeBadge{
+    font-size: 1.1em;
+    background-color: #111111;
+    color: lightgrey;
+    padding: 20px 40px !important;
+}
+.placeHeader{
+
+}
+.placeBadge h5{
+    margin-bottom: 30px !important;
+}
+.placeBadgeRow{
+    display: flex;
+    align-items: center;
+}
+.badgeIcon{
+    width: 70px;
+    margin-right: 40px;
+}
+

@@ -14,8 +14,21 @@ class m220329_162416_create_banned_table extends Migration
     {
         $this->createTable('{{%banned}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer()->notNull(), //todo миграцию и ip в юзера
+            'user_id' => $this->integer()->notNull()->unique(),
+            'reason' => $this->string(128)
         ]);
+
+        $this->createIndex('idx-banned_user_id', 'banned', 'user_id');
+
+        $this->addForeignKey(
+            'fk-banned_user_id',
+            'banned',
+            'user_id',
+            'user',
+            'id',
+            'CASCADE',
+            'CASCADE',
+        );
     }
 
     /**
@@ -23,6 +36,10 @@ class m220329_162416_create_banned_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk-banned_user_id', 'banned');
+
+        $this->dropIndex('idx-banned_user_id', 'banned');
+
         $this->dropTable('{{%banned}}');
     }
 }

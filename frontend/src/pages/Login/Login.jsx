@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import {loginUser} from "../../asyncActions/user/loginUser";
 import {NavLink} from 'react-router-dom';
 import {Container, Icon, TextInput, Row, Button, Col} from "react-materialize";
 import Convex from "../../components/Convex/Convex";
@@ -19,15 +20,13 @@ const Login = () => {
 
     }
 
-    const checkConfirmPassword = () => {
-
-    }
 
 
     const handleForm = (e) => {
         e.preventDefault();
-        alert(loginRef.current.value)
-
+        setUserInfo(prevState => {setUserInfo({login: loginRef.current.value, pasword: passwordRef.current.value })});
+        console.log(userInfo);
+        loginUser(userInfo);
     }
 
     return (

@@ -63,4 +63,11 @@ class PersonController extends Controller
         }
         return $this->render('create', compact('model'));
     }
+
+    public function actionDelete(int $id)
+    {
+        $model = $this->loadModel($id);
+        $model->delete();
+        return $this->redirect(Yii::$app->request->referrer);
+    }
 }

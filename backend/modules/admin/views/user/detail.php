@@ -18,6 +18,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'login',
         'email',
         'phone',
+        [
+            'label' => $model->getAttributeLabel('role_id'),
+            'value' => function($data){
+                return $data->role->name;
+            }
+        ]
     ]
 ]) ?>
-
+<div class="row">
+    <div class="col">
+        <?= $this->render('/application/index', compact('applicationProvider')) ?>
+    </div>
+    <div class="col"></div>
+</div>

@@ -12,7 +12,7 @@ class PersonImage extends ActiveRecord
     public function rules(): array
     {
         return [
-            [['person_id', 'image', 'uploads'], 'required'],
+            [['person_id', 'image'], 'required'],
             [['person_id'], 'integer'],
             [['image'], 'string'],
             [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024] //todo возможно создать встроенный валидатор или как то вынести код

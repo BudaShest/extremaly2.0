@@ -5,10 +5,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap4\ButtonDropdown;
 
-$this->title = 'Ввесь климат';
+$this->title = 'Весь климат';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3>Климат</h3>
+<h3><?= $this->title ?></h3>
 <?= $this->render('/partials/flashBadge') ?>
 <?= Html::a('Создать климат', ['climat/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'label' => 'Изображения',
             'value' => function ($data) {
-                return Html::img('/uploads/' . $data->icon, ['class' => 'img-thumbnail']);
+                return Html::img($data->icon, ['class' => 'img-thumbnail']);
             },
             'format' => 'html'
         ],

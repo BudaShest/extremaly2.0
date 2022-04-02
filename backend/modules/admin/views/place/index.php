@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function ($data) {
                 $output = "";
                 foreach ($data->images as $image) {
-                    $output .= Html::img('/uploads/' . $image->image, ['class' => 'img-thumbnail']);
+                    $output .= Html::img($image->image, ['class' => 'img-thumbnail']);
                 }
                 return $output;
             },

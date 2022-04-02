@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
+use yii\db\Exception;
 use yii\web\IdentityInterface;
 use Yii;
 
@@ -16,31 +17,46 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['login', 'password', 'confirmPassword', 'role_id'], 'required'],
-            [['login', 'password', 'confirmPassword', 'avatar'], 'string'],
+            [['login', 'password', 'confirmPassword', 'avatar', 'phone', 'email'], 'string'],
             [['confirmPassword'], 'validateConfirmPassword'],
             [['login'], 'unique'],
             [['role_id'], 'default'],
-            ['confrimPassword', 'safe']
+            [['confrimPassword'], 'safe']
         ];
     }
 
-    public function validateConfirmPassword($attribute, $params){
-        if($this->password !== $this->$attribute){
+    public function validateConfirmPassword($attribute, $params)
+    {
+        if ($this->password !== $this->$attribute) {
             $this->addError($attribute, 'Пароли не совпадают');
         }
     }
 
     public function register($data): bool
     {
-        if($data){
+        if ($data) {
             $this->attributes = $data;
             $this->role_id = Role::DEFAULT_ROLE_ID;
-            if(!$this->validate()){
+            $this->access_token = "smth"; //todo пока заглушка
+            $this->ip = Yii::$app->request->userIP;
+            if (!$this->validate()) {
                 return false;
             }
             $this->password = Yii::$app->security->generatePasswordHash($this->password);
             return $this->save(false);
         }
+        return false;
+    }
+
+    public function login($data)
+    {
+        if($data){
+            $model = User::findOne(['login' => $data['login']]);
+            if(Yii::$app->security->validatePassword($data['password'], $model['password'])){
+                throw new Exception('Пароль не подходит!');
+            }
+        }
+        return false;
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
@@ -55,12 +71,21 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function findIdentity($id)
     {
-        // TODO: Implement findIdentity() method.
+        if (!$model = User::findOne($id)) {
+            throw new Exception('Модель пользователя с ID:' . $id . 'не надйена');
+        }
+        return $model;
     }
+
+    public function getBanned(): ActiveQuery
+    {
+        return $this->hasOne(Banned::class, ['user_id' => 'id']);
+    }
+
 
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return $this->id;
     }
 
     public function getAuthKey()

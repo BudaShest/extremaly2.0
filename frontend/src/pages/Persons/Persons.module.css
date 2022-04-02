@@ -1,0 +1,8 @@
+.personImage{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border:20px solid #111111;
+    background-color: #111111;
+    object-fit: contain;
+}
