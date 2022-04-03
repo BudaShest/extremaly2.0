@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         [
-            'label' => 'Имя',
+            'attribute' => 'firstname',
             'value' => function($data){
                 return Html::a($data->firstname, ['view', 'id'=>$data->id]);
             },
@@ -42,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'lastname',
         'patronymic',
         'age',
-        'description',
         'profession',
         [
             'label' => 'Изображения',
@@ -62,8 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => 'person/update?id='.$data->id],
-                            ['label' => 'Удалить', 'url' => 'person/delete?id='.$data->id],
+                            ['label' => 'Обновить', 'url' => '/admin/person/update?id='.$data->id],
+                            ['label' => 'Удалить', 'url' => '/admin/person/delete?id='.$data->id],
                         ],
                     ],
                 ]);

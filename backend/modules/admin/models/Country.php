@@ -43,6 +43,7 @@ class Country extends BaseCountry
             'code' => 'Код страны (RU, EN, US...)',
             'name' => 'Название',
             'uploads' => 'Флаг',
+            'flag' => 'Флаг'
         ];
     }
 

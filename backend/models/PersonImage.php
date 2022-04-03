@@ -7,7 +7,7 @@ use yii\db\ActiveQuery;
 
 class PersonImage extends ActiveRecord
 {
-    public $uploads;
+    public const MODEL_FK = 'person_id';
 
     public function rules(): array
     {
@@ -15,7 +15,6 @@ class PersonImage extends ActiveRecord
             [['person_id', 'image'], 'required'],
             [['person_id'], 'integer'],
             [['image'], 'string'],
-            [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024] //todo возможно создать встроенный валидатор или как то вынести код
         ];
     }
 

@@ -20,22 +20,26 @@ class MultiFileBehavior extends Behavior
 
     public function deleteFiles(): bool
     {
-        try{
-            foreach($this->model->images as $image){
-                if(!unlink($this->fileFolder.'/'.$image['image'])){
-                    return false;
-                }
+        foreach($this->model->images as $image){
+            $modelImage = $this->imageClass::findOne([$this->imageClass::MODEL_FK => $this->model->id]);
+            if($modelImage && !$modelImage->delete()){
+                return false;
             }
-            return true;
-        }catch (\Exception $e){
-            $this->model->addError('uploads', $e);
-            return false;
+            try{
+                if(!unlink($this->fileFolder.'/'.$image['image'])){
+                    continue;
+                }
+            }catch (\Exception $e){
+                $this->model->addError('error', $e->getMessage());
+            }
         }
+        return true;
     }
 
     public function upload(): bool
     {
         foreach($this->model->uploads as $upload){
+//            var_dump($upload);die;
             $newName = time().$upload->name;
             if(!$upload->saveAs("uploads/" .$newName)){
                 return false;

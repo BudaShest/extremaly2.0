@@ -1,8 +1,7 @@
 <?php
 /** @var \yii\web\View $this */
 /** @var  Event $model*/
-/** @var EventType $type */
-/** @var Place $place */
+/** @var EventType $eventType */
 
 use app\modules\admin\models\Event;
 use yii\widgets\ActiveForm;
@@ -27,12 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'uploads')->fileInput() ?>
 <div class="form-group">
     <span><?= $model->getAttributeLabel('place_id') ?></span>
-    <?= Html::activeDropDownList($model, 'place_id', ArrayHelper::map($place::find()->all(), 'id','name')) ?>
+    <?= Html::activeDropDownList($model, 'place_id', ArrayHelper::map(Place::find()->all(), 'id','name')) ?>
     <span><?= $model->getAttributeLabel('type_id') ?></span>
-    <?= Html::activeDropDownList($model, 'type_id', ArrayHelper::map($type::find()->all(), 'id', 'name')) ?>
+    <?= Html::activeDropDownList($model, 'type_id', ArrayHelper::map(EventType::find()->all(), 'id', 'name')) ?>
 </div>
 <div class="form-group">
     <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     <?= Html::resetButton('Стереть', ['class' => 'btn btn-danger']) ?>
 </div>
 <?php ActiveForm::end() ?>
+<?= $this->render('/event-type/create', compact('eventType')); ?>

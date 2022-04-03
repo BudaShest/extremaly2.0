@@ -20,14 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
     'columns' => [
         [
-            'label' => 'Код',
+            'attribute' => 'code',
             'value' => function($data){
                 return Html::a($data->code, ['climat/view', 'code'=>$data->code]);
             },
             'format' => 'raw'
         ],
         [
-            'label' => 'Название',
+            'attribute' => 'name',
             'value' => function($data){
                 return Html::a($data->name, ['climat/view', 'code'=>$data->code]);
             },
@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => 'climat/update?code='.$data->code],
-                            ['label' => 'Удалить', 'url' => 'climat/delete?code='.$data->code],
+                            ['label' => 'Обновить', 'url' => '/admin/climat/update?code='.$data->code],
+                            ['label' => 'Удалить', 'url' => '/admin/climat/delete?code='.$data->code],
                         ],
                     ],
                 ]);

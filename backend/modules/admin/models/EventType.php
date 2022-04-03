@@ -32,7 +32,8 @@ class EventType extends BaseEventType
     {
         return [
             'name' => 'Имя',
-            'uploads' => 'Иконка'
+            'uploads' => 'Иконка',
+            'icon' => 'Иконка',
         ];
     }
 }

@@ -21,21 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
     'columns' => [
         [
-            'label' => 'Код',
+            'attribute' => 'code',
             'value' => function($data){
                 return Html::a($data->code, ['country/view', 'code'=>$data->code]);
             },
             'format' => 'raw'
         ],
         [
-            'label' => 'Название',
+            'attribute' => 'name',
             'value' => function($data){
                 return Html::a($data->name, ['country/view', 'code'=>$data->code]);
             },
             'format' => 'raw'
         ],
         [
-            'label' => 'Изображения',
+            'attribute' => 'flag',
             'value' => function ($data) {
                 return Html::img($data->flag, ['class' => 'img-thumbnail']);
             },
@@ -48,8 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => 'country/update?code='.$data->code],
-                            ['label' => 'Удалить', 'url' => 'country/delete?code='.$data->code],
+                            ['label' => 'Обновить', 'url' => '/admin/country/update?code='.$data->code],
+                            ['label' => 'Удалить', 'url' => '/admin/country/delete?code='.$data->code],
                         ],
                     ],
                 ]);

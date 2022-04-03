@@ -20,21 +20,17 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
     'columns' => [
         [
-            'label' => 'Номер ',
-            'value' => function($data){
-                return Html::a($data->id, ['event-type/view', 'id'=>$data->id]);
-            },
-            'format' => 'raw'
+            'class' => 'yii\grid\SerialColumn'
         ],
         [
-            'label' => 'Название',
+            'attribute' => 'name',
             'value' => function($data){
                 return Html::a($data->name, ['event-type/view', 'id'=>$data->id]);
             },
             'format' => 'raw'
         ],
         [
-            'label' => 'Изображения',
+            'attribute' => 'icon',
             'value' => function ($data) {
                 return Html::img($data->icon, ['class' => 'img-thumbnail']);
             },
@@ -47,8 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => 'event-type/update?id='.$data->id],
-                            ['label' => 'Удалить', 'url' => 'event-type/delete?id='.$data->id],
+                            ['label' => 'Обновить', 'url' => '/admin/event-type/update?id='.$data->id],
+                            ['label' => 'Удалить', 'url' => '/admin/event-type/delete?id='.$data->id],
                         ],
                     ],
                 ]);

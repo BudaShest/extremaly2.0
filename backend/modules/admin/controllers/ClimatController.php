@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use app\modules\admin\components\FileWorker;
 use yii\data\ActiveDataProvider;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class ClimatController extends Controller
 {
@@ -24,7 +25,7 @@ class ClimatController extends Controller
                         'roles' => ['@'],
                     ]
                 ],
-                'denyCallback' => function(){
+                'denyCallback' => function () {
                     return $this->redirect('main/login');
                 },
             ]
@@ -45,17 +46,21 @@ class ClimatController extends Controller
 
     public function actionUpdate(string $code)
     {
-        $model = $this -> loadModel($code);
+        $model = $this->loadModel($code);
         $fileWorker = new FileWorker(compact('model'));
-        if($model->load(Yii::$app->request->post())){
-            $fileWorker->deleteFiles();
-            if(!$fileWorker->attachFile() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+        if ($model->load(Yii::$app->request->post())) {
+            if ($fileWorker->attachFile()) {
+                $fileWorker->deleteFiles();
+                if(!$fileWorker->upload()){
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            if(!$model->save()){
+            if (!$model->save()) {
                 var_dump($model->errors);die;
+            }else{
+                Yii::$app->session->setFlash('success','Модель была успешно обновлена!');
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/climat/view?code='.$model->code);
         }
         return $this->render('create', ['climat' => $model]);
     }
@@ -64,14 +69,19 @@ class ClimatController extends Controller
     {
         $model = new Climat();
         $fileWorker = new FileWorker(compact('model'));
-        if($model->load(Yii::$app->request->post())){
-            if(!$fileWorker->attachFile() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+        if ($model->load(Yii::$app->request->post())) {
+            if ($fileWorker->attachFile()) {
+                if(!$fileWorker->upload()){
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            if(!$model->save()){
-                var_dump($model->errors);die;
+            if (!$model->save()) {
+                var_dump($model->errors);
+                die;
+            }else{
+                Yii::$app->session->setFlash('success','Модель была успешно добавлена!');
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/climat/view?code='.$model->code);
         }
         return $this->render('create', ['climat' => $model]);
     }
@@ -80,13 +90,14 @@ class ClimatController extends Controller
     {
         $model = $this->loadModel($code);
         $fileWorker = new FileWorker(['model' => $model]);
-        if(!$fileWorker->deleteFiles()){
-            \Yii::$app->session->setFlash('error', 'Файлы модели ' . Climat::MODEL_NAME_RU . ' не были удалены');
+        $fileWorker->deleteFiles();
+        if(!$model->delete()){
+            Yii::$app->session->setFlash('error', 'Модель не была удалена!');
+        }else{
+            Yii::$app->session->setFlash('success', 'Модель была успешно удалена!');
         }
-        $model->delete();
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->redirect('/admin/climat');
     }
-
 
 
     public function actionView(string $code)
@@ -97,7 +108,7 @@ class ClimatController extends Controller
 
     protected function loadModel(string $code)
     {
-        if(!$model = Climat::findOne(['code' => $code])){
+        if (!$model = Climat::findOne(['code' => $code])) {
             throw new NotFoundHttpException(Climat::MODEL_NAME_RU . ' не найден!');
         }
         return $model;

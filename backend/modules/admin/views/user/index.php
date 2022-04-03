@@ -53,14 +53,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'label' => 'Действия',
             'value' => function ($data) {
                 $actions = [
-                    ['label' => 'Обновить', 'url' => 'user/update?id=' . $data->id],
-                    ['label' => 'Удалить', 'url' => 'user/delete?id=' . $data->id],
+                    ['label' => 'Обновить', 'url' => '/admin/user/update?id=' . $data->id],
+                    ['label' => 'Удалить', 'url' => '/admin/user/delete?id=' . $data->id],
                 ];
 
                 if($data->banned){
-                    $actions[] = ['label' => 'Разбанить', 'url' => 'user/unban?id=' . $data->id];
+                    $actions[] = ['label' => 'Разбанить', 'url' => '/admin/user/unban?id=' . $data->id];
                 }else{
-                    $actions[] = ['label' => 'Забанить', 'url' => 'user/ban?id=' . $data->id];
+                    $actions[] = ['label' => 'Забанить', 'url' => '/admin/user/ban?id=' . $data->id];
                 }
 
                 return ButtonDropdown::widget([

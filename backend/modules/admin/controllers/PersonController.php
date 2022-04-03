@@ -55,14 +55,18 @@ class PersonController extends Controller
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(compact('model'));
         if($model->load(Yii::$app->request->post())){
-            $fileWorker->deleteFiles();
             if(!$model->save()){
                 var_dump($model->errors);die;
+            }else{
+                Yii::$app->session->setFlash('success','Модель была успешно обновлена!');
             }
-            if(!$fileWorker->attachFiles() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка прикрепления изображений');
+            if ($fileWorker->attachFiles()) {
+                $fileWorker->deleteFiles();
+                if(!$fileWorker->upload()){
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/person/view?id='.$model->id);
         }
         return $this->render('create', compact('model'));
 
@@ -75,19 +79,29 @@ class PersonController extends Controller
         if($model->load(Yii::$app->request->post())){
             if(!$model->save()){
                 var_dump($model->errors);die;
+            }else{
+                Yii::$app->session->setFlash('success','Модель была успешно добавлена!');
             }
-            if(!$fileWorker->attachFiles() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка прикрепления изображений');
+            if ($fileWorker->attachFiles()) {
+                if(!$fileWorker->upload()){
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/person/view?id='.$model->id);
         }
         return $this->render('create', compact('model'));
     }
 
-    public function actionDelete(int $id)
+    public function actionDelete(string $id)
     {
         $model = $this->loadModel($id);
-        $model->delete();
-        return $this->redirect(Yii::$app->request->referrer);
+        $fileWorker = new FileWorker(['model' => $model]);
+        $fileWorker->deleteFiles();
+        if(!$model->delete()){
+            Yii::$app->session->setFlash('error', 'Модель не была удалена!');
+        }else{
+            Yii::$app->session->setFlash('success', 'Модель была успешно удалена!');
+        }
+        return $this->redirect('/admin/person');
     }
 }

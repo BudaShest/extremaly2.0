@@ -1,5 +1,6 @@
 <?php
 /** @var yii\web\View $this */
+
 /** @var Place $model */
 
 use yii\widgets\DetailView;
@@ -16,24 +17,36 @@ $this->params['breadcrumbs'][] = $this->title;
     'attributes' => [
         'name',
         'description',
-        'country_code',
-        'climat_code',
+        [
+            'attribute' => 'country_code',
+            'value' => function ($data) {
+                return Html::a($data->country->name  . '<br>' . Html::img($data->country->flag, ['class' => 'img-thumbnail']), ['country/view', 'code' => $data->country->code]);
+            },
+            'format' => 'raw'
+        ],
+        [
+            'attribute' => 'climat_code',
+            'value' => function ($data) {
+                return Html::a($data->climat->name  . '<br>' . Html::img($data->climat->icon, ['class' => 'img-thumbnail']),  ['climat/view', 'code' => $data->climat->code]);
+            },
+            'format' => 'raw'
+        ],
         [
             'label' => 'Изображения',
             'value' => function ($data) {
                 $output = "";
                 foreach ($data->images as $image) {
-                    $output .= Html::img('/uploads/' . $image->image, ['class' => 'img-thumbnail']);
+                    $output .= Html::img($image->image, ['class' => 'img-fluid']);
                 }
                 return $output;
             },
             'format' => 'html'
         ],
     ]
-])?>
+]) ?>
 
 <div class="btn-group">
-    <?= Html::a('Обновить', ['/admin/place/update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
-    <?= Html::a('Удалить', ['/admin/place/delete', 'id' => $model->id], ['class' => 'btn-danger']) ?>
+    <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+    <?= Html::a('Удалить', ['delete', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
 </div>
 

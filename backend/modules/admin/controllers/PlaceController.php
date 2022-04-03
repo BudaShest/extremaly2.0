@@ -26,13 +26,13 @@ class PlaceController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-                'denyCallback' => function(){
+                'denyCallback' => function () {
                     return $this->redirect('main/login');
                 },
             ]
         ];
     }
-    //TODO flash о результатах операции
+
 
     public function actionIndex()
     {
@@ -42,8 +42,8 @@ class PlaceController extends Controller
 
     public function actionView(int $id)
     {
-        if(!$model = Place::findOne($id)){
-            throw new NotFoundHttpException( 'Место с таким идентификатором отсутствует');
+        if (!$model = Place::findOne($id)) {
+            throw new NotFoundHttpException('Место с таким идентификатором отсутствует');
         }
         return $this->render('detail', compact('model'));
     }
@@ -56,52 +56,64 @@ class PlaceController extends Controller
         $countryFileWorker = new FileWorker(['model' => $country]);
         $climat = new Climat();
         $climatFileWorker = new FileWorker(['model' => $climat]);
-        if($place->load(Yii::$app->request->post())){
-            if(!$place->save()){
+        if ($place->load(Yii::$app->request->post())) {
+            if (!$place->save()) {
                 var_dump($place->errors);die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
-            if(!$placeFileWorker->attachFiles() || !$placeFileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка загрузки файлов');
+            if ($placeFileWorker->attachFiles()) {
+                if(!$placeFileWorker->upload()){
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            return $this->redirect('/admin/place/create');
+            return $this->redirect('/admin/place/view?id'.$place->id);
         }
-        if($country->load(Yii::$app->request->post())){
-            if(!$countryFileWorker->attachFile() || !$countryFileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+        if ($country->load(Yii::$app->request->post())) {
+            if ($countryFileWorker->attachFile()) {
+                if (!$countryFileWorker->upload()) {
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            if(!$country->save()){
+            if (!$country->save()) {
                 var_dump($country->errors);die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
-            return $this->redirect('/admin/place/create');
+            return $this->redirect('/admin/place/view?id'.$place->id);
         }
-        if($climat->load(Yii::$app->request->post())){
-            if(!$climatFileWorker->attachFile() || !$climatFileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+        if ($climat->load(Yii::$app->request->post())) {
+            if ($climatFileWorker->attachFile()) {
+                if(!$climatFileWorker->upload()){
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            if(!$climat->save()){
+            if (!$climat->save()) {
                 var_dump($climat->errors);die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
-            return $this->redirect('/admin/place/create');
+            return $this->redirect('/admin/place/view?id'.$place->id);
         }
-        return $this->render('create', compact('country','climat', 'place'));
+        return $this->render('create', compact('country', 'climat', 'place'));
     }
 
 
     public function actionUpdate(int $id)
     {
-        if(!$model = Place::findOne($id)){
+        if (!$model = Place::findOne($id)) {
             throw new NotFoundHttpException('Место с таким идентификатором отсутствует');
         }
         $fileWorker = new FileWorker(['model' => $model]);
-        if($model->load(Yii::$app->request->post())){
+        if ($model->load(Yii::$app->request->post())) {
             $fileWorker->deleteFiles();
-            if(!$model->save()){
-                var_dump($model->errors);die;
+            if ($fileWorker->attachFiles()) {
+                $fileWorker->deleteFiles();
+                if(!$fileWorker->upload()){
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            if(!$fileWorker->attachFiles() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('error', 'Ошибка прикрепления изображений');
-            }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/place/view?id'.$model->id);
         }
         return $this->render('create', ['place' => $model]);
     }
@@ -109,10 +121,16 @@ class PlaceController extends Controller
 
     public function actionDelete(int $id)
     {
-        if(!$model = Place::findOne($id)){
+        if (!$model = Place::findOne($id)) {
             throw new NotFoundHttpException('Место с таким идентификатором отсутствует');
         }
-        $model->delete();
-        return $this->redirect(Yii::$app->request->referrer);
+        $fileWorker = new FileWorker(['model' => $model]);
+        $fileWorker->deleteFiles();
+        if(!$model->delete()){
+            Yii::$app->session->setFlash('error', 'Модель не была удалена!');
+        }else{
+            Yii::$app->session->setFlash('success', 'Модель была успешно удалена!');
+        }
+        return $this->redirect('/admin/place');
     }
 }

@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'yii\grid\SerialColumn'
         ],
         [
-            'label' => 'Название',
+            'attribute' => 'name',
             'value' => function ($data) {
                 return Html::a($data->name, ['view', 'id' => $data->id]);
             },
@@ -45,14 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'offer',
         'from',
         'until',
-        'description',
-        'age_restrictions',
-        'priority',
-        'is_horizontal',
         [
-            'label' => 'Место',
+            'attribute' => 'place_id',
             'value' => function($data){
-                return Html::a($data->place->name, ['place/index', 'id' => $data->place->id]);
+                return Html::a($data->place->name, ['place/view', 'id' => $data->place->id]);
             },
             'format' => 'raw'
         ],
@@ -68,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function ($data) {
                 $output = "";
                 foreach ($data->images as $image) {
-                    $output .= Html::img('/uploads/' . $image->image, ['class' => 'img-thumbnail']);
+                    $output .= Html::img($image->image, ['class' => 'img-thumbnail']);
                 }
                 return $output;
             },
@@ -81,8 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => 'event/update?id=' . $data->id],
-                            ['label' => 'Удалить', 'url' => 'event/delete?id=' . $data->id],
+                            ['label' => 'Обновить', 'url' => '/admin/event/update?id=' . $data->id],
+                            ['label' => 'Удалить', 'url' => '/admin/event/delete?id=' . $data->id],
                         ],
                     ],
                 ]);

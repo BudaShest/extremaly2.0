@@ -65,7 +65,9 @@ AdminAssetBundle::register($this);
             ]
         ]
     ]) ?>
+    <?php if(!Yii::$app->user->isGuest):?>
     <?= Html::a('Выйти', ['main/logout'], ['class' => 'btn btn-danger']) ?>
+    <?php endif ;?>
 </header>
 <main class="main">
     <div class="container">

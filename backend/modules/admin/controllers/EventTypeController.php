@@ -24,7 +24,7 @@ class EventTypeController extends Controller
                         'roles' => ['@'],
                     ]
                 ],
-                'denyCallback' => function(){
+                'denyCallback' => function () {
                     return $this->redirect('main/login');
                 },
             ]
@@ -35,7 +35,7 @@ class EventTypeController extends Controller
     {
 //        $model = new EventType();
         $eventTypesProvider = new ActiveDataProvider([
-           'query' => EventType::find(),
+            'query' => EventType::find(),
             'pagination' => [
                 'pageSize' => 10
             ]
@@ -47,39 +47,51 @@ class EventTypeController extends Controller
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(compact('model'));
-        if($model->load(Yii::$app->request->post())){
-            if(!$fileWorker->attachFile() || !$fileWorker->upload()){
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$fileWorker->attachFile() || !$fileWorker->upload()) {
                 Yii::$app->session->setFlash('Ошибка созранения файла');
-            }else{
+            } else {
                 $fileWorker->deleteFiles();
             }
-            if (!$model->save()){
-                var_dump($model->errors);die;
+            if (!$model->save()) {
+                var_dump($model->errors);
+                die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно обновлена!');
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/event-type/view?id=' . $model->id);
         }
         return $this->render('create', ['eventType' => $model]);
     }
 
-    public function actionDelete(int $id)
+    public function actionDelete(string $id)
     {
         $model = $this->loadModel($id);
-        $model->delete();
-        return $this->redirect(Yii::$app->request->referrer);
+        $fileWorker = new FileWorker(['model' => $model]);
+        $fileWorker->deleteFiles();
+        if (!$model->delete()) {
+            Yii::$app->session->setFlash('error', 'Модель не была удалена!');
+        } else {
+            Yii::$app->session->setFlash('success', 'Модель была успешно удалена!');
+        }
+        return $this->redirect('/admin/event-type');
     }
 
     public function actionCreate()
     {
         $model = new EventType();
         $fileWorker = new FileWorker(compact('model'));
-        if($model->load(Yii::$app->request->post())){
-            if(!$fileWorker->attachFile() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('success','Ошибка загрузки файлов');
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$fileWorker->attachFile() || !$fileWorker->upload()) {
+                Yii::$app->session->setFlash('success', 'Ошибка загрузки файлов');
             }
-            if(!$model->save()){
-                var_dump($model->errors);die;
+            if (!$model->save()) {
+                var_dump($model->errors);
+                die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/event-type/view?id=' . $model->id);
         }
         return $this->render('create', ['eventType' => $model]);
     }
@@ -92,7 +104,7 @@ class EventTypeController extends Controller
 
     protected function loadModel(int $id)
     {
-        if(!$model = EventType::findOne($id)){
+        if (!$model = EventType::findOne($id)) {
             throw new NotFoundHttpException('Модель не найдена!');
         }
         return $model;

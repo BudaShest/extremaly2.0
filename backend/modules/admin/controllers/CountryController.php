@@ -24,7 +24,7 @@ class CountryController extends Controller
                         'roles' => ['@'],
                     ]
                 ],
-                'denyCallback' => function(){
+                'denyCallback' => function () {
                     return $this->redirect('main/login');
                 },
             ]
@@ -46,21 +46,32 @@ class CountryController extends Controller
     public function actionDelete(string $code)
     {
         $model = $this->loadModel($code);
-        $model->delete();
-        $this->redirect(Yii::$app->request->referrer);
+        $fileWorker = new FileWorker(['model' => $model]);
+        $fileWorker->deleteFiles();
+        if (!$model->delete()) {
+            Yii::$app->session->setFlash('error', 'Модель не была удалена!');
+        } else {
+            Yii::$app->session->setFlash('success', 'Модель была успешно удалена!');
+        }
+        return $this->redirect('/admin/country');
     }
 
     public function actionUpdate(string $code)
     {
         $model = $this->loadModel($code);
         $fileWorker = new FileWorker(compact('model'));
-        if($model->load(Yii::$app->request->post())){
-            $fileWorker->deleteFiles();
-            if(!$fileWorker->attachFile() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('error','Ошибка загрузки файлов');
+        if ($model->load(Yii::$app->request->post())) {
+            if ($fileWorker->attachFile()) {
+                $fileWorker->deleteFiles();
+                if (!$fileWorker->upload()) {
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            if(!$model->save()){
-                var_dump($model->errors);die;
+            if (!$model->save()) {
+                var_dump($model->errors);
+                die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно обновлена!');
             }
             return $this->redirect(Yii::$app->request->referrer);
         }
@@ -71,26 +82,32 @@ class CountryController extends Controller
     {
         $model = new Country();
         $fileWorker = new FileWorker(compact('model'));
-        if($model->load(Yii::$app->request->post())){
-            if(!$fileWorker->attachFile() || !$fileWorker->upload()){
-                Yii::$app->session->setFlash('error','Ошибка загрузки файлов');
+        if ($model->load(Yii::$app->request->post())) {
+            if ($fileWorker->attachFile()) {
+                if (!$fileWorker->upload()) {
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
-            if(!$model->save()){
-                var_dump($model->errors);die;
+            if (!$model->save()) {
+                var_dump($model->errors);
+                die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/country/view?code=' . $model->code);
         }
         return $this->render('create', ['country' => $model]);
     }
 
-    public function actionView(string $code){
+    public function actionView(string $code)
+    {
         $model = $this->loadModel($code);
         return $this->render('detail', compact('model'));
     }
 
     protected function loadModel(string $code): Country
     {
-        if(!$model = Country::findOne($code)){
+        if (!$model = Country::findOne($code)) {
             throw new NotFoundHttpException('Страна не найдена!');
         }
         return $model;

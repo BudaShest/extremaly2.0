@@ -7,7 +7,7 @@ use yii\db\ActiveQuery;
 
 class EventImage extends ActiveRecord
 {
-    public $uploads;
+    public const MODEL_FK = 'event_id';
 
     public function rules(): array
     {

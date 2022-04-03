@@ -10,6 +10,7 @@ $this->title = 'Климат ' . $model->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
@@ -18,13 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'label' => 'Иконка',
             'value' => function ($data) {
-                return Html::img('/uploads/' . $data->icon);
+                return Html::img($data->icon, ['class' => 'img-fluid']);
             },
             'format' => 'html'
         ]
     ]
 ]) ?>
 <div class="btn-group">
-    <?= Html::a('Обновить', ['/admin/climat/update', 'id' => $model->code], ['class' => 'btn btn-warning']) ?>
-    <?= Html::a('Удалить', ['/admin/climat/delete', 'id' => $model->code], ['class' => 'btn btn-danger']) ?>
+    <?= Html::a('Обновить', ['/admin/climat/update', 'code' => $model->code], ['class' => 'btn btn-warning']) ?>
+    <?= Html::a('Удалить', ['/admin/climat/delete', 'code' => $model->code], ['class' => 'btn btn-danger']) ?>
 </div>

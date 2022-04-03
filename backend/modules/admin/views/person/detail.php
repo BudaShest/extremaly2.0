@@ -9,6 +9,7 @@ $this->title = 'Создать персону';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function ($data) {
                 $output = "";
                 foreach ($data->images as $image) {
-                    $output .= Html::img('/uploads/' . $image->image, ['class' => 'img-thumbnail']);
+                    $output .= Html::img($image->image, ['class' => 'img-fluid']);
                 }
                 return $output;
             },

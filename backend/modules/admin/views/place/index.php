@@ -48,18 +48,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'class' => LinkPager::class,
         'pagination' => $placesProvider->pagination,
     ],
-//    'header' => Html::encode(Place::MODEL_NAME_RU_MULTI),
     'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
         [
-            'label' => 'Название',
+            'attribute' => 'name',
             'value' => function($data){
                 return Html::a($data->name, ['view', 'id'=>$data->id]);
             },
             'format' => 'raw'
         ],
         'description',
-        'country_code',
-        'climat_code',
+        [
+            'attribute' => 'country_code',
+            'value' => function($data){
+                return Html::a($data->country->name, ['country/view', 'code'=>$data->country->code]);
+            },
+            'format' => 'raw'
+        ],
+        [
+            'attribute' => 'climat_code',
+            'value' => function($data){
+                return Html::a($data->climat->name, ['climat/view', 'code'=>$data->climat->name]);
+            },
+            'format' => 'raw'
+        ],
         [
             'label' => 'Изображения',
             'value' => function ($data) {
@@ -78,8 +90,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => 'place/update?id='.$data->id],
-                            ['label' => 'Удалить', 'url' => 'place/delete?id='.$data->id],
+                            ['label' => 'Обновить', 'url' => '/admin/place/update?id='.$data->id],
+                            ['label' => 'Удалить', 'url' => '/admin/place/delete?id='.$data->id],
                         ],
                     ],
                 ]);
@@ -89,7 +101,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     ],
 ]) ?>
-<?//= LinkPager::widget(['pagination' => $placesProvider->pagination]) ?>
 <h2>Страны и климаты</h2>
 <div class="row">
     <div class="col">

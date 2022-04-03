@@ -22,16 +22,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'priority',
         'is_horizontal',
         [
-            'label' => 'Место',
+            'label' => 'Место (Страна и климат)',
             'value' => function($data){
-                return Html::a($data->place->name, ['place/index', 'id' => $data->place->id]);
+                $output = '';
+                $output .= Html::a($data->place->name, ['/admin/place/view', 'id' => $data->place->id], ['class' => 'lead']);
+                $output .= Html::a(Html::img($data->place->country->flag, ['class' => 'img-thumbnail']), ['/admin/country/view', 'code' => $data->place->country->code]);
+                $output .= Html::a(Html::img($data->place->climat->icon, ['class' => 'img-thumbnail']), ['/admin/climat/view', 'code' => $data->place->climat->code,]);
+                return $output;
             },
             'format' => 'raw'
         ],
         [
             'label' => 'Тип',
             'value' => function($data){
-                return Html::a($data->type->name, ['place/index', 'id' => $data->type->id]);
+                return Html::a($data->type->name, ['/admin/event-type/view', 'id' => $data->type->id]);
             },
             'format' => 'raw'
         ],
@@ -40,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function ($data) {
                 $output = "";
                 foreach ($data->images as $image) {
-                    $output .= Html::img('/uploads/' . $image->image, ['class' => 'img-thumbnail']);
+                    $output .= Html::img($image->image, ['class' => 'img-fluid']);
                 }
                 return $output;
             },

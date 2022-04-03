@@ -40,7 +40,7 @@ class Place extends BasePlace
     public function attributeLabels(): array
     {
         return [
-            'name' => 'Имя',
+            'name' => 'Название',
             'address' => 'Адрес',
             'description' => 'Описание',
             'climat_code' => 'Климат',

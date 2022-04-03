@@ -7,6 +7,8 @@ use yii\db\ActiveQuery;
 
 class PlaceImage extends ActiveRecord
 {
+    public const MODEL_FK = 'place_id';
+
     public function rules(): array
     {
         return [

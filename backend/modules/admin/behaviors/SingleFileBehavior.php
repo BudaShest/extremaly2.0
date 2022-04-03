@@ -35,9 +35,10 @@ class SingleFileBehavior extends Behavior
     public function deleteFiles(): bool
     {
         $fileField = $this->fileField;
+        $this->model->fileField = '';
+        $this->model->save();
         try{
             if(!unlink($this->fileFolder.'/'.$this->model->$fileField)){
-                $this->model->addError('uploads', 'Ошибка удаления файлов');
                 return false;
             }
             return true;

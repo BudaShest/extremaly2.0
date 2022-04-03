@@ -18,10 +18,20 @@ use yii\bootstrap4\LinkPager;
     ],
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
-        'user_id',
+        [
+            'attribute' => 'user_id',
+            'value' => function($data){
+                return Html::a($data->user->login, ['user/view', 'id' => $data->user->id]);
+            }
+        ],
         'ticket_id',
         'num',
-        'status_id'
+        [
+            'attribute' => 'status_id',
+            'value' => function($data){
+                return $data->status->name;
+            }
+        ]
     ]
-])
+]);
 ?>
