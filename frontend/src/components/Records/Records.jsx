@@ -1,5 +1,6 @@
 import React from 'react';
 import {Row,Col, Select, Icon, DatePicker, Card, CardTitle, Pagination,Button} from 'react-materialize';
+import {NavLink} from 'react-router-dom';
 import style from './Records.module.css';
 
 const Records = ({records}) => {
@@ -37,10 +38,6 @@ const Records = ({records}) => {
                                 coverTrigger: true,
                                 hover: false,
                                 inDuration: 150,
-                                onCloseEnd: null,
-                                onCloseStart: null,
-                                onOpenEnd: null,
-                                onOpenStart: null,
                                 outDuration: 250
                             }
                         }}
@@ -73,10 +70,6 @@ const Records = ({records}) => {
                                 coverTrigger: true,
                                 hover: false,
                                 inDuration: 150,
-                                onCloseEnd: null,
-                                onCloseStart: null,
-                                onOpenEnd: null,
-                                onOpenStart: null,
                                 outDuration: 250
                             }
                         }}
@@ -107,12 +100,7 @@ const Records = ({records}) => {
                                 closeOnClick: true,
                                 constrainWidth: true,
                                 coverTrigger: true,
-                                hover: false,
                                 inDuration: 150,
-                                onCloseEnd: null,
-                                onCloseStart: null,
-                                onOpenEnd: null,
-                                onOpenStart: null,
                                 outDuration: 250
                             }
                         }}
@@ -134,9 +122,6 @@ const Records = ({records}) => {
                         label="Дата начала: "
                         options={{
                             autoClose: false,
-                            container: null,
-                            defaultDate: null,
-                            disableDayFn: null,
                             disableWeekends: false,
                             events: [],
                             firstDay: 0,
@@ -146,71 +131,23 @@ const Records = ({records}) => {
                                 clear: 'Clear',
                                 done: 'Ok',
                                 months: [
-                                    'January',
-                                    'February',
-                                    'March',
-                                    'April',
-                                    'May',
-                                    'June',
-                                    'July',
-                                    'August',
-                                    'September',
-                                    'October',
-                                    'November',
-                                    'December'
+                                    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
                                 ],
                                 monthsShort: [
-                                    'Jan',
-                                    'Feb',
-                                    'Mar',
-                                    'Apr',
-                                    'May',
-                                    'Jun',
-                                    'Jul',
-                                    'Aug',
-                                    'Sep',
-                                    'Oct',
-                                    'Nov',
-                                    'Dec'
+                                    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
                                 ],
                                 nextMonth: '›',
                                 previousMonth: '‹',
                                 weekdays: [
-                                    'Sunday',
-                                    'Monday',
-                                    'Tuesday',
-                                    'Wednesday',
-                                    'Thursday',
-                                    'Friday',
-                                    'Saturday'
+                                    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
                                 ],
-                                weekdaysAbbrev: [
-                                    'S',
-                                    'M',
-                                    'T',
-                                    'W',
-                                    'T',
-                                    'F',
-                                    'S'
+                                weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S'
                                 ],
                                 weekdaysShort: [
-                                    'Sun',
-                                    'Mon',
-                                    'Tue',
-                                    'Wed',
-                                    'Thu',
-                                    'Fri',
-                                    'Sat'
+                                    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
                                 ]
                             },
                             isRTL: false,
-                            maxDate: null,
-                            minDate: null,
-                            onClose: null,
-                            onDraw: null,
-                            onOpen: null,
-                            onSelect: null,
-                            parse: null,
                             setDefaultDate: false,
                             showClearBtn: false,
                             showDaysInNextAndPreviousMonths: false,
@@ -223,9 +160,6 @@ const Records = ({records}) => {
                         label="Дата конца: "
                         options={{
                             autoClose: false,
-                            container: null,
-                            defaultDate: null,
-                            disableDayFn: null,
                             disableWeekends: false,
                             events: [],
                             firstDay: 0,
@@ -235,71 +169,24 @@ const Records = ({records}) => {
                                 clear: 'Clear',
                                 done: 'Ok',
                                 months: [
-                                    'January',
-                                    'February',
-                                    'March',
-                                    'April',
-                                    'May',
-                                    'June',
-                                    'July',
-                                    'August',
-                                    'September',
-                                    'October',
-                                    'November',
-                                    'December'
+                                    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
                                 ],
                                 monthsShort: [
-                                    'Jan',
-                                    'Feb',
-                                    'Mar',
-                                    'Apr',
-                                    'May',
-                                    'Jun',
-                                    'Jul',
-                                    'Aug',
-                                    'Sep',
-                                    'Oct',
-                                    'Nov',
-                                    'Dec'
+                                    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
                                 ],
                                 nextMonth: '›',
                                 previousMonth: '‹',
                                 weekdays: [
-                                    'Sunday',
-                                    'Monday',
-                                    'Tuesday',
-                                    'Wednesday',
-                                    'Thursday',
-                                    'Friday',
-                                    'Saturday'
+                                    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
                                 ],
                                 weekdaysAbbrev: [
-                                    'S',
-                                    'M',
-                                    'T',
-                                    'W',
-                                    'T',
-                                    'F',
-                                    'S'
+                                    'S', 'M', 'T', 'W', 'T', 'F', 'S'
                                 ],
                                 weekdaysShort: [
-                                    'Sun',
-                                    'Mon',
-                                    'Tue',
-                                    'Wed',
-                                    'Thu',
-                                    'Fri',
-                                    'Sat'
+                                    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
                                 ]
                             },
                             isRTL: false,
-                            maxDate: null,
-                            minDate: null,
-                            onClose: null,
-                            onDraw: null,
-                            onOpen: null,
-                            onSelect: null,
-                            parse: null,
                             setDefaultDate: false,
                             showClearBtn: false,
                             showDaysInNextAndPreviousMonths: false,
@@ -335,15 +222,18 @@ const Records = ({records}) => {
                                 <Card
                                     key={record.id}
                                     actions={[
-                                        <a key="1" href="#">Это ссылка</a>
+                                        <NavLink to={`/event/${record.id}`}>Перейти</NavLink>,
+                                        <NavLink to={`/event/${record.id}`}>Заказть билеты</NavLink>,
                                     ]}
                                     closeIcon={<Icon>close</Icon>}
-                                    header={<CardTitle image={record.img} />}
+                                    header={<CardTitle image={record.images[0]} />}
                                     horizontal
                                     revealIcon={<Icon>more_vert</Icon>}
                                     className={`small hoverable ${style.record}`}
                                 >
-                                    {record.description}
+                                    <h5>{record.name}</h5>
+                                    <span>{record.offer}</span>
+                                    <p>{record.description}</p>
                                 </Card>
                             );
                         })

@@ -3,10 +3,22 @@
 namespace app\modules\admin\models;
 
 use app\models\EventType as BaseEventType;
+use app\modules\admin\behaviors\SingleFileBehavior;
 use app\modules\admin\models\interfaces\IFileWorkable;
 
-class EventType extends BaseEventType implements IFileWorkable
+class EventType extends BaseEventType
 {
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
+            'class' => SingleFileBehavior::class,
+            'model' => $this,
+            'fileField' => 'icon'
+        ];
+        return $behaviors;
+    }
+
     public $uploads;
 
     public function rules(): array
@@ -14,31 +26,6 @@ class EventType extends BaseEventType implements IFileWorkable
         $rules = parent::rules();
         $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024]; //todo возможно создать встроенный валидатор или как то вынести код
         return $rules;
-    }
-
-    public function upload(string $fileFolder = 'uploads'): bool
-    {
-        $newName = time().$this->uploads->name;
-        if(!$this->uploads->saveAs($fileFolder . "/" .$newName)){
-            return false;
-        }
-        $this->uploads = null;
-        $this->icon = $newName;
-        return true;
-    }
-
-    public function deleteFiles(string $fileFolder = 'uploads'): bool
-    {
-        try{
-            if(!unlink($fileFolder.'/'.$this->flag)){
-                $this->addError('uploads', 'Ошибка удаления файлов');
-                return false;
-            }
-            return true;
-        }catch (\Exception $e){
-            $this->addError('uploads', $e);
-            return false;
-        }
     }
 
     public function attributeLabels(): array

@@ -7,7 +7,7 @@ import FormContainer from "../../components/FormContainer/FormContainer";
 import style from './Login.module.css';
 
 const Login = () => {
-    const [userInfo, setUserInfo] = useState({login: '', pasword: ''})
+    const [userInfo, setUserInfo] = useState({login: '', password: ''})
 
     const loginRef = useRef();
     const passwordRef = useRef();
@@ -24,7 +24,7 @@ const Login = () => {
 
     const handleForm = (e) => {
         e.preventDefault();
-        setUserInfo(prevState => {setUserInfo({login: loginRef.current.value, pasword: passwordRef.current.value })});
+        setUserInfo(prevState => {setUserInfo({login: loginRef.current.value, password: passwordRef.current.value })});
         console.log(userInfo);
         loginUser(userInfo);
     }

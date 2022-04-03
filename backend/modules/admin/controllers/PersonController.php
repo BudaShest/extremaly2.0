@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\FileWorker;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Person;
 use yii\web\NotFoundHttpException;
@@ -10,6 +11,22 @@ use Yii;
 
 class PersonController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ];
+    }
+
     protected function loadModel(int $id)
     {
         if(!$model = Person::findOne($id)){

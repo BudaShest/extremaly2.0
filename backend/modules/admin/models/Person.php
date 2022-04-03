@@ -4,10 +4,22 @@ namespace app\modules\admin\models;
 
 use app\models\Person as BasePerson;
 use app\models\PersonImage;
-use app\modules\admin\models\interfaces\IFileWorkable;
+use app\modules\admin\behaviors\MultiFileBehavior;
 
-class Person extends BasePerson implements IFileWorkable
+class Person extends BasePerson
 {
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
+            'class' => MultiFileBehavior::class,
+            'model' => $this,
+            'imageClass' => PersonImage::class,
+            'fileField' => 'flag'
+        ];
+        return $behaviors;
+    }
+
     /** @inheritDoc */
     public function rules(): array
     {
@@ -28,29 +40,5 @@ class Person extends BasePerson implements IFileWorkable
           'description' => 'Описание',
           'profession' => 'Профессия'
         ];
-    }
-
-    //TODO imageBehaivour для всех сущеностей с таблицами image
-    public function deleteFiles(string $fileFolder = 'uploads'): bool
-    {
-        foreach($this->images as $image){
-            if(!unlink($fileFolder.'/'.$image['image'])){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public function upload(string $fileFolder = 'uploads'): bool
-    {
-        foreach($this->uploads as $upload){
-            $newName = time().$upload->name;
-            if(!$upload->saveAs($fileFolder . "/" .$newName)){
-                return false;
-            }
-            $personImage = new PersonImage(['image'=>$newName]);
-            $this->link('images', $personImage);
-        }
-        return true;
     }
 }

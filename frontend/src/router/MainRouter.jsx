@@ -10,14 +10,15 @@ import Register from "../pages/Register/Register";
 import Places from "../pages/Places/Places";
 import Place from "../pages/Place/Place";
 import Persons from "../pages/Persons/Persons";
-
+import User from "../pages/User/User";
 
 const MainRouter = () => {
     return (
         <Routes>
-            <Route exact path="/" element={<Main/>}/>
-            <Route path="/event" element={<Event/>}/>
-            <Route path="/events" element={<Events/>}/>
+            <Route path="/events">
+                <Route index element={<Events/>}/>
+                <Route path=":id" element={<Event/>}/>
+            </Route>
             <Route path="/places">
                 <Route index element={<Places/>}/>
                 <Route path=":id" element={<Place/>}/>
@@ -26,6 +27,8 @@ const MainRouter = () => {
                 <Route index element={<Persons/>}/>
                 <Route path=":id" element={<Place/>}/>
             </Route>
+            <Route exact path="/" element={<Main/>}/>
+            <Route path="/user" element={<User/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
         </Routes>

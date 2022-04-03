@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Banned;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\User;
 use yii\web\NotFoundHttpException;
@@ -11,9 +12,25 @@ use Yii;
 
 class UserController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'ban', 'unban', 'delete', 'view'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ];
+    }
+
     protected function loadModel(int $id)
     {
-        if(!$model = User::findOne($id)){
+        if (!$model = User::findOne($id)) {
             throw new NotFoundHttpException('Модель не найдена');
         }
         return $model;
@@ -32,9 +49,10 @@ class UserController extends Controller
         return $this->render('index', compact('dataProvider', 'model'));
     }
 
-    public function actionDelete(int $id){
+    public function actionDelete(int $id)
+    {
         $model = $this->loadModel($id);
-        if($model->delete()){
+        if ($model->delete()) {
             Yii::$app->session->setFlash('success', 'Пользователь был успешно удалён');
         }
         return $this->redirect(Yii::$app->request->referrer);
@@ -46,17 +64,19 @@ class UserController extends Controller
         return $this->render('detail', compact('model'));
     }
 
-    public function actionBan(int $id){
+    public function actionBan(int $id)
+    {
         $model = User::findIdentity($id);
         $banned = new Banned();
         $model->link('banned', $banned);
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-    public function actionUnban(int $id){
-        if($model = Banned::findOne(['user_id' => $id])){
+    public function actionUnban(int $id)
+    {
+        if ($model = Banned::findOne(['user_id' => $id])) {
             $model->delete();
-        }else{
+        } else {
             Yii::$app->session->setFlash('error', 'Ошибка разбана');
         }
 

@@ -1,29 +1,31 @@
-import React,{useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {useParams, NavLink} from 'react-router-dom';
 import {Carousel, Container, Row, Col, Textarea, Button, Icon} from "react-materialize";
 import style from './Event.module.css';
 import Persons from "../../components/Persons/Persons";
 import Gallery from "../../components/Gallery/Gallery";
 import Comments from "../../components/Comments/Comments";
 import SocialLinks from "../../components/SocialLinks/SocialLinks";
-
 import {comments as defValueComments} from "../Main/SectionAbout";
 import {initialState as defValuePersons} from "../Main/SectionAbout";
+import {fetchEvent} from '../../asyncActions/events/fetchEvent';
 
 
 const defValueEvent = {
-    name:"Burning Man",
+    name: "Burning Man",
     from: `27 august ${new Date(Date.now()).getFullYear()}`,
     until: `9 september ${new Date(Date.now()).getFullYear()}`,
-    type:"Фестивали",
-    description:`Товарищи! начало повседневной работы по формированию позиции требуют от нас анализа системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что начало повседневной работы по формированию позиции обеспечивает широкому кругу (специалистов) участие в формировании направлений прогрессивного развития. Таким образом постоянное информационно-пропагандистское обеспечение нашей деятельности способствует подготовки и реализации системы обучения кадров, соответствует насущным потребностям. Задача организации, в особенности же постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание новых предложений. Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения модели развития.
+    type: "Фестивали",
+    description: `Товарищи! начало повседневной работы по формированию позиции требуют от нас анализа системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что начало повседневной работы по формированию позиции обеспечивает широкому кругу (специалистов) участие в формировании направлений прогрессивного развития. Таким образом постоянное информационно-пропагандистское обеспечение нашей деятельности способствует подготовки и реализации системы обучения кадров, соответствует насущным потребностям. Задача организации, в особенности же постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание новых предложений. Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения модели развития.
 Таким образом дальнейшее развитие различных форм деятельности в значительной степени обуславливает создание систем массового участия. Товарищи! сложившаяся структура организации способствует подготовки и реализации систем массового участия. Задача организации, в особенности же начало повседневной работы по формированию позиции позволяет выполнять важные задания по разработке соответствующий условий активизации.`,
-    age_restrictions:'18+',
-    country:'США',
-    country_icon:'',
-    place:'пустыня Блэк Рок в Неваде',
-    climat:'Жаркий',
-    climat_icon:"",
-    offer:'Легендарный фестиваль. который не нуждается в представлении!',
+    age_restrictions: '18+',
+    country: 'США',
+    country_icon: '',
+    place: 'пустыня Блэк Рок в Неваде',
+    climat: 'Жаркий',
+    climat_icon: "",
+    offer: 'Легендарный фестиваль. который не нуждается в представлении!',
 }
 
 const defValuephotos = [
@@ -39,22 +41,31 @@ const defValuephotos = [
 ]
 
 export const socialLinks = [
-    {id:0, img:"img/links/fb.png", src:"https://google.com"},
-    {id:1, img:"img/links/ytb.png", src:"https://google.com"},
-    {id:2, img:"img/links/wtsuo.png", src:"https://google.com"},
-    {id:1, img:"img/links/ytb.png", src:"https://google.com"},
+    {id: 0, img: "img/links/fb.png", src: "https://google.com"},
+    {id: 1, img: "img/links/ytb.png", src: "https://google.com"},
+    {id: 2, img: "img/links/wtsuo.png", src: "https://google.com"},
+    {id: 1, img: "img/links/ytb.png", src: "https://google.com"},
 ]
 
 
 const Event = () => {
+    const dispatch = useDispatch();
+    const requestParams = useParams();
 
-    const [event] = useState(defValueEvent);
+    // const [event] = useState(defValueEvent);
     const [persons] = useState(defValuePersons);
     const [photos] = useState(defValuephotos);
     const [comments] = useState(defValueComments);
 
+    const event = useSelector(state => state.eventsReducer.oneEvent);
+    console.log(event);
+
+    useEffect(() => {
+        dispatch(fetchEvent(requestParams.id));
+    }, [])
+
     return (
-        <main style={{backgroundColor:"#222222"}}>
+        <main style={{backgroundColor: "#222222"}}>
             <Carousel
                 className={style.eventSlider}
                 carouselId="Carousel-37"
@@ -76,13 +87,13 @@ const Event = () => {
                 <h5 className="center-align white-text">{event.type}</h5>
                 <Row>
                     <Col l={5}>
-                        <Col style={{backgroundColor:"#111"}} className={style.eventDescription}>
+                        <Col style={{backgroundColor: "#111"}} className={style.eventDescription}>
                             <h4 className={style.eventDescription_headlines}>О событии</h4>
                             <h5 className={style.eventDescription_headlines}>Место:</h5>
                             <ul>
-                                <li><strong>Место проведения: </strong><a href="#">{event.place}</a></li>
-                                <li><strong>Страна проведения: </strong>{event.country}</li>
-                                <li><strong>Климат</strong>: {event.climat}</li>
+                                <li><strong>Место проведения: <NavLink to={`/places/${event.place_id}`}>{event.place_name}</NavLink></strong></li>
+                                <li><strong>Страна проведения: </strong>{event.country_name}</li>
+                                <li><strong>Климат</strong>: {event.climat_name}</li>
                             </ul>
                             <h5 className={style.eventDescription_headlines}>Дата:</h5>
                             <ul>
@@ -113,7 +124,8 @@ const Event = () => {
                             id="Textarea-41"
                             label="Изложите свои мысли..."
                         />
-                        <Button node="button" type="submit" waves="light">Оставить комментарий<Icon right>send</Icon></Button>
+                        <Button node="button" type="submit" waves="light">Оставить комментарий<Icon
+                            right>send</Icon></Button>
                     </form>
                     <SocialLinks links={socialLinks}/>
                 </Comments>

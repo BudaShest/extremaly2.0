@@ -5,21 +5,21 @@ use app\modules\admin\models\Place;
 use yii\base\BaseObject;
 use yii\web\UploadedFile;
 use app\modules\admin\models\interfaces\IFileWorkable;
+use Yii;
 
-class FileWorker extends BaseObject implements IFileWorkable
+class FileWorker extends BaseObject
 {
-    /** @var IFileWorkable|mixed  */
-    public IFileWorkable $model;
+    public $model;
 
     /** @var string|mixed  */
-    public string $fileFolder = 'uploads';
+    public string $fileFolder = 'uploads'; //todo потом удалить
 
     //TODO в моделях попраить формирование пути убрать @webroot
 
     /**
      * @param $config
      */
-    public function __construct($config = []) //todo итерфейс (работает с файлами что)
+    public function __construct($config = [])
     {
         if(in_array('model' , $config)){
             $this->model = $config['model'];
@@ -62,15 +62,15 @@ class FileWorker extends BaseObject implements IFileWorkable
      */
     public function deleteFiles(string $fileFolder = null): bool
     {
-        return $this->model->deleteFiles($fileFolder ?? $this->fileFolder);
+        return $this->model->deleteFiles();
     }
 
     /**
-     * @param string|null $fileFolder
+     * @param string $fileField
      * @return bool
      */
-    public function upload(string $fileFolder = null): bool
+    public function upload(): bool
     {
-        return $this->model->upload($fileFolder ?? $this->fileFolder);
+        return $this->model->upload();
     }
 }

@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use yii\data\ArrayDataProvider;
 use yii\data\SqlDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Event;
 use app\modules\admin\models\Ticket;
@@ -13,6 +14,22 @@ use Yii;
 
 class TicketController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create', 'delete', 'view'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
         $dataProvider = new SqlDataProvider([

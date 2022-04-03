@@ -4,11 +4,22 @@ namespace app\modules\admin\models;
 
 use app\models\Place as BasePlace;
 use app\models\PlaceImage;
-use Yii;
-use app\modules\admin\models\interfaces\IFileWorkable;
+use app\modules\admin\behaviors\MultiFileBehavior;
 
-class Place extends BasePlace implements IFileWorkable
+class Place extends BasePlace
 {
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
+            'class' => MultiFileBehavior::class,
+            'model' => $this,
+            'imageClass' => PlaceImage::class,
+            'fileField' => 'flag'
+        ];
+        return $behaviors;
+    }
+
     //todo сделать также в других модельках модуля
     /** @var string  */
     public const MODEL_NAME_RU = 'Место';
@@ -36,28 +47,5 @@ class Place extends BasePlace implements IFileWorkable
             'country_code' => 'Страна',
             'uploads' => 'Файлы изображений'
         ];
-    }
-
-    public function deleteFiles(string $fileFolder = 'uploads'): bool
-    {
-        foreach($this->images as $image){
-            if(!unlink($fileFolder.'/'.$image['image'])){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public function upload(string $fileFolder = 'uploads'): bool
-    {
-        foreach($this->uploads as $upload){
-            $newName = time().$upload->name;
-            if(!$upload->saveAs($fileFolder . "/" .$newName)){
-                return false;
-            }
-            $placeImage = new PlaceImage(['image'=>$newName]);
-            $this->link('images', $placeImage);
-        }
-        return true;
     }
 }

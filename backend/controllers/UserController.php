@@ -38,6 +38,7 @@ class UserController extends ActiveController
             }
             return ["message" =>  $model->login . ' был успешно зарегистрирован'];
         }
+        return ["message" => 'Пусой запрос!'];
     }
 
     public function actionLogin()
@@ -48,6 +49,7 @@ class UserController extends ActiveController
                 if(!$model->login($request)){
                     return $model->errors;
                 }
+                return ["message" =>  'Пользователь был успешно авторизован'];
             }catch (\Exception $e){
                 return $e->getMessage();
             }

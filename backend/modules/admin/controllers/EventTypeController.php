@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\FileWorker;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\EventType;
 use yii\data\ActiveDataProvider;
@@ -11,6 +12,22 @@ use yii\web\NotFoundHttpException;
 
 class EventTypeController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
 //        $model = new EventType();

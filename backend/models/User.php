@@ -37,7 +37,6 @@ class User extends ActiveRecord implements IdentityInterface
         if ($data) {
             $this->attributes = $data;
             $this->role_id = Role::DEFAULT_ROLE_ID;
-            $this->access_token = "smth"; //todo пока заглушка
             $this->ip = Yii::$app->request->userIP;
             if (!$this->validate()) {
                 return false;
@@ -52,9 +51,21 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if($data){
             $model = User::findOne(['login' => $data['login']]);
-            if(Yii::$app->security->validatePassword($data['password'], $model['password'])){
+            if(!Yii::$app->security->validatePassword($data['password'], $model->password)){
                 throw new Exception('Пароль не подходит!');
             }
+            return true;
+        }
+        return false;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = Yii::$app->security->generateRandomString();
+            }
+            return true;
         }
         return false;
     }

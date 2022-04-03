@@ -7,6 +7,7 @@ use app\models\PersonImage;
 use app\models\PlaceImage;
 use Faker\Factory;
 use yii\console\ExitCode;
+use app\models\EventImage;
 use Exception;
 use app\models\Country;
 use app\models\Climat;
@@ -121,6 +122,10 @@ class MockBuilder
                 $typeModel = EventType::find()->one();
                 $model->type_id = $typeModel->id;
                 $model->save();
+                $modelImage = new EventImage();
+                $modelImage->event_id = $model->id;
+                $modelImage->image = 'https://i.ytimg.com/vi/KebU58pmufg/maxresdefault.jpg';
+                $modelImage->save();
             }
             echo 'События успешно добавлены!' . "\n";
             return ExitCode::OK;

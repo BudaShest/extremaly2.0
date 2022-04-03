@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Climat;
 use yii\web\NotFoundHttpException;
@@ -11,6 +12,22 @@ use Yii;
 
 class ClimatController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
         $climatesProvider = new ActiveDataProvider([

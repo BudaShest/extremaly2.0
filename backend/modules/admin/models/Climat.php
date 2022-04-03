@@ -3,19 +3,28 @@
 namespace app\modules\admin\models;
 
 use app\models\Climat as BaseClimat;
+use app\modules\admin\behaviors\SingleFileBehavior;
 use yii\web\UploadedFile;
-use Yii;
-use app\modules\admin\models\interfaces\IFileWorkable;
 
-class Climat extends BaseClimat implements IFileWorkable
+class Climat extends BaseClimat
 {
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
+            'class' => SingleFileBehavior::class,
+            'model' => $this,
+            'fileField' => 'icon'
+        ];
+        return $behaviors;
+    }
+
+    public $uploads;
+
     /** @var string  */
     public const MODEL_NAME_RU = 'Климат';
     /** @var string  */
     public const MODEL_NAME_RU_MULTI = 'Климаты';
-
-    //TODO вынести в поведения (работа с файлами)
-    public $uploads;
 
     public function rules(): array
     {
@@ -24,31 +33,6 @@ class Climat extends BaseClimat implements IFileWorkable
         return $rules;
     }
 
-    public function upload(string $fileFolder = 'uploads'): bool
-    {
-        $newName = time().$this->uploads->name;
-        if(!$this->uploads->saveAs($fileFolder . "/" .$newName)){
-            return false;
-        }
-        $this->uploads = null;
-        $this->icon = $newName;
-        return true;
-    }
-
-    public function deleteFiles(string $fileFolder = 'uploads'): bool
-    {
-        try{
-            if(!unlink($fileFolder.'/'.$this->icon)){
-                $this->addError('uploads', 'Ошибка удаления файлов');
-                return false;
-            }
-            return true;
-        }catch (\Exception $e){
-            $this->addError('uploads', $e);
-            return false;
-        }
-//        return unlink($fileFolder.'/'.$this->icon);
-    }
 
     public function attributeLabels(): array
     {

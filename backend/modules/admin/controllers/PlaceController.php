@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use app\modules\admin\components\FileWorker;
 use app\modules\admin\models\Place;
 use app\modules\admin\models\Climat;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Country;
 use Yii;
@@ -13,6 +14,21 @@ use yii\web\NotFoundHttpException;
 
 class PlaceController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ];
+    }
     //TODO flash о результатах операции
 
     public function actionIndex()
@@ -73,9 +89,14 @@ class PlaceController extends Controller
         if(!$model = Place::findOne($id)){
             throw new NotFoundHttpException('Место с таким идентификатором отсутствует');
         }
+        $fileWorker = new FileWorker(['model' => $model]);
         if($model->load(Yii::$app->request->post())){
-            if(!$model->save){
+            $fileWorker->deleteFiles();
+            if(!$model->save()){
                 var_dump($model->errors);die;
+            }
+            if(!$fileWorker->attachFiles() || !$fileWorker->upload()){
+                Yii::$app->session->setFlash('error', 'Ошибка прикрепления изображений');
             }
             return $this->redirect(Yii::$app->request->referrer);
         }

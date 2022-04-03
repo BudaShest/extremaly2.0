@@ -1,12 +1,16 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-
+import style from './Place.module.css';
 import {Card, Icon, CardTitle} from 'react-materialize';
 
 const Place = ({id,name, address, country_code, description, images}) => {
     console.log(images);
     return (
         <Card
+            className={style.placeRow}
+            actions={
+                <NavLink to={`/places/${id}`}>Перейти</NavLink>
+            }
             closeIcon={<Icon>close</Icon>}
             header={<CardTitle image={images[0]} reveal
                                waves="light"/>}
@@ -20,9 +24,6 @@ const Place = ({id,name, address, country_code, description, images}) => {
             <span><b>Описание</b></span>
             <p>
                 {description}
-            </p>
-            <p>
-                <NavLink to={`/places/${id}`}>Перейти</NavLink>
             </p>
         </Card>
     );

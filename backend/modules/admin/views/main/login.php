@@ -1,11 +1,14 @@
 <?php
 /** @var \yii\web\View $this */
-/** @var \app\models\User $model*/
+/** @var \app\modules\admin\models\LoginForm $model*/
 
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+$this->title = 'Логин в админ-панеле';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?php $form = ActiveForm::begin([
     'id' => 'login-form',
     'layout' => 'horizontal',
