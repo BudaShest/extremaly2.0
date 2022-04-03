@@ -65,6 +65,7 @@ AdminAssetBundle::register($this);
             ]
         ]
     ]) ?>
+    <?= Html::a('Выйти', ['main/logout'], ['class' => 'btn btn-danger']) ?>
 </header>
 <main class="main">
     <div class="container">

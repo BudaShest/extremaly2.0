@@ -4,6 +4,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap4\ButtonDropdown;
+use yii\bootstrap4\LinkPager;
 
 $this->title = 'Вcе типы событий';
 $this->params['breadcrumbs'][] = $this->title;
@@ -13,6 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::a('Создать тип событий', ['event-type/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
     'dataProvider' => $eventTypesProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $eventTypesProvider->pagination,
+    ],
     'columns' => [
         [
             'label' => 'Номер ',

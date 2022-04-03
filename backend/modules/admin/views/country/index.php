@@ -5,6 +5,7 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\bootstrap4\ButtonDropdown;
+use yii\bootstrap4\LinkPager;
 
 $this->title = 'Добавить страну';
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,6 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::a('Создать страну', ['country/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
     'dataProvider' => $countriesProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $countriesProvider->pagination,
+    ],
     'columns' => [
         [
             'label' => 'Код',

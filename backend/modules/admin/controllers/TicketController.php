@@ -24,8 +24,11 @@ class TicketController extends Controller
                         'allow' => true,
                         'actions' => ['index', 'create', 'delete', 'view'],
                         'roles' => ['@'],
-                    ]
-                ]
+                    ],
+                ],
+                'denyCallback' => function(){
+                    return $this->redirect('main/login');
+                },
             ]
         ];
     }

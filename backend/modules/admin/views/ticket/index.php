@@ -7,6 +7,7 @@ use app\modules\admin\models\Ticket;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use app\modules\admin\models\Event;
+use yii\bootstrap4\LinkPager;
 
 $this->title = 'Все билеты';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $dataProvider->pagination,
+    ],
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         [

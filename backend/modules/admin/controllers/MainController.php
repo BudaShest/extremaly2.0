@@ -51,9 +51,15 @@ class MainController extends Controller
             if(!$model->login($request)) {
                 var_dump($model->errors);
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('index');
         }
         return $this->render('login', compact('model'));
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        return $this->redirect('login');
     }
 
 }

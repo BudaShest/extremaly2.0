@@ -4,13 +4,12 @@
 /** @var Place $model */
 
 use yii\grid\GridView;
-use yii\data\Pagination;
+use yii\bootstrap4\LinkPager;
 use yii\data\ActiveDataProvider;
 use app\modules\admin\models\Place;
 use app\modules\admin\models\Country;
 use app\modules\admin\models\Climat;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\bootstrap4\ButtonDropdown;
 
 $placesProvider = new ActiveDataProvider([
@@ -45,6 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?= GridView::widget([
     'dataProvider' => $placesProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $placesProvider->pagination,
+    ],
 //    'header' => Html::encode(Place::MODEL_NAME_RU_MULTI),
     'columns' => [
         [
@@ -86,6 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     ],
 ]) ?>
+<?//= LinkPager::widget(['pagination' => $placesProvider->pagination]) ?>
 <h2>Страны и климаты</h2>
 <div class="row">
     <div class="col">

@@ -8,6 +8,7 @@ use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\bootstrap4\ButtonDropdown;
+use yii\bootstrap4\LinkPager;
 
 $dataProvider = new ActiveDataProvider([
     'query' => Event::find(),
@@ -26,6 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $dataProvider->pagination,
+    ],
     'columns' => [
         [
             'class' => 'yii\grid\SerialColumn'

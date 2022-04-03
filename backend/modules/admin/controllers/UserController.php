@@ -23,7 +23,10 @@ class UserController extends Controller
                         'actions' => ['index', 'ban', 'unban', 'delete', 'view'],
                         'roles' => ['@'],
                     ]
-                ]
+                ],
+                'denyCallback' => function(){
+                    return $this->redirect('main/login');
+                },
             ]
         ];
     }

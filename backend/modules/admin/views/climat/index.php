@@ -4,6 +4,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap4\ButtonDropdown;
+use yii\bootstrap4\LinkPager;
 
 $this->title = 'Весь климат';
 $this->params['breadcrumbs'][] = $this->title;
@@ -13,6 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::a('Создать климат', ['climat/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
     'dataProvider' => $climatesProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $climatesProvider->pagination,
+    ],
     'columns' => [
         [
             'label' => 'Код',

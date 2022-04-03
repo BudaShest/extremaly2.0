@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\bootstrap4\ButtonDropdown;
 use yii\helpers\Html;
+use yii\bootstrap4\LinkPager;
 
 $this->title = 'Все пользователи';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('/partials/flashBadge') ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $dataProvider->pagination,
+    ],
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         [

@@ -23,7 +23,10 @@ class EventTypeController extends Controller
                         'actions' => ['index', 'update', 'create', 'delete', 'view'],
                         'roles' => ['@'],
                     ]
-                ]
+                ],
+                'denyCallback' => function(){
+                    return $this->redirect('main/login');
+                },
             ]
         ];
     }

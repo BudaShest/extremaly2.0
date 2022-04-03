@@ -7,6 +7,7 @@ use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
 use app\modules\admin\models\Person;
 use yii\helpers\Html;
+use yii\bootstrap4\LinkPager;
 
 $dataProvider = new ActiveDataProvider([
     'query' => Person::find(),
@@ -25,6 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'pager' => [
+        'class' => LinkPager::class,
+        'pagination' => $dataProvider->pagination,
+    ],
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         [

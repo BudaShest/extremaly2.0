@@ -21,7 +21,11 @@ class ApplicationController extends Controller
                         'actions' => ['index'],
                         'roles' => ['@'],
                     ]
-                ]
+                ],
+                'denyCallback' => function(){
+                    return $this->redirect('main/login');
+                },
+
             ]
         ];
     }
