@@ -26,6 +26,8 @@ class Climat extends BaseClimat
     /** @var string  */
     public const MODEL_NAME_RU_MULTI = 'Климаты';
 
+    public const DEFAULT_IMAGE = 'https://cdn-icons.flaticon.com/png/512/2862/premium/2862807.png?token=exp=1649008804~hmac=eabe1a266da93f07a895719a3c15c439';
+
     public function rules(): array
     {
         $rules = parent::rules();

@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 
 <div class="btn-group">
+    <?= Html::a('Очистить файлы', ['/admin/place/delete-files', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     <?= Html::a('Удалить', ['delete', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
 </div>

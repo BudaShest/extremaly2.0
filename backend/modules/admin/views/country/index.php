@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\bootstrap4\ButtonDropdown;
 use yii\bootstrap4\LinkPager;
 
-$this->title = 'Добавить страну';
+$this->title = "Места/страны/климат";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3>Страны</h3>

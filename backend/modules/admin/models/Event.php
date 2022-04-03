@@ -17,7 +17,6 @@ class Event extends BaseEvent
             'class' => MultiFileBehavior::class,
             'model' => $this,
             'imageClass' => EventImage::class,
-            'fileField' => 'images'
         ];
         return $behaviors;
     }
@@ -25,7 +24,7 @@ class Event extends BaseEvent
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 7]; //todo возможно создать встроенный валидатор или как то вынести код
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 10];
         return $rules;
     }
 

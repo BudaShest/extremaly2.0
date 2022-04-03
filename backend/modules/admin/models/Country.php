@@ -4,8 +4,6 @@ namespace app\modules\admin\models;
 
 use app\models\Country as BaseCountry;
 use app\modules\admin\behaviors\SingleFileBehavior;
-use Yii;
-use app\modules\admin\models\interfaces\IFileWorkable;
 
 class Country extends BaseCountry
 {
@@ -20,19 +18,20 @@ class Country extends BaseCountry
         return $behaviors;
     }
 
-    /** @var string  */
+    /** @var string */
     public const MODEL_NAME_RU = 'Страна';
-    /** @var string  */
+    /** @var string */
     public const MODEL_NAME_RU_MULTI = 'Страны';
 
-    //TODO вынести в поведения (работа с файлами чи как)
+    public const DEFAULT_IMAGE = 'https://33tura.ru/FLAG/reunion.gif';
+
     public $uploads;
 
     /** @inheritDoc */
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024,];
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 5,];
         return $rules;
     }
 
@@ -46,6 +45,4 @@ class Country extends BaseCountry
             'flag' => 'Флаг'
         ];
     }
-
-
 }

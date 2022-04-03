@@ -35,7 +35,8 @@ class SingleFileBehavior extends Behavior
     public function deleteFiles(): bool
     {
         $fileField = $this->fileField;
-        $this->model->fileField = '';
+        $class = $this->model->className();
+        $this->model->$fileField = $class::DEFAULT_IMAGE;
         $this->model->save();
         try{
             if(!unlink($this->fileFolder.'/'.$this->model->$fileField)){

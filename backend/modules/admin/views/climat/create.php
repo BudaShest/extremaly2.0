@@ -5,10 +5,10 @@
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Добавить климат';
+$this->title = 'Управление климатом';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3 data-target="expandFormClimat" class="expand-toggler hoverable">Добавить климат</h3>
+<h3 data-target="expandFormClimat" class="expand-toggler hoverable"><?=$this->title?></h3>
 <?php $form = ActiveForm::begin(['options' => ['class' => 'expand-form', 'id' => 'expandFormClimat', 'enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($climat, 'code')->input('text'); ?>
 <?= $form->field($climat, 'name')->input('text'); ?>

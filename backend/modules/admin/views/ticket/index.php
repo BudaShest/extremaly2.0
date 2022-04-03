@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
         [
-            'label' => 'Всего'
+            'label' => 'Всего',
         ]
     ]
 ]) ?>

@@ -33,11 +33,12 @@ $climatesProvider = new ActiveDataProvider([
     ],
 ]);
 
-$this->title = "Все места";
+$this->title = "Места/страны/климат";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h1><?= $this->title ?></h1>
+<h2>Места</h2>
 <?= $this->render('/partials/flashBadge') ?>
 <div>
     <?= Html::a('Создать место', ['create'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
@@ -68,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'attribute' => 'climat_code',
             'value' => function($data){
-                return Html::a($data->climat->name, ['climat/view', 'code'=>$data->climat->name]);
+                return Html::a($data->climat->name, ['climat/view', 'code'=>$data->climat->code]);
             },
             'format' => 'raw'
         ],

@@ -21,12 +21,12 @@ class ClimatController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'actions' => ['index', 'update', 'create', 'delete', 'view', 'delete-files'],
                         'roles' => ['@'],
                     ]
                 ],
                 'denyCallback' => function () {
-                    return $this->redirect('main/login');
+                    return $this->redirect('/admin/main/login');
                 },
             ]
         ];
@@ -51,16 +51,17 @@ class ClimatController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($fileWorker->attachFile()) {
                 $fileWorker->deleteFiles();
-                if(!$fileWorker->upload()){
+                if (!$fileWorker->upload()) {
                     Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
                 }
             }
             if (!$model->save()) {
-                var_dump($model->errors);die;
-            }else{
-                Yii::$app->session->setFlash('success','Модель была успешно обновлена!');
+                var_dump($model->errors);
+                die;
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно обновлена!');
             }
-            return $this->redirect('/admin/climat/view?code='.$model->code);
+            return $this->redirect('/admin/climat/view?code=' . $model->code);
         }
         return $this->render('create', ['climat' => $model]);
     }
@@ -71,17 +72,17 @@ class ClimatController extends Controller
         $fileWorker = new FileWorker(compact('model'));
         if ($model->load(Yii::$app->request->post())) {
             if ($fileWorker->attachFile()) {
-                if(!$fileWorker->upload()){
+                if (!$fileWorker->upload()) {
                     Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
                 }
             }
             if (!$model->save()) {
                 var_dump($model->errors);
                 die;
-            }else{
-                Yii::$app->session->setFlash('success','Модель была успешно добавлена!');
+            } else {
+                Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
-            return $this->redirect('/admin/climat/view?code='.$model->code);
+            return $this->redirect('/admin/climat/view?code=' . $model->code);
         }
         return $this->render('create', ['climat' => $model]);
     }
@@ -91,9 +92,9 @@ class ClimatController extends Controller
         $model = $this->loadModel($code);
         $fileWorker = new FileWorker(['model' => $model]);
         $fileWorker->deleteFiles();
-        if(!$model->delete()){
+        if (!$model->delete()) {
             Yii::$app->session->setFlash('error', 'Модель не была удалена!');
-        }else{
+        } else {
             Yii::$app->session->setFlash('success', 'Модель была успешно удалена!');
         }
         return $this->redirect('/admin/climat');
@@ -104,6 +105,16 @@ class ClimatController extends Controller
     {
         $model = $this->loadModel($code);
         return $this->render('detail', compact('model'));
+    }
+
+    public function actionDeleteFiles(string $code)
+    {
+        $model = $this->loadModel($code);
+        $fileWorker = new FileWorker(compact('model'));
+        if (!$fileWorker->deleteFiles()) {
+            Yii::$app->session->setFlash('error', 'Файлы не были удалены');
+        }
+        return $this->redirect('/admin/climat/view?code=' . $model->code);
     }
 
     protected function loadModel(string $code)

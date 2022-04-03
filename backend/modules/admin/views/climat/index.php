@@ -6,10 +6,10 @@ use yii\grid\GridView;
 use yii\bootstrap4\ButtonDropdown;
 use yii\bootstrap4\LinkPager;
 
-$this->title = 'Весь климат';
+$this->title = "Места/страны/климат";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?= $this->title ?></h3>
+<h3>Климат</h3>
 <?= $this->render('/partials/flashBadge') ?>
 <?= Html::a('Создать климат', ['climat/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([

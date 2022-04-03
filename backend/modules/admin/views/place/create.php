@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\admin\models\Country;
 use app\modules\admin\models\Climat;
 
-$this->title = "Места";
+$this->title = "Места/страны/климат";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <span><?= $place->getAttributeLabel('climat_code') ?></span>
             <?= Html::activeDropDownList($place, 'climat_code', ArrayHelper::map(Climat::find()->all(), 'code', 'name')) ?>
         </div>
-        <?= $form->field($place, 'uploads')->fileInput() ?>
+        <?= $form->field($place, 'uploads')->fileInput()?>
         <div class="form-group">
             <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
             <?= Html::resetButton('Стереть', ['class' => 'btn btn-danger']) ?>

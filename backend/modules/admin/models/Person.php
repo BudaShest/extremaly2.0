@@ -8,6 +8,7 @@ use app\modules\admin\behaviors\MultiFileBehavior;
 
 class Person extends BasePerson
 {
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -15,7 +16,6 @@ class Person extends BasePerson
             'class' => MultiFileBehavior::class,
             'model' => $this,
             'imageClass' => PersonImage::class,
-            'fileField' => 'flag'
         ];
         return $behaviors;
     }

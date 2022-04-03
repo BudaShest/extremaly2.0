@@ -60,7 +60,7 @@ class FileWorker extends BaseObject
      * @param string|null $fileFolder
      * @return bool
      */
-    public function deleteFiles(string $fileFolder = null): bool
+    public function deleteFiles(): bool
     {
         return $this->model->deleteFiles();
     }

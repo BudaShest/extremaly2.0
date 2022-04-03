@@ -21,7 +21,7 @@ class EventController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'actions' => ['index', 'update', 'create', 'delete', 'view', 'delete-files'],
                         'roles' => ['@'],
                     ]
                 ],
@@ -75,7 +75,7 @@ class EventController extends Controller
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
-            return $this->redirect('/admin/place/view?id'.$place->id);
+            return $this->redirect('/admin/event/view?id='.$eventType->id);
         }
         return $this->render('create', compact('model', 'eventType'));
     }
@@ -122,4 +122,13 @@ class EventController extends Controller
         return $this->redirect('/admin/event');
     }
 
+    public function actionDeleteFiles(int $id)
+    {
+        $model = $this->loadModel($id);
+        $fileWorker = new FileWorker(compact('model'));
+        if (!$fileWorker->deleteFiles()) {
+            Yii::$app->session->setFlash('error', 'Файлы не были удалены');
+        }
+        return $this->redirect('/admin/event/view?id=' . $model->id);
+    }
 }

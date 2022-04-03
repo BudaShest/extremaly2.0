@@ -8,6 +8,8 @@ use app\modules\admin\models\interfaces\IFileWorkable;
 
 class EventType extends BaseEventType
 {
+    public const DEFAULT_IMAGE = 'https://www.pngmart.com/files/8/Holiday-PNG-Free-Download.png';
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -24,7 +26,7 @@ class EventType extends BaseEventType
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024]; //todo возможно создать встроенный валидатор или как то вынести код
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 5];
         return $rules;
     }
 

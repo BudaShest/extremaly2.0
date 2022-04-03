@@ -10,6 +10,7 @@ $this->title = 'Тип событий ' . $model->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?= DetailView::widget([
     'model' => $model,
     'attributes' => [
@@ -31,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ]) ?>
 <div class="btn-group">
+    <?= Html::a('Очистить файлы', ['/admin/event-type/delete-files', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     <?= Html::a('Обновить', ['/admin/event-type/update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     <?= Html::a('Удалить', ['/admin/event-type/delete', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
 </div>

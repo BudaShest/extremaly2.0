@@ -20,7 +20,7 @@ class EventTypeController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'actions' => ['index', 'update', 'create', 'delete', 'view','delete-files'],
                         'roles' => ['@'],
                     ]
                 ],
@@ -100,6 +100,16 @@ class EventTypeController extends Controller
     {
         $model = $this->loadModel($id);
         return $this->render('detail', compact('model'));
+    }
+
+    public function actionDeleteFiles(int $id)
+    {
+        $model = $this->loadModel($id);
+        $fileWorker = new FileWorker(compact('model'));
+        if (!$fileWorker->deleteFiles()) {
+            Yii::$app->session->setFlash('error', 'Файлы не были удалены');
+        }
+        return $this->redirect('/admin/event-type/view?id=' . $model->id);
     }
 
     protected function loadModel(int $id)

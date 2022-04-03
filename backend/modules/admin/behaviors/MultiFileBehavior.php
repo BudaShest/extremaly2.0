@@ -8,7 +8,7 @@ class MultiFileBehavior extends Behavior
 {
     public $fileUrl;
     public $fileFolder = 'uploads';
-    public $fileField;
+//    public $fileField;
     public $model;
     public $imageClass; //todo возможно ко всем image классам прциепить интерфейс
 
@@ -39,9 +39,8 @@ class MultiFileBehavior extends Behavior
     public function upload(): bool
     {
         foreach($this->model->uploads as $upload){
-//            var_dump($upload);die;
             $newName = time().$upload->name;
-            if(!$upload->saveAs("uploads/" .$newName)){
+            if(!$upload->saveAs("{$this->fileFolder}/" .$newName)){
                 return false;
             }
             $modelImage = new $this->imageClass(['image'=>$this->fileUrl . $newName]);

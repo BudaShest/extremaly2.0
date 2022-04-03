@@ -11,7 +11,7 @@ class Ticket extends BaseTicket
         return [
             'event_id' => 'Событие',
             'privilege' => 'Привилегии',
-            'price' => 'Цена'
+            'price' => 'Цена',
         ];
     }
 }

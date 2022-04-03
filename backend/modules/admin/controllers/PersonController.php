@@ -19,12 +19,12 @@ class PersonController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'actions' => ['index', 'update', 'create', 'delete', 'view', 'delete-files'],
                         'roles' => ['@'],
                     ]
                 ],
                 'denyCallback' => function(){
-                    return $this->redirect('main/login');
+                    return $this->redirect('/admin/main/login');
                 },
             ]
         ];
@@ -103,5 +103,15 @@ class PersonController extends Controller
             Yii::$app->session->setFlash('success', 'Модель была успешно удалена!');
         }
         return $this->redirect('/admin/person');
+    }
+
+    public function actionDeleteFiles(int $id)
+    {
+        $model = $this->loadModel($id);
+        $fileWorker = new FileWorker(compact('model'));
+        if (!$fileWorker->deleteFiles()) {
+            Yii::$app->session->setFlash('error', 'Файлы не были удалены');
+        }
+        return $this->redirect('/admin/person/view?id=' . $model->id);
     }
 }

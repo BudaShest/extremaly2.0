@@ -35,4 +35,4 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::resetButton('Стереть', ['class' => 'btn btn-danger']) ?>
 </div>
 <?php ActiveForm::end() ?>
-<?= $this->render('/event-type/create', compact('eventType')); ?>
+<?= $this->render('/event-type/create', ['eventType' => new EventType()]); ?>

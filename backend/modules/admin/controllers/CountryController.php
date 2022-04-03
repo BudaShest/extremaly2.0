@@ -20,12 +20,12 @@ class CountryController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'update', 'create', 'delete', 'view'],
+                        'actions' => ['index', 'update', 'create', 'delete', 'view', 'delete-files'],
                         'roles' => ['@'],
                     ]
                 ],
                 'denyCallback' => function () {
-                    return $this->redirect('main/login');
+                    return $this->redirect('/admin/main/login');
                 },
             ]
         ];
@@ -73,7 +73,7 @@ class CountryController extends Controller
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно обновлена!');
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/admin/country/view?code=' . $model->code);
         }
         return $this->render('create', ['country' => $model]);
     }
@@ -97,6 +97,16 @@ class CountryController extends Controller
             return $this->redirect('/admin/country/view?code=' . $model->code);
         }
         return $this->render('create', ['country' => $model]);
+    }
+
+    public function actionDeleteFiles(string $code)
+    {
+        $model = $this->loadModel($code);
+        $fileWorker = new FileWorker(compact('model'));
+        if (!$fileWorker->deleteFiles()) {
+            Yii::$app->session->setFlash('error', 'Файлы не были удалены');
+        }
+        return $this->redirect('/admin/country/view?code=' . $model->code);
     }
 
     public function actionView(string $code)

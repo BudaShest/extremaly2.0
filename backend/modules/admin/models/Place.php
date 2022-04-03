@@ -15,7 +15,7 @@ class Place extends BasePlace
             'class' => MultiFileBehavior::class,
             'model' => $this,
             'imageClass' => PlaceImage::class,
-            'fileField' => 'flag'
+//            'fileField' => 'images'
         ];
         return $behaviors;
     }
