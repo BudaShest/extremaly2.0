@@ -11,7 +11,7 @@ class Person extends ActiveRecord
     {
         return [
             [['firstname', 'age'], 'required'],
-            [['firstname', 'lastname', 'description', 'profession'], 'string'],
+            [['firstname', 'lastname', 'patronymic', 'description', 'profession'], 'string'],
             [['age'], 'integer']
         ];
     }

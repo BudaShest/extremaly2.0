@@ -65,7 +65,8 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => \app\modules\admin\AdminModule::class
-        ]
+        ],
+        'redactor' => 'yii\redactor\RedactorModule',
     ]
 ];
 

@@ -10,6 +10,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\Country;
 use app\modules\admin\models\Climat;
+use yii\redactor\widgets\Redactor;
 
 $this->title = "Места/страны/климат";
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?= $form->field($place, 'name')->input('text') ?>
         <?= $form->field($place, 'address')->input('text') ?>
-        <?= $form->field($place, 'description')->textarea() ?>
+        <?= $form->field($place, 'description')->widget(Redactor::class) ?>
         <div class="form-group">
             <span><?= $place->getAttributeLabel('country_code') ?></span>
             <?= Html::activeDropDownList($place, 'country_code', ArrayHelper::map(Country::find()->all(), 'code', 'name')) ?>

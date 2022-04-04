@@ -42,7 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'format' => 'raw'
         ],
-        'offer',
+        [
+            'attribute' => 'offer',
+            'value' => function($data){
+                return substr($data->offer,0,128) . '...';
+            },
+            'format' => 'raw',
+        ],
         'from',
         'until',
         [

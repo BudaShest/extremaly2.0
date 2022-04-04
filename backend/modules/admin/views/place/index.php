@@ -58,7 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'format' => 'raw'
         ],
-        'description',
+        [
+            'attribute' => 'description',
+            'value' => function($data){
+                return substr($data->description,0,256);
+            },
+            'format' => 'raw'
+        ],
         [
             'attribute' => 'country_code',
             'value' => function($data){

@@ -36,14 +36,20 @@ class SingleFileBehavior extends Behavior
     {
         $fileField = $this->fileField;
         $class = $this->model->className();
+        $oldImage = $this->model->$fileField;
         $this->model->$fileField = $class::DEFAULT_IMAGE;
         $this->model->save();
+//        var_dump($oldImage);
+        $oldImage = explode('/', $oldImage);
+        $oldImage = $oldImage[count($oldImage)- 2] . '/' . $oldImage[count($oldImage)- 1];
+//        var_dump($oldImage);die;
         try{
-            if(!unlink($this->fileFolder.'/'.$this->model->$fileField)){
+            if(!unlink($oldImage)){
                 return false;
             }
             return true;
         }catch (\Exception $e){
+//            var_dump($e->getMessage());die;
             $this->model->addError('uploads', $e);
             return false;
         }

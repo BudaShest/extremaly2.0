@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\Place;
 use app\modules\admin\models\EventType;
+use yii\redactor\widgets\Redactor;
 
 $this->title = 'Добавить событие';
 $this->params['breadcrumbs'][] = $this->title;
@@ -16,10 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= $this->title ?></h1>
 <?php $form = ActiveForm::begin() ?>
 <?= $form->field($model, 'name') ?>
-<?= $form->field($model, 'offer')->textarea() ?>
+<?= $form->field($model, 'offer')->widget(Redactor::class) ?>
 <?= $form->field($model, 'from')->input('date') ?>
 <?= $form->field($model, 'until')->input('date') ?>
-<?= $form->field($model, 'description')->textarea() ?>
+<?= $form->field($model, 'description')->widget(Redactor::class)?>
 <?= $form->field($model, 'age_restrictions') ?>
 <?= $form->field($model, 'priority')->input('number') ?>
 <?= $form->field($model, 'is_horizontal')->checkbox() ?>

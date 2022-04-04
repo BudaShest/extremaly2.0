@@ -17,7 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'lastname',
         'patronymic',
         'age',
-        'description',
+        [
+            'attribute' => 'description',
+            'value' => function($data){
+                return $data->description;
+            },
+            'format' => 'raw'
+        ],
         'profession',
         [
             'label' => 'Изображения',

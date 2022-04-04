@@ -14,10 +14,22 @@ $this->params['breadcrumbs'][] = $this->title;
     'model' => $model,
     'attributes' => [
         'name',
-        'offer',
+        [
+            'attribute' => 'offer',
+            'value' => function($data){
+                return $data->offer;
+            },
+            'format' => 'raw',
+        ],
         'from',
         'until',
-        'description',
+        [
+            'attribute' => 'description',
+            'value' => function($data){
+                return $data->description;
+            },
+            'format' => 'raw',
+        ],
         'age_restrictions',
         'priority',
         'is_horizontal',

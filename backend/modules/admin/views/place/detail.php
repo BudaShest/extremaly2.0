@@ -16,7 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     'model' => $model,
     'attributes' => [
         'name',
-        'description',
+        [
+            'attribute' => 'description',
+            'value' => function($data){
+                return $data->description;
+            },
+            'format' => 'raw',
+        ],
         [
             'attribute' => 'country_code',
             'value' => function ($data) {

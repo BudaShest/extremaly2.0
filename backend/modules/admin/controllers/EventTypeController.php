@@ -48,10 +48,11 @@ class EventTypeController extends Controller
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(compact('model'));
         if ($model->load(Yii::$app->request->post())) {
-            if (!$fileWorker->attachFile() || !$fileWorker->upload()) {
-                Yii::$app->session->setFlash('Ошибка созранения файла');
-            } else {
+            if ($fileWorker->attachFile()) {
                 $fileWorker->deleteFiles();
+                if (!$fileWorker->upload()) {
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
             if (!$model->save()) {
                 var_dump($model->errors);
@@ -82,8 +83,10 @@ class EventTypeController extends Controller
         $model = new EventType();
         $fileWorker = new FileWorker(compact('model'));
         if ($model->load(Yii::$app->request->post())) {
-            if (!$fileWorker->attachFile() || !$fileWorker->upload()) {
-                Yii::$app->session->setFlash('success', 'Ошибка загрузки файлов');
+            if ($fileWorker->attachFile()) {
+                if (!$fileWorker->upload()) {
+                    Yii::$app->session->setFlash('error', 'Ошибка загрузки файла');
+                }
             }
             if (!$model->save()) {
                 var_dump($model->errors);

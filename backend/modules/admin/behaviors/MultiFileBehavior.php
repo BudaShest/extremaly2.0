@@ -21,12 +21,15 @@ class MultiFileBehavior extends Behavior
     public function deleteFiles(): bool
     {
         foreach($this->model->images as $image){
+            $oldImage = $image->image;
+            $oldImage = explode('/', $oldImage);
+            $oldImage = $oldImage[count($oldImage)- 2] . '/' . $oldImage[count($oldImage)- 1];
             $modelImage = $this->imageClass::findOne([$this->imageClass::MODEL_FK => $this->model->id]);
             if($modelImage && !$modelImage->delete()){
                 return false;
             }
             try{
-                if(!unlink($this->fileFolder.'/'.$image['image'])){
+                if(!unlink($oldImage)){
                     continue;
                 }
             }catch (\Exception $e){
