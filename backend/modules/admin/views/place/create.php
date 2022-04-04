@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <span><?= $place->getAttributeLabel('climat_code') ?></span>
             <?= Html::activeDropDownList($place, 'climat_code', ArrayHelper::map(Climat::find()->all(), 'code', 'name')) ?>
         </div>
-        <?= $form->field($place, 'uploads')->fileInput()?>
+        <?= $form->field($place, 'uploads[]')->fileInput(['multiple' => 'multiple'])?>
         <div class="form-group">
             <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
             <?= Html::resetButton('Стереть', ['class' => 'btn btn-danger']) ?>

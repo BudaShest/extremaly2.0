@@ -1,0 +1,33 @@
+
+.topOffer{
+    color:white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+    /*/../public/img/place-parallax.jpeg*/
+    background-attachment: fixed;
+    background-image: url('http://localhost:3000/img/place-parallax.jpeg');
+}
+.topOfferText{
+    padding: 30px;
+    background-color: rgba(0,0,0,0.6);
+    margin: 14px;
+}
+.offerRow{
+    display: flex;
+}
+.offerCol{
+    /*width: 33%;*/
+    display: flex;
+    padding: 14px;
+    flex-direction: column;
+    text-align: left;
+    background-color: rgba(0,0,0,0.6);
+    margin: 14px;
+}
+h4,h3{
+    background-color: rgba(0,0,0,0.6);
+    margin:20px 0;
+    padding: 14px;
+}

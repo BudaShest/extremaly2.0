@@ -1,3 +1,10 @@
+.climatLink{
+    display: flex;
+    flex-direction: column;
+    color:white;
+    align-items: center;
+    margin-bottom: 18px;
+}
 .climateIcon{
     width: 100px;
     height: 100px;

@@ -1,3 +1,10 @@
+.filterBlock{
+    background-color: #111;
+    padding: 24px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
 .personImage{
     width: 200px;
     height: 200px;
@@ -5,6 +12,7 @@
     border:20px solid #111111;
     background-color: #111111;
     object-fit: contain;
+    margin-left: 40px;
 }
 
 .personRow{

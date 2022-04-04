@@ -13,6 +13,8 @@ const Place = () => {
     const requestParams = useParams();
     const id = requestParams.id;
 
+    const place = useSelector(state => state.placesReducer.place);
+
     useEffect(async () => {
         // const script = document.createElement('script');
         // script.src = "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A06a5bc8124e28a3155582c309a0319fdca6a0d1a807d8a73e2880b0a30a015e3&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true";
@@ -24,8 +26,7 @@ const Place = () => {
 
     }, [])
 
-    const place = useSelector(state => state.placesReducer.place);
-    console.log(place);
+
     return (
         <>
             <div className={style.placeHeader}>
@@ -51,10 +52,13 @@ const Place = () => {
                             </Row>
                         </Col>
                         <Col s={8}>
-                            <p className="white-text">{place.description}</p>
+                            <h4 className="white-text">Описание</h4>
+                            <p className="white-text" dangerouslySetInnerHTML={{__html: place.description}}></p>
                         </Col>
                     </Row>
-                    {/*<Gallery photos=""/>*/}
+                    <h3 className="white-text">Галерея изображений</h3>
+                    <Gallery photos={place.images}/>
+                    <h4 className="white-text">События в этом месте</h4>
                 </Container>
             </main>
         </>

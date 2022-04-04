@@ -15,7 +15,6 @@ class Place extends BasePlace
             'class' => MultiFileBehavior::class,
             'model' => $this,
             'imageClass' => PlaceImage::class,
-//            'fileField' => 'images'
         ];
         return $behaviors;
     }
@@ -32,7 +31,7 @@ class Place extends BasePlace
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 10];
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 10, 'maxFiles' => 9];
         return $rules;
     }
 

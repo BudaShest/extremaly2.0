@@ -25,7 +25,7 @@ class PlaceController extends ActiveController
     public function actionGetByCountryCode(string $countryCode)
     {
         if(!$models = Place::find()->where(['country_code' => $countryCode])->all()){
-            throw new NotFoundHttpException('Места не найдены');
+            return [];
         }
         return $models;
     }
@@ -33,7 +33,7 @@ class PlaceController extends ActiveController
     public function actionGetByClimatCode(string $climatCode)
     {
         if(!$models = Place::find()->where(['climat_code' => $climatCode])->all()){
-            throw new NotFoundHttpException('Места не найдены');
+            return [];
         }
         return $models;
     }

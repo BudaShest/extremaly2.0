@@ -18,8 +18,9 @@ const CountryBadge = ({countries}) => {
                 {
                     countries.map(country => {
                         return (
-                            <a onClick={e=>clickHandler(e)} data-country-code={country.code} className={`col ${style.icon}`}>
+                            <a onClick={e=>clickHandler(e)} data-country-code={country.code} className={`col ${style.countryLink}`}>
                                 <img className={`${style.countryIcon} hoverable`} src={country.flag} alt=""/>
+                                <span>{country.name}</span>
                             </a>)
                     })
                 }

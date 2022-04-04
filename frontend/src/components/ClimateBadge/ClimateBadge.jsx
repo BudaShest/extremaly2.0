@@ -18,8 +18,9 @@ const ClimateBadge = ({climates}) => {
                 {
                     climates.map(climate => {
                         return (
-                            <a onClick={clickHandler} data-climat-code={climate.code} className="col s12"><
+                            <a onClick={clickHandler} className={`${style.climatLink} col s12`} data-climat-code={climate.code}><
                                 img className={`${style.climateIcon} hoverable`} src={climate.icon} alt="Климат"/>
+                                <span>{climate.name}</span>
                             </a>
                         )
                     })

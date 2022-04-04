@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'age_restrictions') ?>
 <?= $form->field($model, 'priority')->input('number') ?>
 <?= $form->field($model, 'is_horizontal')->checkbox() ?>
-<?= $form->field($model, 'uploads')->fileInput() ?>
+<?= $form->field($model, 'uploads[]')->fileInput(['multiple' => 'multiple']) ?>
 <div class="form-group">
     <span><?= $model->getAttributeLabel('place_id') ?></span>
     <?= Html::activeDropDownList($model, 'place_id', ArrayHelper::map(Place::find()->all(), 'id','name')) ?>

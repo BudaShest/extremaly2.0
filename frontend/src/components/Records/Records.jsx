@@ -1,21 +1,71 @@
-import React from 'react';
-import {Row,Col, Select, Icon, DatePicker, Card, CardTitle, Pagination,Button} from 'react-materialize';
+import React, {useEffect} from 'react';
+import {Row, Col, Select, Icon, DatePicker, Card, CardTitle, Pagination, Button} from 'react-materialize';
 import {NavLink} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+    fetchEventsByAge,
+    fetchEvents,
+    fetchEventsForOlds,
+    fetchEventsForKids
+} from "../../asyncActions/events/fetchEvents";
+import {fetchPlaces} from "../../asyncActions/places/fetchPlaces";
+import {fetchClimates} from "../../asyncActions/places/fetchClimates";
+import {fetchCountries} from "../../asyncActions/places/fetchCountries";
 import style from './Records.module.css';
+import NoRecords from "../NoRecords/NoRecords";
 
 const Records = ({records}) => {
+    const dispatch = useDispatch();
+    const climates = useSelector(state => state.placesReducer.climates);
+    const countries = useSelector(state => state.placesReducer.countries);
+    const places = useSelector(state => state.placesReducer.places);
 
-    const badgeClickHandler = (e)=> {
+    useEffect(() => {
+        dispatch(fetchClimates());
+        dispatch(fetchCountries());
+        dispatch(fetchPlaces());
+    }, [])
+
+    const ageClickHandler = (e) => {
+        if (e.currentTarget.classList.contains(style.filterBadge_active)) {
+            dispatch(fetchEvents());
+        } else {
+            dispatch(fetchEventsByAge(e.currentTarget.dataset.age));
+        }
         e.currentTarget.classList.toggle(style.filterBadge_active);
     }
 
-    const changeFilterHandler = (e)=>{
+    const kidsClickHandler = (e) => {
+        if (e.currentTarget.classList.contains(style.filterBadge_active)) {
+            e.currentTarget.classList.remove(style.filterBadge_active);
+            dispatch(fetchEvents());
+        } else {
+            e.currentTarget.classList.add(style.filterBadge_active);
+            dispatch(fetchEventsForKids());
+        }
+    }
+
+    const oldsClickHandler = (e) => {
+        if (e.currentTarget.classList.contains(style.filterBadge_active)) {
+            e.currentTarget.classList.remove(style.filterBadge_active);
+            dispatch(fetchEvents());
+        } else {
+            e.currentTarget.classList.add(style.filterBadge_active);
+            dispatch(fetchEventsForOlds());
+        }
+    }
+
+    const badgeClickHandler = (e) => {
+        e.currentTarget.classList.toggle(style.filterBadge_active);
+    }
+
+    const changeFilterHandler = (e) => {
         console.log(e.currentTarget);
         e.currentTarget.classList.add(style.filterBlock_input_active);
     }
 
     return (
-        <Row style={{margin:0}}>
+        <Row style={{margin: 0}}>
             <Col l={4}>
                 <form className={style.filterBlock}>
                     <h4 className={style.filterBlock_headlines}>Фильтры: </h4>
@@ -46,12 +96,9 @@ const Records = ({records}) => {
                         <option disabled value="">
                             Выберите климат
                         </option>
-                        <option value="2">
-                            Жаркий
-                        </option>
-                        <option value="3">
-                            Холодный
-                        </option>
+                        {
+                            climates.map(climate => (<option value={climate.code}>{climate.name}</option>))
+                        }
                     </Select>
 
                     <Select
@@ -78,12 +125,9 @@ const Records = ({records}) => {
                         <option disabled value="">
                             Выберите страну
                         </option>
-                        <option value="2">
-                            Россия
-                        </option>
-                        <option value="3">
-                            США
-                        </option>
+                        {
+                            countries.map(country => (<option value={country.code}>{country.name}</option>))
+                        }
                     </Select>
 
                     <Select
@@ -109,12 +153,9 @@ const Records = ({records}) => {
                         <option disabled value="">
                             Выберите локацию
                         </option>
-                        <option value="2">
-                            Тверь
-                        </option>
-                        <option value="3">
-                            НЕВАДА
-                        </option>
+                        {
+                            places.map(place => (<option value={place.id}>{place.name}</option>))
+                        }
                     </Select>
                     <h5 className={style.filterBlock_headlines}>Период: </h5>
                     <DatePicker
@@ -194,19 +235,19 @@ const Records = ({records}) => {
                             yearRange: 10
                         }}
                     />
-                    <Button style={{backgroundColor:"#EE6E73"}} type="reset">Стереть фильтры</Button>
+                    <Button style={{backgroundColor: "#EE6E73"}} type="reset">Стереть фильтры</Button>
                 </form>
             </Col>
             <Col l={8}>
                 <Row>
                     <Col l={4}>
-                        <div onClick={badgeClickHandler} className={`${style.filterBadge} hoverable`}>
-                            Для всей семьи
+                        <div onClick={kidsClickHandler} data-age="18" className={`${style.filterBadge} hoverable`}>
+                            Для детей
                         </div>
                     </Col>
                     <Col l={4}>
-                        <div onClick={badgeClickHandler} className={`${style.filterBadge} hoverable`}>
-                            Эскстримальные
+                        <div onClick={oldsClickHandler} data-age="100" className={`${style.filterBadge} hoverable`}>
+                            Для взрослых
                         </div>
                     </Col>
                     <Col l={4}>
@@ -217,26 +258,29 @@ const Records = ({records}) => {
                 </Row>
                 <Col>
                     {
-                        records.map(record=>{
-                            return (
-                                <Card
-                                    key={record.id}
-                                    actions={[
-                                        <NavLink to={`/event/${record.id}`}>Перейти</NavLink>,
-                                        <NavLink to={`/event/${record.id}`}>Заказть билеты</NavLink>,
-                                    ]}
-                                    closeIcon={<Icon>close</Icon>}
-                                    header={<CardTitle image={record.images[0]} />}
-                                    horizontal
-                                    revealIcon={<Icon>more_vert</Icon>}
-                                    className={`small hoverable ${style.record}`}
-                                >
-                                    <h5>{record.name}</h5>
-                                    <span>{record.offer}</span>
-                                    <p>{record.description}</p>
-                                </Card>
-                            );
-                        })
+                        records ?
+                            records.map(record => {
+                                return (
+                                    <Card
+                                        key={record.id}
+                                        actions={[
+                                            <NavLink to={`/events/${record.id}`}>Перейти</NavLink>,
+                                            <NavLink to={`/events/${record.id}`}>Заказть билеты</NavLink>,
+                                        ]}
+                                        closeIcon={<Icon>close</Icon>}
+                                        header={<CardTitle image={record.images[0]}/>}
+                                        horizontal
+                                        revealIcon={<Icon>more_vert</Icon>}
+                                        className={`small hoverable ${style.record}`}
+                                    >
+                                        <h5>{record.name}</h5>
+                                        {/*<span>{record.offer}</span>*/}
+                                        <p dangerouslySetInnerHTML={{__html: record.offer.slice(0, 255)}}></p>
+                                    </Card>
+                                );
+                            })
+                            :
+                            <NoRecords/>
                     }
                     <Pagination
                         className={style.pagination}
