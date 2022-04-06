@@ -1,16 +1,23 @@
 import React from 'react';
 import style from './Comments.module.css';
 import {Row, Col, Button} from "react-materialize";
+import {NavLink} from 'react-router-dom';
 import Comment from "../Comment/Comment";
 import {Pagination, Icon} from "react-materialize";
+import {fetchUser} from "../../asyncActions/user/fetchUser";
 
 
 const Comments = ({comments, children}) => {
+
+    let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
+
     return (
         <Row style={{margin:0,padding:"30px 0px"}}>
             <Col l={5} className={style.commentsText}>
                 {
-                    children
+                    currentUser?.isAuth ? children : <div>
+                        <h4><NavLink to="/login">Авторизуйтесь</NavLink>, для того, чтобы оставить комментарий</h4>
+                    </div>
                 }
             </Col>
             <Col l={7} className={style.commentsContainer}>

@@ -19,6 +19,7 @@ class m220308_130711_create_place_table extends Migration
             'description' => $this->text()->notNull(),
             'climat_code' => $this->string(8)->notNull(),
             'country_code' => $this->string(2)->notNull(),
+            'map' => $this->string()->null(),
         ]);
 
         $this->createIndex(

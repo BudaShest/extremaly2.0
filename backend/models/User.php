@@ -10,14 +10,14 @@ use Yii;
 
 class User extends ActiveRecord implements IdentityInterface
 {
-    public string $confirmPassword;
+    public string $confirmPassword = '';
 
     //TODO возможно сценарии
     public function rules(): array
     {
         return [
             [['login', 'password', 'confirmPassword', 'role_id'], 'required'],
-            [['login', 'password', 'confirmPassword', 'avatar', 'phone', 'email'], 'string'],
+            [['login', 'password', 'confirmPassword', 'avatar', 'phone', 'email', 'access_token'], 'string'],
             [['confirmPassword'], 'validateConfirmPassword'],
             [['login'], 'unique'],
             [['role_id'], 'default'],
@@ -51,6 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if($data){
             $model = User::findOne(['login' => $data['login']]);
+            $model->access_token = Yii::$app->security->generateRandomString();
             if(!Yii::$app->security->validatePassword($data['password'], $model->password)){
                 throw new Exception('Пароль не подходит!');
             }
@@ -63,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
-                $this->auth_key = Yii::$app->security->generateRandomString();
+                $this->access_token = Yii::$app->security->generateRandomString();
             }
             return true;
         }

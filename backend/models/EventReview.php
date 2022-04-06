@@ -17,6 +17,18 @@ class EventReview extends ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['user_login'] = function(){
+            return $this->user->login;
+        };
+        $fields['avatar'] = function(){
+            return $this->user->avatar;
+        };
+        return $fields;
+    }
+
     public function getEvent(): ActiveQuery
     {
         return $this->hasOne(Event::class, ['id' => 'event_id']);

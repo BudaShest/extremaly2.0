@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import {useDispatch} from 'react-redux';
 import {loginUser} from "../../asyncActions/user/loginUser";
 import {NavLink} from 'react-router-dom';
 import {Container, Icon, TextInput, Row, Button, Col} from "react-materialize";
@@ -7,8 +8,7 @@ import FormContainer from "../../components/FormContainer/FormContainer";
 import style from './Login.module.css';
 
 const Login = () => {
-    const [userInfo, setUserInfo] = useState({login: '', password: ''})
-
+    const dispatch = useDispatch();
     const loginRef = useRef();
     const passwordRef = useRef();
 
@@ -20,13 +20,14 @@ const Login = () => {
 
     }
 
-
-
-    const handleForm = (e) => {
+    const handleForm = async (e) => {
         e.preventDefault();
-        setUserInfo(prevState => {setUserInfo({login: loginRef.current.value, password: passwordRef.current.value })});
-        console.log(userInfo);
-        loginUser(userInfo);
+        let response = await loginUser({login: loginRef.current.value, password: passwordRef.current.value});
+        if(response.status == 200){
+            // console.log(response);
+            sessionStorage.setItem('userInfo', JSON.stringify({"login": response.login, "token": response.token, "id": response.id, "isAuth": true}));
+            window.location.href = 'http://localhost:3000/';
+        }
     }
 
     return (

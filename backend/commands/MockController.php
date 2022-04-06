@@ -42,4 +42,19 @@ class MockController extends Controller
     {
         return MockBuilder::createPersonRows($numOfRows);
     }
+
+    public function actionStaticContent(int $numOfRows)
+    {
+        return MockBuilder::createStaticContentRows($numOfRows);
+    }
+
+    public function actionPersonLink(int $numOfRows)
+    {
+        return MockBuilder::createPersonLinkRows($numOfRows);
+    }
+
+    public function actionSocialLink(int $numOfRows)
+    {
+        return MockBuilder::createSocialLinkRows($numOfRows);
+    }
 }

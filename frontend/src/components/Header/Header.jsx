@@ -1,9 +1,20 @@
 import React from 'react';
-import {Navbar, Icon, NavItem, Row, Button, Col} from 'react-materialize';
+import {Navbar, Icon, NavItem, Row, Button, Col, Dropdown, Divider} from 'react-materialize';
 import style from './header.module.css';
 import {NavLink} from 'react-router-dom';
+import {logoutUser} from "../../asyncActions/user/logoutFile";
 
 const Header = () => {
+    let currentUser = sessionStorage.getItem('userInfo');
+    currentUser = currentUser ? JSON.parse(currentUser) : {};
+
+    async function handleLogout()
+    {
+        let response = await logoutUser();
+        console.log(response.message);
+        window.location.href = 'http://localhost:3000/'
+    }
+
     return (
         <header>
             <Navbar
@@ -43,9 +54,31 @@ const Header = () => {
                 <NavItem>
                     <NavLink to="/persons">Личности</NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink className={`${style.loginBtn} btn waves-effect waves-light`} to="/login">Войти</NavLink>
-                </NavItem>
+                {
+                    currentUser?.isAuth?
+                        <Dropdown
+                            id="Dropdown_8"
+                            options={{
+                                alignment: 'left',
+                                autoTrigger: true,
+                                closeOnClick: true,
+                                constrainWidth: true,
+                                coverTrigger: true,
+                                hover: true,
+                                inDuration: 150,
+                                outDuration: 250
+                            }}
+                            trigger={<Button node="button">Действия</Button>}
+                        >
+                            <NavLink to="/user">Личный кабинет</NavLink>
+                            <Divider />
+                            <a href="#" onClick={handleLogout}>Выйти</a>
+                        </Dropdown>
+                        :
+                        <NavItem>
+                            <NavLink className={`${style.loginBtn} btn waves-effect waves-light`} to="/login">Войти</NavLink>
+                        </NavItem>
+                }
             </Navbar>
         </header>
     );

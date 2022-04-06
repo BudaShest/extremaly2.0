@@ -19,7 +19,7 @@ class m220308_131235_create_person_table extends Migration
             'patronymic' => $this->string(64),
             'age' => $this->integer(3)->notNull(),
             'description' => $this->text(),
-            'profession' => $this->text()->defaultValue('гражданин мира'),
+            'role' => $this->text()->defaultValue('Организатор'),
         ]);
     }
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useParams, NavLink} from 'react-router-dom';
 import {Carousel, Container, Row, Col, Textarea, Button, Icon} from "react-materialize";
@@ -7,10 +7,10 @@ import Persons from "../../components/Persons/Persons";
 import Gallery from "../../components/Gallery/Gallery";
 import Comments from "../../components/Comments/Comments";
 import SocialLinks from "../../components/SocialLinks/SocialLinks";
-import {comments as defValueComments} from "../Main/SectionAbout";
 import {initialState as defValuePersons} from "../Main/SectionAbout";
 import {fetchEvent} from '../../asyncActions/events/fetchEvent';
-
+import {fetchEventReviews} from "../../asyncActions/events/fetchEventReviews";
+import {createEventReview} from "../../asyncActions/events/createEventReview";
 
 export const socialLinks = [
     {id: 0, img: "/img/links/fb.png", src: "https://google.com"},
@@ -24,20 +24,31 @@ const Event = () => {
     const dispatch = useDispatch();
     const requestParams = useParams();
 
-    const [comments] = useState(defValueComments);
+    const [commentText, setCommentText] = useState('');
 
     const event = useSelector(state => state.eventsReducer.oneEvent);
+    const eventReviews = useSelector(state => state.eventsReducer.eventReviews);
     console.log(event);
 
     useEffect(() => {
         dispatch(fetchEvent(requestParams.id));
-        console.log(event);
+        dispatch(fetchEventReviews(requestParams.id));
+        console.log(eventReviews);
     }, [])
 
     function submitHandler(e){
-
+        e.preventDefault();
+        let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
+        if(currentUser?.isAuth && commentText){
+            let eventReview = {"user_id": currentUser.id, "event_id": event.id, "rating": 5, "text": commentText};
+            dispatch(createEventReview(eventReview))
+            setCommentText('');
+        }
     }
 
+    function changeHandler(e){
+        setCommentText(e.currentTarget.value);
+    }
 
     return (
         <main style={{backgroundColor: "#222222"}}>
@@ -86,12 +97,14 @@ const Event = () => {
                 <Gallery photos={event.images}/>
                 <h3 className="white-text center-align">Ответсвенные лица:</h3>
                 <Persons persons={defValuePersons}/>
-                <Comments comments={comments}>
+                <Comments comments={eventReviews}>
                     <form className={style.commentForm} onSubmit={submitHandler}>
                         <h5 className={style.commentForm_title}>Оставьте комментарий!</h5>
                         <Textarea
-                            id="Textarea-41"
+                            id="TextareaReviewText"
                             label="Изложите свои мысли..."
+                            onChange={changeHandler}
+                            value={commentText}
                         />
                         <Button node="button" type="submit" waves="light">Оставить комментарий<Icon
                             right>send</Icon></Button>

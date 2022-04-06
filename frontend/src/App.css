@@ -21,3 +21,10 @@ body{
 input{
     color: white !important;;
 }
+.carousel{
+    max-height: 600px;
+}
+.materialboxed{
+    max-width: 400px;
+}
+

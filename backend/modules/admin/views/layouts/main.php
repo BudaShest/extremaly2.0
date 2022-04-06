@@ -62,7 +62,27 @@ AdminAssetBundle::register($this);
             [
                 'label' => 'Пользователи',
                 'url' => '/admin/user'
-            ]
+            ],
+            [
+                'label' => 'Статический контент',
+                'url' => '/admin/static-content'
+            ],
+            [
+                'label' => 'Социальные сети персон',
+                'url' => '/admin/person-link'
+            ],
+            [
+                'label' => 'Социальные сети',
+                'url' => '/admin/social-link'
+            ],
+            [
+                'label' => 'О нас',
+                'url' => '/admin/about'
+            ],
+            [
+                'label' => 'Преимущества',
+                'url' => '/admin/advantage'
+            ],
         ]
     ]) ?>
     <?php if(!Yii::$app->user->isGuest):?>

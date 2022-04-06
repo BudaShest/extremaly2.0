@@ -15,7 +15,8 @@ class m220329_162416_create_banned_table extends Migration
         $this->createTable('{{%banned}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull()->unique(),
-            'reason' => $this->string(128)
+            'reason' => $this->string(128),
+            'created_at' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP',
         ]);
 
         $this->createIndex('idx-banned_user_id', 'banned', 'user_id');

@@ -6,6 +6,7 @@ export const fetchPersons = () => {
         axios.get(`http://localhost:8000/person`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
+            .catch(error => console.log(error))
     }
 }
 
@@ -14,6 +15,7 @@ export const fetchPersonsByFounded = (requestedString) => {
         axios.get(`http://localhost:8000/person/find-persons?requestedString=${requestedString}`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
+            .catch(error => console.log(error))
     }
 }
 
@@ -22,6 +24,7 @@ export const fetchPersonsByAge = (age) => {
         axios.get(`http://localhost:8000/person/get-persons-by-age?age=${age}`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
+            .catch(error => console.log(error))
     }
 }
 
@@ -30,5 +33,6 @@ export const fetchPersonsByProfession = (profession) => {
         axios.get(`http://localhost:8000/person/get-persons-by-profession?profession=${profession}`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
+            .catch(error => console.log(error))
     }
 }

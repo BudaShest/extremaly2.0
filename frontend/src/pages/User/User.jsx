@@ -1,9 +1,25 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Container} from 'react-materialize';
 import {Row, Col, TextInput} from 'react-materialize';
 import style from './User.module.css';
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchUser} from "../../asyncActions/user/fetchUser";
 
 const User = () => {
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
+        if(currentUser?.isAuth){
+            dispatch(fetchUser(currentUser.id));
+            console.log(user);
+        }
+    }, [])
+
+    const user = useSelector(state => state.userReducer.user);
+
+
+
     return (
         <main>
             <Container>
@@ -19,20 +35,35 @@ const User = () => {
                         <form className={style.userForm} action="">
                             <TextInput
                                 s={12}
+                                icon="login"
+                                id="TextInputLogin"
+                                label="Логин"
+                                value={user.login}
+                            />
+                            <TextInput
+                                s={12}
                                 icon="email"
-                                id="TextInput-33"
+                                id="TextInputEmail"
                                 label="Email"
+                                value={user.email}
+                            />
+                            <TextInput
+                                s={12}
+                                icon="phone"
+                                id="TextInputPhone"
+                                label="Телефон"
+                                value={user.phone}
                             />
                             <TextInput
                                 s={12}
                                 icon="password"
-                                id="TextInput-38"
+                                id="TextInputPassword"
                                 label="Пароль"
                                 password
                             />
                             <TextInput
                                 s={12}
-                                id="TextInput-38"
+                                id="TextInputConfirmPassword"
                                 icon="password"
                                 label="Повторите пароль"
                                 password

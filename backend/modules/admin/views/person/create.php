@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'patronymic') ?>
 <?= $form->field($model, 'age')->input('number') ?>
 <?= $form->field($model, 'description')->widget(Redactor::class) ?>
-<?= $form->field($model, 'profession') ?>
+<?= $form->field($model, 'role') ?>
 <?= $form->field($model, 'uploads')->fileInput() ?>
 <div class="btn-block">
     <?= Html::submitButton('Отправить' , ['class' => 'btn btn-success']) ?>

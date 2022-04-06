@@ -1,0 +1,13 @@
+.sliderSection{
+    background-color: #222222;
+    padding: 24px 0;
+}
+.sliderElem{
+    width: 400px !important;
+    height: 300px !important;;
+    background-size: cover !important;;
+    background-position: center !important;
+}
+.sliderElemLink{
+    color:white;
+}

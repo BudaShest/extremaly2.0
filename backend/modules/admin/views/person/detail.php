@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'format' => 'raw'
         ],
-        'profession',
+        'role',
         [
             'label' => 'Изображения',
             'value' => function ($data) {

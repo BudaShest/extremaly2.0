@@ -15,6 +15,9 @@ use app\models\EventType;
 use app\models\Place;
 use app\models\Event;
 use app\models\Ticket;
+use app\models\StaticContent;
+use app\models\PersonLink;
+use app\models\SocialLink;
 
 class MockBuilder
 {
@@ -167,7 +170,7 @@ class MockBuilder
                 $model->patronymic = $faker->text(30);
                 $model->age = $faker->numberBetween(10,20);
                 $model->description = $faker->text(40);
-                $model->profession = $faker->jobTitle();
+                $model->role = $faker->jobTitle();
                 $model->save();
                 $modelImage = new PersonImage();
                 $modelImage->person_id = $model->id;
@@ -177,6 +180,65 @@ class MockBuilder
             echo "Персоны успешно добавлены";
             return ExitCode::OK;
         }catch (Exception $e){
+            echo $e->getMessage();
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+    }
+
+    public static function createStaticContentRows(int $numOfRows)
+    {
+        try {
+            $faker = Factory::create();
+            for ($i = 0; $i < $numOfRows; $i++) {
+                $model = new StaticContent();
+                $model->image = 'https://www.wheretowillie.com/wp-content/uploads/2012/08/Under-the-Stars.jpg';
+                $model->title = $faker->text(23);
+                $model->text = $faker->text(256);
+                $model->save();
+            }
+            echo 'Статический контент был успешно добавлен' . "\n";
+            return ExitCode::OK;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+    }
+
+    public static function createPersonLinkRows(int $numOfRows)
+    {
+        try {
+            $faker = Factory::create();
+            for ($i = 0; $i < $numOfRows; $i++) {
+                $model = new PersonLink();
+                $personModel = Person::find()->one();
+                $model->person_id = $personModel->id;
+                $model->icon = 'http://s1.iconbird.com/ico/0912/MetroUIDock/w512h5121347464753Network.png';
+                $model->title = $faker->text(23);
+                $model->url = $faker->url;
+                $model->save();
+            }
+            echo 'Социальные сети личностей были успешно добавлены' . "\n";
+            return ExitCode::OK;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+    }
+
+    public static function createSocialLinkRows(int $numOfRows)
+    {
+        try {
+            $faker = Factory::create();
+            for ($i = 0; $i < $numOfRows; $i++) {
+                $model = new SocialLink();
+                $model->icon = 'http://s1.iconbird.com/ico/0912/MetroUIDock/w512h5121347464753Network.png';
+                $model->title = $faker->text(23);
+                $model->url = $faker->url;
+                $model->save();
+            }
+            echo 'Социальные сети были успешно добавлены' . "\n";
+            return ExitCode::OK;
+        } catch (Exception $e) {
             echo $e->getMessage();
             return ExitCode::UNSPECIFIED_ERROR;
         }

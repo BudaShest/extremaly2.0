@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import {Row, Col, Select, Icon, DatePicker, Card, CardTitle, Pagination, Button} from 'react-materialize';
+import React, {useEffect, useRef} from 'react';
+import {Row, Col, Select, Icon,TextInput, DatePicker, Card, CardTitle, Pagination, Button} from 'react-materialize';
 import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     fetchEventsByAge,
     fetchEvents,
     fetchEventsForOlds,
-    fetchEventsForKids
+    fetchEventsForKids, fetchEventsByClimat, fetchEventsByCountry, fetchEventsByFounded
 } from "../../asyncActions/events/fetchEvents";
 import {fetchPlaces} from "../../asyncActions/places/fetchPlaces";
 import {fetchClimates} from "../../asyncActions/places/fetchClimates";
@@ -15,6 +15,7 @@ import style from './Records.module.css';
 import NoRecords from "../NoRecords/NoRecords";
 
 const Records = ({records}) => {
+    const requestedStringRef = useRef();
     const dispatch = useDispatch();
     const climates = useSelector(state => state.placesReducer.climates);
     const countries = useSelector(state => state.placesReducer.countries);
@@ -26,16 +27,14 @@ const Records = ({records}) => {
         dispatch(fetchPlaces());
     }, [])
 
-    const ageClickHandler = (e) => {
-        if (e.currentTarget.classList.contains(style.filterBadge_active)) {
-            dispatch(fetchEvents());
-        } else {
-            dispatch(fetchEventsByAge(e.currentTarget.dataset.age));
-        }
-        e.currentTarget.classList.toggle(style.filterBadge_active);
+    function search(e) {
+        e.preventDefault();
+        dispatch(fetchEventsByFounded(requestedStringRef.current.value))
     }
 
+
     const kidsClickHandler = (e) => {
+        document.querySelectorAll('.filter-badge').forEach(item => item.classList.remove(style.filterBadge_active))
         if (e.currentTarget.classList.contains(style.filterBadge_active)) {
             e.currentTarget.classList.remove(style.filterBadge_active);
             dispatch(fetchEvents());
@@ -46,6 +45,7 @@ const Records = ({records}) => {
     }
 
     const oldsClickHandler = (e) => {
+        document.querySelectorAll('.filter-badge').forEach(item => item.classList.remove(style.filterBadge_active))
         if (e.currentTarget.classList.contains(style.filterBadge_active)) {
             e.currentTarget.classList.remove(style.filterBadge_active);
             dispatch(fetchEvents());
@@ -57,6 +57,14 @@ const Records = ({records}) => {
 
     const badgeClickHandler = (e) => {
         e.currentTarget.classList.toggle(style.filterBadge_active);
+    }
+
+    const changeClimatHandler = (e) => {
+        dispatch(fetchEventsByClimat(e.currentTarget.value));
+    }
+
+    const changeCountryHandler = (e) => {
+        dispatch(fetchEventsByCountry(e.currentTarget.value))
     }
 
     const changeFilterHandler = (e) => {
@@ -72,10 +80,10 @@ const Records = ({records}) => {
                     <h5 className={style.filterBlock_headlines}>Место: </h5>
 
                     <Select
-                        onChange={changeFilterHandler}
+                        onChange={changeClimatHandler}
                         className={style.filterBlock_input}
                         icon={<Icon>cloud</Icon>}
-                        id="Select-15"
+                        id="SelectClimat"
                         multiple={false}
                         label="Климат"
                         options={{
@@ -103,6 +111,7 @@ const Records = ({records}) => {
 
                     <Select
                         className={style.filterBlock_input}
+                        onChange={changeCountryHandler}
                         icon={<Icon>cloud</Icon>}
                         id="Select-15"
                         multiple={false}
@@ -236,29 +245,38 @@ const Records = ({records}) => {
                         }}
                     />
                     <Button style={{backgroundColor: "#EE6E73"}} type="reset">Стереть фильтры</Button>
+                    <h5 className="white-text">Поиск: </h5>
+                    <TextInput
+                        ref={requestedStringRef}
+                        s={12}
+                        icon="search"
+                        id="TextInput-33"
+                        label="Имя или фамилия"
+                    />
+                    <Button onClick={search}>Поиск</Button>
                 </form>
             </Col>
             <Col l={8}>
                 <Row>
                     <Col l={4}>
-                        <div onClick={kidsClickHandler} data-age="18" className={`${style.filterBadge} hoverable`}>
+                        <div onClick={kidsClickHandler} data-age="18" className={`${style.filterBadge} filter-badge hoverable`}>
                             Для детей
                         </div>
                     </Col>
                     <Col l={4}>
-                        <div onClick={oldsClickHandler} data-age="100" className={`${style.filterBadge} hoverable`}>
+                        <div onClick={oldsClickHandler} data-age="100" className={`${style.filterBadge} filter-badge hoverable`}>
                             Для взрослых
                         </div>
                     </Col>
                     <Col l={4}>
-                        <div onClick={badgeClickHandler} className={`${style.filterBadge} hoverable`}>
+                        <div onClick={badgeClickHandler} className={`${style.filterBadge} filter-badge hoverable`}>
                             Природные
                         </div>
                     </Col>
                 </Row>
-                <Col>
+                <Col s={12}>
                     {
-                        records ?
+                        records.length ?
                             records.map(record => {
                                 return (
                                     <Card

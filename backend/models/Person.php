@@ -11,7 +11,7 @@ class Person extends ActiveRecord
     {
         return [
             [['firstname', 'age'], 'required'],
-            [['firstname', 'lastname', 'patronymic', 'description', 'profession'], 'string'],
+            [['firstname', 'lastname', 'patronymic', 'description', 'role'], 'string'],
             [['age'], 'integer']
         ];
     }
@@ -19,6 +19,11 @@ class Person extends ActiveRecord
     public function getImages(): ActiveQuery
     {
         return $this->hasMany(PersonImage::class, ['person_id' => 'id']);
+    }
+
+    public function getLinks(): ActiveQuery
+    {
+        return $this->hasMany(PersonLink::class, ['person_id' => 'id']);
     }
 
     public function fields(): array

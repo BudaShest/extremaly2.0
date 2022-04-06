@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionSlider from "./SectionSlider";
+import SectionSlider from "../../components/SectionSlider/SectionSlider";
 import {Container, Parallax} from "react-materialize";
 import SectionAbout from "./SectionAbout";
 import Services from "../../components/Services/Services";

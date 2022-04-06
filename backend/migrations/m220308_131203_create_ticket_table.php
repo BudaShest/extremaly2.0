@@ -43,7 +43,7 @@ class m220308_131203_create_ticket_table extends Migration
     public function safeDown()
     {
         $this->dropForeignKey(
-            'fk-ticket_event_id',
+            'fk-ticket-event_id',
             'ticket'
         );
 

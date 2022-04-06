@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'lastname',
         'patronymic',
         'age',
-        'profession',
+        'role',
         [
             'label' => 'Изображения',
             'value' => function ($data) {

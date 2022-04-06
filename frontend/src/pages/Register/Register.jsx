@@ -7,8 +7,6 @@ import {registerUser} from "../../asyncActions/user/registerUser";
 import style from './Register.module.css';
 
 const Register = () => {
-    const [userState, setUserState] = useState({login: '', password: '', confirmPassword: '', email:'', phone: ''});
-
     const loginRef = useRef();
     const passwordRef = useRef();
     const confirmPasswordRef = useRef();
@@ -19,8 +17,7 @@ const Register = () => {
     const register = (e) => {
         e.preventDefault();
         let user = {login: loginRef.current.value, password: passwordRef.current.value, confirmPassword: confirmPasswordRef.current.value, email:emailRef.current.value, phone: phoneRef.current.value};
-        setUserState(prevState => {setUserState(user)});
-        registerUser(userState);
+        registerUser(user).then();
     }
 
     return (
