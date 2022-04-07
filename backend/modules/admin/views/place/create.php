@@ -2,7 +2,6 @@
 /** @var \yii\web\View $this */
 /** @var \app\modules\admin\models\Country $country */
 /** @var \app\modules\admin\models\Climat $climat */
-
 /** @var \app\modules\admin\models\Place $place */
 
 use yii\helpers\Html;
@@ -31,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($place, 'name')->input('text') ?>
         <?= $form->field($place, 'address')->input('text') ?>
         <?= $form->field($place, 'description')->widget(Redactor::class) ?>
+        <?= $form->field($place, 'map')->input('text') ?>
         <div class="form-group">
             <span><?= $place->getAttributeLabel('country_code') ?></span>
             <?= Html::activeDropDownList($place, 'country_code', ArrayHelper::map(Country::find()->all(), 'code', 'name')) ?>

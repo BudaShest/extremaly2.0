@@ -80,6 +80,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'raw'
         ],
         [
+            'attribute' => 'map',
+            'value' => function ($data) {
+                return $data->map ? 'Есть' : 'Отсутствует';
+            },
+        ],
+        [
             'label' => 'Изображения',
             'value' => function ($data) {
                 $output = "";

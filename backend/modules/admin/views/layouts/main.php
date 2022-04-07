@@ -28,28 +28,85 @@ AdminAssetBundle::register($this);
     <?= Nav::widget([ //todo меню с дропдауном
         'items' => [
             [
-                'label' => 'Места',
-                'url' => '/admin/place'
-            ],
-            [
-                'label' => 'Страны',
-                'url' => '/admin/country'
-            ],
-            [
-                'label' => 'Климат',
-                'url' => '/admin/climat'
+                'label' => 'Места/климат/страны',
+                'items' => [
+                    [
+                        'label' => 'Места',
+                        'url' => '/admin/place'
+                    ],
+                    [
+                        'label' => 'Страны',
+                        'url' => '/admin/country'
+                    ],
+                    [
+                        'label' => 'Климат',
+                        'url' => '/admin/climat'
+                    ],
+                ],
             ],
             [
                 'label' => 'Персоны',
-                'url' => '/admin/person'
+                'items' => [
+                    [
+                        'label' => 'Персоны',
+                        'url' => '/admin/person'
+                    ],
+                    [
+                        'label' => 'Социальные сети персон',
+                        'url' => '/admin/person-link'
+                    ],
+                ],
             ],
             [
-                'label' => 'Типы событий',
-                'url' => '/admin/event-type'
+                'label' => 'Главная страница',
+                'items' => [
+                    [
+                        'label' => 'Статический контент',
+                        'url' => '/admin/static-content'
+                    ],
+                    [
+                        'label' => 'Социальные сети',
+                        'url' => '/admin/social-link'
+                    ],
+                    [
+                        'label' => 'О нас',
+                        'url' => '/admin/about'
+                    ],
+                    [
+                        'label' => 'Преимущества',
+                        'url' => '/admin/advantage'
+                    ],
+                    [
+                        'label' => 'Отзывы о проекте',
+                        'url' => '/admin/review'
+                    ],
+                ],
             ],
             [
                 'label' => 'События',
-                'url' => '/admin/event'
+                'items' => [
+                    [
+                        'label' => 'Типы событий',
+                        'url' => '/admin/event-type'
+                    ],
+                    [
+                        'label' => 'События',
+                        'url' => '/admin/event'
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Пользователи и комментарии',
+                'items' => [
+                    [
+                        'label' => 'Пользователи',
+                        'url' => '/admin/user'
+                    ],
+                    [
+                        'label' => 'Комментарии',
+                        'url' => '/admin/event-review'
+                    ],
+                ],
             ],
             [
                 'label' => 'Билеты',
@@ -59,32 +116,9 @@ AdminAssetBundle::register($this);
                 'label' => 'Заявки',
                 'url' => '/admin/application'
             ],
-            [
-                'label' => 'Пользователи',
-                'url' => '/admin/user'
-            ],
-            [
-                'label' => 'Статический контент',
-                'url' => '/admin/static-content'
-            ],
-            [
-                'label' => 'Социальные сети персон',
-                'url' => '/admin/person-link'
-            ],
-            [
-                'label' => 'Социальные сети',
-                'url' => '/admin/social-link'
-            ],
-            [
-                'label' => 'О нас',
-                'url' => '/admin/about'
-            ],
-            [
-                'label' => 'Преимущества',
-                'url' => '/admin/advantage'
-            ],
         ]
     ]) ?>
+
     <?php if(!Yii::$app->user->isGuest):?>
     <?= Html::a('Выйти', ['main/logout'], ['class' => 'btn btn-danger']) ?>
     <?php endif ;?>

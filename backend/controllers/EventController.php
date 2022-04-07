@@ -99,5 +99,11 @@ class EventController extends ActiveController
         return [];
     }
 
-
+    public function actionGetEventsByPlace(int $placeId)
+    {
+        if(!$models = Event::findAll(['place_id' => $placeId])){
+            return [];
+        }
+        return $models;
+    }
 }

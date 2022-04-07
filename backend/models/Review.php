@@ -13,7 +13,7 @@ class Review extends ActiveRecord
             [['user_id', 'text'], 'required'],
             [['user_id', 'rating'], 'integer'],
             [['text'], 'string'],
-            [['created_at'], 'datetime']
+//            [['created_at'], 'datetime']
         ];
     }
 

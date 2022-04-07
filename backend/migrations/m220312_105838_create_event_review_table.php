@@ -18,6 +18,7 @@ class m220312_105838_create_event_review_table extends Migration
             'event_id' => $this->integer()->notNull(),
             'text' => $this->text()->notNull(),
             'rating' => $this->integer(1)->notNull(),
+            'is_visible' => $this->boolean()->defaultValue(true),
             'created_at' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP', //не факт что будет робить
         ]);
 

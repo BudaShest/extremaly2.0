@@ -4,6 +4,7 @@ import {userReducer} from "./userReducer";
 import {personsReducer} from "./personsReducer";
 import {eventsReducer} from "./eventsReducer";
 import {mainReducer} from "./mainReducer";
+import {applicationsReducer} from "./applicationReducer";
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     personsReducer,
     eventsReducer,
     mainReducer,
+    applicationsReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

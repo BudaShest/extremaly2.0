@@ -38,6 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'raw'
         ],
         [
+            'attribute' => 'map',
+            'value' => function ($data) {
+                return "<script type=\"text/javascript\" charset=\"utf-8\" async src=\"https://api-maps.yandex.ru/services/constructor/1.0/js/?um={$data->map}&amp;width=500&amp;height=400&amp;lang=ru_RU&amp;scroll=true\"></script>";
+            },
+            'format' => 'raw'
+        ],
+        [
             'label' => 'Изображения',
             'value' => function ($data) {
                 $output = "";

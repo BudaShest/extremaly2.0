@@ -10,6 +10,7 @@ import style from "../Event/Event.module.css";
 import SocialLinks from "../../components/SocialLinks/SocialLinks";
 import {socialLinks} from "../Event/Event";
 import {createEventReview} from "../../asyncActions/events/createEventReview";
+import {createReview} from "../../asyncActions/main/createReview";
 
 export const comments = [
     {
@@ -97,7 +98,7 @@ export const initialState = [
     },
 ]
 
-const SectionAbout = ({aboutUs, advantages, persons}) => {
+const SectionAbout = ({aboutUs, advantages, persons, reviews}) => {
     const [userEmail, setUserEmail] = useState('');
     const [mailSubject, setMailSubject] = useState('');
     const [mailText, setMailText] = useState('');
@@ -117,8 +118,8 @@ const SectionAbout = ({aboutUs, advantages, persons}) => {
         e.preventDefault();
         let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
         if(currentUser?.isAuth && commentText){
-            let eventReview = {"user_id": currentUser.id, "rating": 5, "text": commentText};
-            dispatch(createEventReview(eventReview))
+            let review = {"user_id": currentUser.id, "rating": 5, "text": commentText};
+            dispatch(createReview(review))
             setCommentText('');
         }
     }
@@ -210,7 +211,7 @@ const SectionAbout = ({aboutUs, advantages, persons}) => {
                 </Row>
                 <h3 className="white-text">Наша команда:</h3>
                 <Persons persons={persons}/>
-                <Comments comments={comments}>
+                <Comments comments={reviews}>
                     <form className={style.commentForm} onSubmit={submitHandler}>
                         <h5 className={style.commentForm_title}>Оставьте комментарий!</h5>
                         <Textarea

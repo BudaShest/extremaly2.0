@@ -1,4 +1,4 @@
-import {addEventReview} from "../../store/eventsReducer";
+import {addEventReviewAction} from "../../store/eventsReducer";
 import axios from 'axios';
 
 export const createEventReview = (eventReview) => {
@@ -6,7 +6,7 @@ export const createEventReview = (eventReview) => {
         return (dispatch) => {
             axios.post(`http://localhost:8000/event-review/create`, eventReview)
                 .then(response => response.data)
-                .then(data => dispatch(addEventReview(data)))
+                .then(data => dispatch(addEventReviewAction(data)))
                 .catch(error => console.log(error))
         }
     }

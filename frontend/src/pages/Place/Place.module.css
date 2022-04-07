@@ -7,8 +7,8 @@
 .placeRowText{
     padding: 20px;
 }
-.placeHeader{
-
+.placeSlider{
+    height: 600px;
 }
 .placeBadge h5{
     margin-bottom: 30px !important;

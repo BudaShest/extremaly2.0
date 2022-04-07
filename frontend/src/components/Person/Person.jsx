@@ -7,7 +7,6 @@ import {Col} from 'react-materialize';
 const Person = ({id,images, clickHandler, isActive,order}) => {
 
     const [className, setClassName] = useState(`${style.person} hoverable`);
-    console.log(images)
 
     useEffect(()=>{
         if(isActive){

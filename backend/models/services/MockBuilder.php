@@ -18,6 +18,9 @@ use app\models\Ticket;
 use app\models\StaticContent;
 use app\models\PersonLink;
 use app\models\SocialLink;
+use app\models\EventReview;
+use app\models\Review;
+use app\models\User;
 
 class MockBuilder
 {
@@ -237,6 +240,50 @@ class MockBuilder
                 $model->save();
             }
             echo 'Социальные сети были успешно добавлены' . "\n";
+            return ExitCode::OK;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+    }
+
+    public static function createReviewRows(int $numOfRows)
+    {
+        try{
+            $faker = Factory::create();
+            for ($i = 0; $i < $numOfRows; $i++) {
+                $model = new Review();
+                $user = User::find()->one();
+                $model->user_id = $user->id;
+                $model->text = $faker->text(400);
+                $model->rating = 5;
+                $model->text = $faker->text(400);
+                $model->save();
+            }
+            echo 'Отзывы были успешно добавлены' . "\n";
+            return ExitCode::OK;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+    }
+
+    public static function createEventReviewRows(int $numOfRows)
+    {
+        try{
+            $faker = Factory::create();
+            for ($i = 0; $i < $numOfRows; $i++) {
+                $model = new EventReview();
+                $user = User::find()->one();
+                $model->user_id = $user->id;
+                $model->text = $faker->text(400);
+                $model->rating = 5;
+                $event = Event::find()->one();
+                $model->event_id = $event->id;
+                $model->text = $faker->text(400);
+                $model->save();
+            }
+            echo 'Отзывы к событию были успешно добавлены' . "\n";
             return ExitCode::OK;
         } catch (Exception $e) {
             echo $e->getMessage();

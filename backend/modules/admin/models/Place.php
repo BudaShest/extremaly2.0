@@ -44,7 +44,8 @@ class Place extends BasePlace
             'description' => 'Описание',
             'climat_code' => 'Климат',
             'country_code' => 'Страна',
-            'uploads' => 'Файлы изображений'
+            'uploads' => 'Файлы изображений',
+            'map' => 'Карта',
         ];
     }
 }

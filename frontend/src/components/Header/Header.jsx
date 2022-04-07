@@ -11,7 +11,6 @@ const Header = () => {
     async function handleLogout()
     {
         let response = await logoutUser();
-        console.log(response.message);
         window.location.href = 'http://localhost:3000/'
     }
 

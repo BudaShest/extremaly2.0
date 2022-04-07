@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useRef} from 'react';
 import {Container} from 'react-materialize';
 import {Row, Col, TextInput} from 'react-materialize';
 import style from './User.module.css';
@@ -7,6 +7,7 @@ import {fetchUser} from "../../asyncActions/user/fetchUser";
 
 const User = () => {
     const dispatch = useDispatch();
+    const fileInputRef = useRef();
 
     useEffect(()=>{
         let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
@@ -18,17 +19,15 @@ const User = () => {
 
     const user = useSelector(state => state.userReducer.user);
 
-
-
     return (
         <main>
             <Container>
                 <Row>
                     <Col s={4}>
-                        <form action="">
+                        <form onClick={} action="">
                             <img src="" alt=""/>
                             <label htmlFor="">Файлы:</label>
-                            <input type="file"/>
+                            <input ref={fileInputRef} type="file"/>
                         </form>
                     </Col>
                     <Col s={8}>

@@ -1,16 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {useParams, NavLink} from 'react-router-dom';
-import {Carousel, Container, Row, Col, Textarea, Button, Icon} from "react-materialize";
+import {useParams, NavLink, useNavigate} from 'react-router-dom';
+import {Carousel, Container, Row, Col, Textarea, Button, Icon, Card} from "react-materialize";
 import style from './Event.module.css';
 import Persons from "../../components/Persons/Persons";
 import Gallery from "../../components/Gallery/Gallery";
 import Comments from "../../components/Comments/Comments";
 import SocialLinks from "../../components/SocialLinks/SocialLinks";
-import {initialState as defValuePersons} from "../Main/SectionAbout";
 import {fetchEvent} from '../../asyncActions/events/fetchEvent';
 import {fetchEventReviews} from "../../asyncActions/events/fetchEventReviews";
 import {createEventReview} from "../../asyncActions/events/createEventReview";
+import {fetchEventTickets} from "../../asyncActions/events/fetchEventTickets";
+import {addTicket} from "../../asyncActions/events/fetchTicket";
 
 export const socialLinks = [
     {id: 0, img: "/img/links/fb.png", src: "https://google.com"},
@@ -21,6 +22,7 @@ export const socialLinks = [
 
 
 const Event = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const requestParams = useParams();
 
@@ -28,12 +30,12 @@ const Event = () => {
 
     const event = useSelector(state => state.eventsReducer.oneEvent);
     const eventReviews = useSelector(state => state.eventsReducer.eventReviews);
-    console.log(event);
+    const eventTickets = useSelector(state => state.eventsReducer.eventTickets);
 
     useEffect(() => {
         dispatch(fetchEvent(requestParams.id));
         dispatch(fetchEventReviews(requestParams.id));
-        console.log(eventReviews);
+        dispatch(fetchEventTickets(requestParams.id));
     }, [])
 
     function submitHandler(e){
@@ -49,6 +51,16 @@ const Event = () => {
     function changeHandler(e){
         setCommentText(e.currentTarget.value);
     }
+    const tickets = useSelector(state => state.applicationsReducer.tickets);
+
+    function clickTicketHandler(e){
+        e.preventDefault();
+        dispatch(addTicket(e.currentTarget.dataset.id));
+        console.log(tickets);
+        navigate('/applications');
+    }
+
+
 
     return (
         <main style={{backgroundColor: "#222222"}}>
@@ -97,6 +109,29 @@ const Event = () => {
                 <Gallery photos={event.images}/>
                 <h3 className="white-text center-align">Ответсвенные лица:</h3>
                 {/*<Persons persons={defValuePersons}/>*/}
+                <h4 className="white-text center-align">Билеты</h4>
+                <h5 className="white-text center-align">Всего: {event.ticket_num}</h5>
+                <Row>
+                    {
+                        eventTickets.map(eventTicket => {return (
+                            <Col s={4}>
+                                <Card
+                                    actions={[
+                                        <Button onClick={clickTicketHandler} data-id={eventTicket.id} key={eventTicket.id}>Забронировать</Button>,
+                                    ]}
+                                    className="blue-grey darken-1"
+                                    closeIcon={<Icon>close</Icon>}
+                                    textClassName="white-text"
+                                    title={eventTicket.privilege}
+                                >
+                                    {eventTicket.description}
+                                    <hr/>
+                                    <span style={{fontSize:'1.4em'}}><b>Цена: </b> {eventTicket.price} руб.</span>
+                                </Card>
+                            </Col>
+                        )})
+                    }
+                </Row>
                 <Comments comments={eventReviews}>
                     <form className={style.commentForm} onSubmit={submitHandler}>
                         <h5 className={style.commentForm_title}>Оставьте комментарий!</h5>
@@ -111,7 +146,6 @@ const Event = () => {
                     </form>
                     <SocialLinks links={socialLinks}/>
                 </Comments>
-
             </Container>
         </main>
     );

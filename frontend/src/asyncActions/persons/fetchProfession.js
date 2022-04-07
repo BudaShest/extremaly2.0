@@ -6,5 +6,6 @@ export const fetchProfessions = () => {
         axios.get(`http://localhost:8000/person/get-professions`)
             .then(response => response.data)
             .then(data => dispatch(getProfessionsAction(data)))
+            .catch(console.error)
     }
 }

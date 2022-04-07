@@ -6,5 +6,6 @@ export const fetchPlace = (id) => {
         axios.get(`http://localhost:8000/place/view?id=${id}`)
             .then(response => response.data)
             .then(data => dispatch(getPlaceAction(data)))
+            .catch(console.error)
     }
 }

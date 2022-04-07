@@ -15,10 +15,6 @@ const Gallery = ({photos}) => {
                                     id="MediaBox_9"
                                     options={{
                                         inDuration: 275,
-                                        // onCloseEnd: null,
-                                        // onCloseStart: null,
-                                        // onOpenEnd: null,
-                                        // onOpenStart: null,
                                         outDuration: 200
                                     }}
                                 >
@@ -26,7 +22,6 @@ const Gallery = ({photos}) => {
                                         alt=""
                                         src={photo}
                                         style={{width: "100%"}}
-                                        // width="650"
                                     />
                                 </MediaBox>
                             </Col>

@@ -7,7 +7,8 @@ import Services from "../../components/Services/Services";
 import MainSlider from "../../components/MainSlider/MainSlider";
 import {fetchTopSlides} from "../../asyncActions/main/fetchTopSlides";
 import {fetchAboutUs} from "../../asyncActions/main/fetchAboutUs";
-import {fetchPersons, fetchRandomPersons} from "../../asyncActions/persons/fetchPersons";
+import {fetchRandomPersons} from "../../asyncActions/persons/fetchPersons";
+import {fetchReviews} from "../../asyncActions/main/fetchReviews";
 import {fetchAdvantages} from "../../asyncActions/main/fetchAdvantages";
 import {fetchEventsByPriority} from "../../asyncActions/events/fetchEvents";
 import style from './Main.module.css';
@@ -20,13 +21,15 @@ const Main = () => {
     const persons = useSelector(state => state.personsReducer.randomPersons);
     const topSlides = useSelector(state => state.mainReducer.topSlides);
     const topEvents= useSelector(state => state.eventsReducer.topEvents);
-    console.log(topEvents);
+    const reviews = useSelector(state => state.mainReducer.reviews);
+
     useEffect(()=>{
         dispatch(fetchRandomPersons())
         dispatch(fetchTopSlides())
         dispatch(fetchAboutUs())
         dispatch(fetchAdvantages())
         dispatch(fetchEventsByPriority())
+        dispatch(fetchReviews())
     },[])
 
     return (
@@ -34,7 +37,7 @@ const Main = () => {
             <MainSlider slides={topSlides? topSlides:[]}/>
             <SectionSlider/>
             <Row className={style.parallaxBlock}></Row>
-            <SectionAbout advantages={advantages} persons={persons} aboutUs={aboutUs}/>
+            <SectionAbout advantages={advantages} persons={persons} reviews={reviews} aboutUs={aboutUs}/>
             <Row className={style.parallaxBlock}></Row>
             <section style={{backgroundColor:"#222"}}>
                 <Container>

@@ -57,4 +57,14 @@ class MockController extends Controller
     {
         return MockBuilder::createSocialLinkRows($numOfRows);
     }
+
+    public function actionEventReview(int $numOfRows)
+    {
+        return MockBuilder::createEventReviewRows($numOfRows);
+    }
+
+    public function actionReview(int $numOfRows)
+    {
+        return MockBuilder::createReviewRows($numOfRows);
+    }
 }

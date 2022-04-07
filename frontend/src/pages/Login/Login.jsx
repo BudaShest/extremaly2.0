@@ -24,7 +24,6 @@ const Login = () => {
         e.preventDefault();
         let response = await loginUser({login: loginRef.current.value, password: passwordRef.current.value});
         if(response.status == 200){
-            // console.log(response);
             sessionStorage.setItem('userInfo', JSON.stringify({"login": response.login, "token": response.token, "id": response.id, "isAuth": true}));
             window.location.href = 'http://localhost:3000/';
         }
