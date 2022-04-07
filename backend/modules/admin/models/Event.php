@@ -41,7 +41,8 @@ class Event extends BaseEvent
             'is_horizontal' => 'Горизонтальная ли?',
             'place_id' => 'Место',
             'type_id' => 'Тип событий',
-            'uploads' => 'Изображения'
+            'uploads' => 'Изображения',
+            'ticket_num' => 'Билетов всего'
         ];
     }
 }

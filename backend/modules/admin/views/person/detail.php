@@ -43,3 +43,4 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::a('Обновить', ['/admin/person/update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     <?= Html::a('Удалить', ['/admin/person/delete', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
 </div>
+<?= $this->render('/person-link/index', compact('personLinksProvider')) ?>

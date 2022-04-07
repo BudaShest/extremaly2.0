@@ -1,6 +1,7 @@
 <?php
 /** @var \yii\web\View $this */
 /** @var User $model */
+
 /** @var ActiveDataProvider $dataProvider */
 
 use app\modules\admin\models\User;
@@ -19,8 +20,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'email',
         'phone',
         [
+            'label' => 'Изображения',
+            'value' => function ($data) {
+                return Html::img($data->avatar, ['class' => 'img-fluid']);
+            },
+            'format' => 'html'
+        ],
+        [
             'label' => $model->getAttributeLabel('role_id'),
-            'value' => function($data){
+            'value' => function ($data) {
                 return $data->role->name;
             }
         ]
@@ -28,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 <div class="row">
     <div class="col">
-        <?= $this->render('/application/index', compact('applicationProvider')) ?>
+                <?= $this->render('/application/index', compact('applicationProvider')) ?>
     </div>
-    <div class="col"></div>
+
+    <div class="col">
+        <?= $this->render('/event-review/index', compact('eventReviewsProvider')) ?>
+    </div>
 </div>

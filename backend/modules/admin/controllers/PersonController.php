@@ -3,6 +3,8 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\FileWorker;
+use app\modules\admin\models\PersonLink;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Person;
@@ -41,13 +43,20 @@ class PersonController extends Controller
     public function actionIndex()
     {
         $model = new Person();
+
         return $this->render('index');
     }
 
     public function actionView(int $id)
     {
         $model = $this->loadModel($id);
-        return $this->render('detail', compact('model'));
+        $personLinksProvider = new ActiveDataProvider([
+            'query' => PersonLink::find(),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        return $this->render('detail', compact('model','personLinksProvider'));
     }
 
     public function actionUpdate(int $id)

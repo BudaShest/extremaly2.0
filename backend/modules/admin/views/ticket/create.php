@@ -16,12 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $form = ActiveForm::begin([]) ?>
 <div class="form-group">
     <span><?= $model->getAttributeLabel('event_id') ?></span>
-<!--    todo сделать dropDOwnList как везде ниже -->
     <?= Html::activeDropDownList($model, 'event_id', ArrayHelper::map(Event::find()->all(), 'id', 'name')) ?>
 </div>
 <?= $form->field($model, 'price' )->input('number') ?>
 <?= $form->field($model, 'privilege')?>
-<?= $form->field($model, 'number')->input('number') ?>
 <div class="form-group">
     <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     <?= Html::resetButton('Стереть', ['class' => 'btn btn-danger']) ?>

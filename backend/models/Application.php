@@ -10,8 +10,8 @@ class Application extends ActiveRecord
     public function rules(): array
     {
         return [
-            [['user_id', 'ticket_id', 'num', 'status_id'], 'required'],
-            [['user_id', 'ticket_id', 'num', 'status_id'], 'integer']
+            [['user_id', 'num', 'status_id'], 'required'],
+            [['user_id', 'num', 'status_id'], 'integer']
         ];
     }
 
@@ -20,13 +20,22 @@ class Application extends ActiveRecord
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
-    public function getTickets(): ActiveQuery //TODO вот тут продумать другой тип связи наверное (возможно добавить промежточную таблицу)
+    public function getTickets(): ActiveQuery
     {
-//        return $this->hasMany(Ticket::class, ['id' => э])
+        return $this->hasMany(Ticket::class, ['id' => 'ticket_id'])->viaTable('ticket_application',['application_id' => 'id']);
     }
 
     public function getStatus(): ActiveQuery
     {
         return $this->hasOne(Status::class, ['id' => 'status_id']);
+    }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['status_name'] = function ($data){
+            return $this->status->name;
+        };
+        return $fields;
     }
 }

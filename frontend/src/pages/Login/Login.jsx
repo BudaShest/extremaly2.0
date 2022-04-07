@@ -1,31 +1,23 @@
-import React, {useState, useRef} from 'react';
-import {useDispatch} from 'react-redux';
+import React, {useRef} from 'react';
 import {loginUser} from "../../asyncActions/user/loginUser";
-import {NavLink} from 'react-router-dom';
+import {NavLink,useNavigate} from 'react-router-dom';
 import {Container, Icon, TextInput, Row, Button, Col} from "react-materialize";
 import Convex from "../../components/Convex/Convex";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import style from './Login.module.css';
 
 const Login = () => {
-    const dispatch = useDispatch();
     const loginRef = useRef();
     const passwordRef = useRef();
+    const navigate = useNavigate();
 
-    const validateLogin = () => {
-
-    }
-
-    const validatePassword = () => {
-
-    }
 
     const handleForm = async (e) => {
         e.preventDefault();
         let response = await loginUser({login: loginRef.current.value, password: passwordRef.current.value});
         if(response.status == 200){
             sessionStorage.setItem('userInfo', JSON.stringify({"login": response.login, "token": response.token, "id": response.id, "isAuth": true}));
-            window.location.href = 'http://localhost:3000/';
+            // window.location.href = 'http://localhost:3000'
         }
     }
 

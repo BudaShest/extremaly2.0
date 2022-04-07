@@ -13,10 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('/partials/flashBadge') ?>
 <?= Html::a('Добавить соц. сети персон', ['person-link/create'], ['class' => 'btn btn-success']) ?>
 <?= GridView::widget([
-    'dataProvider' => $dataProvider,
+    'dataProvider' => $personLinksProvider,
     'pager' => [
         'class' => LinkPager::class,
-        'pagination' => $dataProvider->pagination,
+        'pagination' => $personLinksProvider->pagination,
     ],
     'columns' => [
         [

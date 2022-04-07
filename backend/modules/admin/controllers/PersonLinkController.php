@@ -32,14 +32,14 @@ class PersonLinkController extends Controller
 
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
+        $personLinksProvider = new ActiveDataProvider([
             'query' => PersonLink::find(),
             'pagination' => [
                 'pageSize' => 10,
             ],
         ]);
 
-        return $this->render('index', compact('dataProvider'));
+        return $this->render('index', compact('personLinksProvider'));
     }
 
     public function actionUpdate(int $id)

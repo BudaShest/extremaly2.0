@@ -20,4 +20,19 @@ class Ticket extends ActiveRecord
     {
         return $this->hasOne(Event::class, ['id' => 'event_id']);
     }
+
+    public function getApplications(): ActiveQuery
+    {
+        return $this->hasMany(Application::class,['id'=>'application_id'])->viaTable('ticket_application', ['ticket_id' => 'id']);
+    }
+
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['event_name'] = function(){
+            return $this->event->name;
+        };
+        return $fields;
+    }
 }

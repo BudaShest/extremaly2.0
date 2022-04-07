@@ -99,7 +99,6 @@ export const initialState = [
 ]
 
 const SectionAbout = ({aboutUs, advantages, persons, reviews}) => {
-    const [userEmail, setUserEmail] = useState('');
     const [mailSubject, setMailSubject] = useState('');
     const [mailText, setMailText] = useState('');
     const [errorInfo, setErrorInfo] = useState(null);
@@ -108,7 +107,7 @@ const SectionAbout = ({aboutUs, advantages, persons, reviews}) => {
 
     const handleSendMail = (e) => {
         e.preventDefault();
-        sendMail({"text":mailText, "subject": mailSubject, "mail": userEmail}).then(response=>setErrorInfo(response.message)).catch(console.error)
+        sendMail({"text":mailText, "subject": mailSubject}).then(response=>setErrorInfo(response.message)).catch(console.error)
         setTimeout(()=>setErrorInfo(null), 10000);
     }
 
@@ -257,7 +256,6 @@ const SectionAbout = ({aboutUs, advantages, persons, reviews}) => {
                                     <option value="Пожелание">Пожелание</option>
                                     <option value="Предложение">Предложение</option>
                                 </Select>
-                                <TextInput onChange={e=>setUserEmail(e.currentTarget.value)} value={userEmail} s={10}  placeholder="Как вас зовут" icon={<Icon className="little-icon" placeholder="Текст письма">face</Icon>}/>
                                 <Textarea onChange={e=>setMailText(e.currentTarget.value)} value={mailText} icon={<Icon className="little-icon" placeholder="Текст письма">article</Icon>} s={10}/>
                                 <Row>
                                     <Col push={'s7'} s={3}>

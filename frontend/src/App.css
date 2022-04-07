@@ -31,3 +31,6 @@ input{
     max-width: 400px;
 }
 
+main{
+    min-height: 600px;
+}

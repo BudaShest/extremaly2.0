@@ -42,25 +42,26 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'label' => 'Начало',
             'value' => function ($data){
-                $event = Event::findOne($data['event_id']);
-                return $event->from;
+                return $data->event->from;
             },
-//            'format' => 'raw'
         ],
         [
             'label' => 'Конец',
             'value' => function ($data){
-                $event = Event::findOne($data['event_id']);
-                return $event->until;
+                return $data->event->until;
             },
-//            'format' => 'raw'
         ],
-        [
-            'label' => 'В наличии',
-
-        ],
+//        [
+//            'label' => 'В наличии',
+//            'value' => function($data){
+//                return $data->event->ticket_num - $bookedTicketsNum;
+//            }
+//        ],
         [
             'label' => 'Всего',
+            'value' => function($data){
+                return $data->event->ticket_num;
+            }
         ]
     ]
 ]) ?>

@@ -37,6 +37,10 @@ const Persons = () => {
 
     return (
         <main>
+            <div className={style.topOffer}>
+                <h3 className="center-align">Личности</h3>
+                <p className={`${style.topOfferText} center-align`}>Вы можете сказать большое спасибо всем тем, кто помогает нам в организации различных событий. Именно благодаря этим людям вы можете наслаждаться отдыхом в полной мере!</p>
+            </div>
             <Container>
                 <h1 className="white-text">Все личности</h1>
                 <Row>
@@ -99,7 +103,16 @@ const Persons = () => {
                                             <div className={style.personInfoBadge}>
                                                 <h5>{person.firstname} {person.lastname}</h5>
                                                 <p dangerouslySetInnerHTML={{__html: person.description}}></p>
-                                                <span><b>Профессия: </b>{person.profession}</span>
+                                                <span><b>Роль в событии: </b>{person.role}</span>
+                                                <hr/>
+                                                <span>Соц. сети</span>
+                                                <div>
+                                                    {
+                                                        person.links.map(link => {
+                                                            return (<a href={link.url} target="_blank"><img style={{width:30, height:30, borderRadius:'50%', objectFit: 'contain', margin:10}} src={link.icon} alt=""/></a>);
+                                                        })
+                                                    }
+                                                </div>
                                             </div>
                                         </Col>
                                     </Row>

@@ -3,10 +3,12 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Banned;
+use app\modules\admin\models\EventReview;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\User;
 use yii\web\NotFoundHttpException;
+use app\modules\admin\models\Application;
 use yii\data\ActiveDataProvider;
 use Yii;
 
@@ -64,7 +66,19 @@ class UserController extends Controller
     public function actionView(int $id)
     {
         $model = $this->loadModel($id);
-        return $this->render('detail', compact('model'));
+        $eventReviewsProvider = new ActiveDataProvider([
+            'query' => EventReview::find()->where(['user_id'=>$model->id]),
+            'pagination' => [
+                'pageSize' => 10
+            ]
+        ]);
+        $applicationProvider = new ActiveDataProvider([
+            'query' => Application::find()->where(['user_id'=>$model->id]),
+            'pagination' => [
+                'pageSize' => 10
+            ]
+        ]);
+        return $this->render('detail', compact('model','eventReviewsProvider','applicationProvider'));
     }
 
     public function actionBan(int $id)

@@ -109,6 +109,13 @@ class EventController extends Controller
         return $this->render('detail', compact('model'));
     }
 
+    public function actionAddPersons($id)
+    {
+        $models = $this->loadModel($id);
+//        if()
+        return $this->render('addPersons');
+    }
+
     public function actionDelete($id)
     {
         $model = $this->loadModel($id);

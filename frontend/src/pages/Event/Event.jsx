@@ -38,9 +38,11 @@ const Event = () => {
         dispatch(fetchEventTickets(requestParams.id));
     }, [])
 
+    let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
+
     function submitHandler(e){
         e.preventDefault();
-        let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
+
         if(currentUser?.isAuth && commentText){
             let eventReview = {"user_id": currentUser.id, "event_id": event.id, "rating": 5, "text": commentText};
             dispatch(createEventReview(eventReview))
@@ -78,7 +80,7 @@ const Event = () => {
                 <h2 className="center-align white-text">{event.name}</h2>
                 <h5 className="center-align white-text">{event.type}</h5>
                 <Row>
-                    <Col l={5}>
+                    <Col l={4}>
                         <Col style={{backgroundColor: "#111"}} className={style.eventDescription}>
                             <h4 className={style.eventDescription_headlines}>О событии</h4>
                             <h5 className={style.eventDescription_headlines}>Место:</h5>
@@ -98,7 +100,7 @@ const Event = () => {
                             </ul>
                         </Col>
                     </Col>
-                    <Col l={7}>
+                    <Col l={8}>
                         <Col className="white-text">
                             <h4 dangerouslySetInnerHTML={{__html: event.offer}}></h4>
                             <p dangerouslySetInnerHTML={{__html: event.description}}></p>
@@ -113,7 +115,7 @@ const Event = () => {
                 <h5 className="white-text center-align">Всего: {event.ticket_num}</h5>
                 <Row>
                     {
-                        eventTickets.map(eventTicket => {return (
+                        currentUser?.isAuth ? eventTickets.map(eventTicket => {return (
                             <Col s={4}>
                                 <Card
                                     actions={[
@@ -129,7 +131,7 @@ const Event = () => {
                                     <span style={{fontSize:'1.4em'}}><b>Цена: </b> {eventTicket.price} руб.</span>
                                 </Card>
                             </Col>
-                        )})
+                        )}):<div className="white-text" style={{fontSize:'1.2em'}}><NavLink to="/login">Войдите</NavLink>, чтобы забронировать билеты</div>
                     }
                 </Row>
                 <Comments comments={eventReviews}>

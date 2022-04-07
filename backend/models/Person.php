@@ -26,6 +26,11 @@ class Person extends ActiveRecord
         return $this->hasMany(PersonLink::class, ['person_id' => 'id']);
     }
 
+    public function getEvents(): ActiveQuery
+    {
+        return $this->hasMany(Event::class, ['id' => 'event_id'])->viaTable('event_person', ['person_id' => 'id']);
+    }
+
     public function fields(): array
     {
         $fields = parent::fields();
@@ -35,6 +40,13 @@ class Person extends ActiveRecord
                 $images[] = $image['image'];
             }
             return $images;
+        };
+        $fields['links'] = function (){
+            $links = [];
+            foreach ($this->links as $link){
+                $links[] = $link;
+            }
+            return $links;
         };
         return $fields;
     }

@@ -51,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'format' => 'raw'
         ],
+        'ticket_num',
         [
             'label' => 'Изображения',
             'value' => function ($data) {

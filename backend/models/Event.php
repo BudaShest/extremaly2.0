@@ -64,4 +64,9 @@ class Event extends ActiveRecord
     {
         return $this->hasMany(Ticket::class, ['event_id' => 'id']);
     }
+
+    public function getPersons(): ActiveQuery
+    {
+        return $this->hasMany(Person::class, ['id' => 'person_id'])->viaTable('event_person', ['event_id'=>'id']);
+    }
 }

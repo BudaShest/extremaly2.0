@@ -32,11 +32,11 @@ class PersonController extends ActiveController
     }
 
     public function actionGetProfessions(){
-        return Person::find()->select('profession')->column();
+        return Person::find()->select('role')->column();
     }
 
     public function actionGetPersonsByProfession(string $profession){
-        if($models = Person::find()->where(['like','profession',$profession])->all()){
+        if($models = Person::find()->where(['like','role',$profession])->all()){
             return $models;
         }
         return [];

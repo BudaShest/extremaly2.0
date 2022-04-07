@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\data\SqlDataProvider;
 use yii\filters\AccessControl;
@@ -35,24 +36,26 @@ class TicketController extends Controller
 
     public function actionIndex()
     {
-        $dataProvider = new SqlDataProvider([
-            'sql' => 'SELECT event_id, SUM(price) as total, privilege FROM ticket GROUP BY event_id, privilege'
+        $dataProvider = new ActiveDataProvider([
+            'query' => Ticket::find(),
+            'pagination' => [
+                'pageSize' => 10
+            ]
         ]);
 
-
-
         return $this->render('index', compact('dataProvider'));
-
     }
 
     public function actionCreate()
     {
-        $model = new TicketGenerator();
-        $event = new Event();
+        $model = new Ticket();
         if($model->load(Yii::$app->request->post())){
-            $model->make();
+            if(!$model->save()){
+                var_dump($model->errors);
+            }
+            return $this->redirect('/admin/ticket');
         }
-        return $this->render('create',compact('model', 'event'));
+        return $this->render('create',compact('model'));
     }
 
 

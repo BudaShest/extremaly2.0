@@ -37,7 +37,7 @@ class MailController extends ActiveController
         try{
             if($request = Yii::$app->request->post()){
                 if(Yii::$app->mailer->compose()
-                    ->setFrom($request['mail'])
+                    ->setFrom('rsx99@mail.ru')
                     ->setTo('rsx99@mail.ru')
                     ->setSubject($request['subject'])
                     ->setTextBody($request['text'])
