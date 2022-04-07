@@ -15,7 +15,6 @@ class m220308_131524_create_application_table extends Migration
         $this->createTable('{{%application}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
-            'ticket_id' => $this->integer()->notNull()->unique(),
             'num' => $this->integer()->notNull(),
             'status_id' => $this->integer()->notNull()->defaultValue(1),
             'created_at' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP', //не факт что будет робить
@@ -37,21 +36,6 @@ class m220308_131524_create_application_table extends Migration
             'CASCADE'
         );
 
-        $this->createIndex(
-            'idx-application-ticket_id',
-            'application',
-            'ticket_id'
-        );
-
-        $this->addForeignKey(
-            'fk-application-ticket_id',
-            'application',
-            'ticket_id',
-            'ticket',
-            'id',
-            'CASCADE',
-            'CASCADE'
-        );
 
         $this->createIndex(
             'idx-application-status_id',
@@ -78,10 +62,6 @@ class m220308_131524_create_application_table extends Migration
         $this->dropForeignKey('fk-application-status_id', 'application');
 
         $this->dropIndex('idx-application-status_id', 'application');
-
-        $this->dropForeignKey('fk-application-ticket_id', 'application');
-
-        $this->dropIndex('idx-application-ticket_id', 'application');
 
         $this->dropForeignKey('fk-application-user_id', 'application');
 

@@ -1,0 +1,5 @@
+.parallaxBlock{
+    height: 500px;
+    background-image: url('http://localhost:3000/img/place-parallax.jpeg');
+    background-attachment: fixed;
+}

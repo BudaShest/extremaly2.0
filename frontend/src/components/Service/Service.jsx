@@ -1,7 +1,8 @@
 import React from 'react';
 import {Card, Col, Icon, CardTitle} from "react-materialize";
+import {NavLink} from 'react-router-dom';
 
-const Service = ({l,s,title, image, description, link, size, is_horizontal}) => {
+const Service = ({id,l,s,title, images,name, description, link, size, is_horizontal}) => {
     return (
         <Col
             l={l}
@@ -11,12 +12,12 @@ const Service = ({l,s,title, image, description, link, size, is_horizontal}) => 
 
             <Card
                 actions={[
-                    <a style={{color:"#F27436"}} key="1" href="#">This is a Link</a>
+                    <NavLink to={`/events/${id}`}>Перейти</NavLink>
                 ]}
                 style={{backgroundColor:"#111"}}
-                header={<CardTitle image={image} reveal waves="light"/>}
+                header={<CardTitle image={images[0]} reveal waves="light"/>}
                 textClassName="white-text"
-                title={title}
+                title={name}
                 className={size}
                 horizontal={is_horizontal}
                 reveal={undefined}

@@ -48,4 +48,20 @@ class PersonController extends ActiveController
         }
         return [];
     }
+
+    public function actionGetRandomPersons(){
+        if(!$id = Person::find()->select('id')->orderBy(['id' => SORT_DESC])->limit(1)->scalar()){
+            return [];
+        }
+        $result = [];
+        $ids = range(1,$id);
+        for($i = 0; $i<=2;$i++){
+            $id = array_rand($ids);
+            $key = array_search($id, $ids);
+            if($model = Person::findOne($id)){
+               $result[] = $model;
+            }
+        }
+        return $result;
+    }
 }

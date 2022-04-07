@@ -15,6 +15,9 @@ body{
 .datepicker-row>.is_selected{
     color:white;
 }
+.material-icons{
+    color:lightgrey;
+}
 .materialize-textarea{
     color: lightgrey;
 }

@@ -1,33 +1,45 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import SectionSlider from "../../components/SectionSlider/SectionSlider";
-import {Container, Parallax} from "react-materialize";
+import {Container, Row} from "react-materialize";
 import SectionAbout from "./SectionAbout";
 import Services from "../../components/Services/Services";
 import MainSlider from "../../components/MainSlider/MainSlider";
+import {fetchTopSlides} from "../../asyncActions/main/fetchTopSlides";
+import {fetchAboutUs} from "../../asyncActions/main/fetchAboutUs";
+import {fetchPersons, fetchRandomPersons} from "../../asyncActions/persons/fetchPersons";
+import {fetchAdvantages} from "../../asyncActions/main/fetchAdvantages";
+import {fetchEventsByPriority} from "../../asyncActions/events/fetchEvents";
+import style from './Main.module.css';
 
 const Main = () => {
+    const dispatch = useDispatch();
+
+    const aboutUs = useSelector(state => state.mainReducer.aboutUs);
+    const advantages = useSelector(state => state.mainReducer.advantages);
+    const persons = useSelector(state => state.personsReducer.randomPersons);
+    const topSlides = useSelector(state => state.mainReducer.topSlides);
+    const topEvents= useSelector(state => state.eventsReducer.topEvents);
+    console.log(topEvents);
+    useEffect(()=>{
+        dispatch(fetchRandomPersons())
+        dispatch(fetchTopSlides())
+        dispatch(fetchAboutUs())
+        dispatch(fetchAdvantages())
+        dispatch(fetchEventsByPriority())
+    },[])
+
     return (
         <>
-            <MainSlider/>
+            <MainSlider slides={topSlides? topSlides:[]}/>
             <SectionSlider/>
-            <Parallax
-                image={<img alt="" src="img/parallax/parallax_1.jpg"/>}
-                options={{
-                    responsiveThreshold: 0
-                }}
-            />
-            <SectionAbout/>
-            <Parallax
-                image={<img alt="" src="img/parallax/parallax_2.jpg"/>}
-                options={{
-                    responsiveThreshold: 0
-                }}
-            />
-            {/* TODO Вынести секцию */}
+            <Row className={style.parallaxBlock}></Row>
+            <SectionAbout advantages={advantages} persons={persons} aboutUs={aboutUs}/>
+            <Row className={style.parallaxBlock}></Row>
             <section style={{backgroundColor:"#222"}}>
                 <Container>
                     <h2 className="white-text" style={{margin:0,padding:30}}>Популярное</h2>
-                    <Services/>
+                    <Services topEvents={topEvents}/>
                 </Container>
             </section>
         </>

@@ -96,7 +96,7 @@ const Event = () => {
                 <h3 className="white-text center-align">Галерея</h3>
                 <Gallery photos={event.images}/>
                 <h3 className="white-text center-align">Ответсвенные лица:</h3>
-                <Persons persons={defValuePersons}/>
+                {/*<Persons persons={defValuePersons}/>*/}
                 <Comments comments={eventReviews}>
                     <form className={style.commentForm} onSubmit={submitHandler}>
                         <h5 className={style.commentForm_title}>Оставьте комментарий!</h5>

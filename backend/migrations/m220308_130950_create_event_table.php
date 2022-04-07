@@ -24,6 +24,7 @@ class m220308_130950_create_event_table extends Migration
             'is_horizontal' => $this->boolean()->notNull()->defaultValue(true),
             'place_id' => $this->integer()->notNull(),
             'type_id' => $this->integer()->notNull(),
+            'ticket_num' => $this->integer()->notNull()->defaultValue(10)
         ]);
 
         $this->createIndex(

@@ -40,17 +40,20 @@ class EventController extends ActiveController
         return $models;
     }
 
+    public function actionGetEventsByPriority()
+    {
+        if(!$models = Event::find()->limit(3)->orderBy('priority')->all()){
+            return [];
+        }
+        return $models;
+    }
+
     public function actionGetEventsForOlds()
     {
         if(!$models = Event::find()->where(['>=','age_restrictions', '18'])->all()){
             return [];
         }
         return $models;
-    }
-
-    public function actionGetEventsByPrority()
-    {
-
     }
 
     public function actionGetEventsByClimat($code)

@@ -1,4 +1,4 @@
-import {getEventsAction} from "../../store/eventsReducer";
+import {getEventsAction,getTopEventsAction} from "../../store/eventsReducer";
 import axios from 'axios';
 
 export const fetchEvents = () => {
@@ -65,11 +65,11 @@ export const fetchEventsByFounded = (requestedString) => {
     }
 }
 
-export const fetchEventsByPriority = (age) => {
+export const fetchEventsByPriority = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-by-age?age=${age}`)
+        axios.get(`http://localhost:8000/event/get-events-by-priority`)
             .then(response => response.data)
-            .then(data => dispatch(getEventsAction(data)))
+            .then(data => dispatch(getTopEventsAction(data)))
             .catch(error => console.log(error))
     }
 }

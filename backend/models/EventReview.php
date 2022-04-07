@@ -13,7 +13,7 @@ class EventReview extends ActiveRecord
             [['user_id', 'event_id', 'text'], 'required'],
             [['user_id', 'event_id', 'rating'], 'integer'],
             [['text'], 'string'],
-            [['created_at'], 'datetime']
+//            [['created_at'], 'datetime']
         ];
     }
 
