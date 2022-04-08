@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'priority')->input('number') ?>
 <?= $form->field($model, 'is_horizontal')->checkbox() ?>
 <?= $form->field($model, 'uploads[]')->fileInput(['multiple' => 'multiple']) ?>
+<?= $form->field($model, 'ticket_num')->input('number') ?>
 <div class="form-group">
     <span><?= $model->getAttributeLabel('place_id') ?></span>
     <?= Html::activeDropDownList($model, 'place_id', ArrayHelper::map(Place::find()->all(), 'id','name')) ?>

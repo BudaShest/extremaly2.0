@@ -14,7 +14,7 @@ class About extends BaseAbout
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 12];
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif','jpeg'], 'maxSize' => 1024 * 1024 * 12];
         return $rules;
     }
 

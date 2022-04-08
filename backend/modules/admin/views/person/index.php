@@ -9,12 +9,6 @@ use app\modules\admin\models\Person;
 use yii\helpers\Html;
 use yii\bootstrap4\LinkPager;
 
-$dataProvider = new ActiveDataProvider([
-    'query' => Person::find(),
-    'pagination' => [
-        'pageSize' => 10
-    ]
-]);
 
 $this->title = 'Все персоны';
 $this->params['breadcrumbs'][] = $this->title;
@@ -25,10 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::a('Добавить персону', ['create'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
 </div>
 <?= GridView::widget([
-    'dataProvider' => $dataProvider,
+    'dataProvider' => $personsProvider,
     'pager' => [
         'class' => LinkPager::class,
-        'pagination' => $dataProvider->pagination,
+        'pagination' => $personsProvider->pagination,
     ],
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],

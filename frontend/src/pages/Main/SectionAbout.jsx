@@ -201,7 +201,7 @@ const SectionAbout = ({aboutUs, advantages, persons, reviews}) => {
                             top: 20,
                             left: 20
                         }}
-                              title={advantages[0]?.title}
+                              title={advantages[2]?.title}
                               className="white-text">
                             <p style={{color: "#43A17C", marginLeft: '30px'}}
                                dangerouslySetInnerHTML={{__html: advantages[2]?.text}}></p>

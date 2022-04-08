@@ -15,7 +15,7 @@ class m220308_130950_create_event_table extends Migration
         $this->createTable('{{%event}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(256)->unique()->notNull(),
-            'offer' => $this->string(256),
+            'offer' => $this->text(),
             'from' => $this->dateTime(),
             'until' => $this->dateTime(),
             'description' => $this->text(),

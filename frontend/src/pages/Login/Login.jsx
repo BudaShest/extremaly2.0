@@ -17,7 +17,7 @@ const Login = () => {
         let response = await loginUser({login: loginRef.current.value, password: passwordRef.current.value});
         if(response.status == 200){
             sessionStorage.setItem('userInfo', JSON.stringify({"login": response.login, "token": response.token, "id": response.id, "isAuth": true}));
-            // window.location.href = 'http://localhost:3000'
+            window.location.href = 'http://localhost:3000'
         }
     }
 

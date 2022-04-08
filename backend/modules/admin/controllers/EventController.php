@@ -2,11 +2,13 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Person;
 use app\modules\admin\components\FileWorker;
 use Yii;
 use app\modules\admin\models\EventType;
 use app\modules\admin\models\Place;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use app\modules\admin\models\Event;
 use yii\web\NotFoundHttpException;
@@ -21,7 +23,7 @@ class EventController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'update', 'create', 'delete', 'view', 'delete-files'],
+                        'actions' => ['index', 'update', 'create', 'delete', 'view', 'delete-files','add-persons'],
                         'roles' => ['@'],
                     ]
                 ],
@@ -106,14 +108,29 @@ class EventController extends Controller
     public function actionView($id)
     {
         $model = $this->loadModel($id);
-        return $this->render('detail', compact('model'));
+        $personsProvider = new ActiveDataProvider([
+            'query' => Person::find()->joinWith('events')->where(['event.id' => $model->id]),
+            'pagination' => [
+                'pageSize' => 10
+            ]
+        ]);
+        return $this->render('detail', compact('model', 'personsProvider'));
     }
 
     public function actionAddPersons($id)
     {
-        $models = $this->loadModel($id);
-//        if()
-        return $this->render('addPersons');
+        $model = $this->loadModel($id);
+        if($request = Yii::$app->request->post()){
+            foreach($request['Event']['place_id'] as $personId){
+                if(!$personModel = Person::findOne($personId)){
+                    continue;
+                }else{
+                    $model->link('persons', $personModel);
+                }
+            }
+            return $this->redirect('/admin/event/view?id='.$model->id);
+        }
+        return $this->render('addPersons', compact('model'));
     }
 
     public function actionDelete($id)

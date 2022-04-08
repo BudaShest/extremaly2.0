@@ -10,11 +10,11 @@ class Event extends ActiveRecord
     public function rules(): array
     {
         return [
-            [['name', 'place_id', 'type_id'], 'required'],
+            [['name', 'place_id', 'type_id',], 'required'],
             [['name', 'offer', 'description'], 'string'],
             [['from'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'from'],
             [['until'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'until'],
-            [['age_restrictions', 'priority', 'place_id', 'type_id'], 'integer'],
+            [['age_restrictions', 'priority', 'place_id', 'type_id','ticket_num'], 'integer'],
             [['is_horizontal'], 'boolean'],
             [['name'], 'unique'],
         ];

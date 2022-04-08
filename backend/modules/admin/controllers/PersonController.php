@@ -43,19 +43,25 @@ class PersonController extends Controller
     public function actionIndex()
     {
         $model = new Person();
-
-        return $this->render('index');
+        $personsProvider = new ActiveDataProvider([
+            'query' => Person::find(),
+            'pagination' => [
+                'pageSize' => 10
+            ]
+        ]);
+        return $this->render('index', compact('personsProvider'));
     }
 
     public function actionView(int $id)
     {
         $model = $this->loadModel($id);
         $personLinksProvider = new ActiveDataProvider([
-            'query' => PersonLink::find(),
+            'query' => PersonLink::find()->where(['person_id' => $model->id]),
             'pagination' => [
                 'pageSize' => 10,
             ],
         ]);
+
         return $this->render('detail', compact('model','personLinksProvider'));
     }
 

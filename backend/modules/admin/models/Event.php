@@ -24,7 +24,7 @@ class Event extends BaseEvent
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 15, 'maxFiles' => 9];
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif','jpeg'], 'maxSize' => 1024 * 1024 * 15, 'maxFiles' => 9];
         return $rules;
     }
 

@@ -5,7 +5,7 @@ namespace app\modules\admin\controllers;
 use app\modules\admin\models\LoginForm;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use app\models\User;
+use app\modules\admin\components\ErrorHelper;
 use Yii;
 
 class MainController extends Controller
@@ -49,7 +49,8 @@ class MainController extends Controller
         $model = new LoginForm();
         if($request = Yii::$app->request->post()){
             if(!$model->login($request)) {
-                var_dump($model->errors);
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             }
             return $this->redirect('index');
         }

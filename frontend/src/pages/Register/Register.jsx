@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import Convex from "../../components/Convex/Convex";
 import FormContainer from "../../components/FormContainer/FormContainer";
-import {Row, TextInput, Icon, Container, Col, Button} from "react-materialize";
+import {Row, TextInput, Icon, Container, Col, Button, Chip} from "react-materialize";
 import {NavLink} from 'react-router-dom';
 import {registerUser} from "../../asyncActions/user/registerUser";
 import style from './Register.module.css';
@@ -12,17 +12,23 @@ const Register = () => {
     const confirmPasswordRef = useRef();
     const phoneRef = useRef();
     const emailRef = useRef();
-    const avatarRef = useRef();
+
+    const [operResult, setOperResult] = useState('');
 
     const register = (e) => {
         e.preventDefault();
         let user = {login: loginRef.current.value, password: passwordRef.current.value, confirmPassword: confirmPasswordRef.current.value, email:emailRef.current.value, phone: phoneRef.current.value};
-        registerUser(user).then();
+        registerUser(user).then(res=>setOperResult(res.message));
+        setTimeout(()=>{
+            setOperResult('');
+            window.location.href = 'http://localhost:3000'
+        }, 10000)
     }
 
     return (
         <main>
             <Container style={{padding: "40px 0"}}>
+                <Chip style={{fontSize:'1.2em'}}>{operResult}</Chip>
                 <Convex background={'linear-gradient(269.17deg, #DB4463 13.23%, #F2733C 88.24%)'}>
                     <FormContainer
                         icon={<Icon style={{color: "#F2733C", fontSize: "28em", padding: "10px"}}>remember_me</Icon>}
@@ -70,13 +76,6 @@ const Register = () => {
                                     id="emailInput"
                                     label="Email:"
                                     ref={emailRef}
-                                />
-                                <TextInput
-                                    s={8}
-                                    id="fileInpue"
-                                    label="Аватар профиля:"
-                                    type="file"
-                                    ref={avatarRef}
                                 />
                                 <Col style={{margin: 40}} s={8}>
                                     <Col l={4} push={"s2"}>

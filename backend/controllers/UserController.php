@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Prophecy\Exception\Doubler\MethodNotFoundException;
+use yii\db\Exception;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 use app\models\User;
@@ -68,9 +69,9 @@ class UserController extends ActiveController
             if (!$model->register($request)) {
                 return $model->errors;
             }
-            return ["message" => $model->login . ' был успешно зарегистрирован'];
+            return ["message" => $model->login . ' был успешно зарегистрирован', 'status'=>HttpCode::OK];
         }
-        return ["message" => 'Пустой запрос!'];
+        throw new BadRequestHttpException('Неверный запрос');
     }
 
     public function actionLogin()
