@@ -34,3 +34,7 @@ input{
 main{
     min-height: 600px;
 }
+
+#root{
+    overflow: hidden;
+}

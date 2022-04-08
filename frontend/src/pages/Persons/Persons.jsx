@@ -35,6 +35,10 @@ const Persons = () => {
         dispatch(fetchPersonsByFounded(requestedStringRef.current.value))
     }
 
+    function resetFiltersHandler() {
+        dispatch(fetchPersons());
+    }
+
     return (
         <main>
             <div className={style.topOffer}>
@@ -44,7 +48,7 @@ const Persons = () => {
             <Container>
                 <h1 className="white-text">Все личности</h1>
                 <Row>
-                    <Col s={4}>
+                    <Col s={12} m={4}>
                         <form action="" className={style.filterBlock} onSubmit={e => e.preventDefault()}>
                             <h4 className="white-text">Фильтры: </h4>
                             <Select
@@ -78,7 +82,7 @@ const Persons = () => {
                                         <option value={profession}>{profession}</option>))
                                 }
                             </Select>
-                            <Button style={{backgroundColor: "#EE6E73"}} type="reset">Стереть фильтры</Button>
+                            <Button style={{backgroundColor: "#EE6E73"}} onClick={resetFiltersHandler}>Стереть фильтры</Button>
                             <h5 className="white-text">Поиск: </h5>
                             <TextInput
                                 ref={requestedStringRef}
@@ -90,16 +94,16 @@ const Persons = () => {
                            <Button onClick={search}>Поиск</Button>
                         </form>
                     </Col>
-                    <Col s={8}>
+                    <Col s={12} m={8}>
                         {
                             persons.length ?
                                 persons.map(person => {
                                 return (
                                     <Row className={style.personRow} key={person.id}>
-                                        <Col s={4}>
+                                        <Col s={12} m={12} l={4}>
                                             <img className={style.personImage} src={person.images[0]} alt=""/>
                                         </Col>
-                                        <Col s={8}>
+                                        <Col s={12} m={12} l={8}>
                                             <div className={style.personInfoBadge}>
                                                 <h5>{person.firstname} {person.lastname}</h5>
                                                 <p dangerouslySetInnerHTML={{__html: person.description}}></p>

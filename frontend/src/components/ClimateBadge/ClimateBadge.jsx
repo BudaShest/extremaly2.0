@@ -1,7 +1,7 @@
 import React from 'react';
 import style from "./ClimateBadge.module.css";
 import {useDispatch} from 'react-redux';
-import {Row} from 'react-materialize';
+import {Row, Col} from 'react-materialize';
 import {fetchPlacesByClimat} from "../../asyncActions/places/fetchPlaces";
 
 const ClimateBadge = ({climates}) => {
@@ -18,10 +18,12 @@ const ClimateBadge = ({climates}) => {
                 {
                     climates.map(climate => {
                         return (
-                            <a onClick={clickHandler} className={`${style.climatLink} col s12`} data-climat-code={climate.code}><
-                                img className={`${style.climateIcon} hoverable`} src={climate.icon} alt="Климат"/>
-                                <span>{climate.name}</span>
-                            </a>
+                            <Col>
+                                <a onClick={clickHandler} className={`${style.climatLink} filter-icon`} data-climat-code={climate.code}><
+                                    img className={`${style.climateIcon} hoverable`} src={climate.icon} alt="Климат"/>
+                                    <span>{climate.name}</span>
+                                </a>
+                            </Col>
                         )
                     })
                 }

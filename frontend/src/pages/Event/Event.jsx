@@ -115,7 +115,7 @@ const Event = () => {
                     {
                         currentUser?.isAuth ? eventTickets.map(eventTicket => {
                             return (
-                                <Col s={4}>
+                                <Col s={12} m={4}>
                                     <Card
                                         actions={[
                                             <Button onClick={clickTicketHandler} data-id={eventTicket.id}

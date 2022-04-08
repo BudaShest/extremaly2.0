@@ -11,6 +11,7 @@ $this->title = "Добавить личность";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?=$this->title?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?php $form = ActiveForm::begin([]) ?>
 <?= $form->field($model, 'firstname') ?>
 <?= $form->field($model, 'lastname') ?>

@@ -67,10 +67,10 @@ const Places = () => {
             <Container>
                 <CountryBadge countries={countries}/>
                 <Row>
-                    <Col s={2}>
+                    <Col s={12} m={2}>
                         <ClimateBadge climates={climates}/>
                     </Col>
-                    <Col s={10}>
+                    <Col s={12} m={10}>
                         {
                             places.length ?
                                 places.map(place => <Place {...place}/>)
@@ -79,7 +79,7 @@ const Places = () => {
                         }
                         <Pagination
                             className={style.pagination}
-                            activePage={3}
+                            activePage={1}
                             items={5}
                             leftBtn={<Icon>chevron_left</Icon>}
                             rightBtn={<Icon>chevron_right</Icon>}

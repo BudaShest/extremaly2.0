@@ -13,6 +13,7 @@ $this->title = 'Добавить билеты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?php $form = ActiveForm::begin([]) ?>
 <div class="form-group">
     <span><?= $model->getAttributeLabel('event_id') ?></span>

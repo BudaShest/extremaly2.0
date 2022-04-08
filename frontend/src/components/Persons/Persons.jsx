@@ -4,8 +4,6 @@ import style from './Persons.module.css';
 import Person from "../Person/Person";
 import SocialLinks from "../SocialLinks/SocialLinks";
 
-import {socialLinks} from "../../pages/Event/Event";
-
 
 const Persons = ({persons}) => {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -27,8 +25,6 @@ const Persons = ({persons}) => {
         setActivePerson(currentPerson);
 
     }, [activeIndex])
-
-
 
     return (
         <Col className={style.persons}>

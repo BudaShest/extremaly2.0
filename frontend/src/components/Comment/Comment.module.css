@@ -1,7 +1,9 @@
 .comment{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin: 14px 0;
+    max-width: 100%;
 }
 
 .commentAvatar{

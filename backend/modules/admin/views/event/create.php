@@ -15,6 +15,7 @@ $this->title = 'Добавить событие';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?php $form = ActiveForm::begin() ?>
 <?= $form->field($model, 'name') ?>
 <?= $form->field($model, 'offer')->widget(Redactor::class) ?>

@@ -13,22 +13,22 @@ const Comments = ({comments, children}) => {
 
     return (
         <Row style={{margin:0,padding:"30px 0px"}}>
-            <Col l={5} className={style.commentsText}>
+            <Col s={12} l={5} className={style.commentsText}>
                 {
                     currentUser?.isAuth ? children : <div>
                         <h4><NavLink to="/login">Авторизуйтесь</NavLink>, для того, чтобы оставить комментарий</h4>
                     </div>
                 }
             </Col>
-            <Col l={7} className={style.commentsContainer}>
+            <Col s={12} l={7} className={style.commentsContainer}>
                 {
                     comments.map(comment=><Comment key={comment.id} {...comment}/>)
                 }
                 <Row>
-                    <Col offset={"s3"} s={6}>
+                    <Col offset={"s3"} s={12} m={6}>
                         <Pagination
                             className={style.pagination}
-                            activePage={3}
+                            activePage={1}
                             items={5}
                             leftBtn={<Icon>chevron_left</Icon>}
                             rightBtn={<Icon>chevron_right</Icon>}

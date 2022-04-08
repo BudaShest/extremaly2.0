@@ -15,6 +15,7 @@ $this->title = "Места/страны/климат";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <div class="row">
     <div class="col">
         <?= $this->render('/country/create', ['country' => new Country()]) ?>

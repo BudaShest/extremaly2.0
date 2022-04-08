@@ -67,6 +67,11 @@ const Records = ({records}) => {
         dispatch(fetchEventsByCountry(e.currentTarget.value))
     }
 
+    function resetFiltersHandler(e){
+        e.preventDefault();
+        dispatch(fetchEvents());
+    }
+
     const changeFilterHandler = (e) => {
         console.log(e.currentTarget);
         e.currentTarget.classList.add(style.filterBlock_input_active);
@@ -244,7 +249,7 @@ const Records = ({records}) => {
                             yearRange: 10
                         }}
                     />
-                    <Button style={{backgroundColor: "#EE6E73"}} type="reset">Стереть фильтры</Button>
+                    <Button style={{backgroundColor: "#EE6E73"}} onClick={resetFiltersHandler}>Стереть фильтры</Button>
                     <h5 className="white-text">Поиск: </h5>
                     <TextInput
                         ref={requestedStringRef}
@@ -293,7 +298,7 @@ const Records = ({records}) => {
                                     >
                                         <h5>{record.name}</h5>
                                         {/*<span>{record.offer}</span>*/}
-                                        <p dangerouslySetInnerHTML={{__html: record.offer.slice(0, 255)}}></p>
+                                        <p style={{overflow:'hidden'}} dangerouslySetInnerHTML={{__html: record.offer.slice(0, 200)}}></p>
                                     </Card>
                                 );
                             })
@@ -302,7 +307,7 @@ const Records = ({records}) => {
                     }
                     <Pagination
                         className={style.pagination}
-                        activePage={3}
+                        activePage={1}
                         items={5}
                         leftBtn={<Icon>chevron_left</Icon>}
                         rightBtn={<Icon>chevron_right</Icon>}

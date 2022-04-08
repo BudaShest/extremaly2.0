@@ -60,7 +60,7 @@ const User = () => {
             <Container>
                 <h2 className="white-text center-align">Настройки пользователя</h2>
                 <Row>
-                    <Col s={4}>
+                    <Col s={12} m={4}>
                         <form method="post" encType="multipart/form-data" onSubmit={submitFileHandler}
                               action="http://localhost:8000/user/update-avatar">
                             <img src={user.avatar} alt=""/>
@@ -70,7 +70,7 @@ const User = () => {
                             <Button>Загрузить</Button>
                         </form>
                     </Col>
-                    <Col s={8}>
+                    <Col s={12} m={8}>
                         <form className={style.userForm} onSubmit={submitUserInfoHandler}>
                             <TextInput
                                 s={12}

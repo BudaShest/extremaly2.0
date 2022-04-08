@@ -9,6 +9,7 @@ use yii\helpers\Html;
 ?>
 
 <h1><?= $this->title ?></h1>
+<?= $this->render('/partials/flashBadge') ?>
 <?php $form = ActiveForm::begin() ?>
 <span><?= $model->getAttributeLabel('status_id') ?></span>
 <?= Html::activeDropDownList($model, 'status_id', ArrayHelper::map(Status::find()->all(), 'id', 'name')) ?>

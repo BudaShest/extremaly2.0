@@ -9,6 +9,7 @@ $this->title = 'Управление климатом';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3 data-target="expandFormClimat" class="expand-toggler hoverable"><?=$this->title?></h3>
+<?= $this->render('/partials/flashBadge') ?>
 <?php $form = ActiveForm::begin(['options' => ['class' => 'expand-form', 'id' => 'expandFormClimat', 'enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($climat, 'code')->input('text'); ?>
 <?= $form->field($climat, 'name')->input('text'); ?>
