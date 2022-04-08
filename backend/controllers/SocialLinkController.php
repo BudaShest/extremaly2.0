@@ -7,6 +7,8 @@ use yii\filters\Cors;
 
 class SocialLinkController extends ActiveController
 {
+    public $modelClass = 'app\models\SocialLink';
+    
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();

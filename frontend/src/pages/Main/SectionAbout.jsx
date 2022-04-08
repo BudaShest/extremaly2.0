@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {Container, Row, Col, Button, Icon, Card, Select, Textarea, TextInput, Chip} from 'react-materialize'
+import {Container, Row, Col, Button, Icon, Card, Select, Textarea, Chip} from 'react-materialize'
 import Persons from "../../components/Persons/Persons";
 import Comments from "../../components/Comments/Comments";
 import Convex from "../../components/Convex/Convex";
@@ -8,97 +8,10 @@ import FormContainer from "../../components/FormContainer/FormContainer";
 import {sendMail} from "../../asyncActions/main/sendMail";
 import style from "../Event/Event.module.css";
 import SocialLinks from "../../components/SocialLinks/SocialLinks";
-import {socialLinks} from "../Event/Event";
-import {createEventReview} from "../../asyncActions/events/createEventReview";
 import {createReview} from "../../asyncActions/main/createReview";
 
-export const comments = [
-    {
-        id: 0,
-        login: 'Vasya',
-        avatar: 'https://twizz.ru/wp-content/uploads/-000//1/12-32.jpg',
-        date: '10.10.2021',
-        text: "Равным образом сложившаяся структура организации играет важную роль в формировании направлений прогрессивного развития. Разнообразный и богатый опыт новая модель организационной деятельности требуют от нас анализа системы обучения кадров, соответствует насущным потребностям."
-    },
-    {
-        id: 1,
-        login: 'Vasy2',
-        avatar: 'https://static.kulturologia.ru/files/u18214/portrait61.jpg',
-        date: '10.10.2021',
-        text: 'Равным образом сложившаяся структура организации играет важную роль в формировании направлений прогрессивного развития.'
-    },
-    {
-        id: 2,
-        login: 'Vasy3',
-        avatar: 'https://i.pinimg.com/originals/37/96/88/379688670502e9edf28d261dd3c143d2.jpg',
-        date: '10.10.2021',
-        text: 'На чили ан кайфи'
-    },
-    {
-        id: 3,
-        login: 'Vasy4 Fractal',
-        avatar: 'https://i.pinimg.com/originals/37/96/88/379688670502e9edf28d261dd3c143d2.jpg',
-        date: '10.10.2021',
-        text: 'На чили ан кайфи'
-    },
-]
 
-
-export const initialState = [
-    {
-        id: 0,
-        firstname: "Аркадий",
-        surname: "Укурник",
-        profession: "гениральный директор",
-        avatar: 'team/arcadiy.jpg',
-        links: [ //TODO соц сети
-            {
-                text: "",
-                url: "",
-                icon: "",
-            }
-        ],
-        description: "Создатель компании 'Extremly', эксперт в области отдыха и чила, кандидат наук по кайфологии и" +
-            " релаксоведению. Автор книги 'Чилил, Чилю, Буду Чилить' и 'Тупа адыхаю'."
-
-    },
-    {
-        id: 1,
-        firstname: "Виктор",
-        surname: "Альбиносов",
-        profession: "исполнительный директор",
-        avatar: 'team/victor.jpeg',
-        links: [ //TODO соц сети
-            {
-                text: "",
-                url: "",
-                icon: "",
-            }
-        ],
-        description: "Тот самый парень, что делает 90 процентов и работы и за это мы благодарны ему. Именно он делает" +
-            " возможной деятельность компании."
-
-    },
-    {
-        id: 2,
-        firstname: "Виктория",
-        surname: "Импалова",
-        profession: "Маркетолог",
-        avatar: 'team/victoria.jpg',
-        links: [ //TODO соц сети
-            {
-                text: "",
-                url: "",
-                icon: "",
-            }
-        ],
-        description: "Вика наш козырь в рукаве. Ведь с её складом ума, а также социальными и бизнес-наывками " +
-            "показатели компании растут как грибы."
-
-    },
-]
-
-const SectionAbout = ({aboutUs, advantages, persons, reviews}) => {
+const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
     const [mailSubject, setMailSubject] = useState('');
     const [mailText, setMailText] = useState('');
     const [errorInfo, setErrorInfo] = useState(null);
@@ -222,7 +135,7 @@ const SectionAbout = ({aboutUs, advantages, persons, reviews}) => {
                         <Button node="button" type="submit" waves="light">Оставить комментарий<Icon
                             right>send</Icon></Button>
                     </form>
-                    <SocialLinks links={socialLinks}/>
+                    <SocialLinks links={socialLinks??[]}/>
                 </Comments>
                 <h3 className="white-text">Форма обратной связи:</h3>
                 <Chip>{errorInfo}</Chip>

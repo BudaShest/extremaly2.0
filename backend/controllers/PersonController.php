@@ -64,4 +64,11 @@ class PersonController extends ActiveController
         }
         return $result;
     }
+
+    public function actionGetTopPersons(){
+        if($models = Person::find()->limit(3)->all()){
+            return $models;
+        }
+        return [];
+    }
 }

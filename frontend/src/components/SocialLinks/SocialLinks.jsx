@@ -4,19 +4,19 @@ import style from './SocialLinks.module.css';
 
 const SocialLinks = ({links}) => {
     return (
-        <Row className={style.linksRow}>
+        <div style={{display:'flex',justifyContent:'center'}} className={style.linksRow}>
             {
                 links.map(link=>{
                     return (
                         <Col push={"s1"} key={link.id}>
-                            <a target="_blank" href={link.src}>
-                                <img className={`${style.linkImg} hoverable`} src={link.img} alt=""/>
+                            <a target="_blank" href={link.url}>
+                                <img className={`${style.linkImg} hoverable`} src={link.icon} alt=""/>
                             </a>
                         </Col>
                     );
                 })
             }
-        </Row>
+        </div>
     );
 };
 

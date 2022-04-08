@@ -1,4 +1,4 @@
-import {getPersonsAction, getRandomPersonsAction} from "../../store/personsReducer.js";
+import {getPersonsAction, getTopPersonsAction} from "../../store/personsReducer.js";
 import axios from 'axios';
 
 export const fetchPersons = () => {
@@ -28,11 +28,11 @@ export const fetchPersonsByAge = (age) => {
     }
 }
 
-export const fetchRandomPersons = () => {
+export const fetchTopPersons = () => {
     return (dispatch) => {
-        axios.get('http://localhost:8000/person/get-random-persons')
+        axios.get('http://localhost:8000/person/get-top-persons')
             .then(response => response.data)
-            .then(data => dispatch(getRandomPersonsAction(data)))
+            .then(data => dispatch(getTopPersonsAction(data)))
             .catch(error => console.log(error))
     }
 }

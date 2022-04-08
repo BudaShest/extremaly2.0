@@ -4,8 +4,7 @@ import {Col} from 'react-materialize';
 
 
 
-const Person = ({id,images, clickHandler, isActive,order}) => {
-
+const Person = ({person,index, isActive, clickHandler, order}) => {
     const [className, setClassName] = useState(`${style.person} hoverable`);
 
     useEffect(()=>{
@@ -20,8 +19,8 @@ const Person = ({id,images, clickHandler, isActive,order}) => {
 
 
     return (
-            <div data-id={id} onClick={clickHandler} className={className} style={{backgroundImage:images[0], order:order}}>
-                <div style={{fontSize:'44px', color:'red'}}>{order}</div>
+            <div data-number={index} onClick={clickHandler} className={className} style={{backgroundImage:`url(${person.images[0]})`, order:order}}>
+                <div style={{fontSize:'44px', color:'red'}}></div>
             </div>
 
     );
