@@ -1,4 +1,4 @@
-import {getPersonsAction, getTopPersonsAction} from "../../store/personsReducer.js";
+import {getPersonsAction, getTopPersonsAction, getEventPersonsAction} from "../../store/personsReducer.js";
 import axios from 'axios';
 
 export const fetchPersons = () => {
@@ -42,6 +42,15 @@ export const fetchPersonsByProfession = (profession) => {
         axios.get(`http://localhost:8000/person/get-persons-by-profession?profession=${profession}`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
+            .catch(error => console.log(error))
+    }
+}
+
+export const fetchPersonsByEvent = (eventId) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:8000/person/get-persons-by-event?eventId=${eventId}`)
+            .then(response => response.data)
+            .then(data => dispatch(getEventPersonsAction(data)))
             .catch(error => console.log(error))
     }
 }

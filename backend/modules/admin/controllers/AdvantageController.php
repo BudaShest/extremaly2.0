@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\components\ErrorHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
@@ -48,8 +49,8 @@ class AdvantageController extends Controller
         $model = $this->loadModel($id);
         if ($model->load(Yii::$app->request->post())) {
             if (!$model->save()) {
-                var_dump($model->errors);
-                die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно обновлена!');
             }
@@ -63,8 +64,8 @@ class AdvantageController extends Controller
         $model = new Advantage();
         if ($model->load(Yii::$app->request->post())) {
             if (!$model->save()) {
-                var_dump($model->errors);
-                die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }

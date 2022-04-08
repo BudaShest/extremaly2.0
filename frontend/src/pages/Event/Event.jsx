@@ -12,6 +12,8 @@ import {fetchEventReviews} from "../../asyncActions/events/fetchEventReviews";
 import {createEventReview} from "../../asyncActions/events/createEventReview";
 import {fetchEventTickets} from "../../asyncActions/events/fetchEventTickets";
 import {addTicket} from "../../asyncActions/events/fetchTicket";
+import {fetchPersonsByEvent} from "../../asyncActions/persons/fetchPersons";
+import {fetchSocialLinks} from "../../asyncActions/main/fetchSocialLinks";
 
 const Event = () => {
     const navigate = useNavigate();
@@ -23,11 +25,15 @@ const Event = () => {
     const event = useSelector(state => state.eventsReducer.oneEvent);
     const eventReviews = useSelector(state => state.eventsReducer.eventReviews);
     const eventTickets = useSelector(state => state.eventsReducer.eventTickets);
+    const eventPersons = useSelector(state => state.personsReducer.eventPersons);
+    const socialLinks = useSelector(state => state.mainReducer.socialLinks);
 
     useEffect(() => {
         dispatch(fetchEvent(requestParams.id));
         dispatch(fetchEventReviews(requestParams.id));
         dispatch(fetchEventTickets(requestParams.id));
+        dispatch(fetchPersonsByEvent(requestParams.id));
+        dispatch(fetchSocialLinks());
     }, [])
 
     let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
@@ -102,7 +108,7 @@ const Event = () => {
                 <h3 className="white-text center-align">Галерея</h3>
                 <Gallery photos={event.images}/>
                 <h3 className="white-text center-align">Ответсвенные лица:</h3>
-                {/*<Persons persons={defValuePersons}/>*/}
+                <Persons persons={eventPersons??[]}/>
                 <h4 className="white-text center-align">Билеты</h4>
                 <h5 className="white-text center-align">Всего: {event.ticket_num}</h5>
                 <Row>
@@ -142,7 +148,7 @@ const Event = () => {
                         <Button node="button" type="submit" waves="light">Оставить комментарий<Icon
                             right>send</Icon></Button>
                     </form>
-                    {/*<SocialLinks links={socialLinks}/>*/}
+                    <SocialLinks links={socialLinks}/>
                 </Comments>
             </Container>
         </main>

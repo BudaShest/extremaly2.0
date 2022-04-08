@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\components\ErrorHelper;
 use app\modules\admin\components\FileWorker;
 use app\modules\admin\models\PersonLink;
 use yii\data\ActiveDataProvider;
@@ -71,7 +72,8 @@ class PersonController extends Controller
         $fileWorker = new FileWorker(compact('model'));
         if($model->load(Yii::$app->request->post())){
             if(!$model->save()){
-                var_dump($model->errors);die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             }else{
                 Yii::$app->session->setFlash('success','Модель была успешно обновлена!');
             }
@@ -93,7 +95,8 @@ class PersonController extends Controller
         $fileWorker = new FileWorker(compact('model'));
         if($model->load(Yii::$app->request->post())){
             if(!$model->save()){
-                var_dump($model->errors);die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             }else{
                 Yii::$app->session->setFlash('success','Модель была успешно добавлена!');
             }

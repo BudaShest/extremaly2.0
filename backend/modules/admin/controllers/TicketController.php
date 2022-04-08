@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\components\ErrorHelper;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\data\SqlDataProvider;
@@ -51,7 +52,8 @@ class TicketController extends Controller
         $model = new Ticket();
         if($model->load(Yii::$app->request->post())){
             if(!$model->save()){
-                var_dump($model->errors);
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             }
             return $this->redirect('/admin/ticket');
         }

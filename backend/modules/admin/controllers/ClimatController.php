@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\components\ErrorHelper;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Climat;
@@ -56,8 +57,8 @@ class ClimatController extends Controller
                 }
             }
             if (!$model->save()) {
-                var_dump($model->errors);
-                die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно обновлена!');
             }
@@ -77,8 +78,8 @@ class ClimatController extends Controller
                 }
             }
             if (!$model->save()) {
-                var_dump($model->errors);
-                die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }

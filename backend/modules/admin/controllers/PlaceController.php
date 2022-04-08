@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\components\ErrorHelper;
 use app\modules\admin\components\FileWorker;
 use app\modules\admin\models\Place;
 use app\modules\admin\models\Climat;
@@ -56,7 +57,8 @@ class PlaceController extends Controller
         $climatFileWorker = new FileWorker(['model' => $climat]);
         if ($place->load(Yii::$app->request->post())) {
             if (!$place->save()) {
-                var_dump($place->errors);die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($place->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
@@ -74,7 +76,8 @@ class PlaceController extends Controller
                 }
             }
             if (!$country->save()) {
-                var_dump($country->errors);die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($country->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }
@@ -87,7 +90,8 @@ class PlaceController extends Controller
                 }
             }
             if (!$climat->save()) {
-                var_dump($climat->errors);die;
+                Yii::$app->session->setFlash('error', ErrorHelper::format($climat->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             } else {
                 Yii::$app->session->setFlash('success', 'Модель была успешно добавлена!');
             }

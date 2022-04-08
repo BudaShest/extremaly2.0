@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Caption, Slide, Slider} from "react-materialize";
 
 const MainSlider = ({slides}) => {
-
     return (
         <Slider
             fullscreen={false}
@@ -14,16 +13,18 @@ const MainSlider = ({slides}) => {
             }}
         >
             {
-                slides.map((slide,index)=>(
-                    <Slide key={index} image={<img alt="" src={slide.image}/>}>
-                        <Caption style={{backgroundColor:"rgba(0,0,0,0.8)",padding:"80px 0"}} placement="center">
-                            <h3>
-                                {slide.title}
-                            </h3>
-                            <h5 className="light white-text text-lighten-3" dangerouslySetInnerHTML={{__html: slide.text}}></h5>
-                        </Caption>
-                    </Slide>
-                ))
+                slides.map((slide, index) => {
+                    return (
+                        <Slide key={index} image={<img alt="" src={slide.image}/>}>
+                            <Caption style={{backgroundColor: "rgba(0,0,0,0.8)", padding: "80px 0"}} placement="center">
+                                <h3>
+                                    {slide.title}
+                                </h3>
+                                <h5 className="light white-text text-lighten-3"
+                                    dangerouslySetInnerHTML={{__html: slide.text}}></h5>
+                            </Caption>
+                        </Slide>)
+                })
             }
 
         </Slider>

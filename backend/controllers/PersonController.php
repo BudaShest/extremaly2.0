@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Event;
 use yii\rest\ActiveController;
 use yii\filters\Cors;
 use app\models\Person;
@@ -67,6 +68,13 @@ class PersonController extends ActiveController
 
     public function actionGetTopPersons(){
         if($models = Person::find()->limit(3)->all()){
+            return $models;
+        }
+        return [];
+    }
+
+    public function actionGetPersonsByEvent(int $eventId){
+        if($models = Event::findOne($eventId)->persons){
             return $models;
         }
         return [];

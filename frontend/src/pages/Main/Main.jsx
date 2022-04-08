@@ -23,7 +23,7 @@ const Main = () => {
     const topEvents= useSelector(state => state.eventsReducer.topEvents);
     const reviews = useSelector(state => state.mainReducer.reviews);
     const persons = useSelector(state => state.personsReducer.topPersons);
-    const socialLinks = useSelector(state => state.mainReducer.socialLinks)
+    const socialLinks = useSelector(state => state.mainReducer.socialLinks);
 
     useEffect(()=>{
 
@@ -35,6 +35,8 @@ const Main = () => {
         dispatch(fetchReviews())
         dispatch(fetchSocialLinks())
     },[])
+
+
 
     return (
         <>

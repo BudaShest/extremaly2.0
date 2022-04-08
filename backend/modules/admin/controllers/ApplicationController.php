@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Ticket;
+use app\modules\admin\components\ErrorHelper;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -25,7 +26,7 @@ class ApplicationController extends Controller
                         'roles' => ['@'],
                     ]
                 ],
-                'denyCallback' => function(){
+                'denyCallback' => function () {
                     return $this->redirect('main/login');
                 },
 
@@ -48,19 +49,20 @@ class ApplicationController extends Controller
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
-        if($model->load(Yii::$app->request->post())){
-            if(!$model->save()){
-                var_dump($model->errors);die;
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$model->save()) {
+                Yii::$app->session->setFlash('error', ErrorHelper::format($model->errors));
+                return $this->redirect(Yii::$app->request->referrer);
             }
-            if(Yii::$app->mailer->compose()
+            Yii::$app->mailer->compose()
                 ->setFrom('rsx99@mail.ru')
-                ->setTo(Yii::$app->user->identity->email??'rsx99@mail.ru')
+                ->setTo(Yii::$app->user->identity->email ?? 'rsx99@mail.ru')
                 ->setSubject('Смена статуса заявки')
-                ->setTextBody("У заявки №{$model->id} был изменён статус на ".$model->status->name)
-                ->send()){
+                ->setTextBody("У заявки №{$model->id} был изменён статус на " . $model->status->name)
+                ->send();
 
-            }
-//            return $this->render('detail')
+
+            return $this->redirect('/admin/application/');
         }
         return $this->render('create', compact('model'));
     }
