@@ -4,3 +4,15 @@
 .regFormInput{
     color:#F2733C;
 }
+
+.regFormIcon{
+    color:#F2733C;
+    font-size: 28em;
+    padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .regFormIcon{
+        display: none;
+    }
+}

@@ -3,7 +3,16 @@
     margin:30px;
 }
 
-.logForm_icon{
+.logFormIcon{
     color:#F2733C;
+    font-size: 28em;
+    padding: 10px;
 }
 
+
+
+@media screen and (max-width: 768px) {
+    .logFormIcon{
+        display: none;
+    }
+}

@@ -18,6 +18,7 @@
 .personRow{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .personInfoBadge{
@@ -52,4 +53,8 @@
     text-align: left;
     background-color: rgba(0,0,0,0.6);
     margin: 14px;
+}
+
+.personDescription{
+
 }

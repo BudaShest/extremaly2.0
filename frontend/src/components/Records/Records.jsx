@@ -79,7 +79,7 @@ const Records = ({records}) => {
 
     return (
         <Row style={{margin: 0}}>
-            <Col l={4}>
+            <Col s={12} l={4}>
                 <form className={style.filterBlock}>
                     <h4 className={style.filterBlock_headlines}>Фильтры: </h4>
                     <h5 className={style.filterBlock_headlines}>Место: </h5>

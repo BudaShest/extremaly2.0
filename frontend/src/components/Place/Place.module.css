@@ -2,3 +2,11 @@
     background-color: #111;
     color:lightgrey;
 }
+.placeRowText{
+    padding: 20px;
+}
+@media screen and (max-width: 768px) {
+    .placeRowText{
+        display: none;
+    }
+}

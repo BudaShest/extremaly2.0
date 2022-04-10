@@ -31,3 +31,11 @@
 }
 
 
+@media screen and (max-width: 1280px) {
+    /*.activePersonTextContent_row{*/
+    /*    display: none;*/
+    /*}*/
+    .personsRow{;
+        height: auto;
+    }
+}

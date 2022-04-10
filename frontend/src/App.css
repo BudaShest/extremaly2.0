@@ -38,3 +38,6 @@ main{
 #root{
     overflow: hidden;
 }
+#mobile-nav{
+    background-color: #222;
+}

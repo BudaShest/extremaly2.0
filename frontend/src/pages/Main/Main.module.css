@@ -3,3 +3,36 @@
     background-image: url('http://localhost:3000/img/place-parallax.jpeg');
     background-attachment: fixed;
 }
+
+.aboutUsImageConvex{
+    width: 600px;
+    min-width: 300px;
+    height: 400px;
+    background-color: #DE4564;
+
+}
+
+.firstAdvantage{
+    background-color: #f2733c;
+    padding: 0;
+    margin:50px 0;
+}
+
+.secondAdvantage{
+    background-color: #DE4564;
+    padding: 0;
+    margin:30px 0;
+}
+.thirdAdvantage{
+    background-color: #43a17c;
+    padding: 0;
+    margin: 30px 0;
+}
+
+
+@media screen and (max-width: 1280px) {
+    .aboutUsImageConvex{
+        width: auto;
+        height: auto;
+    }
+}

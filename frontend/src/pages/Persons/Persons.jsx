@@ -106,7 +106,7 @@ const Persons = () => {
                                         <Col s={12} m={12} l={8}>
                                             <div className={style.personInfoBadge}>
                                                 <h5>{person.firstname} {person.lastname}</h5>
-                                                <p dangerouslySetInnerHTML={{__html: person.description}}></p>
+                                                <p className={style.personDescription} dangerouslySetInnerHTML={{__html: person.description}}></p>
                                                 <span><b>Роль в событии: </b>{person.role}</span>
                                                 <hr/>
                                                 <span>Соц. сети</span>

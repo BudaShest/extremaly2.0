@@ -7,6 +7,7 @@ import Convex from "../../components/Convex/Convex";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import {sendMail} from "../../asyncActions/main/sendMail";
 import style from "../Event/Event.module.css";
+import mainStyle from './Main.module.css';
 import SocialLinks from "../../components/SocialLinks/SocialLinks";
 import {createReview} from "../../asyncActions/main/createReview";
 
@@ -45,7 +46,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
 
             <Container>
                 <Row style={{padding: "34px 25px", backgroundColor: '#101010', marginBottom: '60px'}}>
-                    <Col className="m4 push white-text">
+                    <Col s={12} m={4} className="push white-text">
                         <h2>О нас</h2>
                         <p dangerouslySetInnerHTML={{__html: aboutUs.text}}></p>
                         <p dangerouslySetInnerHTML={{__html: aboutUs.small_text}}
@@ -61,8 +62,8 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                             </Icon>
                         </Button>
                     </Col>
-                    <Col className="m4 push-m1">
-                        <div style={{width: "600px", height: "400px", backgroundColor: "#DE4564"}}><img
+                    <Col s={12} m={4} className="push-m1">
+                        <div className={mainStyle.aboutUsImageConvex}><img
                             className="hoverable"
                             style={{width: "100%", height: "100%", position: 'relative', top: "20px", left: "20px"}}
                             src={aboutUs.image} alt=""/></div>
@@ -70,7 +71,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                 </Row>
                 <h3 className="white-text">Наши преимущества</h3>
                 <Row>
-                    <Col className="s5 large" style={{backgroundColor: '#f2733c', padding: 0, margin: "50px 0"}}>
+                    <Col s={12} m={5} className={`large ${mainStyle.firstAdvantage}`}>
                         <Card style={{
                             backgroundColor: "#111111",
                             width: "100%",
@@ -86,8 +87,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                                dangerouslySetInnerHTML={{__html: advantages[0]?.text}}></p>
                         </Card>
                     </Col>
-                    <Col className="s6 push-s1 small"
-                         style={{backgroundColor: '#DE4564', padding: 0, margin: "30px 0"}}>
+                    <Col s={12} m={6} className={`push-m1 small ${mainStyle.secondAdvantage}`}>
                         <Card style={{
                             backgroundColor: "#111111",
                             width: "100%",
@@ -103,8 +103,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                                dangerouslySetInnerHTML={{__html: advantages[1]?.text}}></p>
                         </Card>
                     </Col>
-                    <Col className="s6 push-s1 small"
-                         style={{backgroundColor: '#43A17C', padding: 0, margin: "30px 0"}}>
+                    <Col s={12} m={6} className={`push-m1 small ${mainStyle.thirdAdvantage}`}>
                         <Card style={{
                             backgroundColor: "#111111",
                             width: "100%",
@@ -171,8 +170,8 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                                 </Select>
                                 <Textarea onChange={e=>setMailText(e.currentTarget.value)} value={mailText} icon={<Icon className="little-icon" placeholder="Текст письма">article</Icon>} s={10}/>
                                 <Row>
-                                    <Col push={'s7'} s={3}>
-                                        <Button style={{backgroundColor: "#DB4463"}} large>Подписаться</Button>
+                                    <Col push={'l7'} s={3}>
+                                        <Button style={{backgroundColor: "#DB4463"}} large>Отправить</Button>
                                     </Col>
                                 </Row>
                             </Row>

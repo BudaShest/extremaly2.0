@@ -53,7 +53,7 @@ const Places = () => {
                         <p>Наверняка, вам не захочется провести ночь в палатке под дождём. Администрация проекта
                             "Extremly" гарантирует, что все все заявленные условия будут соблюдены. Будьте спокойны и
                             наслаждайтесь активным отдыхом!</p>
-                        <img className={style.offerImage} src="img/advantages/comfort.png" alt=""/>
+                        <img className={`${style.offerImage} ${style.centerImage}`} src="img/advantages/comfort.png" alt=""/>
                     </div>
                     <div className={style.offerCol}>
                         <h5>Простота</h5>

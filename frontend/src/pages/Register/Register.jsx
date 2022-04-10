@@ -31,13 +31,14 @@ const Register = () => {
                 <Chip style={{fontSize:'1.2em'}}>{operResult}</Chip>
                 <Convex background={'linear-gradient(269.17deg, #DB4463 13.23%, #F2733C 88.24%)'}>
                     <FormContainer
-                        icon={<Icon style={{color: "#F2733C", fontSize: "28em", padding: "10px"}}>remember_me</Icon>}
+                        icon={<Icon className={style.regFormIcon}>remember_me</Icon>}
                         background={'#111111'}>
                         <form action="" onSubmit={e => register(e)}>
                             <Row>
                                 <TextInput
                                     className={style.regFormInput}
-                                    s={8}
+                                    m={8}
+                                    s={12}
                                     icon={<Icon>login</Icon>}
                                     id="loginInput"
                                     label="Login:"
@@ -45,7 +46,8 @@ const Register = () => {
                                 />
                                 <TextInput
                                     className={style.regFormInput}
-                                    s={8}
+                                    m={8}
+                                    s={12}
                                     icon={<Icon>password</Icon>}
                                     id="passwordInput"
                                     label="Пароль:"
@@ -54,7 +56,8 @@ const Register = () => {
                                 />
                                 <TextInput
                                     className={style.regFormInput}
-                                    s={8}
+                                    s={12}
+                                    m={8}
                                     icon={<Icon>password</Icon>}
                                     id="confirmInput"
                                     label="Повторите пароль:"
@@ -63,7 +66,8 @@ const Register = () => {
                                 />
                                 <TextInput
                                     className={style.regFormInput}
-                                    s={8}
+                                    s={12}
+                                    m={8}
                                     icon={<Icon>phone</Icon>}
                                     id=''
                                     label="Телефон"
@@ -71,14 +75,15 @@ const Register = () => {
                                 />
                                 <TextInput
                                     className={style.regFormInput}
-                                    s={8}
+                                    s={12}
+                                    m={8}
                                     icon={<Icon>email</Icon>}
                                     id="emailInput"
                                     label="Email:"
                                     ref={emailRef}
                                 />
                                 <Col style={{margin: 40}} s={8}>
-                                    <Col l={4} push={"s2"}>
+                                    <Col l={4} push={"m2"}>
                                         <Button large style={{backgroundColor: "#42A379"}} node="button" type="submit"
                                                 waves="light">Регистрация
                                             <Icon right>login</Icon>

@@ -32,7 +32,11 @@
 }
 .offerImage{
     filter: invert(90%);
-    height: 300px;
+    height: 220px;
+    margin:30px 0;
+}
+.centerImage{
+    height: 270px;
 }
 h4,h3{
     background-color: rgba(0,0,0,0.6);
