@@ -31,3 +31,12 @@
     background-color: #42A379 !important;
     color:white;
 }
+
+@media screen and (max-width: 768px){
+    .menuIcon{
+        font-size: 3em !important;
+    }
+    .logo{
+        max-width: 240px;
+    }
+}

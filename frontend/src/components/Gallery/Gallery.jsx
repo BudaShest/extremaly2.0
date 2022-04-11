@@ -12,14 +12,14 @@ const Gallery = ({photos}) => {
                         return (
                             <Col key={index} l={4} m={4} s={12} style={{margin: "10px 0"}}>
                                 <MediaBox
-                                    id="MediaBox_9"
+                                    id="MediaBoxGallery"
                                     options={{
                                         inDuration: 275,
                                         outDuration: 200
                                     }}
                                 >
                                     <img
-                                        alt=""
+                                        alt="Изображение галереи"
                                         src={photo}
                                         style={{width: "100%"}}
                                     />

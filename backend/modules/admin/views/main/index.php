@@ -6,7 +6,7 @@
 <h2>Пользуйтесь с умом!</h2>
 <div class="row">
     <div class="col">
-        <img class="img-fluid" src="/static/admin.png" alt="">
+        <img class="img-fluid" src="/static/admin.png" alt="Сем привет">
     </div>
     <div class="col">
         <p class="text-muted mt-4 text-info">

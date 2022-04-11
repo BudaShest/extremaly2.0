@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import {NavLink} from 'react-router-dom';
 import {Container, Row, Col, Button, Icon, Card, Select, Textarea, Chip} from 'react-materialize'
 import Persons from "../../components/Persons/Persons";
 import Comments from "../../components/Comments/Comments";
@@ -51,22 +52,23 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                         <p dangerouslySetInnerHTML={{__html: aboutUs.text}}></p>
                         <p dangerouslySetInnerHTML={{__html: aboutUs.small_text}}
                            style={{fontSize: '0.8em', color: "lightgray"}}></p>
-                        <Button
+                        <NavLink
+                            to="/login"
                             large
-                            node="a"
+                            className={`btn btn-large`}
                             style={{marginRight: '5px', backgroundColor: "#DE4564", color: "white"}}
                             waves="light">
                             Авторизуйтесь
                             <Icon left>
                                 cloud
                             </Icon>
-                        </Button>
+                        </NavLink>
                     </Col>
                     <Col s={12} m={4} className="push-m1">
                         <div className={mainStyle.aboutUsImageConvex}><img
                             className="hoverable"
                             style={{width: "100%", height: "100%", position: 'relative', top: "20px", left: "20px"}}
-                            src={aboutUs.image} alt=""/></div>
+                            src={aboutUs.image} alt="О нас"/></div>
                     </Col>
                 </Row>
                 <h3 className="white-text">Наши преимущества</h3>
@@ -124,7 +126,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                 <Persons persons={persons}/>
                 <Comments comments={reviews}>
                     <form className={style.commentForm} onSubmit={submitHandler}>
-                        <h5 className={style.commentForm_title}>Оставьте комментарий!</h5>
+                        <h5 className={style.commentForm_title}>Оставьте отзыв о проекте!</h5>
                         <Textarea
                             id="TextareaReviewText"
                             label="Изложите свои мысли..."
@@ -139,7 +141,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                 <h3 className="white-text">Форма обратной связи:</h3>
                 <Chip>{errorInfo}</Chip>
                 <Convex size={"large"} s={12} background={'linear-gradient(269.17deg, #DB4463 13.23%, #F2733C 88.24%)'}>
-                    <FormContainer icon={<img style={{width: '100%'}} src="img/ui/letter.png" alt=""/>}
+                    <FormContainer icon={<img style={{width: '100%'}} src="img/ui/letter.png" alt="Иконка формы"/>}
                                    background={'#111111'}>
                         <form onSubmit={handleSendMail} action="">
                             <Row>
@@ -149,6 +151,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                                     id="SelectMailTheme"
                                     onChange={e=>setMailSubject(e.currentTarget.value)}
                                     multiple={false}
+                                    label="Выберите тему обращения"
                                     value={mailSubject}
                                     options={{
                                         classes: '',
@@ -162,13 +165,13 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                                             inDuration: 150,
                                             outDuration: 250
                                         }
-                                }} value="">
+                                }}>
                                     <option disabled value="">Выберите тему обращения</option>
                                     <option value="Жалоба">Жалоба</option>
                                     <option value="Пожелание">Пожелание</option>
                                     <option value="Предложение">Предложение</option>
                                 </Select>
-                                <Textarea onChange={e=>setMailText(e.currentTarget.value)} value={mailText} icon={<Icon className="little-icon" placeholder="Текст письма">article</Icon>} s={10}/>
+                                <Textarea label="Изложите свои мысли" onChange={e=>setMailText(e.currentTarget.value)} value={mailText} icon={<Icon className="little-icon" placeholder="Текст письма">article</Icon>} s={10}/>
                                 <Row>
                                     <Col push={'l7'} s={3}>
                                         <Button style={{backgroundColor: "#DB4463"}} large>Отправить</Button>

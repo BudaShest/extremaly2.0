@@ -10,7 +10,11 @@
     font-size: 28em;
     padding: 10px;
 }
-
+@media screen and (max-width: 1280px) {
+    .regFormIcon{
+        font-size: 18em;
+    }
+}
 @media screen and (max-width: 768px) {
     .regFormIcon{
         display: none;

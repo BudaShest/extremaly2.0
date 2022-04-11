@@ -10,7 +10,7 @@ const SocialLinks = ({links}) => {
                     return (
                         <Col push={"s1"} key={link.id}>
                             <a target="_blank" href={link.url}>
-                                <img className={`${style.linkImg} hoverable`} src={link.icon} alt=""/>
+                                <img className={`${style.linkImg} hoverable`} src={link.icon} alt="Соц. сеть"/>
                             </a>
                         </Col>
                     );

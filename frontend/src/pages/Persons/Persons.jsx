@@ -101,7 +101,7 @@ const Persons = () => {
                                 return (
                                     <Row className={style.personRow} key={person.id}>
                                         <Col s={12} m={12} l={4}>
-                                            <img className={style.personImage} src={person.images[0]} alt=""/>
+                                            <img className={style.personImage} src={person.images[0]} alt="Аватар"/>
                                         </Col>
                                         <Col s={12} m={12} l={8}>
                                             <div className={style.personInfoBadge}>
@@ -113,7 +113,7 @@ const Persons = () => {
                                                 <div>
                                                     {
                                                         person.links.map(link => {
-                                                            return (<a href={link.url} target="_blank"><img style={{width:30, height:30, borderRadius:'50%', objectFit: 'contain', margin:10}} src={link.icon} alt=""/></a>);
+                                                            return (<a href={link.url} title={link.title} target="_blank"><img style={{width:30, height:30, borderRadius:'50%', objectFit: 'contain', margin:10}} src={link.icon} alt={link.title}/></a>);
                                                         })
                                                     }
                                                 </div>

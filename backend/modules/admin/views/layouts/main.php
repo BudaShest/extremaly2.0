@@ -142,7 +142,7 @@ AdminAssetBundle::register($this);
             </div>
             <div class="col">
                 <ul>
-                    <li>Разработал студент ЮУрГТк <a href="https://vk.com/kotanjam" target="_blank">Титов Александр</a>
+                    <li>Разработал студент ЮУрГТк <a href="https://vk.com/kotanjam" title="Автор" target="_blank">Титов Александр</a>
                     </li>
                     <li><i>from <b>Russia</b> with <b>big</b> love!</i></li>
                 </ul>

@@ -52,11 +52,11 @@ const Place = () => {
                             <h5 className="white-text center-align">Характеристики</h5>
                             <Row className={style.placeBadgeRow}>
                                 <Col s={4}><b>Климат:</b></Col>
-                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon} src={place.climat_icon} alt=""/>{place.climat_name}</Col>
+                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon} src={place.climat_icon} alt={place.climat_name}/>{place.climat_name}</Col>
                             </Row>
                             <Row className={style.placeBadgeRow}>
                                 <Col s={4}><b>Страна:</b></Col>
-                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon} src={place.country_flag} alt=""/>{place.country_name}</Col>
+                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon} src={place.country_flag} alt={place.country_name}/>{place.country_name}</Col>
                             </Row>
                             <Row>
                                 <Col s={4}><b>Адрес: </b></Col>

@@ -13,8 +13,8 @@ const Footer = () => {
             </h5>
             <p className="grey-text text-lighten-4">
                 г. Москва, ул. Литейный проспект, д. 157 <br/>
-                <a href=""></a> <br/>
-                <a href=""></a> <br/>
+                {/*<a href=""></a> <br/>*/}
+                {/*<a href=""></a> <br/>*/}
             </p>
         </FooterM>
     );

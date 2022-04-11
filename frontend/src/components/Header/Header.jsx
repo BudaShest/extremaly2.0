@@ -22,7 +22,7 @@ const Header = () => {
                 brand={
                     <a className={style.logo} href="/"><Row>
                         <Col className={`s4`}>
-                            <img className="responsive-img" src="/img/logo.png" alt=""/>
+                            <img className="responsive-img" src="/img/logo.png" alt="Логотип"/>
                         </Col>
                         <Col className={`s8`}>
                             <span className={`${style.logoSpan} row`}>Extremly</span>
@@ -31,7 +31,7 @@ const Header = () => {
                     </Row></a>
                 }
                 id="mobile-nav"
-                menuIcon={<Icon>menu</Icon>}
+                menuIcon={<Icon className={style.menuIcon}>menu</Icon>}
                 options={{
                     draggable:true,
                     edge: 'left',
@@ -71,7 +71,7 @@ const Header = () => {
                         >
                             <NavLink to="/user">Личный кабинет</NavLink>
                             <Divider />
-                            <a href="#" onClick={handleLogout}>Выйти</a>
+                            <a title="Выйти" href="#" onClick={handleLogout}>Выйти</a>
                         </Dropdown>
                         :
                         <NavItem>

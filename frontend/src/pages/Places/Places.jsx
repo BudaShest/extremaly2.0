@@ -46,21 +46,21 @@ const Places = () => {
                         <p>Наш огромный мир полон различных опасных мест, куда лучше не соваться. Но можете быть
                             спокойны. на нашей плоащдке не будет ни одного такого места! Все локации, отобранные нами и
                             происходящие в них события полностью соответствуют всем нормативам безопасности</p>
-                        <img className={style.offerImage} src="img/advantages/safety.png" alt=""/>
+                        <img className={style.offerImage} src="img/advantages/safety.png" alt="Безопасность"/>
                     </div>
                     <div className={style.offerCol}>
                         <h5>Комфорт</h5>
                         <p>Наверняка, вам не захочется провести ночь в палатке под дождём. Администрация проекта
                             "Extremly" гарантирует, что все все заявленные условия будут соблюдены. Будьте спокойны и
                             наслаждайтесь активным отдыхом!</p>
-                        <img className={`${style.offerImage} ${style.centerImage}`} src="img/advantages/comfort.png" alt=""/>
+                        <img className={`${style.offerImage} ${style.centerImage}`} src="img/advantages/comfort.png" alt="Комфорт"/>
                     </div>
                     <div className={style.offerCol}>
                         <h5>Простота</h5>
                         <p>Не думаем, что Вам самостоятельно хочется искать билеты на самолёт, организовывать транспорт,
                             искать отель и т.д. Это не беда! Команда Extremly всё сделает за вас! Вам остаётся лишь
                             приобрести билет!</p>
-                        <img className={style.offerImage} src="img/advantages/goodwork.png" alt=""/>
+                        <img className={style.offerImage} src="img/advantages/goodwork.png" alt="Простота"/>
                     </div>
                 </div>
             </div>
