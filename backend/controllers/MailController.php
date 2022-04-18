@@ -21,17 +21,6 @@ class MailController extends ActiveController
         return $behaviors;
     }
 
-//    protected function verbs()
-//    {
-//        return [
-//            'index' => ['GET', 'HEAD'],
-//            'view' => ['GET', 'HEAD'],
-//            'send-mail' => ['OPTIONS','POST'],
-//            'update' => ['PUT', 'PATCH'],
-//            'delete' => ['DELETE'],
-//        ];
-//    }
-
     public function actionSendMail()
     {
         try{

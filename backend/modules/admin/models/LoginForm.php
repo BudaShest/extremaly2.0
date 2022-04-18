@@ -41,5 +41,4 @@ class LoginForm extends Model
             return true;
         }
     }
-
 }

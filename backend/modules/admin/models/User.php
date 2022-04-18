@@ -41,5 +41,4 @@ class User extends BaseUser
         $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 1024 * 1024 * 3,];
         return $rules;
     }
-
 }

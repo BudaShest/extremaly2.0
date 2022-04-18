@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 use app\models\Event;
@@ -11,7 +10,6 @@ use app\models\Place;
 class EventController extends ActiveController
 {
     public $modelClass = 'app\models\Event';
-
 
     public function behaviors(): array
     {

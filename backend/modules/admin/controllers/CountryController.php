@@ -123,5 +123,4 @@ class CountryController extends Controller
         }
         return $model;
     }
-
 }

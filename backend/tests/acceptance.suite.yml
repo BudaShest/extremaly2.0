@@ -1,0 +1,11 @@
+actor: AcceptanceTester
+modules:
+  enabled:
+    - WebDriver:
+        url: http://127.0.0.1/
+        browser: firefox
+        host: http://127.0.0.1/
+    - Yii2:
+        part: orm
+        entryScript: index-test.php
+        cleanup: true

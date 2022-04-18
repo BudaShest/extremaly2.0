@@ -20,5 +20,4 @@ class PersonLink extends ActiveRecord
     {
         return $this->hasOne(Person::class, ['id' => 'person_id']);
     }
-
 }

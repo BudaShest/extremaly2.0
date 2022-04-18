@@ -5,8 +5,6 @@ namespace app\controllers;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
-
-
 class CountryController extends ActiveController
 {
     public $modelClass = 'app\models\Country';

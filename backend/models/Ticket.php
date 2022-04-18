@@ -26,7 +26,6 @@ class Ticket extends ActiveRecord
         return $this->hasMany(Application::class,['id'=>'application_id'])->viaTable('ticket_application', ['ticket_id' => 'id']);
     }
 
-
     public function fields()
     {
         $fields = parent::fields();

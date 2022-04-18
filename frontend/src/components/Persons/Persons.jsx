@@ -4,7 +4,6 @@ import style from './Persons.module.css';
 import Person from "../Person/Person";
 import SocialLinks from "../SocialLinks/SocialLinks";
 
-
 const Persons = ({persons}) => {
     const [activeIndex, setActiveIndex] = useState(1);
     const [activePerson, setActivePerson] = useState(persons[1]);
@@ -43,9 +42,6 @@ const Persons = ({persons}) => {
             </div>
         </Col>
     );
-
-
-
 };
 
 export default Persons;

@@ -10,15 +10,6 @@ class EventReviewController extends ActiveController
 {
     public $modelClass = 'app\models\EventReview';
 
-//    public function actions()
-//    {
-//        return [
-//            'options' => [
-//                'class' => 'yii\rest\OptionsAction',
-//            ],
-//        ];
-//    }
-
     protected function verbs()
     {
         return [

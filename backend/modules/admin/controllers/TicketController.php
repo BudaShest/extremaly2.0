@@ -59,6 +59,4 @@ class TicketController extends Controller
         }
         return $this->render('create',compact('model'));
     }
-
-
 }
