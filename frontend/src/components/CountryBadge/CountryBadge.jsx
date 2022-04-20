@@ -8,7 +8,15 @@ const CountryBadge = ({countries}) => {
     const dispatch = useDispatch();
 
     function clickHandler(e){
+        resetActiveClasses();
+        let badgeIcon = e.currentTarget.children[0];
+        badgeIcon.classList.add(style.countryIconActive);
         dispatch(fetchPlacesByCountry(e.currentTarget.dataset.countryCode));
+    }
+
+    function resetActiveClasses(){ //todo в климатах будет чо то похожее
+        let badgeIcons = document.querySelectorAll("."+style.countryIconActive);
+        badgeIcons.forEach(badgeIcon => badgeIcon.classList.remove(style.countryIconActive));
     }
     
     return (

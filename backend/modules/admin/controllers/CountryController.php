@@ -4,16 +4,22 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\ErrorHelper;
 use app\modules\admin\components\FileWorker;
+use yii\web\Response;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Country;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
+use yii\db\StaleObjectException;
 use Yii;
 
 class CountryController extends Controller
 {
-    public function behaviors()
+    /**
+     * @inheritDoc
+     * @return array[]
+     */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -32,7 +38,11 @@ class CountryController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Просмотр странииы "Все страны"
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $countriesProvider = new ActiveDataProvider([
             'query' => Country::find(),
@@ -44,7 +54,14 @@ class CountryController extends Controller
         return $this->render('index', compact('countriesProvider'));
     }
 
-    public function actionDelete(string $code)
+    /**
+     * Удаление записи страны
+     * @param string $code
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws StaleObjectException
+     */
+    public function actionDelete(string $code): Response
     {
         $model = $this->loadModel($code);
         $fileWorker = new FileWorker(['model' => $model]);
@@ -57,6 +74,12 @@ class CountryController extends Controller
         return $this->redirect('/admin/country');
     }
 
+    /**
+     * Обновление информации о стране
+     * @param string $code
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(string $code)
     {
         $model = $this->loadModel($code);
@@ -79,6 +102,10 @@ class CountryController extends Controller
         return $this->render('create', ['country' => $model]);
     }
 
+    /**
+     * Создание страны (Добавление информации)
+     * @return string|Response
+     */
     public function actionCreate()
     {
         $model = new Country();
@@ -100,7 +127,13 @@ class CountryController extends Controller
         return $this->render('create', ['country' => $model]);
     }
 
-    public function actionDeleteFiles(string $code)
+    /**
+     * Удаление медиафайлов страны
+     * @param string $code
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionDeleteFiles(string $code): Response
     {
         $model = $this->loadModel($code);
         $fileWorker = new FileWorker(compact('model'));
@@ -110,12 +143,24 @@ class CountryController extends Controller
         return $this->redirect('/admin/country/view?code=' . $model->code);
     }
 
-    public function actionView(string $code)
+    /**
+     * Просмотр страны
+     * @param string $code
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(string $code): string
     {
         $model = $this->loadModel($code);
         return $this->render('detail', compact('model'));
     }
 
+    /**
+     * Загрузка модели
+     * @param string $code
+     * @return Country
+     * @throws NotFoundHttpException
+     */
     protected function loadModel(string $code): Country
     {
         if (!$model = Country::findOne($code)) {

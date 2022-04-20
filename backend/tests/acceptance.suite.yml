@@ -2,9 +2,9 @@ actor: AcceptanceTester
 modules:
   enabled:
     - WebDriver:
-        url: http://127.0.0.1/
+        url: 'http://nginx/'
         browser: firefox
-        host: http://127.0.0.1/
+        host: 'firefox'
     - Yii2:
         part: orm
         entryScript: index-test.php
