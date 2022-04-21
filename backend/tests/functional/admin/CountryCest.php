@@ -1,5 +1,5 @@
 <?php
-namespace admin;
+namespace functional\admin;
 
 use Codeception\Util\HttpCode;
 use FunctionalTester;
@@ -54,7 +54,7 @@ class CountryCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Открыть страницу просмотра детальной информации о стране');
-        $I->amOnPage('/place/view');
+        $I->amOnPage('/country/view');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра детальной информации о стране');
@@ -68,11 +68,11 @@ class CountryCest
      */
     public function updateTest(FunctionalTester $I): void
     {
-        $I->amGoingTo('');
-        $I->amOnPage('');
+        $I->amGoingTo('Посетить страницу с формой обновления информации о стране');
+        $I->amOnPage('/country/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expectTo('');
+        $I->expectTo('Увидеть страницу с формой обновления информации о стране');
         $I->see("Управление страной");
     }
 }

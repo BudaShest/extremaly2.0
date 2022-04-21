@@ -5,16 +5,19 @@ namespace app\modules\admin\controllers;
 use app\modules\admin\components\ErrorHelper;
 use app\modules\admin\components\FileWorker;
 use app\modules\admin\models\PersonLink;
+use phpDocumentor\Reflection\Types\Mixed_;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\Person;
 use yii\web\NotFoundHttpException;
 use Yii;
+use yii\web\Response;
 
 class PersonController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -33,15 +36,25 @@ class PersonController extends Controller
         ];
     }
 
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return Person
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): Person
     {
         if(!$model = Person::findOne($id)){
-            throw new NotFoundHttpException('Модель Песоны не найдена');
+            throw new NotFoundHttpException('Модель персоны не найдена!');
         }
         return $model;
     }
 
-    public function actionIndex()
+    /**
+     * Страница "Все персоны"
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $model = new Person();
         $personsProvider = new ActiveDataProvider([
@@ -53,7 +66,13 @@ class PersonController extends Controller
         return $this->render('index', compact('personsProvider'));
     }
 
-    public function actionView(int $id)
+    /**
+     * Страница просмотра детальной информации о персоне(личности)
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         $model = $this->loadModel($id);
         $personLinksProvider = new ActiveDataProvider([
@@ -66,6 +85,12 @@ class PersonController extends Controller
         return $this->render('detail', compact('model','personLinksProvider'));
     }
 
+    /**
+     * Страница обновления личности
+     * @param int $id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
@@ -89,6 +114,10 @@ class PersonController extends Controller
 
     }
 
+    /**
+     * Страница добавления личности
+     * @return string|Response
+     */
     public function actionCreate()
     {
         $model = new Person();
@@ -110,7 +139,13 @@ class PersonController extends Controller
         return $this->render('create', compact('model'));
     }
 
-    public function actionDelete(string $id)
+    /**
+     * @param string $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(string $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(['model' => $model]);
@@ -123,7 +158,13 @@ class PersonController extends Controller
         return $this->redirect('/admin/person');
     }
 
-    public function actionDeleteFiles(int $id)
+    /**
+     * Удаление медиафайлов
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionDeleteFiles(int $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(compact('model'));

@@ -1,6 +1,5 @@
 <?php
 /** @var yii\web\View $this */
-
 /** @var \app\models\PersonLink $model */
 
 use yii\widgets\DetailView;

@@ -5,7 +5,7 @@
 use yii\widgets\DetailView;
 use yii\helpers\Html;
 
-$this->title = 'Создать персону';
+$this->title = 'Информация о личности: "' . $model->firstname . " " . $model->lastname . '"';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>

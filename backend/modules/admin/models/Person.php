@@ -33,12 +33,12 @@ class Person extends BasePerson
     public function attributeLabels(): array
     {
         return [
-          'firstname' => 'Имя',
-          'lastname' => 'Фамилия',
-          'patronymic' => 'Отчество',
-          'age' => 'Возраст',
-          'description' => 'Описание',
-          'profession' => 'Профессия'
+            'firstname' => 'Имя',
+            'lastname' => 'Фамилия',
+            'patronymic' => 'Отчество',
+            'age' => 'Возраст',
+            'description' => 'Описание',
+            'role' => 'Роль личности в событиях',
         ];
     }
 }

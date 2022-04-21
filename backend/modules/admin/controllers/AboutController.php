@@ -1,18 +1,21 @@
 <?php
 
 namespace app\modules\admin\controllers;
+
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 use app\modules\admin\models\About;
 use app\modules\admin\components\FileWorker;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use Yii;
 use app\modules\admin\components\ErrorHelper;
 
 class AboutController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -31,7 +34,11 @@ class AboutController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Страница со списком всех записей "О нас"
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => About::find(),
@@ -43,6 +50,12 @@ class AboutController extends Controller
         return $this->render('index', compact('dataProvider'));
     }
 
+    /**
+     * Страница обновления информации "О нас"
+     * @param int $id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
@@ -65,6 +78,10 @@ class AboutController extends Controller
         return $this->render('create', ['model' => $model]);
     }
 
+    /**
+     * Страница добавления записи о нас
+     * @return string|Response
+     */
     public function actionCreate()
     {
         $model = new About();
@@ -86,7 +103,14 @@ class AboutController extends Controller
         return $this->render('create', ['model' => $model]);
     }
 
-    public function actionDelete(int $id)
+    /**
+     * Удаление записи "О нас"
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(int $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(['model' => $model]);
@@ -99,14 +123,25 @@ class AboutController extends Controller
         return $this->redirect('/admin/about');
     }
 
-
-    public function actionView(int $id)
+    /**
+     * Страница просмотра информации записи "О нас"
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         $model = $this->loadModel($id);
         return $this->render('detail', compact('model'));
     }
 
-    public function actionDeleteFiles(int $id)
+    /**
+     * Удаление медиафайлов
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionDeleteFiles(int $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(compact('model'));
@@ -116,7 +151,13 @@ class AboutController extends Controller
         return $this->redirect('/admin/about/view?id=' . $model->id);
     }
 
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return About
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): About
     {
         if (!$model = About::findOne($id)) {
             throw new NotFoundHttpException("Статический контент не найден!");
