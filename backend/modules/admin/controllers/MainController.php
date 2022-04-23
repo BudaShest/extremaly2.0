@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\LoginForm;
 use yii\filters\AccessControl;
+use yii\web\Response;
 use yii\web\Controller;
 use app\modules\admin\components\ErrorHelper;
 use Yii;
@@ -30,7 +31,7 @@ class MainController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [
@@ -39,11 +40,19 @@ class MainController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Главная страница
+     * @return string
+     */
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
 
+    /**
+     * Страница авторизации
+     * @return string|Response
+     */
     public function actionLogin()
     {
         $model = new LoginForm();
@@ -57,7 +66,11 @@ class MainController extends Controller
         return $this->render('login', compact('model'));
     }
 
-    public function actionLogout()
+    /**
+     * Выход
+     * @return Response
+     */
+    public function actionLogout(): Response
     {
         Yii::$app->user->logout();
         return $this->redirect('login');

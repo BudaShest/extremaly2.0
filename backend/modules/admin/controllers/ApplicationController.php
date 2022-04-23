@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\Ticket;
+use yii\web\Response;
 use app\modules\admin\components\ErrorHelper;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -13,7 +13,8 @@ use Yii;
 
 class ApplicationController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -34,7 +35,11 @@ class ApplicationController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Страница со списком всех заявок
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $applicationProvider = new ActiveDataProvider([
             'query' => Application::find(),
@@ -46,6 +51,12 @@ class ApplicationController extends Controller
         return $this->render('index', compact('applicationProvider'));
     }
 
+    /**
+     * Страница обновления статуса заявки
+     * @param int $id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
@@ -67,7 +78,14 @@ class ApplicationController extends Controller
         return $this->render('create', compact('model'));
     }
 
-    public function actionDelete(int $id)
+    /**
+     * Удаление записи
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(int $id): Response
     {
         $model = $this->loadModel($id);
         if (!$model->delete()) {
@@ -78,7 +96,13 @@ class ApplicationController extends Controller
         return $this->redirect('/admin/application');
     }
 
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return Application
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): Application
     {
         if (!$model = Application::findOne($id)) {
             throw new NotFoundHttpException("Статический контент не найден!");

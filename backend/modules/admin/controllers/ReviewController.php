@@ -3,7 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\ErrorHelper;
-use app\modules\admin\components\FileWorker;
+use yii\web\Response;
 use app\modules\admin\models\Review;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -13,7 +13,8 @@ use Yii;
 
 class ReviewController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -21,7 +22,7 @@ class ReviewController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'update', 'create', 'delete', 'view','delete-files'],
+                        'actions' => ['index', 'update', 'delete', 'view','delete-files'],
                         'roles' => ['@'],
                     ]
                 ],
@@ -32,7 +33,11 @@ class ReviewController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Страница со списком всех отзывов о проекте
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $reviewsProvider = new ActiveDataProvider([
             'query' =>Review::find(),
@@ -43,6 +48,12 @@ class ReviewController extends Controller
         return $this->render('index', compact('reviewsProvider'));
     }
 
+    /**
+     * Страница обновления отзыва о проекте
+     * @param int $id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
@@ -55,10 +66,16 @@ class ReviewController extends Controller
             }
             return $this->redirect('/admin/review/view?id=' . $model->id);
         }
-        return $this->render('create', ['eventType' => $model]);
+        return $this->render('create', ['review' => $model]);
     }
 
-    public function actionDelete(string $id)
+    /**
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(int $id): Response
     {
         $model = $this->loadModel($id);
         if (!$model->delete()) {
@@ -69,15 +86,25 @@ class ReviewController extends Controller
         return $this->redirect('/admin/review');
     }
 
-
-    public function actionView(int $id)
+    /**
+     * Страница просмотра отзыва о проекте
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         $model = $this->loadModel($id);
         return $this->render('detail', compact('model'));
     }
 
-
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return Review
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): Review
     {
         if (!$model = Review::findOne($id)) {
             throw new NotFoundHttpException('Модель не найдена!');

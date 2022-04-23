@@ -6,7 +6,7 @@
 use yii\widgets\DetailView;
 use yii\helpers\Html;
 
-$this->title = 'Соц сеть ' . $model->title;
+$this->title = 'Социальная сеть ' . $model->title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>

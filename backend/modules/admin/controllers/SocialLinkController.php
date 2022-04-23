@@ -9,10 +9,12 @@ use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 use app\modules\admin\models\SocialLink;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 class SocialLinkController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -31,7 +33,11 @@ class SocialLinkController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Страница со списком соц. сетей проекта
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => SocialLink::find(),
@@ -43,6 +49,11 @@ class SocialLinkController extends Controller
         return $this->render('index', compact('dataProvider'));
     }
 
+    /**
+     * @param int $id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
@@ -65,6 +76,10 @@ class SocialLinkController extends Controller
         return $this->render('create', ['model' => $model]);
     }
 
+    /**
+     * Страница добавления соц. сети проекта
+     * @return string|Response
+     */
     public function actionCreate()
     {
         $model = new SocialLink();
@@ -86,7 +101,13 @@ class SocialLinkController extends Controller
         return $this->render('create', ['model' => $model]);
     }
 
-    public function actionDelete(int $id)
+    /**
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(int $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(['model' => $model]);
@@ -99,14 +120,25 @@ class SocialLinkController extends Controller
         return $this->redirect('/admin/social-link');
     }
 
-
-    public function actionView(int $id)
+    /**
+     * Страница просмотра информации о соц. сети проекта
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         $model = $this->loadModel($id);
         return $this->render('detail', compact('model'));
     }
 
-    public function actionDeleteFiles(int $id)
+    /**
+     * Удаление медиафайлов
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionDeleteFiles(int $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(compact('model'));
@@ -116,7 +148,13 @@ class SocialLinkController extends Controller
         return $this->redirect('/admin/social-link/view?id=' . $model->id);
     }
 
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return SocialLink
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): SocialLink
     {
         if (!$model = SocialLink::findOne($id)) {
             throw new NotFoundHttpException("Статический контент не найден!");

@@ -1,7 +1,8 @@
 <?php
-namespace admin;
+namespace functional\admin;
 
 use Codeception\Util\HttpCode;
+use FunctionalTester;
 
 class ReviewCest
 {
@@ -9,43 +10,48 @@ class ReviewCest
     {
     }
 
+    /**
+     * Страница со списком всех отзывов
+     * @param FunctionalTester $I
+     * @return void
+     */
     public function indexTest(FunctionalTester $I): void
     {
-        $I->amGoingTo('');
-        $I->amOnPage('');
+        $I->amGoingTo('Посетить страницу со списком всех отзывов');
+        $I->amOnPage('/review/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expectTo('');
-        $I->see();
+        $I->expectTo('Увидеть страницу со списком всех отзывов');
+        $I->see('Вcе отзывы');
     }
 
-    public function createTest(FunctionalTester $I): void
-    {
-        $I->amGoingTo('');
-        $I->amOnPage('');
-        $I->seeResponseCodeIs(HttpCode::OK);
-
-        $I->expectTo('');
-        $I->see();
-    }
-
+    /**
+     * Страница просмотра отзыва о проекте
+     * @param FunctionalTester $I
+     * @return void
+     */
     public function viewTest(FunctionalTester $I): void
     {
-        $I->amGoingTo('');
-        $I->amOnPage('');
+        $I->amGoingTo('Посетить страницу просмотра отзыва о проекте');
+        $I->amOnPage('/review/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expectTo('');
-        $I->see();
+        $I->expectTo('Увидеть страницу просмотра отзыва о проекте');
+        $I->see('Отзыв о проекте');
     }
 
+    /**
+     * Страница обновления отзыва о проекте
+     * @param FunctionalTester $I
+     * @return void
+     */
     public function updateTest(FunctionalTester $I): void
     {
-        $I->amGoingTo('');
-        $I->amOnPage('');
+        $I->amGoingTo('Посетить страницу обновления отзыва о проекте');
+        $I->amOnPage('/review/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expectTo('');
+        $I->expectTo('Увидеть страницу обновления отзыва о проекте');
         $I->see();
     }
 }

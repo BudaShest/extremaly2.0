@@ -34,6 +34,7 @@ class SocialLink extends BaseSocialLink
             'title' => 'Заголовок',
             'icon' => 'Иконка',
             'uploads' => 'Иконка',
+            'url' => 'Ссылка'
         ];
     }
 }

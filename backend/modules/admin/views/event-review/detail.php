@@ -6,7 +6,7 @@
 use yii\widgets\DetailView;
 use yii\helpers\Html;
 
-$this->title = 'Комментарий к собтия ' . $model->event->name;
+$this->title = 'Комментарий к событию ' . $model->event->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>

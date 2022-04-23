@@ -6,7 +6,7 @@
 use yii\widgets\DetailView;
 use yii\helpers\Html;
 
-$this->title = 'Тип событий ' . $model->name;
+$this->title = 'Отзыв о проекте № ' . $model->id;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'label' => 'Номер ',
             'value' => function($data){
-                return Html::a($data->id, ['event-type/view', 'id'=>$data->id]);
+                return Html::a($data->id, ['review/view', 'id'=>$data->id]);
             },
             'format' => 'raw'
         ],

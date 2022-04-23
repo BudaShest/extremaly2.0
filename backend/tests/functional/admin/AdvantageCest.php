@@ -23,22 +23,22 @@ class AdvantageCest
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех преимущества');
-        $I->see();
+        $I->see('Все преимущества');
     }
 
     /**
-     * Обновление информации о преимуществе
+     * Создание записи преимущества
      * @param FunctionalTester $I
      * @return void
      */
     public function createTest(FunctionalTester $I): void
     {
-        $I->amGoingTo('');
-        $I->amOnPage('');
+        $I->amGoingTo('Посетить страницу с формой добавления записи преимущества');
+        $I->amOnPage('/advantage/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expectTo('');
-        $I->see();
+        $I->expectTo('Увидеть страницу с формой добавления записи преимущества');
+        $I->see("Добавление преимущества");
     }
 
     /**
@@ -48,12 +48,12 @@ class AdvantageCest
      */
     public function viewTest(FunctionalTester $I): void
     {
-        $I->amGoingTo('');
-        $I->amOnPage('');
+        $I->amGoingTo('Посетить страницу просмотра информации о преимуществе');
+        $I->amOnPage('/advantage/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expectTo('');
-        $I->see();
+        $I->expectTo('Увидеть страницу просмотра информации о преимуществе');
+        $I->see("Преимущество");
     }
 
     /**
@@ -63,11 +63,11 @@ class AdvantageCest
      */
     public function updateTest(FunctionalTester $I): void
     {
-        $I->amGoingTo('');
-        $I->amOnPage('');
+        $I->amGoingTo('Посетить страницу с формой обновления информации о преимуществе');
+        $I->amOnPage('/advantage/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expectTo('');
-        $I->see();
+        $I->expectTo('Увидеть страницу с формой обновления информации о преимуществе');
+        $I->see('Управление преимуществом');
     }
 }

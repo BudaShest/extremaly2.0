@@ -8,12 +8,14 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\admin\models\EventType;
 use yii\data\ActiveDataProvider;
+use yii\web\Response;
 use Yii;
 use yii\web\NotFoundHttpException;
 
 class EventTypeController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -32,9 +34,12 @@ class EventTypeController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Страница с просмотром всех типов событий
+     * @return string
+     */
+    public function actionIndex(): string
     {
-//        $model = new EventType();
         $eventTypesProvider = new ActiveDataProvider([
             'query' => EventType::find(),
             'pagination' => [
@@ -44,6 +49,12 @@ class EventTypeController extends Controller
         return $this->render('index', compact('eventTypesProvider'));
     }
 
+    /**
+     * Страница обновления информации о типе события
+     * @param int $id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
@@ -66,7 +77,14 @@ class EventTypeController extends Controller
         return $this->render('create', ['eventType' => $model]);
     }
 
-    public function actionDelete(string $id)
+    /**
+     * Удаление записи
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(int $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(['model' => $model]);
@@ -79,6 +97,10 @@ class EventTypeController extends Controller
         return $this->redirect('/admin/event-type');
     }
 
+    /**
+     * Страница добавления типов событий
+     * @return string|Response
+     */
     public function actionCreate()
     {
         $model = new EventType();
@@ -100,13 +122,25 @@ class EventTypeController extends Controller
         return $this->render('create', ['eventType' => $model]);
     }
 
-    public function actionView(int $id)
+    /**
+     * Страница просмотра детальной информации о типе события
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         $model = $this->loadModel($id);
         return $this->render('detail', compact('model'));
     }
 
-    public function actionDeleteFiles(int $id)
+    /**
+     * Страница удаления медиафайлов
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionDeleteFiles(int $id): Response
     {
         $model = $this->loadModel($id);
         $fileWorker = new FileWorker(compact('model'));
@@ -116,7 +150,13 @@ class EventTypeController extends Controller
         return $this->redirect('/admin/event-type/view?id=' . $model->id);
     }
 
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return EventType
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): EventType
     {
         if (!$model = EventType::findOne($id)) {
             throw new NotFoundHttpException('Модель не найдена!');

@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use app\models\Banned;
 use app\modules\admin\models\EventReview;
 use yii\filters\AccessControl;
+use yii\web\Response;
 use yii\web\Controller;
 use app\modules\admin\models\User;
 use yii\web\NotFoundHttpException;
@@ -14,7 +15,8 @@ use Yii;
 
 class UserController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -33,7 +35,13 @@ class UserController extends Controller
         ];
     }
 
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return User
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): User
     {
         if (!$model = User::findOne($id)) {
             throw new NotFoundHttpException('Модель не найдена');
@@ -41,7 +49,11 @@ class UserController extends Controller
         return $model;
     }
 
-    public function actionIndex()
+    /**
+     * Страница со списком всех пользователей
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $model = new User();
         $dataProvider = new ActiveDataProvider([
@@ -54,7 +66,14 @@ class UserController extends Controller
         return $this->render('index', compact('dataProvider', 'model'));
     }
 
-    public function actionDelete(int $id)
+    /**
+     * Удаление пользовательской записи
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(int $id): Response
     {
         $model = $this->loadModel($id);
         if ($model->delete()) {
@@ -63,7 +82,13 @@ class UserController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-    public function actionView(int $id)
+    /**
+     * Страница просмотра пользовательской информации
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         $model = $this->loadModel($id);
         $eventReviewsProvider = new ActiveDataProvider([
@@ -81,7 +106,13 @@ class UserController extends Controller
         return $this->render('detail', compact('model','eventReviewsProvider','applicationProvider'));
     }
 
-    public function actionBan(int $id)
+    /**
+     * Забанить пользователя
+     * @param int $id
+     * @return Response
+     * @throws \yii\db\Exception
+     */
+    public function actionBan(int $id): Response
     {
         $model = User::findIdentity($id);
         $banned = new Banned();
@@ -89,7 +120,13 @@ class UserController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-    public function actionUnban(int $id)
+    /**
+     * Разбанить пользователя
+     * @param int $id
+     * @return Response
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionUnban(int $id): Response
     {
         if ($model = Banned::findOne(['user_id' => $id])) {
             $model->delete();

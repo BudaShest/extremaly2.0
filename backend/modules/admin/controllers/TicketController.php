@@ -4,19 +4,19 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\ErrorHelper;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
-use yii\data\SqlDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use app\modules\admin\models\Event;
+use yii\web\Response;
 use app\modules\admin\models\Ticket;
-use app\modules\admin\models\TicketGenerator;
 
 use Yii;
 
 class TicketController extends Controller
 {
-    public function behaviors()
+    /**
+     * @return array[]
+     */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -35,7 +35,11 @@ class TicketController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Страница со списком всех видов билетов
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Ticket::find(),
@@ -47,6 +51,10 @@ class TicketController extends Controller
         return $this->render('index', compact('dataProvider'));
     }
 
+    /**
+     * Страница добавления типов билетов
+     * @return string|Response
+     */
     public function actionCreate()
     {
         $model = new Ticket();

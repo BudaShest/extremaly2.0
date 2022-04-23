@@ -6,7 +6,7 @@
 use yii\widgets\DetailView;
 use yii\helpers\Html;
 
-$this->title = 'Преимущество';
+$this->title = 'Преимущество № ' . $model->id;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ]) ?>
 <div class="btn-group">
-    <?= Html::a('Очистить файлы', ['/admin/advantage/delete-files', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     <?= Html::a('Обновить', ['/admin/advantage/update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     <?= Html::a('Удалить', ['/admin/advantage/delete', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
 </div>

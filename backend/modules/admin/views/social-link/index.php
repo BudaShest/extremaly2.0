@@ -6,7 +6,7 @@ use yii\grid\GridView;
 use yii\bootstrap4\ButtonDropdown;
 use yii\bootstrap4\LinkPager;
 
-$this->title = "Соц сети";
+$this->title = "Социальные сети проекта";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?= $this->title ?></h3>

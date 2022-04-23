@@ -3,7 +3,8 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\ErrorHelper;
-use app\modules\admin\components\FileWorker;
+use Prophecy\Argument\Token\ExactValueToken;
+use yii\web\Response;
 use app\modules\admin\models\EventReview;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -13,7 +14,8 @@ use Yii;
 
 class EventReviewController extends Controller
 {
-    public function behaviors()
+    /** @inheritDoc */
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -32,7 +34,11 @@ class EventReviewController extends Controller
         ];
     }
 
-    public function actionIndex()
+    /**
+     * Страница со списком всех комментариев к событию
+     * @return string
+     */
+    public function actionIndex(): string
     {
         $eventReviewsProvider = new ActiveDataProvider([
             'query' => EventReview::find(),
@@ -43,6 +49,12 @@ class EventReviewController extends Controller
         return $this->render('index', compact('eventReviewsProvider'));
     }
 
+    /**
+     * Страница обновления информации комментария к событию
+     * @param int $id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate(int $id)
     {
         $model = $this->loadModel($id);
@@ -58,7 +70,14 @@ class EventReviewController extends Controller
         return $this->render('create', ['eventReview' => $model]);
     }
 
-    public function actionDelete(string $id)
+    /**
+     * Удаление записи комментария к событию
+     * @param string $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete(string $id): Response
     {
         $model = $this->loadModel($id);
         if (!$model->delete()) {
@@ -69,15 +88,25 @@ class EventReviewController extends Controller
         return $this->redirect('/admin/event-review');
     }
 
-
-    public function actionView(int $id)
+    /**
+     * Страница просмотра детальной информации комментария к событию
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         $model = $this->loadModel($id);
         return $this->render('detail', compact('model'));
     }
 
-
-    protected function loadModel(int $id)
+    /**
+     * Загрузка модели
+     * @param int $id
+     * @return EventReview
+     * @throws NotFoundHttpException
+     */
+    protected function loadModel(int $id): EventReview
     {
         if (!$model = EventReview::findOne($id)) {
             throw new NotFoundHttpException('Модель не найдена!');
