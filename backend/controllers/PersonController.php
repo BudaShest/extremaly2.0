@@ -32,11 +32,16 @@ class PersonController extends ActiveController
      */
     public function actionFindPersons(string $requestedString): array
     {
-        //todo расширить алгоритм поиска
         if ($models = Person::find()->where(['ilike', 'firstname', $requestedString])->all()) {
             return $models;
         }
         if ($models = Person::find()->where(['ilike', 'lastname', $requestedString])->all()) {
+            return $models;
+        }
+        if ($models = Person::find()->where(['ilike', 'role', $requestedString])->all()) {
+            return $models;
+        }
+        if ($models = Person::find()->where(['ilike', 'description', $requestedString])->all()) {
             return $models;
         }
         return [];

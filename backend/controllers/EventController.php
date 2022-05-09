@@ -121,6 +121,9 @@ class EventController extends ActiveController
         if ($models = Event::find()->where(['ilike', 'offer', $requestedString])->all()) {
             return $models;
         }
+        if ($models = Event::find()->where(['ilike', 'description', $requestedString])->all()) {
+            return $models;
+        }
         if ($models = Place::find()->where(['ilike', 'name', $requestedString])->all()) {
             $result = [];
             foreach ($models as $model) {
