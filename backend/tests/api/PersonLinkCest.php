@@ -6,11 +6,7 @@ use Faker\Factory;
 class PersonLinkCest
 {
     /** @var \Faker\Generator $faker */
-    protected $faker;
-
-    public function _before(ApiTester $I)
-    {
-    }
+    protected Faker\Generator $faker;
 
     /**
      * Внедрение зависимости

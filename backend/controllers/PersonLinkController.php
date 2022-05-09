@@ -7,8 +7,10 @@ use yii\filters\Cors;
 
 class PersonLinkController extends ActiveController
 {
+    /** @inheritdoc  */
     public $modelClass = 'app\models\PersonLink';
 
+    /** @inheritdoc  */
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();

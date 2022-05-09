@@ -5,8 +5,8 @@ use Faker\Factory;
 
 class AboutCest
 {
-    /** @var Faker\Generator $faker - генератор фейковых данных */
-    protected $faker;
+    /** @var \Faker\Generator $faker */
+    protected Faker\Generator $faker;
 
     /**
      * Внедрение зависимости

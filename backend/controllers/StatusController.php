@@ -4,7 +4,8 @@ namespace app\controllers;
 
 use yii\rest\ActiveController;
 
-class StatusController extends ActiveController //TODO не факт, что эта модель вообще нужна, чекнем попозже
+class StatusController extends ActiveController
 {
+    /** @inheritdoc  */
     public $modelClass = 'app\models\Status';
 }

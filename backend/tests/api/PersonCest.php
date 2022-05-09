@@ -6,11 +6,7 @@ use Faker\Factory;
 class PersonCest
 {
     /** @var \Faker\Generator $faker */
-    protected $faker;
-
-    public function _before(ApiTester $I)
-    {
-    }
+    protected Faker\Generator $faker;
 
     /**
      * Внедрение зависимости
@@ -22,9 +18,8 @@ class PersonCest
     }
 
     /**
-     * Cписок персон
+     * Список персон
      * @param ApiTester $I
-     * @return void
      */
     public function indexTest(ApiTester $I): void
     {
@@ -39,7 +34,6 @@ class PersonCest
     /**
      * Запись персоны
      * @param ApiTester $I
-     * @return void
      */
     public function viewTest(ApiTester $I): void
     {
@@ -54,7 +48,6 @@ class PersonCest
     /**
      * Создать запись персоны
      * @param ApiTester $I
-     * @return void
      */
     public function createTest(ApiTester $I): void
     {
@@ -76,7 +69,6 @@ class PersonCest
     /**
      * Обновить запись персоны
      * @param ApiTester $I
-     * @return void
      */
     public function updateTest(ApiTester $I): void
     {
@@ -91,12 +83,109 @@ class PersonCest
     /**
      * Удалить запись персоны
      * @param ApiTester $I
-     * @return void
      */
     public function deleteTest(ApiTester $I): void
     {
         $I->amGoingTo('Удалить');
         $I->sendDelete('/person/delete?id=1');
         $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
+    }
+
+    /**
+     * Поиск личностей
+     * @param ApiTester $I
+     */
+    public function findPersonsTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Найти личности по имени или фамилии');
+        $I->sendGet('/person/find-persons?requestedString=' . urlencode('Аркадий'));
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть найденные личности в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить все роли в событии (ранее - профессии)
+     * @param ApiTester $I
+     */
+    public function getProfessionsTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить все роли в событии');
+        $I->sendGet('/person/get-professions');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть все роли в событии в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить личности по роли в событии
+     * @param ApiTester $I
+     */
+    public function getPersonsByProfessionTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить личности по роли в событии');
+        $I->sendGet('/person/get-persons-by-profession?profession=' . urlencode('организатор'));
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Получить личности по роли в событии');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить личности по возрасту
+     * @param ApiTester $I
+     */
+    public function getPersonsByAgeTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить личности по возрасту');
+        $I->sendGet('/person/get-persons-by-age?age=18');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Получить личности по возрасту в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить случайные личности
+     * @param ApiTester $I
+     */
+    public function getRandomPersonsTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить случайные личности');
+        $I->sendGet('/person/get-random-persons');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Получить случайные личности в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить первые 3 персоны
+     * @param ApiTester $I
+     */
+    public function getTopPersonsTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить первые 3 персоны');
+        $I->sendGet('/person/get-top-persons');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Получить первые 3 персоны в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить личности по участию в событии
+     * @param ApiTester $I
+     */
+    public function getPersonsByEventTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить личности по участию в событии');
+        $I->sendGet('/person/get-persons-by-event?eventId=1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть личности по участию событию в формате JSON');
+        $I->seeResponseIsJson();
     }
 }

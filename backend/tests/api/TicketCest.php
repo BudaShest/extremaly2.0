@@ -5,8 +5,8 @@ use Faker\Factory;
 
 class TicketCest
 {
-    /** @var Faker\Generator $faker - генератор фейковых данных */
-    protected $faker;
+    /** @var \Faker\Generator $faker */
+    protected Faker\Generator $faker;
 
     public function _before(ApiTester $I)
     {
@@ -95,5 +95,20 @@ class TicketCest
         $I->amGoingTo('Удалить запись вида билета');
         $I->sendDelete('/ticket/delete?id=1');
         $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
+    }
+
+    /**
+     * Получить билеты по событию
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getTicketsByEvent(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить билеты по событию');
+        $I->sendGet('/ticket/get-tickets-by-event?eventId=1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть билеты по событию в формате JSON');
+        $I->seeResponseIsJson();
     }
 }

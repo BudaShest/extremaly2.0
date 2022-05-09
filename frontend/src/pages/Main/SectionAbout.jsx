@@ -13,7 +13,7 @@ import SocialLinks from "../../components/SocialLinks/SocialLinks";
 import {createReview} from "../../asyncActions/main/createReview";
 
 
-const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
+const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, reviews}) => {
     const [mailSubject, setMailSubject] = useState('');
     const [mailText, setMailText] = useState('');
     const [errorInfo, setErrorInfo] = useState(null);
@@ -22,23 +22,26 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
 
     const handleSendMail = (e) => {
         e.preventDefault();
-        sendMail({"text":mailText, "subject": mailSubject}).then(response=>setErrorInfo(response.message)).catch(console.error)
-        setTimeout(()=>setErrorInfo(null), 10000);
+        sendMail({
+            "text": mailText,
+            "subject": mailSubject
+        }).then(response => setErrorInfo(response.message)).catch(console.error)
+        setTimeout(() => setErrorInfo(null), 10000);
     }
 
     const [commentText, setCommentText] = useState('');
 
-    function submitHandler(e){
+    function submitHandler(e) {
         e.preventDefault();
         let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
-        if(currentUser?.isAuth && commentText){
+        if (currentUser?.isAuth && commentText) {
             let review = {"user_id": currentUser.id, "rating": 5, "text": commentText};
             dispatch(createReview(review))
             setCommentText('');
         }
     }
 
-    function changeHandler(e){
+    function changeHandler(e) {
         setCommentText(e.currentTarget.value);
     }
 
@@ -124,7 +127,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                 </Row>
                 <h3 className="white-text">Наша команда:</h3>
                 <Persons persons={persons}/>
-                <Comments comments={reviews}>
+                <Comments numOfPages={numOfPages} comments={reviews}>
                     <form className={style.commentForm} onSubmit={submitHandler}>
                         <h5 className={style.commentForm_title}>Оставьте отзыв о проекте!</h5>
                         <Textarea
@@ -136,7 +139,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                         <Button node="button" type="submit" waves="light">Оставить комментарий<Icon
                             right>send</Icon></Button>
                     </form>
-                    <SocialLinks links={socialLinks??[]}/>
+                    <SocialLinks links={socialLinks ?? []}/>
                 </Comments>
                 <h3 className="white-text">Форма обратной связи:</h3>
                 <Chip>{errorInfo}</Chip>
@@ -149,7 +152,7 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                                     s={10}
                                     icon={<Icon className="little-icon">category</Icon>}
                                     id="SelectMailTheme"
-                                    onChange={e=>setMailSubject(e.currentTarget.value)}
+                                    onChange={e => setMailSubject(e.currentTarget.value)}
                                     multiple={false}
                                     label="Выберите тему обращения"
                                     value={mailSubject}
@@ -165,13 +168,16 @@ const SectionAbout = ({socialLinks,aboutUs, advantages, persons, reviews}) => {
                                             inDuration: 150,
                                             outDuration: 250
                                         }
-                                }}>
+                                    }}>
                                     <option disabled value="">Выберите тему обращения</option>
                                     <option value="Жалоба">Жалоба</option>
                                     <option value="Пожелание">Пожелание</option>
                                     <option value="Предложение">Предложение</option>
                                 </Select>
-                                <Textarea label="Изложите свои мысли" onChange={e=>setMailText(e.currentTarget.value)} value={mailText} icon={<Icon className="little-icon" placeholder="Текст письма">article</Icon>} s={10}/>
+                                <Textarea label="Изложите свои мысли" onChange={e => setMailText(e.currentTarget.value)}
+                                          value={mailText}
+                                          icon={<Icon className="little-icon" placeholder="Текст письма">article</Icon>}
+                                          s={10}/>
                                 <Row>
                                     <Col push={'l7'} s={3}>
                                         <Button style={{backgroundColor: "#DB4463"}} large>Отправить</Button>

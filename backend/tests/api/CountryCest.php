@@ -6,7 +6,7 @@ use Faker\Factory;
 class CountryCest
 {
     /** @var \Faker\Generator $faker */
-    private $faker;
+    protected Faker\Generator $faker;
 
     /**
      * Внедрение зависимости
@@ -14,10 +14,6 @@ class CountryCest
     public function _inject()
     {
         $this->faker = Factory::create('ru');
-    }
-
-    public function _before(ApiTester $I)
-    {
     }
 
     /**
@@ -65,34 +61,31 @@ class CountryCest
         $I->seeResponseIsJson();
     }
 
-//    /**
-//     * Обновление страны
-//     * @param ApiTester $I
-//     * @return void
-//     */
-//    public function updateTest(ApiTester $I): void
-//    {
-//        $I->amGoingTo('Обновить страну');
-//        $I->sendPost('/country/update?id=TE', ['name' => 'Тест']);
-//        $I->seeResponseCodeIs(HttpCode::OK);
-//
-//        $I->expectTo('Название страны будет обновлено');
-//        //todo grabнуть респонс
-//    }
-//
+    /**
+     * Обновление страны
+     * @param ApiTester $I
+     * @return void
+     */
+    public function updateTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Обновить страну');
+        $I->sendPut('/country/update?id=RU', ['name' => 'Тест']);
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Название страны будет обновлено');
+        $I->seeResponseIsJson();
+    }
+
 
     /**
      * Удаление страны
      * @param ApiTester $I
      * @return void
      */
-    public function deleteTest(ApiTester $I): void //todo не работает
+    public function deleteTest(ApiTester $I): void
     {
         $I->amGoingTo('Удалить страну');
-        $I->sendDelete('/country/delete?id=TE');
-        $I->seeResponseCodeIs(HttpCode::OK);
-
-        $I->expectTo('Запись страны будет удалена');
-        $I->seeResponseIsJson();
+        $I->sendDelete('/country/delete?id=RU');
+        $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
     }
 }

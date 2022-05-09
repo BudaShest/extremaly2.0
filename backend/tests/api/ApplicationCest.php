@@ -5,8 +5,8 @@ use Faker\Factory;
 
 class ApplicationCest
 {
-    /** @var Faker\Generator $faker - генератор фейковых данных */
-    protected $faker;
+    /** @var \Faker\Generator $faker */
+    protected Faker\Generator $faker;
 
     public function _before(ApiTester $I)
     {

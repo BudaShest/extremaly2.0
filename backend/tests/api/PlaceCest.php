@@ -6,11 +6,7 @@ use Faker\Factory;
 class PlaceCest
 {
     /** @var \Faker\Generator $faker */
-    protected $faker;
-
-    public function _before(ApiTester $I)
-    {
-    }
+    protected Faker\Generator $faker;
 
     /**
      * Внедрение зависимости
@@ -32,7 +28,7 @@ class PlaceCest
         $I->sendGet('/place');
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expect('Увидеть список записей мест в формате JSON');
+        $I->expectTo('Увидеть список записей мест в формате JSON');
         $I->seeResponseIsJson();
     }
 
@@ -83,7 +79,7 @@ class PlaceCest
         $I->sendPut('/place/update?id=1', ['name' => 'test']);
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->expect('Увидеть только что обновлённую запись места в формате JSON');
+        $I->expectTo('Увидеть только что обновлённую запись места в формате JSON');
         $I->seeResponseIsJson();
     }
 
@@ -97,5 +93,35 @@ class PlaceCest
         $I->amGoingTo('Удалить');
         $I->sendDelete('/place/delete?id=1');
         $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
+    }
+
+    /**
+     * Получить места по стране проведения
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getByCountryCode(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить места по стране проведения');
+        $I->sendGet('/place/get-by-country-code?countryCode=US');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть место по стране проведения JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить места по климату
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getByClimmatCode(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить места по климату');
+        $I->sendGet('/place/get-by-climat-code?climatCode=HOT');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть место по климату в формате JSON');
+        $I->seeResponseIsJson();
     }
 }

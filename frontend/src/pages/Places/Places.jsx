@@ -4,33 +4,40 @@ import CountryBadge from "../../components/CountryBadge/CountryBadge";
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchCountries} from "../../asyncActions/places/fetchCountries";
 import {fetchClimates} from "../../asyncActions/places/fetchClimates";
-import {fetchPlaces} from '../../asyncActions/places/fetchPlaces';
+import {fetchNumOfPages, fetchPlaces, fetchPlacesWithPagination} from '../../asyncActions/places/fetchPlaces';
 import ClimateBadge from "../../components/ClimateBadge/ClimateBadge";
 import Place from "../../components/Place/Place";
 import NoRecords from "../../components/NoRecords/NoRecords";
 import style from './Places.module.css';
 
+/**
+ * Страница "Места"
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Places = () => {
     const dispatch = useDispatch();
 
     useEffect(async () => {
-        // const script = document.createElement('script');
-        // script.src = "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A06a5bc8124e28a3155582c309a0319fdca6a0d1a807d8a73e2880b0a30a015e3&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true";
-        // script.charSet = "utf-8";
-        // script.async = true;
-        //
-        // document.querySelector('#mapContainer').append(script);
+
         dispatch(fetchCountries());
         dispatch(fetchClimates());
-        dispatch(fetchPlaces());
+        dispatch(fetchNumOfPages());
+        dispatch(fetchPlacesWithPagination(1));
 
     }, [])
+
+    const numOfPage = useSelector(state => state.placesReducer.numOfPages);
 
     const countries = useSelector(state => state.placesReducer.countries);
 
     const climates = useSelector(state => state.placesReducer.climates);
 
     const places = useSelector(state => state.placesReducer.places);
+
+    function paginationHandler(page){
+        dispatch(fetchPlacesWithPagination(page));
+    }
 
     return (
         <main>
@@ -53,7 +60,8 @@ const Places = () => {
                         <p>Наверняка, вам не захочется провести ночь в палатке под дождём. Администрация проекта
                             "Extremly" гарантирует, что все все заявленные условия будут соблюдены. Будьте спокойны и
                             наслаждайтесь активным отдыхом!</p>
-                        <img className={`${style.offerImage} ${style.centerImage}`} src="img/advantages/comfort.png" alt="Комфорт"/>
+                        <img className={`${style.offerImage} ${style.centerImage}`} src="img/advantages/comfort.png"
+                             alt="Комфорт"/>
                     </div>
                     <div className={style.offerCol}>
                         <h5>Простота</h5>
@@ -78,9 +86,10 @@ const Places = () => {
                                 <NoRecords/>
                         }
                         <Pagination
+                            onSelect={paginationHandler}
                             className={style.pagination}
                             activePage={1}
-                            items={5}
+                            items={numOfPage + 1}
                             leftBtn={<Icon>chevron_left</Icon>}
                             rightBtn={<Icon>chevron_right</Icon>}
                         />

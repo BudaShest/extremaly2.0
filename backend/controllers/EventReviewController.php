@@ -8,9 +8,11 @@ use app\models\EventReview;
 
 class EventReviewController extends ActiveController
 {
+    /** @inheritdoc  */
     public $modelClass = 'app\models\EventReview';
 
-    protected function verbs()
+    /** @inheritdoc */
+    protected function verbs(): array
     {
         return [
             'index' => ['GET', 'HEAD'],
@@ -21,6 +23,7 @@ class EventReviewController extends ActiveController
         ];
     }
 
+    /** @inheritdoc */
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();
@@ -32,7 +35,12 @@ class EventReviewController extends ActiveController
         return $behaviors;
     }
 
-    public function actionGetEventReviews(int $eventId)
+    /**
+     * Получить комментарии к событию
+     * @param int $eventId
+     * @return array
+     */
+    public function actionGetEventReviews(int $eventId): array
     {
         if(!$models = EventReview::findAll(['event_id' => $eventId])){
             return [];

@@ -15,6 +15,11 @@ import {addTicket} from "../../asyncActions/events/fetchTicket";
 import {fetchPersonsByEvent} from "../../asyncActions/persons/fetchPersons";
 import {fetchSocialLinks} from "../../asyncActions/main/fetchSocialLinks";
 
+/**
+ * Страница "Событие"
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Event = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -108,7 +113,7 @@ const Event = () => {
                 <h3 className="white-text center-align">Галерея</h3>
                 <Gallery photos={event.images}/>
                 <h3 className="white-text center-align">Ответсвенные лица:</h3>
-                <Persons persons={eventPersons??[]}/>
+                <Persons persons={eventPersons ?? []}/>
                 <h4 className="white-text center-align">Билеты</h4>
                 <h5 className="white-text center-align">Всего: {event.ticket_num}</h5>
                 <Row>

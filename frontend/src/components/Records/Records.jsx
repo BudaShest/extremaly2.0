@@ -1,20 +1,21 @@
 import React, {useEffect, useRef} from 'react';
-import {Row, Col, Select, Icon,TextInput, DatePicker, Card, CardTitle, Pagination, Button} from 'react-materialize';
+import {Row, Col, Select, Icon, TextInput, DatePicker, Card, CardTitle, Pagination, Button} from 'react-materialize';
 import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     fetchEventsByAge,
     fetchEvents,
     fetchEventsForOlds,
-    fetchEventsForKids, fetchEventsByClimat, fetchEventsByCountry, fetchEventsByFounded
+    fetchEventsForKids, fetchEventsByClimat, fetchEventsByCountry, fetchEventsByFounded, fetchEventsWithPagination
 } from "../../asyncActions/events/fetchEvents";
 import {fetchPlaces} from "../../asyncActions/places/fetchPlaces";
 import {fetchClimates} from "../../asyncActions/places/fetchClimates";
 import {fetchCountries} from "../../asyncActions/places/fetchCountries";
 import style from './Records.module.css';
 import NoRecords from "../NoRecords/NoRecords";
+import {fetchNumOfPages} from "../../asyncActions/main/fetchReviews";
 
-const Records = ({records}) => {
+const Records = ({records, numOfPages}) => {
     const requestedStringRef = useRef();
     const dispatch = useDispatch();
     const climates = useSelector(state => state.placesReducer.climates);
@@ -25,11 +26,16 @@ const Records = ({records}) => {
         dispatch(fetchClimates());
         dispatch(fetchCountries());
         dispatch(fetchPlaces());
+        dispatch(fetchNumOfPages());
     }, [])
 
     function search(e) {
         e.preventDefault();
         dispatch(fetchEventsByFounded(requestedStringRef.current.value))
+    }
+
+    function paginationHandler(page){
+        dispatch(fetchEventsWithPagination(page))
     }
 
 
@@ -67,7 +73,7 @@ const Records = ({records}) => {
         dispatch(fetchEventsByCountry(e.currentTarget.value))
     }
 
-    function resetFiltersHandler(e){
+    function resetFiltersHandler(e) {
         e.preventDefault();
         dispatch(fetchEvents());
     }
@@ -231,15 +237,9 @@ const Records = ({records}) => {
                                 ],
                                 nextMonth: '›',
                                 previousMonth: '‹',
-                                weekdays: [
-                                    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-                                ],
-                                weekdaysAbbrev: [
-                                    'S', 'M', 'T', 'W', 'T', 'F', 'S'
-                                ],
-                                weekdaysShort: [
-                                    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-                                ]
+                                weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                                weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                                weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
                             },
                             isRTL: false,
                             setDefaultDate: false,
@@ -264,12 +264,14 @@ const Records = ({records}) => {
             <Col l={8}>
                 <Row>
                     <Col l={4}>
-                        <div onClick={kidsClickHandler} data-age="18" className={`${style.filterBadge} filter-badge hoverable`}>
+                        <div onClick={kidsClickHandler} data-age="18"
+                             className={`${style.filterBadge} filter-badge hoverable`}>
                             Для детей
                         </div>
                     </Col>
                     <Col l={4}>
-                        <div onClick={oldsClickHandler} data-age="100" className={`${style.filterBadge} filter-badge hoverable`}>
+                        <div onClick={oldsClickHandler} data-age="100"
+                             className={`${style.filterBadge} filter-badge hoverable`}>
                             Для взрослых
                         </div>
                     </Col>
@@ -298,7 +300,8 @@ const Records = ({records}) => {
                                     >
                                         <h5>{record.name}</h5>
                                         {/*<span>{record.offer}</span>*/}
-                                        <p style={{overflow:'hidden'}} dangerouslySetInnerHTML={{__html: record.offer.slice(0, 200)}}></p>
+                                        <p style={{overflow: 'hidden'}}
+                                           dangerouslySetInnerHTML={{__html: record.offer.slice(0, 200)}}></p>
                                     </Card>
                                 );
                             })
@@ -306,9 +309,10 @@ const Records = ({records}) => {
                             <NoRecords/>
                     }
                     <Pagination
+                        onSelect={paginationHandler}
                         className={style.pagination}
                         activePage={1}
-                        items={5}
+                        items={numOfPages + 1}
                         leftBtn={<Icon>chevron_left</Icon>}
                         rightBtn={<Icon>chevron_right</Icon>}
                     />

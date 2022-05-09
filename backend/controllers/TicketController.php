@@ -8,8 +8,10 @@ use app\models\Ticket;
 
 class TicketController extends ActiveController
 {
+    /** @inheritdoc */
     public $modelClass = 'app\models\Ticket';
 
+    /** @inheritdoc */
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();
@@ -21,9 +23,14 @@ class TicketController extends ActiveController
         return $behaviors;
     }
 
-    public function actionGetTicketsByEvent(int $eventId)
+    /**
+     * Получить билеты по событию
+     * @param int $eventId
+     * @return array
+     */
+    public function actionGetTicketsByEvent(int $eventId): array
     {
-        if(!$models = Ticket::findAll(['event_id' => $eventId])){
+        if (!$models = Ticket::findAll(['event_id' => $eventId])) {
             return [];
         }
         return $models;

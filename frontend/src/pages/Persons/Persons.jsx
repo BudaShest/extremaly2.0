@@ -2,10 +2,12 @@ import React, {useEffect, useRef} from 'react';
 import {Container, Row, Col, Pagination, Icon, Select, TextInput, Button} from 'react-materialize';
 import {useSelector, useDispatch} from 'react-redux';
 import {
+    fetchNumOfPaginatedPages,
     fetchPersons,
     fetchPersonsByAge,
     fetchPersonsByFounded,
-    fetchPersonsByProfession
+    fetchPersonsByProfession,
+    fetchPersonsWithPagination
 } from '../../asyncActions/persons/fetchPersons';
 import {fetchProfessions} from "../../asyncActions/persons/fetchProfession";
 import style from './Persons.module.css';
@@ -13,13 +15,15 @@ import NoRecords from "../../components/NoRecords/NoRecords";
 
 const Persons = () => {
     const persons = useSelector(state => state.personsReducer.persons);
+    const numOfPages = useSelector(state => state.personsReducer.numOfPages);
     const professions = useSelector(state => state.personsReducer.professions);
     const dispatch = useDispatch();
     const requestedStringRef = useRef();
 
     useEffect(() => {
-        dispatch(fetchPersons());
+        dispatch(fetchPersonsWithPagination(1));
         dispatch(fetchProfessions());
+        dispatch(fetchNumOfPaginatedPages());
     }, [])
 
     function professionChangeHandler(e) {
@@ -30,13 +34,20 @@ const Persons = () => {
         dispatch(fetchPersonsByAge(e.currentTarget.value))
     }
 
+    /** Поиск */
     function search(e) {
         e.preventDefault();
         dispatch(fetchPersonsByFounded(requestedStringRef.current.value))
     }
 
+    /** Сброс фильтров */
     function resetFiltersHandler() {
         dispatch(fetchPersons());
+    }
+
+    /** Обработчик пагинации */
+    function paginationHandler(page) {
+        dispatch(fetchPersonsWithPagination(page))
     }
 
     return (
@@ -126,9 +137,10 @@ const Persons = () => {
                             <NoRecords/>
                         }
                         <Pagination
+                            onSelect={e=>paginationHandler(e)}
                             className={style.pagination}
-                            activePage={3}
-                            items={5}
+                            activePage={1}
+                            items={numOfPages + 1}
                             leftBtn={<Icon>chevron_left</Icon>}
                             rightBtn={<Icon>chevron_right</Icon>}
                         />

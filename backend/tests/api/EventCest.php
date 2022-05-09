@@ -5,12 +5,8 @@ use Faker\Factory;
 
 class EventCest
 {
-    /** @var Faker\Generator $faker - генератор фейковых данных */
-    protected $faker;
-
-    public function _before(ApiTester $I)
-    {
-    }
+    /** @var \Faker\Generator $faker */
+    protected Faker\Generator $faker;
 
     /**
      * Внедрение зависимости
@@ -112,11 +108,115 @@ class EventCest
     public function getEventsByAgeTest(ApiTester $I): void
     {
         $I->amGoingTo('Получить события по возрастному ограничению');
-        $I->sendGet('/event/get-events-by-age');
+        $I->sendGet('/event/get-events-by-age?age=20');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Получить события в формате JSON');
         $I->seeResponseIsJson();
     }
 
+    /**
+     * Получить события, подходящие для детей
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getEventsForKidsTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить события, подходящие для детей');
+        $I->sendGet('/event/get-events-for-kids');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть события, подходящие для детей в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить события, с максимальным приоритетом
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getEventsByPriorityTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить события, с максимальным приоритетом');
+        $I->sendGet('/event/get-events-by-priority');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть соыбтия с максимальным приоритетом в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить события только для взрослых
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getEventsForOldsTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить события только для взрослых');
+        $I->sendGet('/event/get-events-for-olds');
+        $I->seeResponseIsJson(HttpCode::OK);
+
+        $I->expectTo('Увидеть события только для взрослых в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить события по типу климата
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getEventsByClimatTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить события по типу климата');
+        $I->sendGet('/event/get-events-by-climat?code=HOT');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть события по типу климата в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить события по стране проведения
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getEventsByCountryTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить события по стране проведения');
+        $I->sendGet('/event/get-events-by-country?code=US');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть события по стране проведения в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Найти события
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getEventsByFoundedTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Найти события');
+        $I->sendGet('/event/get-events-by-founded?requestedString='.urlencode('Блэк'));
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть найденные события в формате JSON');
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * Получить события по месту
+     * @param ApiTester $I
+     * @return void
+     */
+    public function getEventsByPlaceTest(ApiTester $I): void
+    {
+        $I->amGoingTo('Получить события по месту');
+        $I->sendGet('/event/get-events-by-place?placeId=1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Увидеть события места в формате JSON');
+        $I->seeResponseIsJson();
+    }
 }
