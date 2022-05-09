@@ -9,9 +9,9 @@ use yii\redactor\widgets\Redactor;
 $this->title = 'О нас';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?=$this->title?></h3>
+<h3><?= $this->title ?></h3>
 <?= $this->render('/partials/flashBadge') ?>
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'admin-form']]); ?>
 <?= $form->field($model, 'text')->widget(Redactor::class); ?>
 <?= $form->field($model, 'small_text')->widget(Redactor::class); ?>
 <?= $form->field($model, 'uploads')->fileInput(); ?>

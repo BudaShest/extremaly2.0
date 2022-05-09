@@ -12,6 +12,10 @@ modules:
     config:
         Yii2:
             configFile: 'config/test.php'
+            cleanup: false,
+            transaction: true,
+            recreateComponents: ['urlManager']
+
 
 # To enable code coverage:
 #coverage:

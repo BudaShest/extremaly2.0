@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="container">
         <h2>Добавить место</h2>
-        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'admin-form']]); ?>
         <?= $form->field($place, 'name')->input('text') ?>
         <?= $form->field($place, 'address')->input('text') ?>
         <?= $form->field($place, 'description')->widget(Redactor::class) ?>

@@ -75,7 +75,7 @@ $config = [
             'class' => \app\modules\admin\AdminModule::class
         ],
         'redactor' => 'yii\redactor\RedactorModule',
-    ]
+    ],
 ];
 
 if (YII_ENV_DEV) {

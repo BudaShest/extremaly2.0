@@ -7,13 +7,15 @@ use yii\rest\ActiveController;
 
 class CountryController extends ActiveController
 {
+    /** @inheritdoc */
     public $modelClass = 'app\models\Country';
 
+    /** @inheritdoc */
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();
 
-        $behaviors['corsFilter'] = [ //TODO создать общий класс для контроллеров и вынести его туда
+        $behaviors['corsFilter'] = [
             'class' => Cors::class
         ];
 

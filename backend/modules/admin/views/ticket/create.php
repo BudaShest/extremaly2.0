@@ -1,6 +1,7 @@
 <?php
 /** @var \yii\web\View $this */
 /** @var Ticket $model */
+
 /** @var Event $event */
 
 use app\modules\admin\models\Ticket;
@@ -14,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
 <?= $this->render('/partials/flashBadge') ?>
-<?php $form = ActiveForm::begin([]) ?>
+<?php $form = ActiveForm::begin(['options' => ['class' => 'admin-form']]) ?>
 <div class="form-group">
     <span><?= $model->getAttributeLabel('event_id') ?></span>
     <?= Html::activeDropDownList($model, 'event_id', ArrayHelper::map(Event::find()->all(), 'id', 'name')) ?>
 </div>
-<?= $form->field($model, 'price' )->input('number') ?>
-<?= $form->field($model, 'privilege')?>
+<?= $form->field($model, 'price')->input('number') ?>
+<?= $form->field($model, 'privilege') ?>
 <div class="form-group">
     <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     <?= Html::resetButton('Стереть', ['class' => 'btn btn-danger']) ?>

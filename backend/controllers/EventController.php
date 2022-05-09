@@ -9,8 +9,10 @@ use app\models\Place;
 
 class EventController extends ActiveController
 {
+    /** @inheritdoc */
     public $modelClass = 'app\models\Event';
 
+    /** @inheritdoc */
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();
@@ -22,7 +24,12 @@ class EventController extends ActiveController
         return $behaviors;
     }
 
-    public function actionGetEventsByAge(int $age)
+    /**
+     * Получить события по возрастному ограничению
+     * @param int $age
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function actionGetEventsByAge(int $age): array
     {
         if(!$models = Event::find()->where(['<','age_restrictions', $age])->all()){
             return [];
@@ -30,7 +37,11 @@ class EventController extends ActiveController
         return $models;
     }
 
-    public function actionGetEventsForKids()
+    /**
+     * Получить события, подходящие для детей
+     * @return array
+     */
+    public function actionGetEventsForKids(): array
     {
         if(!$models = Event::find()->where(['<','age_restrictions', '18'])->all()){
             return [];
@@ -38,7 +49,11 @@ class EventController extends ActiveController
         return $models;
     }
 
-    public function actionGetEventsByPriority()
+    /**
+     * Получить события по приоритету
+     * @return array
+     */
+    public function actionGetEventsByPriority(): array
     {
         if(!$models = Event::find()->limit(3)->orderBy('priority')->all()){
             return [];
@@ -46,7 +61,11 @@ class EventController extends ActiveController
         return $models;
     }
 
-    public function actionGetEventsForOlds()
+    /**
+     * Получить события только для взрослых
+     * @return array
+     */
+    public function actionGetEventsForOlds(): array //todo нейминг
     {
         if(!$models = Event::find()->where(['>=','age_restrictions', '18'])->all()){
             return [];
@@ -54,7 +73,12 @@ class EventController extends ActiveController
         return $models;
     }
 
-    public function actionGetEventsByClimat($code)
+    /**
+     * Получить события по типу климата
+     * @param string $code
+     * @return array
+     */
+    public function actionGetEventsByClimat(string $code): array
     {
         if(!$models = Place::findAll(['climat_code' => $code])){
             return [];
@@ -66,8 +90,12 @@ class EventController extends ActiveController
         return $result;
     }
 
-
-    public function actionGetEventsByCountry(string $code)
+    /**
+     * Получить события по стране провердения
+     * @param string $code
+     * @return array
+     */
+    public function actionGetEventsByCountry(string $code): array
     {
         if(!$models = Place::findAll(['country_code' => $code])){
             return [];
@@ -79,7 +107,11 @@ class EventController extends ActiveController
         return $result;
     }
 
-    public function actionGetEventsByFounded(string $requestedString)
+    /**
+     * @param string $requestedString
+     * @return array
+     */
+    public function actionGetEventsByFounded(string $requestedString): array
     {
         if($models = Event::find()->where(['like', 'name', $requestedString])->all()){
            return $models;
@@ -97,7 +129,11 @@ class EventController extends ActiveController
         return [];
     }
 
-    public function actionGetEventsByPlace(int $placeId)
+    /**
+     * @param int $placeId
+     * @return array
+     */
+    public function actionGetEventsByPlace(int $placeId): array
     {
         if(!$models = Event::findAll(['place_id' => $placeId])){
             return [];
