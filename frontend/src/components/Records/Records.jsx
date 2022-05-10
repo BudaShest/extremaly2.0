@@ -75,7 +75,7 @@ const Records = ({records, numOfPages}) => {
 
     function resetFiltersHandler(e) {
         e.preventDefault();
-        dispatch(fetchEvents());
+        dispatch(fetchEventsWithPagination(1));
     }
 
     const changeFilterHandler = (e) => {

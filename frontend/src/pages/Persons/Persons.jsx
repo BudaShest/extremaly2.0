@@ -42,7 +42,7 @@ const Persons = () => {
 
     /** Сброс фильтров */
     function resetFiltersHandler() {
-        dispatch(fetchPersons());
+        dispatch(fetchPersonsWithPagination(1));
     }
 
     /** Обработчик пагинации */
@@ -86,7 +86,7 @@ const Persons = () => {
                                 value=""
                             >
                                 <option disabled value="">
-                                    Выберите профессию
+                                    Выберите роль в событии
                                 </option>
                                 {
                                     professions.map(profession => (
