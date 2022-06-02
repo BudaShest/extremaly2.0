@@ -2,68 +2,130 @@
 
 namespace app\commands;
 
-use app\models\Ticket;
 use yii\console\Controller;
 use app\models\services\MockBuilder;
 
+/**
+ * Контроллер для заполнения базы данных мокововыми данными
+ */
 class MockController extends Controller
 {
-    public function actionCountry(int $numOfRows)
+    /**
+     * Страны
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionCountry(int $numOfRows): int
     {
         return MockBuilder::createCountryRows($numOfRows);
     }
 
-    public function actionClimat(int $numOfRows)
+    /**
+     * Климат
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionClimat(int $numOfRows): int
     {
         return MockBuilder::createClimatRows($numOfRows);
     }
 
-    public function actionEventType(int $numOfRows)
+    /**
+     * Тип события
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionEventType(int $numOfRows): int
     {
         return MockBuilder::createEventTypeRows($numOfRows);
     }
 
-    public function actionPlace(int $numOfRows)
+    /**
+     * Места
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionPlace(int $numOfRows): int
     {
         return MockBuilder::createPlaceRows($numOfRows);
     }
 
-    public function actionEvent(int $numOfRows)
+    /**
+     * События
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionEvent(int $numOfRows): int
     {
         return MockBuilder::createEventRows($numOfRows);
     }
 
-    public function actionTicket(int $numOfRows)
+    /**
+     * Билеты
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionTicket(int $numOfRows): int
     {
         return MockBuilder::createTicketRows($numOfRows);
     }
 
-    public function actionPerson(int $numOfRows)
+    /**
+     * Личности
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionPerson(int $numOfRows): int
     {
         return MockBuilder::createPersonRows($numOfRows);
     }
 
-    public function actionStaticContent(int $numOfRows)
+    /**
+     * Статический контент главной старнциы
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionStaticContent(int $numOfRows): int
     {
         return MockBuilder::createStaticContentRows($numOfRows);
     }
 
-    public function actionPersonLink(int $numOfRows)
+    /**
+     * Соц. сети персон
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionPersonLink(int $numOfRows): int
     {
         return MockBuilder::createPersonLinkRows($numOfRows);
     }
 
-    public function actionSocialLink(int $numOfRows)
+    /**
+     * Социальные сети проекта
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionSocialLink(int $numOfRows): int
     {
         return MockBuilder::createSocialLinkRows($numOfRows);
     }
 
-    public function actionEventReview(int $numOfRows)
+    /**
+     * Отзывы к событиям
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionEventReview(int $numOfRows): int
     {
         return MockBuilder::createEventReviewRows($numOfRows);
     }
 
-    public function actionReview(int $numOfRows)
+    /**
+     * Отзывы к проекты
+     * @param int $numOfRows - кол-во строк
+     * @return int - статус операции
+     */
+    public function actionReview(int $numOfRows): int
     {
         return MockBuilder::createReviewRows($numOfRows);
     }

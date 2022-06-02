@@ -5,9 +5,13 @@ namespace app\models;
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
+/**
+ * Модель "Роль (пользователя)"
+ */
 class Role extends ActiveRecord
 {
-    const DEFAULT_ROLE_ID = 3;
+    /** @var int Роль по умолч. */
+    public const DEFAULT_ROLE_ID = 3;
 
     public function rules(): array
     {

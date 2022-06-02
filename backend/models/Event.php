@@ -5,8 +5,28 @@ namespace app\models;
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
+/**
+ * Модель "Событие"
+ * @property int $id - ID
+ * @property string $name - Имя
+ * @property string $offer - Оффер
+ * @property \DateTime $from - Дата начала
+ * @property \DateTime $until - Дата конца
+ * @property string $description - Описание
+ * @property int $age_restrictions - Возрастные ограничения
+ * @property int $priority - Приоритет
+ * @property bool $is_horizontal - Горизонтальная ли?
+ * @property int $place_id - Место
+ * @property int $type_id - Тип событий
+ * @property int $ticket_num - Билетов всего
+ * @property Place $place - Место
+ * @property EventType $type - Тип события
+ * @property EventImage $images - Изображение события
+ * @property Ticket $tickets - Билет
+ */
 class Event extends ActiveRecord
 {
+    /** @inheritdoc */
     public function rules(): array
     {
         return [
@@ -14,59 +34,76 @@ class Event extends ActiveRecord
             [['name', 'offer', 'description'], 'string'],
             [['from'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'from'],
             [['until'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'until'],
-            [['age_restrictions', 'priority', 'place_id', 'type_id','ticket_num'], 'integer'],
+            [['age_restrictions', 'priority', 'place_id', 'type_id', 'ticket_num'], 'integer'],
             [['is_horizontal'], 'boolean'],
             [['name'], 'unique'],
         ];
     }
 
+    /** @inheritdoc */
     public function fields(): array
     {
         $fields = parent::fields();
-        $fields['images'] = function (){
+        $fields['images'] = function () {
             $images = [];
-            foreach ($this->images as $image){
+            foreach ($this->images as $image) {
                 $images[] = $image['image'];
             }
             return $images;
         };
-        $fields['place_name'] = function (){
+        $fields['place_name'] = function () {
             return $this->place->name;
         };
-        $fields['type_name'] = function (){
+        $fields['type_name'] = function () {
             return $this->type->name;
         };
-        $fields['country_name'] = function (){
+        $fields['country_name'] = function () {
             return $this->place->country->name;
         };
-        $fields['climat_name'] = function (){
+        $fields['climat_name'] = function () {
             return $this->place->climat->name;
         };
         return $fields;
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getPlace(): ActiveQuery
     {
         return $this->hasOne(Place::class, ['id' => 'place_id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getType(): ActiveQuery
     {
         return $this->hasOne(EventType::class, ['id' => 'type_id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getImages(): ActiveQuery
     {
         return $this->hasMany(EventImage::class, ['event_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getTickets(): ActiveQuery
     {
         return $this->hasMany(Ticket::class, ['event_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery
+     * @throws \yii\base\InvalidConfigException
+     */
     public function getPersons(): ActiveQuery
     {
-        return $this->hasMany(Person::class, ['id' => 'person_id'])->viaTable('event_person', ['event_id'=>'id']);
+        return $this->hasMany(Person::class, ['id' => 'person_id'])->viaTable('event_person', ['event_id' => 'id']);
     }
 }

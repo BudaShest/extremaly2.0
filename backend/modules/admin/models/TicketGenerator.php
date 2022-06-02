@@ -5,8 +5,13 @@ namespace app\modules\admin\models;
 use app\modules\admin\models\interfaces\IFabric;
 use yii\base\Model;
 
+/**
+ * Модель "Генератор билетов"
+ * @deprecated
+ */
 class TicketGenerator extends Model implements IFabric
 {
+    /** @inheritdoc */
     public function rules(): array
     {
         return [

@@ -4,13 +4,18 @@ namespace app\modules\admin\models;
 
 use app\modules\admin\behaviors\SingleFileBehavior;
 use app\models\StaticContent as BaseStaticContent;
+use yii\web\UploadedFile;
 
-class StaticContent extends BaseStaticContent
+/** @inheritdoc */
+final class StaticContent extends BaseStaticContent
 {
-    public $uploads;
+    /** @var UploadedFile $uploads - загрузки */
+    public UploadedFile $uploads;
 
+    /** @var string Изображение-заглушка */
     public const DEFAULT_IMAGE = 'https://www.wheretowillie.com/wp-content/uploads/2012/08/Under-the-Stars.jpg';
 
+    /** @inheritdoc */
     public function rules(): array
     {
         $rules = parent::rules();
@@ -18,7 +23,8 @@ class StaticContent extends BaseStaticContent
         return $rules;
     }
 
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -29,6 +35,7 @@ class StaticContent extends BaseStaticContent
         return $behaviors;
     }
 
+    /** @inheritdoc */
     public function attributeLabels(): array
     {
         return [

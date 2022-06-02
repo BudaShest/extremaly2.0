@@ -4,8 +4,10 @@ namespace app\modules\admin\models;
 
 use app\models\Ticket as BaseTicket;
 
-class Ticket extends BaseTicket
+/** @inheritdoc  */
+final class Ticket extends BaseTicket
 {
+    /** @inheritdoc */
     public function attributeLabels(): array
     {
         return [

@@ -24,7 +24,11 @@ use app\models\User;
 
 class MockBuilder
 {
-
+    /**
+     * Создать записи стран
+     * @param int $numOfRows
+     * @return int
+     */
     public static function createCountryRows(int $numOfRows): int
     {
         try {
@@ -42,9 +46,13 @@ class MockBuilder
             echo $e->getMessage();
             return ExitCode::UNSPECIFIED_ERROR;
         }
-
     }
 
+    /**
+     * Создать записи климата
+     * @param int $numOfRows
+     * @return int
+     */
     public static function createClimatRows(int $numOfRows): int
     {
         try {
@@ -64,6 +72,11 @@ class MockBuilder
         }
     }
 
+    /**
+     * Создать записи типов событий
+     * @param int $numOfRows
+     * @return int
+     */
     public static function createEventTypeRows(int $numOfRows): int
     {
         try {
@@ -82,6 +95,11 @@ class MockBuilder
         }
     }
 
+    /**
+     * Создать записи мест
+     * @param int $numOfRows
+     * @return int
+     */
     public static function createPlaceRows(int $numOfRows): int
     {
         try {
@@ -109,6 +127,11 @@ class MockBuilder
         }
     }
 
+    /**
+     * Создать записи событий
+     * @param int $numOfRows
+     * @return int
+     */
     public static function createEventRows(int $numOfRows): int
     {
         try {
@@ -141,6 +164,11 @@ class MockBuilder
         }
     }
 
+    /**
+     * Создать записи билетов
+     * @param int $numOfRows
+     * @return int
+     */
     public static function createTicketRows(int $numOfRows): int
     {
         try {
@@ -162,6 +190,11 @@ class MockBuilder
         }
     }
 
+    /**
+     * Создать записи личностей
+     * @param int $numOfRows
+     * @return int
+     */
     public static function createPersonRows(int $numOfRows): int
     {
         try{
@@ -188,7 +221,12 @@ class MockBuilder
         }
     }
 
-    public static function createStaticContentRows(int $numOfRows)
+    /**
+     * Создать записи статического контента
+     * @param int $numOfRows
+     * @return int
+     */
+    public static function createStaticContentRows(int $numOfRows): int
     {
         try {
             $faker = Factory::create();
@@ -207,7 +245,12 @@ class MockBuilder
         }
     }
 
-    public static function createPersonLinkRows(int $numOfRows)
+    /**
+     * Создать записи соц. сетей персон
+     * @param int $numOfRows
+     * @return int
+     */
+    public static function createPersonLinkRows(int $numOfRows): int
     {
         try {
             $faker = Factory::create();
@@ -228,7 +271,12 @@ class MockBuilder
         }
     }
 
-    public static function createSocialLinkRows(int $numOfRows)
+    /**
+     * Создать записи социальных сетей
+     * @param int $numOfRows
+     * @return int
+     */
+    public static function createSocialLinkRows(int $numOfRows): int
     {
         try {
             $faker = Factory::create();
@@ -247,7 +295,12 @@ class MockBuilder
         }
     }
 
-    public static function createReviewRows(int $numOfRows)
+    /**
+     * Создать записи отзывов к проекту
+     * @param int $numOfRows
+     * @return int
+     */
+    public static function createReviewRows(int $numOfRows): int
     {
         try{
             $faker = Factory::create();
@@ -268,7 +321,12 @@ class MockBuilder
         }
     }
 
-    public static function createEventReviewRows(int $numOfRows)
+    /**
+     * Создать записи отзывов к событию
+     * @param int $numOfRows
+     * @return int
+     */
+    public static function createEventReviewRows(int $numOfRows): int
     {
         try{
             $faker = Factory::create();

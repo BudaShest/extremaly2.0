@@ -5,10 +5,15 @@ namespace app\modules\admin\models;
 use app\models\Place as BasePlace;
 use app\models\PlaceImage;
 use app\modules\admin\behaviors\MultiFileBehavior;
+use yii\web\UploadedFile;
 
+/**
+ * @inheritdoc
+ */
 class Place extends BasePlace
 {
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -20,12 +25,14 @@ class Place extends BasePlace
     }
 
     //todo сделать также в других модельках модуля
-    /** @var string  */
+
+    /** @var string */
     public const MODEL_NAME_RU = 'Место';
-    /** @var string  */
+    /** @var string */
     public const MODEL_NAME_RU_MULTI = 'Места';
 
-    public $uploads;
+    /** @var UploadedFile[] $uploads */
+    public array $uploads;
 
     /** @inheritDoc */
     public function rules(): array

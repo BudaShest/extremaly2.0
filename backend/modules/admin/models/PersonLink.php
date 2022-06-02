@@ -1,15 +1,21 @@
 <?php
 
 namespace app\modules\admin\models;
+
 use app\models\PersonLink as BasePersonLink;
 use app\modules\admin\behaviors\SingleFileBehavior;
+use yii\web\UploadedFile;
 
-class PersonLink extends BasePersonLink
+/** @inheritdoc */
+final class PersonLink extends BasePersonLink
 {
-    public $uploads;
+    /** @var UploadedFile $uploads */
+    public UploadedFile $uploads;
 
+    /** @var string Изображение заглушка */
     public const DEFAULT_IMAGE = 'http://s1.iconbird.com/ico/0912/MetroUIDock/w512h5121347464753Network.png';
 
+    /** @inheritdoc */
     public function rules(): array
     {
         $rules = parent::rules();
@@ -17,7 +23,8 @@ class PersonLink extends BasePersonLink
         return $rules;
     }
 
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -28,6 +35,7 @@ class PersonLink extends BasePersonLink
         return $behaviors;
     }
 
+    /** @inheritdoc */
     public function attributeLabels(): array
     {
         return [

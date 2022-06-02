@@ -5,12 +5,16 @@ namespace app\modules\admin\models;
 use app\models\EventType as BaseEventType;
 use app\modules\admin\behaviors\SingleFileBehavior;
 use app\modules\admin\models\interfaces\IFileWorkable;
+use yii\web\UploadedFile;
 
-class EventType extends BaseEventType
+/** @inheritdoc */
+final class EventType extends BaseEventType
 {
+    /** @var string Изображение (заглушка) */
     public const DEFAULT_IMAGE = 'https://www.pngmart.com/files/8/Holiday-PNG-Free-Download.png';
 
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -21,8 +25,10 @@ class EventType extends BaseEventType
         return $behaviors;
     }
 
-    public $uploads;
+    /** @var UploadedFile $uploads - загрузки */
+    public UploadedFile $uploads;
 
+    /** @inheritdoc */
     public function rules(): array
     {
         $rules = parent::rules();
@@ -30,6 +36,7 @@ class EventType extends BaseEventType
         return $rules;
     }
 
+    /** @inheritdoc */
     public function attributeLabels(): array
     {
         return [

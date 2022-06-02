@@ -4,8 +4,10 @@ namespace app\modules\admin\models;
 
 use app\models\Application as BaseApplication;
 
+/** @inheritdoc */
 class Application extends BaseApplication
 {
+    /** @inheritdoc */
     public function attributeLabels(): array
     {
         return [
@@ -15,5 +17,4 @@ class Application extends BaseApplication
             'status_id' => 'Статус'
         ];
     }
-
 }

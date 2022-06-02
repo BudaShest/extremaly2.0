@@ -8,8 +8,19 @@ use yii\db\Exception;
 use yii\web\IdentityInterface;
 use Yii;
 
+/**
+ * Класс пользователь
+ * @property string $login - Логин
+ * @property string $password - Пароль
+ * @property string $confirmPassword - Повторение пароля
+ * @property string $email - Email
+ * @property string $phone - Номер телефона
+ * @property string $avatar - Аватар
+ * @property int $role_id - Роль (id)
+ */
 class User extends ActiveRecord implements IdentityInterface
 {
+    /** @var string Повторение пароля */
     public string $confirmPassword = '';
 
     //TODO возможно сценарии
@@ -18,20 +29,34 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['login', 'password', 'role_id'], 'required'],
             [['login', 'password', 'confirmPassword', 'avatar', 'phone', 'email', 'access_token'], 'string'],
-            [['confirmPassword'], 'validateConfirmPassword'],
+//            [['confirmPassword'], 'validateConfirmPassword'], //todo протетстить и удалить, если правило ниже норм
+            [['confirmPassword'], 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли должны быть идентичны!'],
             [['login'], 'unique'],
             [['role_id'], 'default'],
             [['confrimPassword'], 'safe']
         ];
     }
 
-    public function validateConfirmPassword($attribute, $params)
+    /**
+     * Валидация пароля на проверку
+     * @deprecated
+     * @param $attribute
+     * @param $params
+     * @return void
+     */
+    public function validateConfirmPassword($attribute, $params): void
     {
         if ($this->password !== $this->$attribute) {
             $this->addError($attribute, 'Пароли не совпадают');
         }
     }
 
+    /**
+     * Регистрация
+     * @param $data
+     * @return bool
+     * @throws \yii\base\Exception
+     */
     public function register($data): bool
     {
         if ($data) {
@@ -47,7 +72,14 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
 
-    public function login($data)
+    /**
+     * Авторизация
+     * @param $data
+     * @return bool - результат авторизации
+     * @throws Exception
+     * @throws \yii\base\Exception
+     */
+    public function login($data): bool
     {
         if($data){
             $model = User::findOne(['login' => $data['login']]);
@@ -60,6 +92,7 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
 
+    /** @inheritdoc  */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -71,16 +104,13 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
 
+    /** @inheritdoc */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['access_token' => $token]);
     }
 
-    public function getRole(): ActiveQuery
-    {
-        return $this->hasOne(Role::class, ['id' => 'role_id']);
-    }
-
+    /** @inheritdoc */
     public static function findIdentity($id)
     {
         if (!$model = User::findOne($id)) {
@@ -89,22 +119,37 @@ class User extends ActiveRecord implements IdentityInterface
         return $model;
     }
 
+    /**
+     * Роль (relation)
+     * @return ActiveQuery
+     */
+    public function getRole(): ActiveQuery
+    {
+        return $this->hasOne(Role::class, ['id' => 'role_id']);
+    }
+
+    /**
+     * Бан (relation)
+     * @return ActiveQuery
+     */
     public function getBanned(): ActiveQuery
     {
         return $this->hasOne(Banned::class, ['user_id' => 'id']);
     }
 
-
+    /** @inheritdoc */
     public function getId()
     {
         return $this->id;
     }
 
+    /** @inheritdoc */
     public function getAuthKey()
     {
         // TODO: Implement getAuthKey() method.
     }
 
+    /** @inheritdoc */
     public function validateAuthKey($authKey)
     {
         // TODO: Implement validateAuthKey() method.

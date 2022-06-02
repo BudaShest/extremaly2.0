@@ -4,10 +4,13 @@ namespace app\modules\admin\models;
 
 use app\models\Country as BaseCountry;
 use app\modules\admin\behaviors\SingleFileBehavior;
+use yii\web\UploadedFile;
 
+/** @inheritdoc */
 class Country extends BaseCountry
 {
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -25,7 +28,8 @@ class Country extends BaseCountry
 
     public const DEFAULT_IMAGE = 'https://33tura.ru/FLAG/reunion.gif';
 
-    public $uploads;
+    /** @var UploadedFile $uploads - Загрузки */
+    public UploadedFile $uploads;
 
     /** @inheritDoc */
     public function rules(): array
@@ -36,7 +40,7 @@ class Country extends BaseCountry
     }
 
     /** @inheritDoc */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'code' => 'Код страны (RU, EN, US...)',

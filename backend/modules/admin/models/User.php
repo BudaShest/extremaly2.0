@@ -27,6 +27,7 @@ class User extends BaseUser
         return [
             'login' => 'Логин',
             'avatar' => 'Аватар',
+            'password' => 'Пароль',
             'email' => 'Email',
             'phone' => 'Номер телефона',
             'role_id' => 'Роль',

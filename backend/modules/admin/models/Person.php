@@ -5,11 +5,12 @@ namespace app\modules\admin\models;
 use app\models\Person as BasePerson;
 use app\models\PersonImage;
 use app\modules\admin\behaviors\MultiFileBehavior;
+use yii\web\UploadedFile;
 
-class Person extends BasePerson
+final class Person extends BasePerson
 {
-
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -28,8 +29,10 @@ class Person extends BasePerson
         return $rules;
     }
 
-    public $uploads;
+    /** @var UploadedFile[] $uploads - Загрузки */
+    public array $uploads;
 
+    /** @inheritdoc */
     public function attributeLabels(): array
     {
         return [

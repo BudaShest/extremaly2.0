@@ -5,12 +5,18 @@ namespace app\modules\admin\models;
 use app\models\Event as BaseEvent;
 use app\modules\admin\behaviors\MultiFileBehavior;
 use app\models\EventImage;
+use yii\web\UploadedFile;
 
-class Event extends BaseEvent
+/**
+ * @inheritdoc
+ */
+final class Event extends BaseEvent
 {
-    public $uploads;
+    /** @var UploadedFile[] Загрузки */
+    public array $uploads;
 
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -21,14 +27,16 @@ class Event extends BaseEvent
         return $behaviors;
     }
 
+    /** @inheritdoc */
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif','jpeg'], 'maxSize' => 1024 * 1024 * 15, 'maxFiles' => 9];
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'maxSize' => 1024 * 1024 * 15, 'maxFiles' => 9];
         return $rules;
     }
 
-    public function attributeLabels()
+    /** @inheritdoc */
+    public function attributeLabels(): array
     {
         return [
             'name' => 'Имя',

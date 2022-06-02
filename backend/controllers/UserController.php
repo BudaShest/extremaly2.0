@@ -12,14 +12,17 @@ use Codeception\Util\HttpCode;
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
 use yii\web\BadRequestHttpException;
+use yii\web\IdentityInterface;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 
 
 class UserController extends ActiveController
 {
+    /** @inheritdoc */
     public $modelClass = 'app\models\User';
 
+    /** @inheritdoc */
     public function behaviors(): array
     {
         $behaviors = parent::behaviors();
@@ -36,7 +39,8 @@ class UserController extends ActiveController
         return $behaviors;
     }
 
-    protected function verbs()
+    /** @inheritdoc */
+    protected function verbs(): array
     {
         return [
             'index' => ['GET', 'HEAD'],
@@ -47,8 +51,12 @@ class UserController extends ActiveController
         ];
     }
 
-
-    public function actionRegister()
+    /**
+     * Регистрация пользователя
+     * @return array
+     * @throws BadRequestHttpException
+     */
+    public function actionRegister(): array
     {
         $model = new User();
         if ($request = Yii::$app->request->post()) {
@@ -60,7 +68,12 @@ class UserController extends ActiveController
         throw new BadRequestHttpException('Неверный запрос');
     }
 
-    public function actionLogin()
+    /**
+     * Авторизация пользователя
+     * @return array
+     * @throws BadRequestHttpException
+     */
+    public function actionLogin(): array
     {
         if ($request = Yii::$app->request->post()) {
             $model = User::findOne(['login' => Yii::$app->request->post('login')]);
@@ -79,12 +92,23 @@ class UserController extends ActiveController
         throw new BadRequestHttpException();
     }
 
-    public function actionCheck()
+    /**
+     * @deprecated
+     * @return IdentityInterface
+     */
+    public function actionCheck(): IdentityInterface
     {
         return Yii::$app->user->identity;
     }
 
-    public function actionUpdateUser(int $id)
+    /**
+     * Обновление пользовательский информации
+     * @param int $id
+     * @return array|string[]
+     * @throws MethodNotAllowedHttpException
+     * @throws \yii\base\Exception
+     */
+    public function actionUpdateUser(int $id): array //todo разделить этот метод
     {
         if ($request = Yii::$app->request->post()) {
             $user = User::findOne($id);
@@ -111,7 +135,12 @@ class UserController extends ActiveController
         throw new MethodNotAllowedHttpException('Только POST');
     }
 
-    public function actionUpdateAvatar()
+    /**
+     * Обновить аватар
+     * @return array
+     * @throws MethodNotAllowedHttpException
+     */
+    public function actionUpdateAvatar(): array
     {
         if($request = Yii::$app->request->post()){
             try {
@@ -133,7 +162,12 @@ class UserController extends ActiveController
         throw new MethodNotAllowedHttpException();
     }
 
-    public function actionLogout()
+    /**
+     * Выход из учётки
+     * @return array
+     * @throws MethodNotAllowedHttpException
+     */
+    public function actionLogout(): array
     {
         if (Yii::$app->request->isPost) {
             $result = Yii::$app->user->logout();

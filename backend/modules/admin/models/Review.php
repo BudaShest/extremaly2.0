@@ -1,12 +1,14 @@
 <?php
 
 namespace app\modules\admin\models;
+
 use app\models\Review as BaseEventReview;
 
-class Review extends BaseEventReview
+/** @inheritdoc */
+final class Review extends BaseEventReview
 {
     /** @inheritDoc */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'user_id' => 'Пользователь',
