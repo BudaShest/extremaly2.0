@@ -1,0 +1,12 @@
+.serviceCardCol {
+    padding: 20px;
+}
+
+.serviceCard {
+    background-color: #111;
+}
+
+.serviceCardText {
+    max-height: 250px;
+    overflow: hidden;
+}

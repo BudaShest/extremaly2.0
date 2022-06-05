@@ -29,7 +29,7 @@ const Persons = ({persons}) => {
         <Col className={style.persons}>
             <div className={style.personsRow}>
                 {
-                    persons.map((person,index)=><Person index={index} isActive={index == activeIndex} clickHandler={clickHandler} person={person} />)
+                    persons.map((person,index)=><Person key={person.id} index={index} isActive={index == activeIndex} clickHandler={clickHandler} person={person} />)
                 }
             </div>
             <div className={style.activePersonTextContent_row}>

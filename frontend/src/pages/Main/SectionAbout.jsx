@@ -57,7 +57,6 @@ const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, re
                            style={{fontSize: '0.8em', color: "lightgray"}}></p>
                         <NavLink
                             to="/login"
-                            large
                             className={`btn btn-large`}
                             style={{marginRight: '5px', backgroundColor: "#DE4564", color: "white"}}
                             waves="light">
