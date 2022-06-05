@@ -2,21 +2,34 @@
 
 namespace app\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
 /**
  * Класс "Заявка"
+ * Attributes:
  * @property int $user_id - Пользователь(ID)
  * @property int $num - Кол-во
  * @property int $status_id - Статус (ID)
  * @property int $ticket_id - Билет (ID)
+ * Relations:
  * @property User $user - Пользователь
  * @property Ticket $tickets - Билеты
  * @property Status $status - Статус
  */
 class Application extends ActiveRecord
 {
+    public function behaviors(): array
+    {
+        return [
+            'class' => TimestampBehavior::class,
+            'attributes' => [
+                ActiveRecord::EVENT_AFTER_INSERT => ['created_at']
+            ]
+        ];
+    }
+
     /** @inheritdoc */
     public function rules(): array
     {
@@ -52,10 +65,10 @@ class Application extends ActiveRecord
     }
 
     /** @inheritdoc */
-    public function fields()
+    public function fields(): array
     {
         $fields = parent::fields();
-        $fields['status_name'] = function ($data) {
+        $fields['status_name'] = function () {
             return $this->status->name;
         };
         return $fields;

@@ -10,6 +10,7 @@ use Yii;
 
 /**
  * Класс пользователь
+ * @property int $id - ID
  * @property string $login - Логин
  * @property string $password - Пароль
  * @property string $confirmPassword - Повторение пароля

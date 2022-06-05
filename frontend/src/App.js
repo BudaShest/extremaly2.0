@@ -4,11 +4,8 @@ import './App.css';
 import {Preloader} from "react-materialize";
 import React,{Suspense, useEffect} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {fetchCountries} from "./asyncActions/places/fetchCountries";
+import Chat from "./components/Chat/Chat";
 import MainRouter from "./router/MainRouter";
-
-
 const Header = React.lazy(()=>import('./components/Header/Header'));
 const Footer = React.lazy(()=>import('./components/Footer/Footer'));
 
@@ -19,6 +16,9 @@ function App() {
             <Header/>
         </Suspense>
             <MainRouter/>
+        <Suspense fallback={<Preloader/>}>
+            <Chat/>
+        </Suspense>
         <Suspense fallback={<Preloader/>}>
             <Footer/>
         </Suspense>

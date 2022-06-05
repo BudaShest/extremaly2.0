@@ -1,0 +1,49 @@
+.chatBadge {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    max-width: 300px;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100px;
+}
+
+/*.chatBadge:hover {*/
+/*    transform: scale(110%);*/
+/*    transition: all 0.4s ease-in-out;*/
+/*}*/
+
+.chatBadge:hover .chatHeader {
+    background-color: #43a97e;
+    transition: all 0.4s ease-in-out;
+}
+
+.chatHeader {
+    display: flex;
+    background-color: #378162;
+    padding: 10px;
+}
+
+
+.chatOffer {
+    color: white;
+    font-size: 1.4em;
+}
+
+.messageContainer {
+    height: 0;
+}
+
+.messageContainerActive{
+    height: 300px;
+    transition: all 0.4s ease-in-out;
+}
+
+.chatBadgeActive{
+    height: auto;
+    transition: all 0.4s ease-in-out;
+}
+
+.chatSendButton {
+    width: 100%;
+}

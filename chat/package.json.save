@@ -1,0 +1,18 @@
+{
+  "name": "exremaly-chat",
+  "version" : "1.0.0",
+  "description" : "Chat server for extremly-project",
+  "author": "Alexandr Budashest <budashest@gmail.com>",
+  "license": "MIT",
+  "main": "app.js",
+  "keywords": [
+    "nodejs",
+    "extremly",
+    "chat",
+    "websocket"
+  ],
+  "dependencies": {
+    "express": "^4.18.1
+"
+  }
+}

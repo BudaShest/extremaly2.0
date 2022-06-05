@@ -1,5 +1,6 @@
 <?php
 /** @var \yii\web\View $this */
+/** @var \yii\data\BaseDataProvider $applicationProvider */
 
 $this->title = 'Управление заявками';
 $this->params['breadcrumbs'][] = $this->title;
@@ -8,6 +9,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap4\LinkPager;
 use yii\bootstrap4\ButtonDropdown;
+use app\modules\admin\models\Application;
 
 ?>
     <h1><?= $this->title ?></h1>
@@ -23,6 +25,7 @@ use yii\bootstrap4\ButtonDropdown;
         [
             'attribute' => 'user_id',
             'value' => function ($data) {
+                /** @var Application $data */
                 return Html::a($data->user->login, ['user/view', 'id' => $data->user->id]);
             },
             'format' => 'raw'
@@ -30,10 +33,10 @@ use yii\bootstrap4\ButtonDropdown;
         [
             'attribute' => 'ticket_id',
             'value' => function ($data) {
-//            var_dump($data->tickets);die;
+                /** @var Application $data */
                 $output = '';
                 foreach ($data->tickets as $ticket) {
-                    $output .= Html::a($ticket->privilege, ['ticket/view','id'=>$ticket->id]) . '<br/>';
+                    $output .= Html::a($ticket->privilege, ['ticket/view', 'id' => $ticket->id]) . '<br/>';
                 }
                 return $output;
             },
@@ -43,22 +46,26 @@ use yii\bootstrap4\ButtonDropdown;
         [
             'attribute' => 'status_id',
             'value' => function ($data) {
+                /** @var Application $data */
                 return $data->status->name;
             }
         ],
-[        'label' => 'Действия',
-        'value' => function ($data) {
-            return ButtonDropdown::widget([
-                'label' => 'Действия',
-                'dropdown' => [
-                    'items' => [
-                        ['label' => 'Обновить', 'url' => '/admin/application/update?id=' . $data->id],
-                        ['label' => 'Удалить', 'url' => '/admin/application/delete?id=' . $data->id],
+        'created_at',
+        [
+            'label' => 'Действия',
+            'value' => function ($data) {
+                return ButtonDropdown::widget([
+                    'label' => 'Действия',
+                    'dropdown' => [
+                        'items' => [
+                            ['label' => 'Обновить', 'url' => '/admin/application/update?id=' . $data->id],
+                            ['label' => 'Удалить', 'url' => '/admin/application/delete?id=' . $data->id],
+                        ],
                     ],
-                ],
-            ]);
-        },
-        'format' => 'raw']
+                ]);
+            },
+            'format' => 'raw'
+        ]
     ]
 ]);
 ?>

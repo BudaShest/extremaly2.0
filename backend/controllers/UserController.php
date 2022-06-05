@@ -54,7 +54,7 @@ class UserController extends ActiveController
     /**
      * Регистрация пользователя
      * @return array
-     * @throws BadRequestHttpException
+     * @throws BadRequestHttpException|\yii\base\Exception
      */
     public function actionRegister(): array
     {
