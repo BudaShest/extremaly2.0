@@ -27,7 +27,13 @@ http.listen(8080, () => {
  */
 io.on('connection', (socket) => {
     console.log('User was connected');
-    // socket.emit('news', {data: "data"})
+
+    const {roomId} = socket.handshake.query;
+
+    socket.roomId = roomId;
+
+    socket.join(roomId);
+
     socket.on('sendMessage', data => {
         let message = {
             "from_id": data['from_id'],
@@ -35,9 +41,10 @@ io.on('connection', (socket) => {
             "text": data["text"],
             "was_read": false,
         }
+        socket.in(socket.roomId).emit('getMessage', message)
         // console.log(message);
-        console.log("message");
-        socket.emit('getMessage', data)
+
+        // socket.emit('getMessage', data)
         //Записываем сообщения в бД
         // fetch('http://php/message/create', {
         //     method: "POST",
