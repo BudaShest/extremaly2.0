@@ -8,4 +8,5 @@ modules:
     enabled:
       - Asserts
       - Yii2:
+            url: http://localhost:8000/index-test.php
             part: [orm, email, fixtures]

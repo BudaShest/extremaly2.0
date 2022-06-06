@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {Caption, Slide, Slider} from "react-materialize";
 
+/**
+ * Компонент "Слайдер-шапка"
+ * @param slides
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MainSlider = ({slides}) => {
     return (
         <Slider

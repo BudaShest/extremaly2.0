@@ -1,0 +1,16 @@
+.message {
+    display: flex;
+    background-color: #DE4564;
+    padding: 10px;
+    color: white;
+    margin: 4px;
+}
+
+.messageText {
+    flex-grow: 4;
+}
+
+.messageDatetime {
+    flex-grow: 1;
+    font-size: 0.7em;
+}

@@ -46,7 +46,7 @@ const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, re
     }
 
     return (
-        <section style={{backgroundColor: "#222222", padding: "30px 0"}}>
+        <section className={mainStyle.sectionAbout}>
 
             <Container>
                 <Row style={{padding: "34px 25px", backgroundColor: '#101010', marginBottom: '60px'}}>

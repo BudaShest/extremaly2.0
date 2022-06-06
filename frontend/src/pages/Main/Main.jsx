@@ -46,13 +46,13 @@ const Main = () => {
 
     return (
         <>
-            <MainSlider slides={topSlides}/>
+            <MainSlider slides={topSlides ?? []}/>
             <SectionSlider/>
             <Row className={style.parallaxBlock}></Row>
             <SectionAbout socialLinks={socialLinks} advantages={advantages} persons={persons} reviews={reviews}
-                           numOfPages={numOfPages + 1} aboutUs={aboutUs}/>
+                          numOfPages={numOfPages + 1} aboutUs={aboutUs}/>
             <Row className={style.parallaxBlock}></Row>
-            <section style={{backgroundColor: "#222"}}>
+            <section className={style.sectionAbout}>
                 <Container>
                     <h2 className="white-text" style={{margin: 0, padding: 30}}>Популярное</h2>
                     <Services topEvents={topEvents}/>

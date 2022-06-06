@@ -1,13 +1,29 @@
-.sliderSection{
-    background-color: #222222;
+.sliderSection {
+    background: linear-gradient(172deg, rgba(34,34,34,1) 47%, rgba(16,16,16,1) 69%);
     padding: 24px 0;
 }
-.sliderElem{
+
+.sliderElem {
     width: 400px !important;
     height: 300px !important;;
     background-size: cover !important;;
     background-position: center !important;
 }
-.sliderElemLink{
-    color:white;
+
+.sliderElemText:hover {
+    transform: scale(105%);
+    transition: all 0.3s ease-in-out;
+}
+
+.sliderElemText {
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    font-size: 2em;
+    width: 100%;
+    padding: 14px;
+}
+
+.sliderElemLink {
+    color: white;
+    text-decoration: underline;
 }

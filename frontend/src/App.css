@@ -1,43 +1,57 @@
 /* Глобальные стили */
-body{
+body {
     background-color: #222;
 }
-.select-dropdown{
+
+.select-dropdown {
     color: white;
 }
-.datepicker{
-    color:white;
+
+.datepicker {
+    color: white;
 }
 
-.datepicker-row>*{
-    color:gray;
+.datepicker-row > * {
+    color: gray;
 }
-.datepicker-row>.is_selected{
-    color:white;
+
+.datepicker-row > .is_selected {
+    color: white;
 }
-.material-icons{
-    color:lightgrey;
-}
-.materialize-textarea{
+
+.material-icons {
     color: lightgrey;
 }
-input{
+
+.materialize-textarea {
+    color: lightgrey;
+}
+
+input {
     color: white !important;;
 }
-.carousel{
+
+.carousel {
     max-height: 600px;
 }
-.materialboxed{
+
+.materialboxed {
     max-width: 400px;
 }
 
-main{
+main {
     min-height: 600px;
 }
 
-#root{
+#root {
     overflow: hidden;
 }
-#mobile-nav{
+
+#mobile-nav {
     background-color: #222;
+}
+
+.btn:hover, .btn-large:hover {
+    transform: scale(105%);
+    transition: all 0.3s ease-in-out;
 }

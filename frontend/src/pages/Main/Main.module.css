@@ -1,10 +1,10 @@
-.parallaxBlock{
+.parallaxBlock {
     height: 500px;
     background-image: url('http://localhost:3000/img/place-parallax.jpeg');
     background-attachment: fixed;
 }
 
-.aboutUsImageConvex{
+.aboutUsImageConvex {
     width: 600px;
     min-width: 300px;
     height: 400px;
@@ -12,18 +12,30 @@
 
 }
 
-.firstAdvantage{
+.firstAdvantage {
     background-color: #f2733c;
     padding: 0;
-    margin:50px 0;
+    margin: 50px 0;
 }
 
-.secondAdvantage{
+.secondAdvantage {
     background-color: #DE4564;
     padding: 0;
-    margin:30px 0;
+    margin: 30px 0;
 }
-.thirdAdvantage{
+
+.sectionAbout {
+    padding: 30px 0;
+    background: linear-gradient(172deg, rgba(34,34,34,1) 47%, rgba(16,16,16,1) 69%);
+}
+
+.sectionServices {
+    padding: 30px 0;
+    /*background: linear-gradient(172deg, rgba(34,34,34,1) 47%, rgba(16,16,16,1) 69%);*/
+    background: linear-gradient(180deg, rgba(34,34,34,1) 44%, rgba(16,16,16,1) 69%);
+}
+
+.thirdAdvantage {
     background-color: #43a17c;
     padding: 0;
     margin: 30px 0;
@@ -31,7 +43,7 @@
 
 
 @media screen and (max-width: 1280px) {
-    .aboutUsImageConvex{
+    .aboutUsImageConvex {
         width: auto;
         height: auto;
     }

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Message;
 use yii\rest\ActiveController;
 use yii\filters\Cors;
 
@@ -20,5 +21,15 @@ class MessageController extends ActiveController
         ];
 
         return $behaviors;
+    }
+
+    /**
+     * Получить сообщения пользователяы
+     * @param int $userId
+     * @return array
+     */
+    public function actionGetUserMessages(int $userId): array
+    {
+        return Message::find()->where(['from_id' => $userId])->all();
     }
 }

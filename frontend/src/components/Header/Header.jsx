@@ -4,13 +4,21 @@ import style from './header.module.css';
 import {NavLink} from 'react-router-dom';
 import {logoutUser} from "../../asyncActions/user/logoutFile";
 
+/**
+ * Компонент "Шаппка"
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Header = () => {
     let currentUser = sessionStorage.getItem('userInfo');
     currentUser = currentUser ? JSON.parse(currentUser) : {};
 
-    async function handleLogout()
-    {
-        let response = await logoutUser();
+    /**
+     * Выход с сайта
+     * @returns {Promise<void>}
+     */
+    async function handleLogout() {
+        await logoutUser();
         window.location.href = 'http://localhost:3000/'
     }
 
@@ -33,15 +41,15 @@ const Header = () => {
                 id="mobile-nav"
                 menuIcon={<Icon className={style.menuIcon}>menu</Icon>}
                 options={{
-                    draggable:true,
+                    draggable: true,
                     edge: 'left',
-                    inDuration:250,
+                    inDuration: 250,
                     onCloseEnd: null,
                     onCloseStart: null,
                     onOpenEnd: null,
                     onOpenStart: null,
-                    outDuration:200,
-                    preventScroll:true
+                    outDuration: 200,
+                    preventScroll: true
                 }}
             >
                 <NavItem>
@@ -54,7 +62,7 @@ const Header = () => {
                     <NavLink to="/persons">Личности</NavLink>
                 </NavItem>
                 {
-                    currentUser?.isAuth?
+                    currentUser?.isAuth ?
                         <Dropdown
                             id="Dropdown_8"
                             options={{
@@ -70,12 +78,13 @@ const Header = () => {
                             trigger={<Button node="button">Действия</Button>}
                         >
                             <NavLink to="/user">Личный кабинет</NavLink>
-                            <Divider />
+                            <Divider/>
                             <a title="Выйти" href="#" onClick={handleLogout}>Выйти</a>
                         </Dropdown>
                         :
                         <NavItem>
-                            <NavLink className={`${style.loginBtn} btn waves-effect waves-light`} to="/login">Войти</NavLink>
+                            <NavLink className={`${style.loginBtn} btn waves-effect waves-light`}
+                                     to="/login">Войти</NavLink>
                         </NavItem>
                 }
             </Navbar>

@@ -24,6 +24,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'cache' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['country','event-review','event','place']],
             ],

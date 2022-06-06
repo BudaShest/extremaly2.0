@@ -8,10 +8,11 @@
     height: 100px;
 }
 
-/*.chatBadge:hover {*/
-/*    transform: scale(110%);*/
-/*    transition: all 0.4s ease-in-out;*/
-/*}*/
+.chatUnavailableBadge {
+    color: white;
+    padding: 20px;
+    font-size: 1.2em;
+}
 
 .chatBadge:hover .chatHeader {
     background-color: #43a97e;
@@ -32,6 +33,7 @@
 
 .messageContainer {
     height: 0;
+    overflow-y: scroll;
 }
 
 .messageContainerActive{
