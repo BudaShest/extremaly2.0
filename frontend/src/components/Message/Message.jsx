@@ -8,9 +8,9 @@ import style from './Message.module.css'
  * @returns {JSX.Element}
  * @constructor
  */
-const Message = ({message}) => {
+const Message = ({message, fromAuthor}) => {
     return (
-        <div className={style.message}>
+        <div className={`${style.message} ${fromAuthor ? style.myMessage : style.hisMessage}`}>
             <p className={style.messageText}>{message.text}</p>
             <Chip className={style.messageDatetime}>{message.created_at}</Chip>
         </div>

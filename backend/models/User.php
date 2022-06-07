@@ -24,6 +24,7 @@ class User extends ActiveRecord implements IdentityInterface
     /** @var string Повторение пароля */
     public string $confirmPassword = '';
 
+    /** @inheritdoc */
     public function rules(): array
     {
         return [

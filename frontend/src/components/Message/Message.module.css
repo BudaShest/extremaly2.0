@@ -1,9 +1,18 @@
 .message {
     display: flex;
-    background-color: #DE4564;
     padding: 10px;
     color: white;
     margin: 4px;
+    width: 90%;
+}
+
+.myMessage {
+    background-color: #DE4564;
+}
+
+.hisMessage {
+    margin-left: 20px;
+    background-color: #43a17c;
 }
 
 .messageText {

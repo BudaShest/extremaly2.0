@@ -7,10 +7,10 @@ import Message from "../Message/Message"
 const Chat = () => {
     const textRef = useRef();
     const [isActive, setActive] = useState(false);
-    // const [messageText, setMessageText] = useState('');
-    const [messages, setMessages] = useState([]);;
+    const [messages, setMessages] = useState([]);
     const socket = io('http://localhost:8082');
 
+    //todo вынести наверх
     socket.on('getMessage', function (data) {
         setMessages([...messages, data])
     })
@@ -22,10 +22,8 @@ const Chat = () => {
         if (currentUser.isAuth) {
             socket.emit('sendMessage', {
                 "from_id": currentUser.id,
-                // "text": messageText,
                 "text": textRef.current.value,
             });
-            // setMessageText('');
         } else {
             alert('Пользователь должен быть авторизован!');
         }
@@ -40,20 +38,10 @@ const Chat = () => {
                 currentUser.isAuth ? <>
                         <div className={`${style.messageContainer} ${isActive && style.messageContainerActive}`}>
                             {
-                                messages.map(message => <Message key={message.id} message={message}/>)
+                                messages.map(message => <Message fromAuthor={currentUser.id === message.from_id} key={message.id} message={message}/>)
                             }
                         </div>
-                        {/*<Textarea*/}
-                        {/*    // onChange={(e) => setMessageText(e.currentTarget.value)}*/}
-                        {/*    // value={messageText}*/}
-                        {/*    ref={textRef}*/}
-                        {/*    id="Textarea-31"*/}
-                        {/*    l={12}*/}
-                        {/*    m={12}*/}
-                        {/*    s={12}*/}
-                        {/*    xl={12}*/}
-                        {/*/>*/}
-                        <textarea style={{color: 'white'}} ref={textRef} name="" id="" cols="30" rows="10"></textarea>
+                        <textarea className={`materialize-textarea`} style={{color: 'white'}} ref={textRef} name="messageText" id="messageTextInput" cols="30" rows="10"></textarea>
                         <Button onClick={sendMessage} className={style.chatSendButton}>
                             Отправить
                         </Button>
