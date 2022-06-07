@@ -1,22 +1,31 @@
-.regForm{
-    margin:30px;
-}
-.regFormInput{
-    color:#F2733C;
+.regForm {
+    margin: 30px;
 }
 
-.regFormIcon{
-    color:#F2733C;
+.regFormInput {
+    color: #F2733C;
+}
+
+.errorSpan {
+    color: coral;
+    height: 30px;
+    font-size: 0.8em;
+}
+
+.regFormIcon {
+    color: #F2733C;
     font-size: 28em;
     padding: 10px;
 }
+
 @media screen and (max-width: 1280px) {
-    .regFormIcon{
+    .regFormIcon {
         font-size: 18em;
     }
 }
+
 @media screen and (max-width: 768px) {
-    .regFormIcon{
+    .regFormIcon {
         display: none;
     }
 }

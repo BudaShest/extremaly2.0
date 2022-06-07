@@ -24,26 +24,26 @@ class User extends ActiveRecord implements IdentityInterface
     /** @var string Повторение пароля */
     public string $confirmPassword = '';
 
-    //TODO возможно сценарии
     public function rules(): array
     {
         return [
             [['login', 'password', 'role_id'], 'required'],
             [['login', 'password', 'confirmPassword', 'avatar', 'phone', 'email', 'access_token'], 'string'],
-//            [['confirmPassword'], 'validateConfirmPassword'], //todo протетстить и удалить, если правило ниже норм
             [['confirmPassword'], 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли должны быть идентичны!'],
+            [['phone'], 'unique'],
+            [['email'], 'email'],
+            [['email'], 'unique'],
             [['login'], 'unique'],
-            [['role_id'], 'default'],
             [['confrimPassword'], 'safe']
         ];
     }
 
     /**
      * Валидация пароля на проверку
-     * @deprecated
      * @param $attribute
      * @param $params
      * @return void
+     * @deprecated
      */
     public function validateConfirmPassword($attribute, $params): void
     {
@@ -82,10 +82,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function login($data): bool
     {
-        if($data){
+        if ($data) {
             $model = User::findOne(['login' => $data['login']]);
             $model->access_token = Yii::$app->security->generateRandomString();
-            if(!Yii::$app->security->validatePassword($data['password'], $model->password)){
+            if (!Yii::$app->security->validatePassword($data['password'], $model->password)) {
                 throw new Exception('Пароль не подходит!');
             }
             return true;
@@ -93,7 +93,7 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
 
-    /** @inheritdoc  */
+    /** @inheritdoc */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {

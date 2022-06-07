@@ -63,7 +63,7 @@ class UserController extends ActiveController
             if (!$model->register($request)) {
                 return $model->errors;
             }
-            return ["message" => $model->login . ' был успешно зарегистрирован', 'status'=>HttpCode::OK];
+            return ["result" => true, "message" => $model->login . ' был успешно зарегистрирован', 'status'=>HttpCode::OK];
         }
         throw new BadRequestHttpException('Неверный запрос');
     }
