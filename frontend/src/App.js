@@ -10,7 +10,6 @@ const Header = React.lazy(()=>import('./components/Header/Header'));
 const Footer = React.lazy(()=>import('./components/Footer/Footer'));
 
 function App() {
-
   return (
     <Router>
         <Suspense fallback={<Preloader/>}>

@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Textarea, Button} from 'react-materialize';
+import {Button} from 'react-materialize';
 import style from './Chat.module.css';
 import {io} from "socket.io-client";
 import Message from "../Message/Message"
@@ -10,7 +10,6 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const socket = io('http://localhost:8082');
 
-    //todo вынести наверх
     socket.on('getMessage', function (data) {
         setMessages([...messages, data])
     })
@@ -36,7 +35,7 @@ const Chat = () => {
             </header>
             {
                 currentUser.isAuth ? <>
-                        <div className={`${style.messageContainer} ${isActive && style.messageContainerActive}`}>
+                        <div id="messageContainer" className={`${style.messageContainer} ${isActive && style.messageContainerActive}`}>
                             {
                                 messages.map(message => <Message fromAuthor={currentUser.id === message.from_id} key={message.id} message={message}/>)
                             }
