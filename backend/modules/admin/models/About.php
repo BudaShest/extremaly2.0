@@ -10,7 +10,7 @@ use yii\web\UploadedFile;
  * @inheritdoc
  * @property UploadedFile $uploads
  */
-class About extends BaseAbout
+final class About extends BaseAbout
 {
     /** @var UploadedFile $uploads - загрузки */
     public UploadedFile $uploads;

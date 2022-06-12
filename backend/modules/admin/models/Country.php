@@ -7,7 +7,7 @@ use app\modules\admin\behaviors\SingleFileBehavior;
 use yii\web\UploadedFile;
 
 /** @inheritdoc */
-class Country extends BaseCountry
+final class Country extends BaseCountry
 {
     /** @inheritdoc */
     public function behaviors(): array

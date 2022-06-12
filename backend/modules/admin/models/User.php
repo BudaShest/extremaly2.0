@@ -6,7 +6,7 @@ use app\models\User as BaseUser;
 use app\modules\admin\behaviors\SingleFileBehavior;
 use app\modules\admin\models\interfaces\IFileWorkable;
 
-class User extends BaseUser
+final class User extends BaseUser
 {
     public function behaviors()
     {

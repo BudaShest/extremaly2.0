@@ -10,7 +10,7 @@ use yii\web\UploadedFile;
 /**
  * @inheritdoc
  */
-class Place extends BasePlace
+final class Place extends BasePlace
 {
     /** @inheritdoc */
     public function behaviors(): array

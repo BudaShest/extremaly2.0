@@ -7,10 +7,13 @@ use yii\db\ActiveQuery;
 
 /**
  * Модель "Отзыв к событию"
+ * Attributes:
+ * @property int $id - ID
  * @property int $user_id - Пользователь(ID)
  * @property int $event_id - Событие(ID)
  * @property string $text - Текст
  * @property int $rating - Рейтинг
+ * Relations:
  * @property Event $event - Событие
  * @property User $user - Пользователь
  */

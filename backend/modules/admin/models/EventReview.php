@@ -5,7 +5,7 @@ namespace app\modules\admin\models;
 use app\models\EventReview as BaseEventReview;
 
 /** @inheritdoc */
-class EventReview extends BaseEventReview
+final class EventReview extends BaseEventReview
 {
     /** @inheritDoc */
     public function attributeLabels(): array

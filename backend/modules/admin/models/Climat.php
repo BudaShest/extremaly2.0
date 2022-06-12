@@ -7,7 +7,7 @@ use app\modules\admin\behaviors\SingleFileBehavior;
 use yii\web\UploadedFile;
 
 /** @inheritdoc */
-class Climat extends BaseClimat
+final class Climat extends BaseClimat
 {
     /** @inheritdoc */
     public function behaviors(): array
