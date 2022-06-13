@@ -81,7 +81,7 @@ const Places = () => {
                     <Col s={12} m={10}>
                         {
                             places.length ?
-                                places.map(place => <Place {...place}/>)
+                                places.map(place => <Place key={place.id} {...place}/>)
                                 :
                                 <NoRecords/>
                         }

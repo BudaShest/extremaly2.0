@@ -3,8 +3,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'pgsql:host=db;dbname=extremaly',
-    'username' => getenv('POSTGRES_USER'),
-    'password' => getenv('POSTGRES_PASSWORD'),
+    'username' => 'root',
+    'password' => 'root',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

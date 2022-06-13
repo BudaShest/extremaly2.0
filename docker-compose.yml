@@ -1,12 +1,14 @@
 version: '3.9'
 services:
-  php:
+  # Apache отключён в угоду nginx
+  apache:
     image: yiisoftware/yii2-php:7.4-apache
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./backend:/app:delegated
     ports:
       - '8000:80'
+  # Контейнер с PG
   db:
     image: postgres:latest
     restart: unless-stopped
@@ -14,11 +16,13 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     env_file:
       - .env
+  # Админер для простоты взаимодействия с СУБД
   adminer:
     image: adminer
     restart: unless-stopped
     ports:
        - '8081:8080'
+  # Фронт енд (react-app)
   frontend:
     build: ./frontend
     depends_on:
@@ -29,6 +33,7 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+  # Отдельный сервер для чата на ноде
   chat:
     build: ./chat
     volumes:
@@ -36,17 +41,6 @@ services:
       - /usr/src/app/node_modules
     ports:
       - '8082:8080'
-  nginx:
-    image: nginx:latest
-    depends_on:
-      - db
-      - php
-    restart: unless-stopped
-    ports:
-      - '80:80'
-    volumes:
-      - ./backend:/etc/nginx/app
-    env_file:
-      - .env
+
 
 

@@ -7,9 +7,9 @@ const Place = ({id, name, address, climat_name, country_code, country_name, desc
     return (
         <Card
             className={style.placeRow}
-            actions={
+            actions={[
                 <NavLink to={`/places/${id}`}>Перейти</NavLink>
-            }
+            ]}
             closeIcon={<Icon>close</Icon>}
             header={<CardTitle image={images[0]} reveal
                                waves="light"/>}
