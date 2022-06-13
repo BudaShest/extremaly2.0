@@ -1,42 +1,26 @@
 <?php
 /** @var \yii\web\View $this */
-/** @var \yii\data\BaseDataProvider $applicationProvider */
+/** @var Application $model */
 
-$this->title = 'Управление заявками';
-$this->params['breadcrumbs'][] = $this->title;
-
-use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\bootstrap4\LinkPager;
-use yii\bootstrap4\ButtonDropdown;
 use app\modules\admin\models\Application;
+use yii\bootstrap4\ButtonDropdown;
+use yii\helpers\Html;
+use yii\widgets\DetailView;
 
+$this->title = 'Заявка №' . $model->id;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-    <h1><?= $this->title ?></h1>
-<?= $this->render('/partials/flashBadge') ?>
-<?= GridView::widget([
-    'dataProvider' => $applicationProvider,
-    'pager' => [
-        'class' => LinkPager::class,
-        'pagination' => $applicationProvider->pagination,
-    ],
-    'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
-        [
-            'label' => 'Ссылка',
-            'value' => function ($data) {
-                /** @var Application $data */
-                return Html::a('Просмотр', ['/admin/application/view', 'id' => $data->id]);
-            },
-            'format' => 'raw',
-        ],
+<h1><?= $this->title ?></h1>
+<?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
         [
             'attribute' => 'user_id',
             'value' => function ($data) {
                 /** @var Application $data */
-                return Html::a($data->user->login, ['user/view', 'id' => $data->user->id]);
+                return Html::a($data->user->login, ['user/view', 'id' => $data->user->id]) . '<br/>' . Html::img($data->user->avatar);
             },
-            'format' => 'html'
+            'format' => 'raw'
         ],
         [
             'attribute' => 'ticket_id',
@@ -75,5 +59,6 @@ use app\modules\admin\models\Application;
             'format' => 'raw'
         ]
     ]
-]);
+])
 ?>
+<?= $this->render('/ticket/index', compact('dataProvider')) ?>

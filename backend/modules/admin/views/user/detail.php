@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 <div class="row">
     <div class="col">
-                <?= $this->render('/application/index', compact('applicationProvider')) ?>
+        <?= $this->render('/application/index', compact('applicationProvider')) ?>
     </div>
 
     <div class="col">

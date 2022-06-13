@@ -62,6 +62,7 @@ class ReviewController extends ActiveController
 
         $pagination = new Pagination([
             'totalCount' => $query->count(),
+            'pageSize' => 3
         ]);
 
         return $pagination->pageCount;

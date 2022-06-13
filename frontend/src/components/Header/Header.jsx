@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom';
 import {logoutUser} from "../../asyncActions/user/logoutFile";
 
 /**
- * Компонент "Шаппка"
+ * Компонент "Шапка"
  * @returns {JSX.Element}
  * @constructor
  */
@@ -44,10 +44,6 @@ const Header = () => {
                     draggable: true,
                     edge: 'left',
                     inDuration: 250,
-                    onCloseEnd: null,
-                    onCloseStart: null,
-                    onOpenEnd: null,
-                    onOpenStart: null,
                     outDuration: 200,
                     preventScroll: true
                 }}
@@ -79,6 +75,7 @@ const Header = () => {
                         >
                             <NavLink to="/user">Личный кабинет</NavLink>
                             <Divider/>
+                            <NavLink to="/applications">Неподтверждённые заявки</NavLink>
                             <a title="Выйти" href="#" onClick={handleLogout}>Выйти</a>
                         </Dropdown>
                         :

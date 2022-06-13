@@ -1,0 +1,37 @@
+.itemPrice {
+    color: white;
+    font-size: 1.3em;
+}
+
+.itemLink {
+    font-size: 1.4em;
+}
+
+.countInputBlock {
+    display: flex;
+}
+
+.controlBtn {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    height: 40px !important;
+    width: 40px !important;
+    color: white;
+    border: none;
+}
+
+.controlInput {
+    -moz-appearance: textfield;
+    max-width: 50px;
+    padding-left: 25px !important;
+    font-size: 1.2em !important;
+}
+
+.plusBtn {
+    background-color: #43a17c;
+}
+
+.minusBtn {
+    background-color: #DE4564;
+}

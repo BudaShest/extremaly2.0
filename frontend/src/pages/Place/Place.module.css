@@ -1,20 +1,28 @@
-.placeBadge{
+.sliderElemLink {
+    color: white;
+}
+
+.placeBadge {
     font-size: 1.1em;
     background-color: #111111;
     color: lightgrey;
     padding: 20px 40px !important;
 }
-.placeSlider{
+
+.placeSlider {
     height: 600px;
 }
-.placeBadge h5{
+
+.placeBadge h5 {
     margin-bottom: 30px !important;
 }
-.placeBadgeRow{
+
+.placeBadgeRow {
     display: flex;
     align-items: center;
 }
-.badgeIcon{
+
+.badgeIcon {
     width: 70px;
     margin-right: 40px;
 }

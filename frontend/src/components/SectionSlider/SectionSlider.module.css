@@ -8,6 +8,8 @@
     height: 300px !important;;
     background-size: cover !important;;
     background-position: center !important;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 .sliderElemText:hover {

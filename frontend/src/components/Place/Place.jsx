@@ -3,16 +3,26 @@ import {NavLink} from 'react-router-dom';
 import style from './Place.module.css';
 import {Card, Icon, CardTitle} from 'react-materialize';
 
+/**
+ * Компонент "Место"
+ * @param id
+ * @param name
+ * @param address
+ * @param climat_name
+ * @param country_code
+ * @param country_name
+ * @param description
+ * @param images
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Place = ({id, name, address, climat_name, country_code, country_name, description, images}) => {
     return (
         <Card
             className={style.placeRow}
-            actions={[
-                <NavLink to={`/places/${id}`}>Перейти</NavLink>
-            ]}
+            actions={[<NavLink to={`/places/${id}`}>Перейти</NavLink>]}
             closeIcon={<Icon>close</Icon>}
-            header={<CardTitle image={images[0]} reveal
-                               waves="light"/>}
+            header={<CardTitle image={images[0]} reveal waves="light"/>}
             title={name}
             horizontal={true}
         >

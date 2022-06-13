@@ -50,7 +50,7 @@ const Main = () => {
             <SectionSlider/>
             <Row className={style.parallaxBlock}></Row>
             <SectionAbout socialLinks={socialLinks} advantages={advantages} persons={persons} reviews={reviews}
-                          numOfPages={numOfPages + 1} aboutUs={aboutUs}/>
+                          numOfPages={numOfPages} aboutUs={aboutUs}/>
             <Row className={style.parallaxBlock}></Row>
             <section className={style.sectionAbout}>
                 <Container>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Caption, Slide, Slider} from "react-materialize";
 
 /**
@@ -8,18 +8,25 @@ import {Caption, Slide, Slider} from "react-materialize";
  * @constructor
  */
 const MainSlider = ({slides}) => {
+
+    const [mainSlides, setMainSlider] = useState([]);
+    console.log('sliders');
+    useEffect(()=>{
+        setMainSlider(slides);
+    }, [slides])
+
     return (
         <Slider
             fullscreen={false}
             options={{
                 duration: 500,
                 height: 600,
-                indicators: false,
+                indicators: true,
                 interval: 6000
             }}
         >
             {
-                slides.map((slide, index) => {
+                mainSlides.map((slide, index) => {
                     return (
                         <Slide key={index} image={<img alt="Слайд" src={slide.image}/>}>
                             <Caption style={{backgroundColor: "rgba(0,0,0,0.8)", padding: "80px 0"}} placement="center">

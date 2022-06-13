@@ -15,6 +15,9 @@ use yii\db\ActiveRecord;
  */
 class Status extends ActiveRecord
 {
+    /** @var int Статус заявки "В рассмотрении" */
+    public const DEFAULT_STATUS_ID = 1;
+
     /** @inheritdoc */
     public function rules(): array
     {

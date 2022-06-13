@@ -15,7 +15,8 @@ use yii\web\NotFoundHttpException;
 
 class PlaceController extends Controller
 {
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         return [
             'access' => [

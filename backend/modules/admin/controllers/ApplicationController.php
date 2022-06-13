@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\Ticket;
 use yii\web\Response;
 use app\modules\admin\components\ErrorHelper;
 use yii\data\ActiveDataProvider;
@@ -49,6 +50,24 @@ class ApplicationController extends Controller
         ]);
 
         return $this->render('index', compact('applicationProvider'));
+    }
+
+    /**
+     * Странциа просмотра информации о заявке
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
+    {
+        $model = $this->loadModel($id);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $model->getTickets()
+        ]);
+
+
+        return $this->render('detail', compact('model', 'dataProvider'));
     }
 
     /**
@@ -105,7 +124,7 @@ class ApplicationController extends Controller
     protected function loadModel(int $id): Application
     {
         if (!$model = Application::findOne($id)) {
-            throw new NotFoundHttpException("Статический контент не найден!");
+            throw new NotFoundHttpException("Заявка не найдена!");
         }
         return $model;
     }

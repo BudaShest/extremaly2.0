@@ -13,7 +13,8 @@ final class Review extends BaseEventReview
         return [
             'user_id' => 'Пользователь',
             'text' => 'Текст',
-            'rating' => 'Рейтинг'
+            'rating' => 'Рейтинг',
+            'created_at' => 'Создан'
         ];
     }
 }

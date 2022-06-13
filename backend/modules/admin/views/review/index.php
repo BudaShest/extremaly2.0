@@ -1,10 +1,13 @@
 <?php
 /** @var \yii\web\View $this */
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+/** @var \yii\data\BaseDataProvider $reviewsProvider */
+
+use app\modules\admin\models\Review;
 use yii\bootstrap4\ButtonDropdown;
 use yii\bootstrap4\LinkPager;
+use yii\grid\GridView;
+use yii\helpers\Html;
 
 $this->title = 'Вcе отзывы';
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,8 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'user_id',
-            'value' => function($data){
-                return Html::a($data->user->login, ['user/view', 'id'=>$data->user->id]);
+            'value' => function ($data) {
+                /** @var Review $data */
+                return Html::a($data->user->login, ['user/view', 'id' => $data->user->id]);
             },
             'format' => 'raw'
         ],
@@ -33,14 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'raw'
         ],
         [
+            'attribute' => 'created_at'
+        ],
+        [
             'label' => 'Действия',
             'value' => function ($data) {
+                /** @var Review $data */
                 return ButtonDropdown::widget([
                     'label' => 'Действия',
                     'dropdown' => [
                         'items' => [
-                            ['label' => 'Обновить', 'url' => '/admin/review/update?id='.$data->id],
-                            ['label' => 'Удалить', 'url' => '/admin/review/delete?id='.$data->id],
+                            ['label' => 'Обновить', 'url' => '/admin/review/update?id=' . $data->id],
+                            ['label' => 'Удалить', 'url' => '/admin/review/delete?id=' . $data->id],
                         ],
                     ],
                 ]);

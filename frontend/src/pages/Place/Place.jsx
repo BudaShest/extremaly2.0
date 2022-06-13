@@ -18,9 +18,9 @@ const Place = () => {
     const placeEvents = useSelector(state => state.placesReducer.placeEvents);
     console.log(place)
 
-    useEffect( ()  => {
+    useEffect(() => {
         const script = document.createElement('script');
-        if(place.map){
+        if (place.map) {
             script.src = `https://api-maps.yandex.ru/services/constructor/1.0/js/?um=${place.map}&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true`;
             script.charSet = "utf-8";
             script.async = true;
@@ -52,11 +52,17 @@ const Place = () => {
                             <h5 className="white-text center-align">Характеристики</h5>
                             <Row className={style.placeBadgeRow}>
                                 <Col s={4}><b>Климат:</b></Col>
-                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon} src={place.climat_icon} alt={place.climat_name}/>{place.climat_name}</Col>
+                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon}
+                                                                                src={place.climat_icon}
+                                                                                alt={place.climat_name}/>{place.climat_name}
+                                </Col>
                             </Row>
                             <Row className={style.placeBadgeRow}>
                                 <Col s={4}><b>Страна:</b></Col>
-                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon} src={place.country_flag} alt={place.country_name}/>{place.country_name}</Col>
+                                <Col s={8} className={style.placeBadgeRow}><img className={style.badgeIcon}
+                                                                                src={place.country_flag}
+                                                                                alt={place.country_name}/>{place.country_name}
+                                </Col>
                             </Row>
                             <Row>
                                 <Col s={4}><b>Адрес: </b></Col>
@@ -68,31 +74,44 @@ const Place = () => {
                             <p className="white-text" dangerouslySetInnerHTML={{__html: place.description}}></p>
                         </Col>
                     </Row>
-                    <h3>Карта</h3>
-                    <Row><Col s={10}>
-                        <div id="mapContainer"></div>
-                    </Col></Row>
+                    <h3 className="white-text">Карта</h3>
+                    <Row>
+                        <Col push={'s1'} s={10}>
+                            <div style={{minHeight: 600, backgroundColor: '#101010'}} id="mapContainer"></div>
+                        </Col>
+                    </Row>
                     <h3 className="white-text">Галерея изображений</h3>
                     <Gallery photos={place.images}/>
                     <h4 className="white-text">События в этом месте</h4>
                     {
-                        placeEvents.length?
-                        <Carousel
-                            carouselId="Carousel-35"
-                            className="white-text center"
-                            options={{
-                                fullWidth: false,
-                                indicators: false
-                            }}
-                        >
-                            {
-                                placeEvents.map(placeEvent => {return(
-                                    <div className={`valign-wrapper hoverable ${style.sliderElem}`} style={{backgroundImage:`url(${placeEvent.images[0]})`}}>
-                                        <p style={{backgroundColor:"rgba(0,0,0,0.6)", textAlign:'center', fontSize:"2em", width:'100%', padding:'14px'}}><NavLink className={style.sliderElemLink} to={`/events/${placeEvent.id}`}>{placeEvent.name}</NavLink></p>
-                                    </div>
-                                )})
-                            }
-                        </Carousel>:''
+                        placeEvents.length ?
+                            <Carousel
+                                carouselId="Carousel-35"
+                                className="white-text center"
+                                options={{
+                                    fullWidth: false,
+                                    indicators: false
+                                }}
+                            >
+                                {
+                                    placeEvents.map(placeEvent => {
+                                        return (
+                                            <div className={`valign-wrapper hoverable ${style.sliderElem}`}
+                                                 style={{backgroundImage: `url(${placeEvent.images[0]})`}}>
+                                                <p style={{
+                                                    backgroundColor: "rgba(0,0,0,0.6)",
+                                                    textAlign: 'center',
+                                                    fontSize: "2em",
+                                                    width: '100%',
+                                                    padding: '14px'
+                                                }}><NavLink className={style.sliderElemLink}
+                                                            to={`/events/${placeEvent.id}`}>{placeEvent.name}</NavLink>
+                                                </p>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Carousel> : ''
                     }
                 </Container>
             </main>

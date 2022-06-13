@@ -6,6 +6,8 @@ services:
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./backend:/app:delegated
+    depends_on:
+      - db
     ports:
       - '8000:80'
   # Контейнер с PG
@@ -19,6 +21,8 @@ services:
   # Админер для простоты взаимодействия с СУБД
   adminer:
     image: adminer
+    depends_on:
+      - db
     restart: unless-stopped
     ports:
        - '8081:8080'
@@ -26,8 +30,7 @@ services:
   frontend:
     build: ./frontend
     depends_on:
-      - db
-      - nginx
+      - apache
     ports:
       - '3000:3000'
     volumes:
@@ -36,6 +39,8 @@ services:
   # Отдельный сервер для чата на ноде
   chat:
     build: ./chat
+    depends_on:
+      - frontend
     volumes:
       - ./chat:/usr/src/app
       - /usr/src/app/node_modules

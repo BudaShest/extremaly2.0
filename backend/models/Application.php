@@ -20,21 +20,11 @@ use yii\db\ActiveQuery;
  */
 class Application extends ActiveRecord
 {
-    public function behaviors(): array
-    {
-        return [
-            'class' => TimestampBehavior::class,
-            'attributes' => [
-                ActiveRecord::EVENT_AFTER_INSERT => ['created_at']
-            ]
-        ];
-    }
-
     /** @inheritdoc */
     public function rules(): array
     {
         return [
-            [['user_id', 'num', 'status_id', 'ticket_id'], 'required'],
+            [['user_id', 'num', 'status_id'], 'required'],
             [['user_id', 'num', 'status_id'], 'integer']
         ];
     }

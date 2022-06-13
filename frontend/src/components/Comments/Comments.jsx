@@ -35,9 +35,11 @@ const Comments = ({numOfPages, comments, children}) => {
                 }
             </Col>
             <Col s={12} l={7} className={style.commentsContainer}>
-                {
-                    comments.map(comment => <Comment key={comment.id} {...comment}/>)
-                }
+                <Row style={{minHeight:520}}>
+                    {
+                        comments.map(comment => <Comment key={comment.id} {...comment}/>)
+                    }
+                </Row>
                 <Row>
                     <Col offset={"s3"} s={12} m={6}>
                         <Pagination
