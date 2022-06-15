@@ -19,6 +19,7 @@ class m220407_092516_create_junction_table_for_ticket_and_application_table exte
         $this->createTable('{{%ticket_application}}', [
             'ticket_id' => $this->integer(),
             'application_id' => $this->integer(),
+            'num' => $this->integer()->notNull(),
             'PRIMARY KEY(ticket_id, application_id)',
         ]);
 

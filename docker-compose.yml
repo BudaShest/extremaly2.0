@@ -36,16 +36,16 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-  # Отдельный сервер для чата на ноде
-  chat:
-    build: ./chat
-    depends_on:
-      - frontend
-    volumes:
-      - ./chat:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - '8082:8080'
+  # Отдельный сервер для чата на ноде (был отключен)
+#  chat:
+#    build: ./chat
+#    depends_on:
+#      - frontend
+#    volumes:
+#      - ./chat:/usr/src/app
+#      - /usr/src/app/node_modules
+#    ports:
+#      - '8082:8080'
 
 
 

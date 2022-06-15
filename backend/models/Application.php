@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 
@@ -37,13 +36,14 @@ class Application extends ActiveRecord
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
-    /**
-     * @return ActiveQuery
-     * @throws \yii\base\InvalidConfigException
-     */
+    public function getTicketApplications(): ActiveQuery
+    {
+        return $this->hasMany(TicketApplication::class, ['application_id' => 'id']);
+    }
+
     public function getTickets(): ActiveQuery
     {
-        return $this->hasMany(Ticket::class, ['id' => 'ticket_id'])->viaTable('ticket_application', ['application_id' => 'id']);
+        return $this->hasMany(Ticket::class, ['id' => 'ticket_id'])->via('ticketApplications');
     }
 
     /**

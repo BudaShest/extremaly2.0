@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Status;
 use app\models\Ticket;
 use app\models\Application;
+use app\models\TicketApplication;
 use app\modules\admin\components\ErrorHelper;
 use Codeception\Util\HttpCode;
 use Yii;
@@ -70,7 +71,6 @@ class ApplicationController extends ActiveController
     public function actionCreateApplication()
     {
         $request = Yii::$app->request->post();
-//        var_dump($request);die;
         $model = new Application();
         $model->user_id = $request['user_id'];
         $model->num = array_sum(array_column($request['tickets'], 'cnt'));
@@ -83,11 +83,14 @@ class ApplicationController extends ActiveController
                 return ['message' => 'Ошибка создания заявки!', "status" => HttpCode::NOT_MODIFIED];
             }
             if ($ticket->event->ticket_num >= $item['cnt']) {
-                $ticket->link('applications', $model);
+                $ticketApp = new TicketApplication();
+                $ticketApp->ticket_id = $ticket->id;
+                $ticketApp->application_id = $model->id;
+                $ticketApp->num = $item['cnt'];
+                $ticketApp->save();
             } else {
                 return ['message' => 'Было выбрано слишком много билетов!', "status" => HttpCode::NOT_MODIFIED];
             }
-//            var_dump($model);die;
         }
         return $this->redirect('http://localhost:3000/user');
     }

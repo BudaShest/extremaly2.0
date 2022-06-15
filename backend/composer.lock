@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14730d4cda0689973eb17bca5e864864",
+    "content-hash": "d79d9e10b1ff4c49764684df71bf4a7c",
     "packages": [
+        {
+            "name": "alexinator1/yii2-jta",
+            "version": "v0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexinator1/yii2-jta.git",
+                "reference": "64a487c9d0d150af00f7c6ef02e99c1f75b01858"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexinator1/yii2-jta/zipball/64a487c9d0d150af00f7c6ef02e99c1f75b01858",
+                "reference": "64a487c9d0d150af00f7c6ef02e99c1f75b01858",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "alexinator1\\jta\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksey Rudakov",
+                    "email": "rudakovalal@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension allows to access attributes of junction table and attach them as child model as properties in many-to-many relation",
+            "keywords": [
+                "Junction Attributes",
+                "Junction table",
+                "Pivot table",
+                "activerecord",
+                "many-to-many",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/alexinator1/yii2-jta/issues",
+                "source": "https://github.com/alexinator1/yii2-jta/tree/v0.3"
+            },
+            "time": "2017-01-30T14:04:28+00:00"
+        },
         {
             "name": "behat/gherkin",
             "version": "v4.9.0",
@@ -6500,5 +6548,5 @@
         "php": ">=7.4"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

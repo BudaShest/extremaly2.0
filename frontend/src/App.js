@@ -4,7 +4,6 @@ import './App.css';
 import {Preloader} from "react-materialize";
 import React,{Suspense} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
-import Chat from "./components/Chat/Chat";
 import MainRouter from "./router/MainRouter";
 const Header = React.lazy(()=>import('./components/Header/Header'));
 const Footer = React.lazy(()=>import('./components/Footer/Footer'));
@@ -15,10 +14,7 @@ function App() {
         <Suspense fallback={<Preloader/>}>
             <Header/>
         </Suspense>
-            <MainRouter/>
-        <Suspense fallback={<Preloader/>}>
-            <Chat/>
-        </Suspense>
+        <MainRouter/>
         <Suspense fallback={<Preloader/>}>
             <Footer/>
         </Suspense>

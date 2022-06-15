@@ -35,14 +35,25 @@ class Ticket extends ActiveRecord
         return $this->hasOne(Event::class, ['id' => 'event_id']);
     }
 
-    /**
-     * @return ActiveQuery
-     * @throws \yii\base\InvalidConfigException
-     */
+    public function getTicketApplications(): ActiveQuery
+    {
+        return $this->hasMany(TicketApplication::class, ['ticket_id' => 'id']);
+    }
+
+
     public function getApplications(): ActiveQuery
     {
-        return $this->hasMany(Application::class,['id'=>'application_id'])->viaTable('ticket_application', ['ticket_id' => 'id']);
+        return $this->hasMany(Application::class, ['id' => 'application_id'])->via('ticketApplications');
     }
+
+//    /**
+//     * @return ActiveQuery
+//     * @throws \yii\base\InvalidConfigException
+//     */
+//    public function getApplications(): ActiveQuery
+//    {
+//        return $this->hasMany(Application::class,['id'=>'application_id'])->via('ticket_application', ['ticket_id' => 'id'],);
+//    }
 
     /** @inheritdoc */
     public function fields(): array
