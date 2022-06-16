@@ -8,6 +8,7 @@ class SocialLinkCest
 {
     public function _before(FunctionalTester $I)
     {
+        $I->amLogin($I);
     }
 
     /**
@@ -18,7 +19,7 @@ class SocialLinkCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу со списком соц. сетей проекта');
-        $I->amOnPage('/social-link/index');
+        $I->amOnPage('/admin/social-link/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком соц. сетей проекта');
@@ -33,7 +34,7 @@ class SocialLinkCest
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу добавления социальной сети');
-        $I->amOnPage('/social-link//create');
+        $I->amOnPage('/admin/social-link/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу добавления социальной стеи');
@@ -48,7 +49,7 @@ class SocialLinkCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу просмотра информации о соц. сети проекта');
-        $I->amOnPage('/social-link/view?id=1');
+        $I->amOnPage('/admin/social-link/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра информации о соц. сети проекта');
@@ -63,7 +64,7 @@ class SocialLinkCest
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу обновления информации о соц. сети проекта');
-        $I->amOnPage('/social-link/update?id=1');
+        $I->amOnPage('/admin/social-link/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу обновления информации о соц. сети проекта');

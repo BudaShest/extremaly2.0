@@ -4,21 +4,17 @@ namespace admin;
 use FunctionalTester;
 use Codeception\Util\HttpCode;
 
+/**
+ * Класс для тестирования раздела "События"
+ */
 class EventCest
 {
     public function _before(FunctionalTester $I)
     {
-        $I->amGoingTo('Пройти авторизацию');
-        $I->amOnPage('/admin/main/login');
-        $I->see('Login');
-//        $I->submitForm('#login-form',[
-//            'LoginForm[login]' => 'admin',
-//            'LoginForm[password]' => 'admin'
-//        ]);
-//        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->amLogin($I);
     }
 
-    /**
+    /**Place
      * Страница со списком всех событий
      * @param FunctionalTester $I
      * @return void
@@ -26,7 +22,7 @@ class EventCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Протестировать страницу со списком событий');
-        $I->amOnPage('/event');
+        $I->amOnPage('/admin/event/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех событий');
@@ -41,11 +37,11 @@ class EventCest
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Протестировать страницу добавления события');
-        $I->amOnPage('/event/create');
+        $I->amOnPage('/admin/event/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу добавления события');
-        $I->see('');
+        $I->see('Добавить событие');
     }
 
     /**
@@ -56,7 +52,7 @@ class EventCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу просмотра детальной информации о событии');
-        $I->amOnPage('/event/view?id=1');
+        $I->amOnPage('/admin/event/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра детальной информации о событии');
@@ -71,7 +67,7 @@ class EventCest
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу обновления информации о событии');
-        $I->amOnPage('/event/view?id=1');
+        $I->amOnPage('/admin/event/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Посетить страницу просмотра детальной информации о событии');

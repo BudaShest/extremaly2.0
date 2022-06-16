@@ -13,7 +13,7 @@ use yii\web\UploadedFile;
 final class Event extends BaseEvent
 {
     /** @var UploadedFile[] Загрузки */
-    public array $uploads;
+    public array $uploads = [];
 
     /** @inheritdoc */
     public function behaviors(): array

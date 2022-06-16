@@ -14,7 +14,7 @@ class PlaceCest
 {
     public function _before(FunctionalTester $I)
     {
-        //todo сюда авторизацию приебенить
+        $I->amLogin($I);
     }
 
     /**
@@ -25,7 +25,7 @@ class PlaceCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Открыть страницу со списком всех мест');
-        $I->amOnPage('/place/index');
+        $I->amOnPage('/admin/place/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех мест');
@@ -40,11 +40,11 @@ class PlaceCest
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Открыть страницу с формой добавления места');
-        $I->amOnPage('/place/create');
+        $I->amOnPage('/admin/place/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу с формой добавления места');
-        $I->see("Добавить место");
+        $I->see("Управление местом");
     }
 
     /**
@@ -55,7 +55,7 @@ class PlaceCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Открыть страницу с детальной информацией о места');
-        $I->amOnPage('/place/view?id=1');
+        $I->amOnPage('/admin/place/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра детальной информации о месте');
@@ -70,10 +70,10 @@ class PlaceCest
     public function updateTest(FunctionalTester $I)
     {
         $I->amGoingTo('Открыть страницу обновления информации о месте');
-        $I->amOnPage('/place/update?id=1');
+        $I->amOnPage('/admin/place/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу обновления информации о месте');
-        $I->see("Обновление места");
+        $I->see("Управление местом");
     }
 }

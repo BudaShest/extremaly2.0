@@ -25,8 +25,8 @@ final class EventType extends BaseEventType
         return $behaviors;
     }
 
-    /** @var UploadedFile $uploads - загрузки */
-    public UploadedFile $uploads;
+    /** @var ?UploadedFile $uploads - загрузки */
+    public ?UploadedFile $uploads = null;
 
     /** @inheritdoc */
     public function rules(): array

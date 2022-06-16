@@ -28,14 +28,14 @@ final class Country extends BaseCountry
 
     public const DEFAULT_IMAGE = 'https://33tura.ru/FLAG/reunion.gif';
 
-    /** @var UploadedFile $uploads - Загрузки */
-    public UploadedFile $uploads;
+    /** @var ?UploadedFile $uploads - Загрузки */
+    public ?UploadedFile $uploads = null;
 
     /** @inheritDoc */
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif','jpeg'], 'maxSize' => 1024 * 1024 * 5,];
+        $rules[] = [['uploads'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'maxSize' => 1024 * 1024 * 5,];
         return $rules;
     }
 

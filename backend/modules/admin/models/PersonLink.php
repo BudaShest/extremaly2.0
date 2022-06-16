@@ -9,8 +9,8 @@ use yii\web\UploadedFile;
 /** @inheritdoc */
 final class PersonLink extends BasePersonLink
 {
-    /** @var UploadedFile $uploads */
-    public UploadedFile $uploads;
+    /** @var ?UploadedFile $uploads */
+    public ?UploadedFile $uploads = null;
 
     /** @var string Изображение заглушка */
     public const DEFAULT_IMAGE = 'http://s1.iconbird.com/ico/0912/MetroUIDock/w512h5121347464753Network.png';

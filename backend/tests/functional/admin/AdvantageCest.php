@@ -9,6 +9,7 @@ class AdvantageCest
 {
     public function _before(FunctionalTester $I)
     {
+        $I->amLogin($I);
     }
 
     /**
@@ -19,7 +20,7 @@ class AdvantageCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу со списком всех преимущества');
-        $I->amOnPage('/advantage/index');
+        $I->amOnPage('/admin/advantage/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех преимущества');
@@ -34,7 +35,7 @@ class AdvantageCest
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу с формой добавления записи преимущества');
-        $I->amOnPage('/advantage/create');
+        $I->amOnPage('/admin/advantage/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу с формой добавления записи преимущества');
@@ -49,7 +50,7 @@ class AdvantageCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу просмотра информации о преимуществе');
-        $I->amOnPage('/advantage/view?id=1');
+        $I->amOnPage('/admin/advantage/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра информации о преимуществе');
@@ -64,7 +65,7 @@ class AdvantageCest
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу с формой обновления информации о преимуществе');
-        $I->amOnPage('/advantage/update?id=1');
+        $I->amOnPage('/admin/advantage/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу с формой обновления информации о преимуществе');

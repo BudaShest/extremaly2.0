@@ -24,15 +24,13 @@ final class Place extends BasePlace
         return $behaviors;
     }
 
-    //todo сделать также в других модельках модуля
-
     /** @var string */
     public const MODEL_NAME_RU = 'Место';
     /** @var string */
     public const MODEL_NAME_RU_MULTI = 'Места';
 
     /** @var UploadedFile[] $uploads */
-    public array $uploads;
+    public array $uploads = [];
 
     /** @inheritDoc */
     public function rules(): array

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <img src="<?= $avatar ?>" class="img-fluid" alt="">
     </div>
 <?php endif; ?>
-<?= $form->field($model, 'uploads')->fileInput() ?>
+<?= $form->field($model, 'uploads[]')->fileInput() ?>
 <div class="btn-block">
     <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     <?= Html::resetButton('Стереть', ['class' => 'btn btn-danger']) ?>

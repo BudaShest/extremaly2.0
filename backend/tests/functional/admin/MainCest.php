@@ -8,6 +8,7 @@ class MainCest
 {
     public function _before(FunctionalTester $I)
     {
+        $I->amLogin($I);
     }
 
     /**
@@ -18,11 +19,11 @@ class MainCest
     public function loginTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу авторизации');
-        $I->amOnPage('/main/login');
+        $I->amOnPage('/admin/main/login');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу авторизации');
-        $I->see('Добро пожаловать в админ панель!');
+        $I->see('Логин в админ-панели');
     }
 
     /**
@@ -33,24 +34,25 @@ class MainCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить главную страницу');
-        $I->amOnPage('/main/login');
+        $I->amOnPage('/admin/main/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть главную страницу');
-        $I->see('Логин в админ-панеле');
+        $I->see('Добро пожаловать в админ панель!');
     }
 
-//    /** todo испрвить сам метод */
-//     * @param FunctionalTester $I
-//     * @return void
-//     */
-//    public function logoutTest(FunctionalTester $I): void
-//    {
-//        $I->amGoingTo('');
-//        $I->amOnPage('');
-//        $I->seeResponseCodeIs(HttpCode::OK);
-//
-//        $I->expectTo('');
-//        $I->see();
-//    }
+    /**
+     * Выход
+     * @param FunctionalTester $I
+     * @return void
+     */
+    public function logoutTest(FunctionalTester $I): void
+    {
+        $I->amGoingTo('Выйти из учётной записи');
+        $I->amOnPage('/admin/main/logout');
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->expectTo('Выйти и увидеть форму авторизации');
+        $I->see('Логин в админ-панели');
+    }
 }

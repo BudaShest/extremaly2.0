@@ -8,6 +8,7 @@ class ReviewCest
 {
     public function _before(FunctionalTester $I)
     {
+        $I->amLogin($I);
     }
 
     /**
@@ -18,7 +19,7 @@ class ReviewCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу со списком всех отзывов');
-        $I->amOnPage('/review/index');
+        $I->amOnPage('/admin/review/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех отзывов');
@@ -33,7 +34,7 @@ class ReviewCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу просмотра отзыва о проекте');
-        $I->amOnPage('/review/view?id=1');
+        $I->amOnPage('/admin/review/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра отзыва о проекте');
@@ -48,10 +49,10 @@ class ReviewCest
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу обновления отзыва о проекте');
-        $I->amOnPage('/review/update?id=1');
+        $I->amOnPage('/admin/review/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу обновления отзыва о проекте');
-        $I->see();
+        $I->see('Управление отзывом');
     }
 }

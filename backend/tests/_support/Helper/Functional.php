@@ -7,6 +7,11 @@ use FunctionalTester;
 
 class Functional extends \Codeception\Module
 {
+    /**
+     * Авторизация под административной учётной записью
+     * @param FunctionalTester $I
+     * @return void
+     */
     public function amLogin(FunctionalTester $I)
     {
         $I->amGoingTo('Авторизоваться под административной учётной записью');

@@ -6,7 +6,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\redactor\widgets\Redactor;
 
-$this->title = 'Управление статичным контентов';
+$this->title = 'Управление статичным контентом';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?=$this->title?></h3>

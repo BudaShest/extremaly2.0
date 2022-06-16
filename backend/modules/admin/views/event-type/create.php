@@ -5,7 +5,7 @@
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = $model->isNewRecord ? 'Добавить тип события' : 'Управление типом события';
+$this->title = $eventType->isNewRecord ? 'Добавить тип события' : 'Управление типом события';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3 data-target="expandFormClimat" class="expand-toggler hoverable"><?= $this->title ?></h3>

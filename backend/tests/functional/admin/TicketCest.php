@@ -1,4 +1,5 @@
 <?php
+
 namespace functional\admin;
 
 use Codeception\Util\HttpCode;
@@ -8,6 +9,7 @@ class TicketCest
 {
     public function _before(FunctionalTester $I)
     {
+        $I->amLogin($I);
     }
 
     /**
@@ -18,7 +20,7 @@ class TicketCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу со списком всех видов билетов');
-        $I->amOnPage('/ticket/index');
+        $I->amOnPage('/admin/ticket/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех видов билетов');
@@ -33,7 +35,7 @@ class TicketCest
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу добавления типов билетов');
-        $I->amOnPage('/ticket/create');
+        $I->amOnPage('/admin/ticket/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу добавления типов билетов');

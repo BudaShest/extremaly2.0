@@ -8,7 +8,7 @@ class PersonLinkCest
 {
     public function _before(FunctionalTester $I)
     {
-        //todo автторизация =)
+        $I->amLogin($I);
     }
 
     /**
@@ -19,7 +19,7 @@ class PersonLinkCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу со списком соц. сетей личностей');
-        $I->amOnPage('/person-link/index');
+        $I->amOnPage('/admin/person-link/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком соц. сетей личностей');
@@ -34,7 +34,7 @@ class PersonLinkCest
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу добавления соц. сети личности');
-        $I->amOnPage('/person-link/create');
+        $I->amOnPage('/admin/person-link/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу добавления соц. сети личности');
@@ -49,7 +49,7 @@ class PersonLinkCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу просмотра детальной информации о соц. сети личности');
-        $I->amOnPage('/person-link/view?id=1');
+        $I->amOnPage('/admin/person-link/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра детальной информации о соц. сети личности');
@@ -64,7 +64,7 @@ class PersonLinkCest
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу обновления соц. сети личности');
-        $I->amOnPage('/person-link/update?id=1');
+        $I->amOnPage('/admin/person-link/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу обновления соц. сети личности');

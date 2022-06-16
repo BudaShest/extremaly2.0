@@ -21,8 +21,8 @@ final class Climat extends BaseClimat
         return $behaviors;
     }
 
-    /** @var UploadedFile $uploads - загрузки */
-    public UploadedFile $uploads;
+    /** @var ?UploadedFile $uploads - загрузки */
+    public ?UploadedFile $uploads = null;
 
     /** @var string */
     public const MODEL_NAME_RU = 'Климат';

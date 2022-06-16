@@ -13,7 +13,7 @@ class CountryCest
 {
     public function _before(FunctionalTester $I)
     {
-        //todo сюда авторизацию приебенить
+        $I->amLogin($I);
     }
 
     /**
@@ -24,7 +24,7 @@ class CountryCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Открыть страницу со списком всех стран');
-        $I->amOnPage('/country/index');
+        $I->amOnPage('/admin/country/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех стран');
@@ -39,7 +39,7 @@ class CountryCest
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Открыть страницу с формой добавления страны');
-        $I->amOnPage('/country/create');
+        $I->amOnPage('/admin/country/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу с формой добавления страны');
@@ -54,7 +54,7 @@ class CountryCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Открыть страницу просмотра детальной информации о стране');
-        $I->amOnPage('/country/view');
+        $I->amOnPage('/admin/country/view?code=RU');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра детальной информации о стране');
@@ -69,7 +69,7 @@ class CountryCest
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу с формой обновления информации о стране');
-        $I->amOnPage('/country/update?id=1');
+        $I->amOnPage('/admin/country/update?code=RU');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу с формой обновления информации о стране');

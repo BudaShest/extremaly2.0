@@ -12,8 +12,8 @@ use yii\web\UploadedFile;
  */
 final class About extends BaseAbout
 {
-    /** @var UploadedFile $uploads - загрузки */
-    public UploadedFile $uploads;
+    /** @var ?UploadedFile $uploads - загрузки */
+    public ?UploadedFile $uploads = null;
 
     /** @var string Изображение заглушка */
     public const DEFAULT_IMAGE = 'https://www.wheretowillie.com/wp-content/uploads/2012/08/Under-the-Stars.jpg';

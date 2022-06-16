@@ -30,7 +30,7 @@ final class Person extends BasePerson
     }
 
     /** @var UploadedFile[] $uploads - Загрузки */
-    public array $uploads;
+    public array $uploads = [];
 
     /** @inheritdoc */
     public function attributeLabels(): array

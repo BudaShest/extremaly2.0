@@ -8,6 +8,7 @@ class EventReviewCest
 {
     public function _before(FunctionalTester $I)
     {
+        $I->amLogin($I);
     }
 
     /**
@@ -18,7 +19,7 @@ class EventReviewCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу со списком всех комментариев к событию');
-        $I->amOnPage('/event-review/index');
+        $I->amOnPage('/admin/event-review/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех комментариев к событию');
@@ -33,7 +34,7 @@ class EventReviewCest
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу просмотра детальной информации комментария к событию');
-        $I->amOnPage('/event-review/view?id=1');
+        $I->amOnPage('/admin/event-review/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра детальной информации комментария к событию');
@@ -48,7 +49,7 @@ class EventReviewCest
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу обновления информации комментария к событию');
-        $I->amOnPage('/event-review/update?id=1');
+        $I->amOnPage('/admin/event-review/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу обновления информации комментария к событию');

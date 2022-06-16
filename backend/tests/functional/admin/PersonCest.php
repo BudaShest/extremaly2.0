@@ -1,4 +1,5 @@
 <?php
+
 namespace functional\admin;
 
 use FunctionalTester;
@@ -13,6 +14,7 @@ class PersonCest
 {
     public function _before(FunctionalTester $I)
     {
+        $I->amLogin($I);
     }
 
     /**
@@ -23,7 +25,7 @@ class PersonCest
     public function indexTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу со списком всех персон');
-        $I->amOnPage('/person/index');
+        $I->amOnPage('/admin/person/index');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу со списком всех персон');
@@ -33,12 +35,12 @@ class PersonCest
     /**
      * Страница с формой добавления персоны
      * @param FunctionalTester $I
-     * @return void
+     * @covers ::actionCreate
      */
     public function createTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу с формой добавления личности');
-        $I->amOnPage('/person/create');
+        $I->amOnPage('/admin/person/create');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу с формой добавления личности');
@@ -48,12 +50,12 @@ class PersonCest
     /**
      * Страница просмотра детальной информации о личности
      * @param FunctionalTester $I
-     * @return void
+     * @covers ::actionView
      */
     public function viewTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу просмотра детальной информации о личности');
-        $I->amOnPage('/person/view?id=1');
+        $I->amOnPage('/admin/person/view?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу просмотра детальной информации о личности');
@@ -63,12 +65,12 @@ class PersonCest
     /**
      * Страница обновления информации о личности
      * @param FunctionalTester $I
-     * @return void
+     * @covers ::actionUpdate
      */
     public function updateTest(FunctionalTester $I): void
     {
         $I->amGoingTo('Посетить страницу обновления информации о личности');
-        $I->amOnPage('/person/update?id=1');
+        $I->amOnPage('/admin/person/update?id=1');
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $I->expectTo('Увидеть страницу обновления инфморации о личности');
