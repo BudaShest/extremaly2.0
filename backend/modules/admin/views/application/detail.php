@@ -1,11 +1,16 @@
 <?php
-/** @var \yii\web\View $this */
+/** @var View $this */
 /** @var Application $model */
+/** @var BaseDataProvider $dataProvider */
 
 use app\modules\admin\models\Application;
 use yii\bootstrap4\ButtonDropdown;
+use yii\data\BaseDataProvider;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\DetailView;
+
+$inApplication = true;
 
 $this->title = 'Заявка №' . $model->id;
 $this->params['breadcrumbs'][] = $this->title;
@@ -61,4 +66,22 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ])
 ?>
-<?= $this->render('/ticket/index', compact('dataProvider')) ?>
+<h2>Билеты в заявке</h2>
+<div class="row">
+    <div class="col">
+        <span class="ticket-application-table-header">Билет</span>
+    </div>
+    <div class="col">
+        <span class="ticket-application-table-header">Кол-во</span>
+    </div>
+</div>
+<?php foreach ($model->ticketApplications as $ticketApplication): ?>
+<div class="row">
+    <div class="col">
+        <span class="ticket-application-table-filed"><?= Html::a($ticketApplication->ticket->event->name, ['/admin/event/view', 'id' => $ticketApplication->ticket->event->id]) ?></span>
+    </div>
+    <div class="col">
+        <span class="ticket-application-table-filed"><?= $ticketApplication->num ?></span>
+    </div>
+</div>
+<?php endforeach; ?>

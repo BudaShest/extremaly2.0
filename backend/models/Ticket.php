@@ -13,7 +13,8 @@ use yii\db\ActiveQuery;
  * @property string $privilege
  * Relations:
  * @property Event $event
- * @property Application $applications
+ * @property Application[] $applications
+ * @property TicketApplication[] $ticketApplications
  */
 class Ticket extends ActiveRecord
 {
@@ -35,31 +36,28 @@ class Ticket extends ActiveRecord
         return $this->hasOne(Event::class, ['id' => 'event_id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getTicketApplications(): ActiveQuery
     {
         return $this->hasMany(TicketApplication::class, ['ticket_id' => 'id']);
     }
 
-
+    /**
+     * @return ActiveQuery
+     */
     public function getApplications(): ActiveQuery
     {
         return $this->hasMany(Application::class, ['id' => 'application_id'])->via('ticketApplications');
     }
 
-//    /**
-//     * @return ActiveQuery
-//     * @throws \yii\base\InvalidConfigException
-//     */
-//    public function getApplications(): ActiveQuery
-//    {
-//        return $this->hasMany(Application::class,['id'=>'application_id'])->via('ticket_application', ['ticket_id' => 'id'],);
-//    }
 
     /** @inheritdoc */
     public function fields(): array
     {
         $fields = parent::fields();
-        $fields['event_name'] = function(){
+        $fields['event_name'] = function () {
             return $this->event->name;
         };
         return $fields;

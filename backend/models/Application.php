@@ -8,6 +8,7 @@ use yii\db\ActiveQuery;
 /**
  * Класс "Заявка"
  * Attributes:
+ * @property int $id - ID
  * @property int $user_id - Пользователь(ID)
  * @property int $num - Кол-во
  * @property int $status_id - Статус (ID)
