@@ -14,22 +14,9 @@ settings:
   memory_limit: 1024M
 modules:
     enabled:
+      - \Helper\Functional
       - Filesystem
       - Yii2:
           url: "http://localhost:80/index-test.php"
     REST:
         depends: Yii2
-#class_name: FunctionalTester
-#settings:
-#  bootstrap: functional/_bootstrap.php
-#modules:
-#  enabled:
-#    - Asserts
-#    - Filesystem
-##    - \Helper\Functional
-#    - Yii2:
-#        part: [orm, fixtures]
-#        entryScript: index-test.php
-#        configFile: config/test.php
-#        cleanup: false
-#        transaction: false

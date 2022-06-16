@@ -3,24 +3,12 @@ namespace admin;
 
 use Codeception\Util\HttpCode;
 use FunctionalTester;
-use const http\Client\Curl\Features\HTTP2;
 
 class ApplicationCest
 {
     public function _before(FunctionalTester $I)
     {
-        $I->amGoingTo('Авторизоваться под административной учётной записью');
-        $I->amOnPage('/admin/main/login');
-        $I->seeResponseCodeIs(HttpCode::OK);
-
-        $I->see('Логин в админ-панели');
-        $I->submitForm('#login-form', [
-            'LoginForm' => [
-                'login' => 'admin',
-                'password' => 'admin',
-            ]
-        ]);
-        $I->see('Добро пожаловать в админ панель!');
+        $I->amLogin($I);
     }
 
     /**
