@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     personsReducer,
     eventsReducer,
     mainReducer,
-    applicationsReducer
+    applicationsReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -96,7 +96,7 @@ const Place = () => {
                                 {
                                     placeEvents.map(placeEvent => {
                                         return (
-                                            <div className={`valign-wrapper hoverable ${style.sliderElem}`}
+                                            <div key={placeEvent.id} className={`valign-wrapper hoverable ${style.sliderElem}`}
                                                  style={{backgroundImage: `url(${placeEvent.images[0]})`}}>
                                                 <p style={{
                                                     backgroundColor: "rgba(0,0,0,0.6)",

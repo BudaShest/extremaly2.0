@@ -10,7 +10,7 @@ import {Caption, Slide, Slider} from "react-materialize";
 const MainSlider = ({slides}) => {
 
     const [mainSlides, setMainSlider] = useState([]);
-    console.log('sliders');
+
     useEffect(()=>{
         setMainSlider(slides);
     }, [slides])

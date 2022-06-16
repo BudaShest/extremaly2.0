@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use yii\data\Pagination;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 use app\models\EventReview;
@@ -42,9 +43,24 @@ class EventReviewController extends ActiveController
      */
     public function actionGetEventReviews(int $eventId): array
     {
-        if(!$models = EventReview::findAll(['event_id' => $eventId])){
-            return [];
-        }
+        $query = EventReview::find();
+
+        $pagination = new Pagination([
+            'totalCount' => $query->count(),
+        ]);
+        $models = $query->limit($pagination->limit)->offset($pagination->offset)->all();
         return $models;
+    }
+
+    /**
+     * Получить количество страниц
+     * @return int
+     */
+    public function actionGetNumOfPages(int $eventId): int
+    {
+        $query = EventReview::find()->where(['event_id' => $eventId]);
+
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 3]);
+        return $pagination->pageCount;
     }
 }

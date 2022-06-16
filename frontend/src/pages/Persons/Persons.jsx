@@ -59,7 +59,7 @@ const Persons = () => {
             <Container>
                 <h1 className="white-text">Все личности</h1>
                 <Row>
-                    <Col s={12} m={4}>
+                    <Col s={12} m={12} l={4}>
                         <form action="" className={style.filterBlock} onSubmit={e => e.preventDefault()}>
                             <h4 className="white-text">Фильтры: </h4>
                             <Select
@@ -90,7 +90,7 @@ const Persons = () => {
                                 </option>
                                 {
                                     professions.map(profession => (
-                                        <option value={profession}>{profession}</option>))
+                                        <option key={profession.id} value={profession}>{profession}</option>))
                                 }
                             </Select>
                             <Button style={{backgroundColor: "#EE6E73"}} onClick={resetFiltersHandler}>Стереть фильтры</Button>
@@ -105,16 +105,16 @@ const Persons = () => {
                            <Button onClick={search}>Поиск</Button>
                         </form>
                     </Col>
-                    <Col s={12} m={8}>
+                    <Col s={12} m={12} l={8}>
                         {
                             persons.length ?
                                 persons.map(person => {
                                 return (
                                     <Row className={style.personRow} key={person.id}>
-                                        <Col s={12} m={12} l={4}>
+                                        <Col s={12} m={12} l={6} xl={4}>
                                             <img className={style.personImage} src={person.images[0]} alt="Аватар"/>
                                         </Col>
-                                        <Col s={12} m={12} l={8}>
+                                        <Col s={12} m={12} l={6} xl={8}>
                                             <div className={style.personInfoBadge}>
                                                 <h5>{person.firstname} {person.lastname}</h5>
                                                 <p className={style.personDescription} dangerouslySetInnerHTML={{__html: person.description}}></p>
@@ -124,7 +124,7 @@ const Persons = () => {
                                                 <div>
                                                     {
                                                         person.links.map(link => {
-                                                            return (<a href={link.url} title={link.title} target="_blank"><img style={{width:30, height:30, borderRadius:'50%', objectFit: 'contain', margin:10}} src={link.icon} alt={link.title}/></a>);
+                                                            return (<a href={link.url} key={link.id} title={link.title} target="_blank"><img style={{width:30, height:30, borderRadius:'50%', objectFit: 'contain', margin:10}} src={link.icon} alt={link.title}/></a>);
                                                         })
                                                     }
                                                 </div>
@@ -140,7 +140,7 @@ const Persons = () => {
                             onSelect={e=>paginationHandler(e)}
                             className={style.pagination}
                             activePage={1}
-                            items={numOfPages + 1}
+                            items={numOfPages}
                             leftBtn={<Icon>chevron_left</Icon>}
                             rightBtn={<Icon>chevron_right</Icon>}
                         />

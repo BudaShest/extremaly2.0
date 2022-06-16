@@ -14,6 +14,7 @@ import {fetchEventTickets} from "../../asyncActions/events/fetchEventTickets";
 import {addTicket} from "../../asyncActions/events/fetchTicket";
 import {fetchPersonsByEvent} from "../../asyncActions/persons/fetchPersons";
 import {fetchSocialLinks} from "../../asyncActions/main/fetchSocialLinks";
+import {fetchNumOfPaginatedPages} from "../../asyncActions/events/fetchEventReviews";
 
 /**
  * Страница "Событие"
@@ -32,12 +33,14 @@ const Event = () => {
     const eventTickets = useSelector(state => state.eventsReducer.eventTickets);
     const eventPersons = useSelector(state => state.personsReducer.eventPersons);
     const socialLinks = useSelector(state => state.mainReducer.socialLinks);
+    const numOfReviewPages = useSelector(state => state.eventsReducer.numOfReviewPages)
 
     useEffect(() => {
         dispatch(fetchEvent(requestParams.id));
         dispatch(fetchEventReviews(requestParams.id));
         dispatch(fetchEventTickets(requestParams.id));
         dispatch(fetchPersonsByEvent(requestParams.id));
+        dispatch(fetchNumOfPaginatedPages(requestParams.id))
         dispatch(fetchSocialLinks());
     }, [])
 
@@ -120,7 +123,7 @@ const Event = () => {
                     {
                         currentUser?.isAuth ? eventTickets.map(eventTicket => {
                             return (
-                                <Col s={12} m={4}>
+                                <Col key={eventTicket.id} s={12} m={4}>
                                     <Card
                                         actions={[
                                             <Button onClick={clickTicketHandler} data-id={eventTicket.id}
@@ -141,7 +144,7 @@ const Event = () => {
                             to="/login">Войдите</NavLink>, чтобы забронировать билеты</div>
                     }
                 </Row>
-                <Comments comments={eventReviews}>
+                <Comments comments={eventReviews} numOfPages={numOfReviewPages}>
                     <form className={style.commentForm} onSubmit={submitHandler}>
                         <h5 className={style.commentForm_title}>Оставьте комментарий!</h5>
                         <Textarea

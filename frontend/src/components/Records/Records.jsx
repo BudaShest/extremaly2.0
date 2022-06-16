@@ -15,6 +15,13 @@ import style from './Records.module.css';
 import NoRecords from "../NoRecords/NoRecords";
 import {fetchNumOfPages} from "../../asyncActions/main/fetchReviews";
 
+/**
+ * Компонент "Записи"
+ * @param records
+ * @param numOfPages
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Records = ({records, numOfPages}) => {
     const requestedStringRef = useRef();
     const dispatch = useDispatch();
@@ -116,7 +123,7 @@ const Records = ({records, numOfPages}) => {
                             Выберите климат
                         </option>
                         {
-                            climates.map(climate => (<option value={climate.code}>{climate.name}</option>))
+                            climates.map(climate => (<option key={climate.code} value={climate.code}>{climate.name}</option>))
                         }
                     </Select>
 
@@ -146,7 +153,7 @@ const Records = ({records, numOfPages}) => {
                             Выберите страну
                         </option>
                         {
-                            countries.map(country => (<option value={country.code}>{country.name}</option>))
+                            countries.map(country => (<option key={country.code} value={country.code}>{country.name}</option>))
                         }
                     </Select>
 
@@ -174,7 +181,7 @@ const Records = ({records, numOfPages}) => {
                             Выберите локацию
                         </option>
                         {
-                            places.map(place => (<option value={place.id}>{place.name}</option>))
+                            places.map(place => (<option key={place.id} value={place.id}>{place.name}</option>))
                         }
                     </Select>
                     <h5 className={style.filterBlock_headlines}>Период: </h5>
@@ -289,8 +296,8 @@ const Records = ({records, numOfPages}) => {
                                     <Card
                                         key={record.id}
                                         actions={[
-                                            <NavLink to={`/events/${record.id}`}>Перейти</NavLink>,
-                                            <NavLink to={`/events/${record.id}`}>Заказть билеты</NavLink>,
+                                            <NavLink key={1} to={`/events/${record.id}`}>Перейти</NavLink>,
+                                            <NavLink key={2} to={`/events/${record.id}`}>Заказать билеты</NavLink>,
                                         ]}
                                         closeIcon={<Icon>close</Icon>}
                                         header={<CardTitle image={record.images[0]}/>}

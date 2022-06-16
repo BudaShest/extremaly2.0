@@ -126,10 +126,10 @@ const User = () => {
                 <Row>
                     {userApplications && userApplications.map(application => {
                         return (
-                            <Col>
+                            <Col key={application.id}>
                                 <Card
                                     actions={[
-                                        <NavLink to={'/application/'+application.id}>Просмотр</NavLink>
+                                        <NavLink key={0} to={'/application/'+application.id}>Просмотр</NavLink>
                                     ]}
                                     className="blue-grey darken-1"
                                     closeIcon={<Icon>close</Icon>}

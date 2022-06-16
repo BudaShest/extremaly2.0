@@ -138,6 +138,7 @@ class PersonController extends ActiveController
 
         $pagination = new Pagination([
             'totalCount' => $query->count(),
+            'pageSize' => 5
         ]);
         return $pagination->pageCount;
     }

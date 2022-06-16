@@ -12,7 +12,19 @@ import SocialLinks from "../SocialLinks/SocialLinks";
  */
 const Persons = ({persons}) => {
     const [activeIndex, setActiveIndex] = useState(1);
-    const [activePerson, setActivePerson] = useState(persons[1]);
+    const [personList, setPersonList] = useState(persons);
+    const [activePerson, setActivePerson] = useState(personList[1]);
+
+    useEffect(()=>{
+        setPersonList(persons);
+        let currentPerson = persons.filter((person, index) => index == activeIndex)[0]
+        setActivePerson(currentPerson);
+    }, [persons])
+
+    useEffect(() => {
+        let currentPerson = persons.filter((person, index) => index == activeIndex)[0]
+        setActivePerson(currentPerson);
+    }, [activeIndex])
 
     const clickHandler = (e) => {
         if (e.target.closest('div').dataset.number) {
@@ -21,19 +33,11 @@ const Persons = ({persons}) => {
         }
     }
 
-    useEffect(() => {
-
-        let currentPerson = persons.filter((person, index) => index === activeIndex)
-        currentPerson = currentPerson[0]
-        setActivePerson(currentPerson);
-
-    }, [activeIndex])
-
     return (
         <Col className={style.persons}>
             <div className={style.personsRow}>
                 {
-                    persons.map((person, index) => <Person key={person.id} index={index} isActive={index == activeIndex}
+                    personList.map((person, index) => <Person key={person.id} index={index} isActive={index == activeIndex}
                                                            clickHandler={clickHandler} person={person}/>)
                 }
             </div>
