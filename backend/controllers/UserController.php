@@ -30,10 +30,10 @@ class UserController extends ActiveController
         $behaviors['corsFilter'] = [
             'class' => Cors::class,
         ];
+
 //        $behaviors['authenticator'] = [
 //            'class' => HttpBearerAuth::class,
 //        ];
-//
 //        $behaviors['authenticator']['except'] = ['register', 'login'];
 
         return $behaviors;
@@ -44,7 +44,7 @@ class UserController extends ActiveController
     {
         return [
             'index' => ['GET', 'HEAD'],
-            'view' => ['GET', 'HEAD'],
+            'view' => ['OPTIONS', 'GET', 'HEAD'],
             'create' => ['OPTIONS', 'POST'],
             'update' => ['OPTIONS', 'PUT', 'PATCH'],
             'delete' => ['DELETE'],
@@ -63,7 +63,7 @@ class UserController extends ActiveController
             if (!$model->register($request)) {
                 return $model->errors;
             }
-            return ["result" => true, "message" => $model->login . ' был успешно зарегистрирован', 'status'=>HttpCode::OK];
+            return ["result" => true, "message" => $model->login . ' был успешно зарегистрирован', 'status' => HttpCode::OK];
         }
         throw new BadRequestHttpException('Неверный запрос');
     }
@@ -93,8 +93,8 @@ class UserController extends ActiveController
     }
 
     /**
-     * @deprecated
      * @return IdentityInterface
+     * @deprecated
      */
     public function actionCheck(): IdentityInterface
     {
@@ -142,21 +142,21 @@ class UserController extends ActiveController
      */
     public function actionUpdateAvatar(): array
     {
-        if($request = Yii::$app->request->post()){
+        if ($request = Yii::$app->request->post()) {
             try {
                 if ($file = $_FILES['avatar']) {
                     if (move_uploaded_file($file['tmp_name'], 'uploads/' . $file['name'])) {
                         $newName = 'http://' . Yii::$app->request->hostName . ':' . Yii::$app->request->port . '/uploads/' . $file['name'];
                         $user = User::findOne($request['user_id']);
                         $user->avatar = $newName;
-                        if(!$user->save()){
-                            return ["message" => 'Ошибка обновления автара!', "status"=>HttpCode::NOT_MODIFIED, "error"=>$user->errors];
+                        if (!$user->save()) {
+                            return ["message" => 'Ошибка обновления автара!', "status" => HttpCode::NOT_MODIFIED, "error" => $user->errors];
                         }
-                        return ["message" => 'Аватар был успешно обновлён', "status"=>HttpCode::OK];
+                        return ["message" => 'Аватар был успешно обновлён', "status" => HttpCode::OK];
                     }
                 }
             } catch (\Exception $e) {
-                return ["message" => $e->getMessage(), "status"=>HttpCode::INTERNAL_SERVER_ERROR ];
+                return ["message" => $e->getMessage(), "status" => HttpCode::INTERNAL_SERVER_ERROR];
             }
         }
         throw new MethodNotAllowedHttpException();

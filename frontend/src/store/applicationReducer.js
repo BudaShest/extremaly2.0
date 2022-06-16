@@ -15,6 +15,7 @@ const defaultValueState = {
 const ADD_APPLICATION = 'ADD_APPLICATION';
 const ADD_TICKET = 'ADD_TICKET';
 const GET_APPLICATION = 'GET_APPLICATION';
+const GET_APPLICATIONS = 'GET_APPLICATIONS';
 
 /**
  * Редсьюер для заявок
@@ -27,7 +28,9 @@ export const applicationsReducer = (state = defaultValueState, action) => {
         case ADD_APPLICATION:
             return {...state, applications: [...state.applications, action.payload]}
         case GET_APPLICATION:
-            return {currentApplication: action.payload}
+            return {...state, currentApplication: action.payload}
+        case GET_APPLICATIONS:
+            return {...state, applications: action.payload}
         case ADD_TICKET:
             return {...state, tickets: [...state.tickets, action.payload]}
         default:
@@ -41,5 +44,6 @@ export const applicationsReducer = (state = defaultValueState, action) => {
  * @returns {{payload, type: string}}
  */
 export const getApplicationAction = (payload) => ({type: GET_APPLICATION, payload})
+export const getApplicationsAction = (payload) => ({type: GET_APPLICATIONS, payload})
 export const addApplicationAction = (payload) => ({type: ADD_APPLICATION, payload})
 export const addTicketAction = (payload) => ({type: ADD_TICKET, payload})

@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\Review;
+use Yii;
 use yii\data\Pagination;
+use yii\filters\auth\HttpBearerAuth;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -18,11 +20,12 @@ class ReviewController extends ActiveController
         return [
             'index' => ['GET', 'HEAD'],
             'view' => ['GET', 'HEAD'],
-            'create' => ['OPTIONS', 'POST'],
+            'create' => ['OPTIONS', 'POST', 'HEAD'],
             'update' => ['PUT', 'PATCH'],
             'delete' => ['DELETE'],
         ];
     }
+
 
     /** @inheritdoc */
     public function behaviors(): array
@@ -30,8 +33,12 @@ class ReviewController extends ActiveController
         $behaviors = parent::behaviors();
 
         $behaviors['corsFilter'] = [
-            'class' => Cors::class
+            'class' => Cors::class,
         ];
+//        $behaviors['authenticator'] = [
+//            'class' => HttpBearerAuth::class,
+//        ];
+        $behaviors['authenticator']['except'] = ['index', 'view', 'update', 'delete', 'get-reviews-with-pagination', 'get-num-of-pages'];
 
         return $behaviors;
     }

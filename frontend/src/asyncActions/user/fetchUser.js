@@ -8,7 +8,7 @@ export const fetchUser = (id) => {
         headers: { "Authorization": `Bearer ${token}`}
     };
     return (dispatch) => {
-        axios.get(`http://localhost:8000/user/view?id=${id}`)
+        axios.get(`http://localhost:8000/user/view?id=${id}`, config)
             .then(response => response.data)
             .then(data => dispatch(fetchUserAction(data)))
             .catch(error => console.log(error))

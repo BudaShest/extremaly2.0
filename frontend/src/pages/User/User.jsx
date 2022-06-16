@@ -13,12 +13,15 @@ const User = () => {
     const dispatch = useDispatch();
     const fileInputRef = useRef();
     let user = useSelector(state => state.userReducer.user);
-    const [userApplication, setUserApplications] = useState([]);
+    let userApplications = useSelector(state => state.applicationsReducer.applications);
+    console.log(userApplications)
+    // const [userApplication, setUserApplications] = useState([]);
     useEffect(() => {
         let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
         if (currentUser?.isAuth) {
             dispatch(fetchUser(currentUser.id));
-            fetchApplicationsByUser(currentUser.id).then(res => setUserApplications(res))
+            dispatch(fetchApplicationsByUser(currentUser.id))
+            // fetchApplicationsByUser(currentUser.id).then(res => setUserApplications(res))
             // console.log(user);
 
         }
@@ -121,7 +124,7 @@ const User = () => {
                 </Row>
                 <h3 className="white-text center-align">Пользовательские заявки</h3>
                 <Row>
-                    {userApplication.map(application => {
+                    {userApplications && userApplications.map(application => {
                         return (
                             <Col>
                                 <Card

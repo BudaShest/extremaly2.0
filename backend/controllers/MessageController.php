@@ -6,6 +6,7 @@ use app\models\Message;
 use yii\rest\ActiveController;
 use yii\filters\Cors;
 
+/** @deprecated */
 class MessageController extends ActiveController
 {
     /** @inheritdoc */
