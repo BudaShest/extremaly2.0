@@ -52,13 +52,15 @@ class Ticket extends ActiveRecord
         return $this->hasMany(Application::class, ['id' => 'application_id'])->via('ticketApplications');
     }
 
-
     /** @inheritdoc */
     public function fields(): array
     {
         $fields = parent::fields();
         $fields['event_name'] = function () {
             return $this->event->name;
+        };
+        $fields['ticket_applications'] = function () {
+            return $this->ticketApplications;
         };
         return $fields;
     }

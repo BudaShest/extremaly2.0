@@ -1,0 +1,19 @@
+.tableWrapper {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 14px;
+}
+
+.applicationTable {
+    color: white;
+    font-size: 1.4em;
+}
+
+.applicationTable td, .applicationTable th, .applicationTable tr {
+    border: 1px solid #777777;
+    padding: 6px;
+}
+
+.applicationTicketsTable {
+    font-size: 1.7em;
+    padding: 10px 20px;
+}

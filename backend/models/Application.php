@@ -15,7 +15,7 @@ use yii\db\ActiveQuery;
  * @property int $ticket_id - Билет (ID)
  * Relations:
  * @property User $user - Пользователь
- * @property Ticket $tickets - Билеты
+ * @property Ticket[] $tickets - Билеты
  * @property Status $status - Статус
  */
 class Application extends ActiveRecord
@@ -61,6 +61,9 @@ class Application extends ActiveRecord
         $fields = parent::fields();
         $fields['status_name'] = function () {
             return $this->status->name;
+        };
+        $fields['tickets'] = function (){
+            return $this->tickets;
         };
         return $fields;
     }

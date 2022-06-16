@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {NavLink} from 'react-router-dom';
 import {Container} from 'react-materialize';
 import {Row, Col,Icon, TextInput, Button, Card} from 'react-materialize';
 import style from './User.module.css';
@@ -125,8 +126,7 @@ const User = () => {
                             <Col>
                                 <Card
                                     actions={[
-                                        <a key="1" href="#">This is a link</a>,
-                                        <a key="2" href="#">This is a link</a>
+                                        <NavLink to={'/application/'+application.id}>Просмотр</NavLink>
                                     ]}
                                     className="blue-grey darken-1"
                                     closeIcon={<Icon>close</Icon>}

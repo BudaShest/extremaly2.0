@@ -39,35 +39,9 @@ class ApplicationController extends ActiveController
     }
 
     /**
-     * Создание заявки
-     * @throws \yii\db\Exception
+     * Созадание заявки
+     * @return array|\yii\web\Response
      */
-//    public function actionCreateApplication(): array
-//    {
-//        $request = Yii::$app->request->post();
-//        var_dump($request);die;
-//        if (!$ticket = Ticket::findOne($request['ticket_id'])) {
-//            return ['message' => 'Ошибка создания заявки!', "status" => HttpCode::NOT_MODIFIED];
-//        }
-//        $numOfTickets = $ticket->event->ticket_num;
-//
-//        $bookedTicketsNum = Yii::$app->db->createCommand('SELECT SUM(num) FROM application INNER JOIN ticket_application ON application.id = ticket_application.application_id INNER JOIN ticket ON ticket.id = ticket_application.ticket_id WHERE ticket.event_id = :event_id')->bindValue('event_id', $ticket->event_id)->queryScalar();
-//        if ($bookedTicketsNum + $request['num'] <= $numOfTickets) {
-//            $model = new Application();
-//            $model->user_id = $request['user_id'];
-//            $model->num = $request['num'];
-//            $model->status_id = 1;
-//            if (!$model->save()) {
-//                return ['message' => 'Ошибка создания билета!', "status" => HttpCode::NOT_MODIFIED, 'errors' => ErrorHelper::format($model->errors)];
-//            }
-//            $ticket->link('applications', $model);
-//            Yii::$app->response->statusCode = 201;
-//            return ['message' => 'Заявка была успешно создана!', "status" => HttpCode::CREATED];
-//        }
-//        return ['message' => 'Слишком много билетов', "status" => HttpCode::NOT_MODIFIED];
-//
-//    }
-
     public function actionCreateApplication()
     {
         $request = Yii::$app->request->post();
@@ -87,7 +61,11 @@ class ApplicationController extends ActiveController
                 $ticketApp->ticket_id = $ticket->id;
                 $ticketApp->application_id = $model->id;
                 $ticketApp->num = $item['cnt'];
-                $ticketApp->save();
+                if($ticketApp->save()){
+                    $event = $ticket->event;
+                    $event->ticket_num = $event->ticket_num - $item['cnt'];
+                    $event->save();
+                }
             } else {
                 return ['message' => 'Было выбрано слишком много билетов!', "status" => HttpCode::NOT_MODIFIED];
             }
