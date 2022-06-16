@@ -12,7 +12,7 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'language' => 'en-US',
+    'language' => 'ru',
     'components' => [
         'db' => $db,
         'mailer' => [
@@ -42,6 +42,12 @@ return [
             ],
             */
         ],
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => \app\modules\admin\AdminModule::class
+        ],
+        'redactor' => 'yii\redactor\RedactorModule',
     ],
     'params' => $params,
 ];

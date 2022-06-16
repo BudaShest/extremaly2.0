@@ -4,7 +4,7 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
-$this->title = 'Логин в админ-панеле';
+$this->title = 'Логин в админ-панели';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= $this->title ?></h1>
