@@ -14,8 +14,14 @@ const User = () => {
     const fileInputRef = useRef();
     let user = useSelector(state => state.userReducer.user);
     let userApplications = useSelector(state => state.applicationsReducer.applications);
-    console.log(userApplications)
-    // const [userApplication, setUserApplications] = useState([]);
+    user = useSelector(state => state.userReducer.user);
+    const [currentUser, setCurrentUser] = useState(user);
+    const [userLogin, setUserLogin] = useState(currentUser.login);
+    const [userPhone, setUserPhone] = useState(currentUser.phone);
+    const [userEmail, setUserEmail] = useState(currentUser.email);
+    const [userPassword, setUserPassword] = useState('');
+    const [confirmUserPassword, setConfirmUserPassword] = useState('');
+
     useEffect(() => {
         let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
         if (currentUser?.isAuth) {
@@ -26,12 +32,6 @@ const User = () => {
 
         }
     }, [])
-    user = useSelector(state => state.userReducer.user);
-    const [userLogin, setUserLogin] = useState(user.login);
-    const [userPhone, setUserPhone] = useState(user.phone);
-    const [userEmail, setUserEmail] = useState(user.email);
-    const [userPassword, setUserPassword] = useState('');
-    const [confirmUserPassword, setConfirmUserPassword] = useState('');
 
     function submitFileHandler(e) {
         // e.preventDefault();
@@ -82,7 +82,7 @@ const User = () => {
                                 icon="login"
                                 id="TextInputLogin"
                                 label="Логин"
-                                value={userLogin ?? user.login}
+                                value={user.login}
                             />
                             <TextInput
                                 s={12}
