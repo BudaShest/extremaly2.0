@@ -3,7 +3,7 @@
  * @returns string
  */
 export const getApiUrl = () => {
-    return process.env.NODE_ENV ? process.env.REACT_APP_TEST_API_URL : process.env.REACT_APP_TEST_API_URL;
+    return process.env.REACT_APP_DEV ? process.env.REACT_APP_TEST_API_URL : process.env.REACT_APP_REAL_API_URL;
 }
 
 /**
