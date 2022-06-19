@@ -3,7 +3,8 @@
  * @returns string
  */
 export const getApiUrl = () => {
-    return process.env.REACT_APP_DEV ? process.env.REACT_APP_TEST_API_URL : process.env.REACT_APP_REAL_API_URL;
+    // return process.env.REACT_APP_DEV ? process.env.REACT_APP_TEST_API_URL : process.env.REACT_APP_REAL_API_URL; //todo
+    return 'http://185.182.111.121:8000';
 }
 
 /**
