@@ -6,5 +6,4 @@ COPY package-lock.json ./
 RUN npm install --silent
 RUN #npm install react-script@3.4.1 -g --slient
 COPY . ./
-#CMD ["npm", "start"]
-CMD npm run-script build
+CMD ["npm", "start"]
