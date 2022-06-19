@@ -148,12 +148,12 @@ class User extends ActiveRecord implements IdentityInterface
     /** @inheritdoc */
     public function getAuthKey()
     {
-        // TODO: Implement getAuthKey() method.
+        die;
     }
 
     /** @inheritdoc */
     public function validateAuthKey($authKey)
     {
-        // TODO: Implement validateAuthKey() method.
+        die;
     }
 }

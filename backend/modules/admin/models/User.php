@@ -5,10 +5,12 @@ namespace app\modules\admin\models;
 use app\models\User as BaseUser;
 use app\modules\admin\behaviors\SingleFileBehavior;
 use app\modules\admin\models\interfaces\IFileWorkable;
+use yii\web\UploadedFile;
 
 final class User extends BaseUser
 {
-    public function behaviors()
+    /** @inheritdoc */
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
         $behaviors[] = [
@@ -19,10 +21,11 @@ final class User extends BaseUser
         return $behaviors;
     }
 
-    //TODO вынести в поведения (работа с файлами чи как)
-    public $uploads;
+    /** @var ?UploadedFile $uploads - загрузки */
+    public ?UploadedFile $uploads = null;
 
-    public function attributeLabels()
+    /** @inheritdoc */
+    public function attributeLabels(): array
     {
         return [
             'login' => 'Логин',

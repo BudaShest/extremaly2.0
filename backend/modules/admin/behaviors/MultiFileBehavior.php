@@ -6,11 +6,13 @@ use Yii;
 
 class MultiFileBehavior extends Behavior
 {
+    /** @var string $fileUrl */
     public $fileUrl;
+    /** @var string $fileFolder */
     public $fileFolder = 'uploads';
-//    public $fileField;
+
     public $model;
-    public $imageClass; //todo возможно ко всем image классам прциепить интерфейс
+    public $imageClass;
 
     public function init()
     {
