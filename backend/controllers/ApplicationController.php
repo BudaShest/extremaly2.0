@@ -52,38 +52,42 @@ class ApplicationController extends ActiveController
 
 
     /**
-     * Созадание заявки
+     * Создание заявки
      * @return array|\yii\web\Response
      */
     public function actionCreateApplication()
     {
-        $request = Yii::$app->request->post();
-        $model = new Application();
-        $model->user_id = $request['user_id'];
-        $model->num = array_sum(array_column($request['tickets'], 'cnt'));
-        $model->status_id = Status::DEFAULT_STATUS_ID;
-        if (!$model->save()) {
-            return ['message' => 'Ошибка создания заявки!', "status" => HttpCode::NOT_MODIFIED, 'errors' => ErrorHelper::format($model->errors)];
-        }
-        foreach ($request['tickets'] as $item) {
-            if (!$ticket = Ticket::findOne($item['id'])) {
-                return ['message' => 'Ошибка создания заявки!', "status" => HttpCode::NOT_MODIFIED];
+        try {
+            $request = Yii::$app->request->post();
+            $model = new Application();
+            $model->user_id = $request['user_id'];
+            $model->num = array_sum(array_column($request['tickets'], 'cnt'));
+            $model->status_id = Status::DEFAULT_STATUS_ID;
+            if (!$model->save()) {
+                return ['message' => 'Ошибка создания заявки!', "status" => HttpCode::NOT_MODIFIED, 'errors' => ErrorHelper::format($model->errors)];
             }
-            if ($ticket->event->ticket_num >= $item['cnt']) {
-                $ticketApp = new TicketApplication();
-                $ticketApp->ticket_id = $ticket->id;
-                $ticketApp->application_id = $model->id;
-                $ticketApp->num = $item['cnt'];
-                if ($ticketApp->save()) {
-                    $event = $ticket->event;
-                    $event->ticket_num = $event->ticket_num - $item['cnt'];
-                    $event->save();
+            foreach ($request['tickets'] as $item) {
+                if (!$ticket = Ticket::findOne($item['id'])) {
+                    return ['message' => 'Ошибка создания заявки!', "status" => HttpCode::NOT_MODIFIED];
                 }
-            } else {
-                return ['message' => 'Было выбрано слишком много билетов!', "status" => HttpCode::NOT_MODIFIED];
+                if ($ticket->event->ticket_num >= $item['cnt']) {
+                    $ticketApp = new TicketApplication();
+                    $ticketApp->ticket_id = $ticket->id;
+                    $ticketApp->application_id = $model->id;
+                    $ticketApp->num = $item['cnt'];
+                    if ($ticketApp->save()) {
+                        $event = $ticket->event;
+                        $event->ticket_num = $event->ticket_num - $item['cnt'];
+                        $event->save();
+                    }
+                } else {
+                    return ['message' => 'Было выбрано слишком много билетов!', "status" => HttpCode::NOT_MODIFIED];
+                }
             }
+            return $this->redirect('http://localhost:3000/user');
+        } catch (\Exception $exception) {
+            return ['message' => $exception->getMessage(), "status" => HttpCode::INTERNAL_SERVER_ERROR];
         }
-        return $this->redirect('http://localhost:3000/user');
     }
 
     /**

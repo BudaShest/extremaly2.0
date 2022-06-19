@@ -5,6 +5,17 @@ namespace app\models;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
+/**
+ * Модель, связывающая билеты и заявки
+ * Attributes:
+ * @property int $id - ID
+ * @property int $application_id - ID заявки
+ * @property int $ticket_id - ID билета
+ * @property int $num - кол-во билетов определённого типа я заявке
+ * Relations:
+ * @property Ticket $ticket
+ * @property Application $application
+ */
 class TicketApplication extends ActiveRecord
 {
     /** @inheritdoc */
