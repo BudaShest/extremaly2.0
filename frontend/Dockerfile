@@ -8,4 +8,4 @@ RUN #npm install react-script@3.4.1 -g --slient
 COPY . ./
 #CMD ["npm", "start"]
 CMD ["npm", "build"]
-CMD ["npm", "serve"]
+CMD npm run serve
