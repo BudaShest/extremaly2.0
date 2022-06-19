@@ -32,7 +32,7 @@ const Persons = ({persons}) => {
             setActiveIndex(index);
         }
     }
-    console.log(activePerson);
+
     return (
         <Col className={style.persons}>
             <div className={style.personsRow}>

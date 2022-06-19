@@ -1,7 +1,14 @@
 import axios from 'axios';
+import {getApiUrl} from "../helpers";
 
-export const loginUser = (user)=>{
-    return axios.post('http://localhost:8000/user/login', user)
+/**
+ * Авторизация пользователя
+ * @param user
+ * @returns {*|Promise<any>}
+ */
+export const loginUser = (user) => {
+    let url = getApiUrl();
+    return axios.post(`${url}/user/login`, user)
         .then(response => response.data)
         .then(data => {
             return data;

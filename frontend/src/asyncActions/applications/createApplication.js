@@ -1,13 +1,18 @@
 import axios from 'axios';
+import {getUserToken, getApiUrl} from "../helpers";
 
-
+/**
+ * Создание заявки
+ * @param application
+ * @returns {*|Promise<any>}
+ */
 export const createApplication = (application) => {
-    let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
-    let token = currentUser ? currentUser.token : "";
+    let token = getUserToken();
+    let url = getApiUrl();
     const config = {
         headers: {"Authorization": `Bearer ${token}`}
     };
-    return axios.post(`http://localhost:8000/application/create-application`, application)
+    return axios.post(`${url}/application/create-application`, application)
         .then(response => response.data)
         .then(data => {
             return data;

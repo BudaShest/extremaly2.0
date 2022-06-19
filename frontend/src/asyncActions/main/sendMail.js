@@ -1,8 +1,17 @@
 import axios from 'axios';
+import {getApiUrl} from "../helpers";
 
-export const sendMail = (mail) =>{
-    return axios.post('http://localhost:8000/mail/send-mail', mail)
+/**
+ * Отправка письма
+ * @param mail
+ * @returns {*|Promise<any>}
+ */
+export const sendMail = (mail) => {
+    let url = getApiUrl();
+    return axios.post(`${url}/mail/send-mail`, mail)
         .then(response => response.data)
-        .then(data => {return data})
+        .then(data => {
+            return data
+        })
         .catch(console.error)
 }

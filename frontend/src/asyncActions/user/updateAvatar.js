@@ -1,7 +1,14 @@
 import axios from 'axios';
+import {getApiUrl} from "../helpers";
 
-export const updateAvatar = (formData)=>{
-    return axios.post('http://localhost:8000/user/update-avatar', formData)
+/**
+ * Обновить аватар пользователя
+ * @param formData
+ * @returns {*|Promise<any>}
+ */
+export const updateAvatar = (formData) => {
+    let url = getApiUrl();
+    return axios.post(`${url}/user/update-avatar`, formData)
         .then(response => response.data)
         .then(data => {
             return data;

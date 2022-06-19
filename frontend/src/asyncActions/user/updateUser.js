@@ -1,7 +1,14 @@
 import axios from 'axios';
+import {getApiUrl} from "../helpers";
 
-export const updateUser = (user)=>{
-    return axios.post('http://localhost:8000/user/update-user?id='+user.id, user)
+/**
+ * Обновить пользовательскую информацию
+ * @param user
+ * @returns {*|Promise<any>}
+ */
+export const updateUser = (user) => {
+    let url = getApiUrl();
+    return axios.post(`${url}/user/update-user?id=${user.id}`, user)
         .then(response => response.data)
         .then(data => {
             return data;

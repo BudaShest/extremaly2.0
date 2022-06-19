@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {getApplicationsAction} from "../../store/applicationReducer";
+import {getUserToken, getApiUrl} from "../helpers";
 
 /**
  * Получить пользовательские заявки
@@ -7,14 +8,14 @@ import {getApplicationsAction} from "../../store/applicationReducer";
  * @returns {*|Promise<any>}
  */
 export const fetchApplicationsByUser = (userId) => {
-    let currentUser = JSON.parse(sessionStorage.getItem('userInfo'));
-    let token = currentUser ? currentUser.token : "";
+    let url = getApiUrl();
+    let token = getUserToken();
 
     const config = {
         headers: {"Authorization": `Bearer ${token}`, 'Content-Type': 'application/json'}
     };
     return (dispatch) => {
-        axios.get('http://localhost:8000/application/get-applications-by-user?userId=' + userId, config)
+        axios.get(`${url}/get-applications-by-user?userId=` + userId, config)
             .then(res => res.data)
             .then(data => dispatch(getApplicationsAction(data)))
             .catch(console.error)

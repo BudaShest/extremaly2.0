@@ -1,5 +1,8 @@
 import {getEventsAction, getTopEventsAction} from "../../store/eventsReducer";
 import axios from 'axios';
+import {getApiUrl} from "../helpers";
+
+let url = getApiUrl();
 
 /**
  * Получить события
@@ -7,7 +10,7 @@ import axios from 'axios';
  */
 export const fetchEvents = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event`)
+        axios.get(`${url}/event`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(error => console.log(error))
@@ -20,7 +23,7 @@ export const fetchEvents = () => {
  */
 export const fetchEventsForKids = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-for-kids`)
+        axios.get(`${url}/event/get-events-for-kids`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(error => console.log(error))
@@ -33,7 +36,7 @@ export const fetchEventsForKids = () => {
  */
 export const fetchEventsForOlds = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-for-olds`)
+        axios.get(`${url}/event/get-events-for-olds`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(error => console.log(error))
@@ -47,7 +50,7 @@ export const fetchEventsForOlds = () => {
  */
 export const fetchEventsByAge = (age) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-by-age?age=${age}`)
+        axios.get(`${url}/event/get-events-by-age?age=${age}`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(error => console.log(error))
@@ -61,7 +64,7 @@ export const fetchEventsByAge = (age) => {
  */
 export const fetchEventsByClimat = (code) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-by-climat?code=${code}`)
+        axios.get(`${url}/event/get-events-by-climat?code=${code}`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(error => console.log(error))
@@ -75,7 +78,7 @@ export const fetchEventsByClimat = (code) => {
  */
 export const fetchEventsByCountry = (code) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-by-country?code=${code}`)
+        axios.get(`${url}/event/get-events-by-country?code=${code}`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(error => console.log(error))
@@ -89,7 +92,7 @@ export const fetchEventsByCountry = (code) => {
  */
 export const fetchEventsByFounded = (requestedString) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-by-founded?requestedString=${requestedString}`)
+        axios.get(`${url}/event/get-events-by-founded?requestedString=${requestedString}`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(error => console.log(error))
@@ -102,7 +105,7 @@ export const fetchEventsByFounded = (requestedString) => {
  */
 export const fetchEventsByPriority = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-by-priority`)
+        axios.get(`${url}/event/get-events-by-priority`)
             .then(response => response.data)
             .then(data => dispatch(getTopEventsAction(data)))
             .catch(error => console.log(error))
@@ -116,7 +119,7 @@ export const fetchEventsByPriority = () => {
  */
 export const fetchEventsWithPagination = (page) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/event/get-events-with-pagination?page=${page}&per-page=3`)
+        axios.get(`${url}/event/get-events-with-pagination?page=${page}&per-page=3`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
             .catch(console.error)

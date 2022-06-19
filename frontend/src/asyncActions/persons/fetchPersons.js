@@ -5,6 +5,9 @@ import {
     getNumOfPagesAction
 } from "../../store/personsReducer.js";
 import axios from 'axios';
+import {getApiUrl} from "../helpers";
+
+let url = getApiUrl();
 
 /**
  * Получить все личности
@@ -12,7 +15,7 @@ import axios from 'axios';
  */
 export const fetchPersons = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/person`)
+        axios.get(`${url}/person`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
             .catch(console.error)
@@ -26,7 +29,7 @@ export const fetchPersons = () => {
  */
 export const fetchPersonsByFounded = (requestedString) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/person/find-persons?requestedString=${requestedString}`)
+        axios.get(`${url}/person/find-persons?requestedString=${requestedString}`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
             .catch(console.error)
@@ -40,7 +43,7 @@ export const fetchPersonsByFounded = (requestedString) => {
  */
 export const fetchPersonsByAge = (age) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/person/get-persons-by-age?age=${age}`)
+        axios.get(`${url}/person/get-persons-by-age?age=${age}`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
             .catch(console.error)
@@ -53,7 +56,7 @@ export const fetchPersonsByAge = (age) => {
  */
 export const fetchTopPersons = () => {
     return (dispatch) => {
-        axios.get('http://localhost:8000/person/get-top-persons')
+        axios.get(`${url}/person/get-top-persons`)
             .then(response => response.data)
             .then(data => dispatch(getTopPersonsAction(data)))
             .catch(console.error)
@@ -67,7 +70,7 @@ export const fetchTopPersons = () => {
  */
 export const fetchPersonsByProfession = (profession) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/person/get-persons-by-profession?profession=${profession}`)
+        axios.get(`${url}/person/get-persons-by-profession?profession=${profession}`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
             .catch(console.error)
@@ -81,7 +84,7 @@ export const fetchPersonsByProfession = (profession) => {
  */
 export const fetchPersonsByEvent = (eventId) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/person/get-persons-by-event?eventId=${eventId}`)
+        axios.get(`${url}/person/get-persons-by-event?eventId=${eventId}`)
             .then(response => response.data)
             .then(data => dispatch(getEventPersonsAction(data)))
             .catch(console.error)
@@ -95,7 +98,7 @@ export const fetchPersonsByEvent = (eventId) => {
  */
 export const fetchPersonsWithPagination = (page) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/person/get-persons-with-pagination?page=${page}&per-page=5`)
+        axios.get(`${url}/person/get-persons-with-pagination?page=${page}&per-page=5`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
             .catch(console.error)
@@ -108,7 +111,7 @@ export const fetchPersonsWithPagination = (page) => {
  */
 export const fetchNumOfPaginatedPages = () => {
     return (dispatch) => {
-        axios.get('http://localhost:8000/person/get-num-of-paginated-pages')
+        axios.get(`${url}/person/get-num-of-paginated-pages`)
             .then(response => response.data)
             .then(data => dispatch(getNumOfPagesAction(data)))
             .catch(console.error)

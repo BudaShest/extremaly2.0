@@ -1,5 +1,8 @@
 import {getNumOfPages, getNumOfPagesAction, getPlacesAction} from "../../store/placesReducer";
 import axios from 'axios';
+import {getApiUrl} from "../helpers";
+
+let url = getApiUrl();
 
 /**
  * Получить места
@@ -7,7 +10,7 @@ import axios from 'axios';
  */
 export const fetchPlaces = () => {
     return (dispatch) => {
-        axios.get('http://localhost:8000/place')
+        axios.get(`${url}/place`)
             .then(response => response.data)
             .then(data => dispatch(getPlacesAction(data)))
             .catch(console.error)
@@ -21,7 +24,7 @@ export const fetchPlaces = () => {
  */
 export const fetchPlacesByCountry = (countryCode) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/place/get-by-country-code?countryCode=${countryCode}`)
+        axios.get(`${url}/place/get-by-country-code?countryCode=${countryCode}`)
             .then(response => response.data)
             .then(data => dispatch(getPlacesAction(data)))
             .catch(console.error)
@@ -35,7 +38,7 @@ export const fetchPlacesByCountry = (countryCode) => {
  */
 export const fetchPlacesByClimat = (climatCode) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/place/get-by-climat-code?climatCode=${climatCode}`)
+        axios.get(`${url}/place/get-by-climat-code?climatCode=${climatCode}`)
             .then(response => response.data)
             .then(data => dispatch(getPlacesAction(data)))
             .catch(console.error)
@@ -49,17 +52,20 @@ export const fetchPlacesByClimat = (climatCode) => {
  */
 export const fetchPlacesWithPagination = (page) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/place/get-places-with-pagination?page=${page}&per-page=3`)
+        axios.get(`${url}/place/get-places-with-pagination?page=${page}&per-page=3`)
             .then(response => response.data)
             .then(data => dispatch(getPlacesAction(data)))
             .catch(console.error)
     }
 }
 
-
+/**
+ * Получить кол-во страниц (для пагинации)
+ * @returns {(function(*): void)|*}
+ */
 export const fetchNumOfPages = () => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/place/get-num-of-paginated-pages`)
+        axios.get(`${url}/place/get-num-of-paginated-pages`)
             .then(response => response.data)
             .then(data => dispatch(getNumOfPagesAction(data)))
             .catch(console.error)

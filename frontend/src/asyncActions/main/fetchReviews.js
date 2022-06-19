@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {getNumOfPagesAction, getReviewsAction} from "../../store/mainReducer";
+import {getApiUrl} from "../helpers";
+
+let url = getApiUrl();
 
 /**
  * Получить отзывы к проекту
@@ -7,7 +10,7 @@ import {getNumOfPagesAction, getReviewsAction} from "../../store/mainReducer";
  */
 export const fetchReviews = () => {
     return (dispatch) => {
-        axios.get('http://localhost:8000/review')
+        axios.get(`${url}/review`)
             .then(response => response.data)
             .then(data => dispatch(getReviewsAction(data)))
             .catch(console.error)
@@ -20,7 +23,7 @@ export const fetchReviews = () => {
  */
 export const fetchReviewWithPagination = (page) => {
     return (dispatch) => {
-        axios.get(`http://localhost:8000/review/get-reviews-with-pagination?page=${page}&per-page=3`)
+        axios.get(`${url}/review/get-reviews-with-pagination?page=${page}&per-page=3`)
             .then(response => response.data)
             .then(data => dispatch(getReviewsAction(data)))
             .catch(console.error)
@@ -34,7 +37,7 @@ export const fetchReviewWithPagination = (page) => {
  */
 export const fetchNumOfPages = (page) => {
     return (dispatch) => {
-        axios.get('http://localhost:8000/review/get-num-of-pages')
+        axios.get(`${url}/review/get-num-of-pages`)
             .then(response => response.data)
             .then(data => dispatch(getNumOfPagesAction(data)))
             .catch(console.error)

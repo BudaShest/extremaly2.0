@@ -1,10 +1,16 @@
 import axios from 'axios';
+import {getApiUrl, logout} from "../helpers";
 
-export const logoutUser = ()=>{
-    sessionStorage.removeItem('userInfo');
-    return axios.post('http://localhost:8000/user/logout')
+/**
+ * Выход из учётной записи
+ * @returns {*|Promise<any>}
+ */
+export const logoutUser = () => {
+    let url = getApiUrl();
+    return axios.post(`${url}/user/logout`)
         .then(response => response.data)
         .then(data => {
+            logout();
             return data;
         })
         .catch(error => console.error(error));
