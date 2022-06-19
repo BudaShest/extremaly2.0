@@ -65,7 +65,7 @@ const User = () => {
                 <h2 className="white-text center-align">Настройки пользователя</h2>
                 <Row>
                     <Col s={12} m={4}>
-                        <form method="post" encType="multipart/form-data" onSubmit={submitFileHandler}
+                        <form method="post" style={{display:'flex', flexDirection: 'column'}} encType="multipart/form-data" onSubmit={submitFileHandler}
                               action="http://localhost:8000/user/update-avatar">
                             <img src={user.avatar} alt="Аватар"/>
                             <input name="user_id" type="text" value={user.id} hidden={true}/>

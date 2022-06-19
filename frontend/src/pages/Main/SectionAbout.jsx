@@ -12,7 +12,17 @@ import mainStyle from './Main.module.css';
 import SocialLinks from "../../components/SocialLinks/SocialLinks";
 import {createReview} from "../../asyncActions/main/createReview";
 
-
+/**
+ * Секция со справочной информацией и некоторыми формами
+ * @param numOfPages
+ * @param socialLinks
+ * @param aboutUs
+ * @param advantages
+ * @param persons
+ * @param reviews
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, reviews}) => {
     const [mailSubject, setMailSubject] = useState('');
     const [mailText, setMailText] = useState('');

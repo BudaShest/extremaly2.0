@@ -32,8 +32,10 @@ class Event extends ActiveRecord
         return [
             [['name', 'place_id', 'type_id',], 'required'],
             [['name', 'offer', 'description'], 'string'],
-            [['from'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'from'],
-            [['until'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'until'],
+//            [['from'], 'date', 'format' => 'php:Y.m.d', 'timestampAttribute' => 'from'],
+//            [['until'], 'date', 'format' => 'php:Y.m.d', 'timestampAttribute' => 'until'],
+            [['from'], 'safe'], //пока костылим //todo
+            [['until'], 'safe'], //пока костыим
             [['age_restrictions', 'priority', 'place_id', 'type_id', 'ticket_num'], 'integer'],
             [['is_horizontal'], 'boolean'],
             [['name'], 'unique'],
@@ -105,5 +107,19 @@ class Event extends ActiveRecord
     public function getPersons(): ActiveQuery
     {
         return $this->hasMany(Person::class, ['id' => 'person_id'])->viaTable('event_person', ['event_id' => 'id']);
+    }
+
+    /** @inheritdoc  */
+    public function load($data, $formName = null)
+    {
+//        var_dump($data);die;
+//        $data['Event']['from'] = strtotime($data['Event']['from']);
+//        $data['Event']['until'] = strtotime($data['Event']['until']);
+        if ($data) {
+//            $data['Event']['from'] = date('Y-m-d', strtotime($data['Event']['from']));
+//            $data['Event']['until'] = date('Y-m-d', strtotime($data['Event']['until']));
+//            var_dump($data['Event']);die;
+            return parent::load($data, $formName);
+        }
     }
 }
