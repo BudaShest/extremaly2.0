@@ -20,7 +20,8 @@ const Basket = ({applications}) => {
     return (
         <div>
             <h2 className="white-text">Неподтверждённые заявки</h2>
-            <form style={{margin: '40px 0'}} method="post" action="http://localhost:8000/application/create-application">
+            {/*todo url*/}
+            <form style={{margin: '40px 0'}} method="post" action="http://185.182.111.121:8000/application/create-application">
                 <Row>
                     <Col s={9}>
                         <Row style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>

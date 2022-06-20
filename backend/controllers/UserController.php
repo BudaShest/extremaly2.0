@@ -137,10 +137,9 @@ class UserController extends ActiveController
 
     /**
      * Обновить аватар
-     * @return array
      * @throws MethodNotAllowedHttpException
      */
-    public function actionUpdateAvatar(): array
+    public function actionUpdateAvatar()
     {
         if ($request = Yii::$app->request->post()) {
             try {
@@ -152,7 +151,7 @@ class UserController extends ActiveController
                         if (!$user->save()) {
                             return ["message" => 'Ошибка обновления автара!', "status" => HttpCode::NOT_MODIFIED, "error" => $user->errors];
                         }
-                        return ["message" => 'Аватар был успешно обновлён', "status" => HttpCode::OK];
+                        return $this->redirect('http://'.$_SERVER['SERVER_NAME'].':3000/user');
                     }
                 }
             } catch (\Exception $e) {

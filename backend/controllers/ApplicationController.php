@@ -84,7 +84,7 @@ class ApplicationController extends ActiveController
                     return ['message' => 'Было выбрано слишком много билетов!', "status" => HttpCode::NOT_MODIFIED];
                 }
             }
-            return $this->redirect('http://localhost:3000/user');
+            return $this->redirect('http://'.$_SERVER['SERVER_NAME'].':3000/user');
         } catch (\Exception $exception) {
             return ['message' => $exception->getMessage(), "status" => HttpCode::INTERNAL_SERVER_ERROR];
         }

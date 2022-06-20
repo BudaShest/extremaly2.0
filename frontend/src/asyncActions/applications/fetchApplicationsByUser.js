@@ -15,7 +15,7 @@ export const fetchApplicationsByUser = (userId) => {
         headers: {"Authorization": `Bearer ${token}`, 'Content-Type': 'application/json'}
     };
     return (dispatch) => {
-        axios.get(`${url}/get-applications-by-user?userId=` + userId, config)
+        axios.get(`${url}/application/get-applications-by-user?userId=` + userId, config)
             .then(res => res.data)
             .then(data => dispatch(getApplicationsAction(data)))
             .catch(console.error)
