@@ -1,0 +1,29 @@
+.title{
+    
+}
+
+.text{
+    
+}
+
+@media screen and (max-width: 768px) {
+    .title{
+        font-size: 2.4em;
+    }
+
+    .text{
+        font-size: 1.2em;
+    }
+}
+
+
+
+@media screen and (max-width: 375px) {
+    .title{
+        font-size: 1.8em;
+    }
+
+    .text{
+        font-size: 1em;
+    }
+}
