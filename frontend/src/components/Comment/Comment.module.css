@@ -1,4 +1,4 @@
-.comment{
+.comment {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -6,34 +6,36 @@
     max-width: 100%;
 }
 
-.commentAvatar{
+.commentAvatar {
     width: 120px;
-    height:120px;
+    height: 120px;
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
 }
 
-.commentText{
-    background-color: rgba(110,110,110,0.7);
+.commentText {
+    background-color: rgba(110, 110, 110, 0.7);
     width: 110px;
-    padding:4px 14px;
+    padding: 4px 14px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 2;
     height: 150px;
     z-index: 2;
-    left:60px;
+    left: 60px;
     position: relative;
     overflow: hidden;
 
 
 }
-.commentText h5{
+
+.commentText h5 {
     margin: 4px;
 }
-.commentText p{
+
+.commentText p {
     margin: 4px;
     padding: 10px;
     color: #c3c3c3;
@@ -42,18 +44,30 @@
     overflow-y: scroll;
     max-height: 75px;
 }
+
 .commentText p::-webkit-scrollbar {
     border-bottom: 2px solid #111111;
-    border-top:2px solid #111111;
+    border-top: 2px solid #111111;
     width: 10px;
 }
 
 .commentText ::-webkit-scrollbar-thumb {
     background-color: #223c50;
 }
-.commentDate{
+
+.commentDate {
     max-width: 90px;
     background-color: #111111;
     color: white;
     align-self: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    .comment {
+        flex-direction: column;
+    }
+    .commentText {
+        left: 0;
+        width: 100%;
+    }
 }

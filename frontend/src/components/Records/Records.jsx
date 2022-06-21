@@ -296,8 +296,7 @@ const Records = ({records, numOfPages}) => {
                                     <Card
                                         key={record.id}
                                         actions={[
-                                            <NavLink key={1} to={`/events/${record.id}`}>Перейти</NavLink>,
-                                            <NavLink key={2} to={`/events/${record.id}`}>Заказать билеты</NavLink>,
+                                            <NavLink key={1} to={`/events/${record.id}`}>Перейти</NavLink>
                                         ]}
                                         closeIcon={<Icon>close</Icon>}
                                         header={<CardTitle image={record.images[0]}/>}
@@ -307,7 +306,7 @@ const Records = ({records, numOfPages}) => {
                                     >
                                         <h5>{record.name}</h5>
                                         {/*<span>{record.offer}</span>*/}
-                                        <p style={{overflow: 'hidden'}}
+                                        <p  className={style.cardText} style={{overflow: 'hidden'}}
                                            dangerouslySetInnerHTML={{__html: record.offer.slice(0, 200)}}></p>
                                     </Card>
                                 );

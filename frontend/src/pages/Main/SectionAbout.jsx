@@ -153,12 +153,13 @@ const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, re
                 <h3 className="white-text">Форма обратной связи:</h3>
                 <Chip>{errorInfo}</Chip>
                 <Convex size={"large"} s={12} background={'linear-gradient(269.17deg, #DB4463 13.23%, #F2733C 88.24%)'}>
-                    <FormContainer icon={<img style={{width: '100%'}} src="img/ui/letter.png" alt="Иконка формы"/>}
+                    <FormContainer icon={<img className={style.formIcon} style={{width: '100%'}} src="img/ui/letter.png" alt="Иконка формы"/>}
                                    background={'#111111'}>
                         <form onSubmit={handleSendMail} action="">
                             <Row>
                                 <Select
-                                    s={10}
+                                    s={12}
+                                    l={10}
                                     icon={<Icon className="little-icon">category</Icon>}
                                     id="SelectMailTheme"
                                     onChange={e => setMailSubject(e.currentTarget.value)}
@@ -186,7 +187,7 @@ const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, re
                                 <Textarea label="Изложите свои мысли" onChange={e => setMailText(e.currentTarget.value)}
                                           value={mailText}
                                           icon={<Icon className="little-icon" placeholder="Текст письма">article</Icon>}
-                                          s={10}/>
+                                          s={12} l={10}/>
                                 <Row>
                                     <Col push={'l7'} s={3}>
                                         <Button style={{backgroundColor: "#DB4463"}} large>Отправить</Button>

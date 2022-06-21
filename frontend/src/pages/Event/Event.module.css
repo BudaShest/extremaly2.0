@@ -30,3 +30,8 @@
     filter: invert(100%);
     width: 300px;
 }
+@media screen and (max-width: 378px) {
+    .formIcon{
+        display: none;
+    }
+}

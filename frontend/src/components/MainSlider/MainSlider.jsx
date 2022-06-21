@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Caption, Slide, Slider} from "react-materialize";
+import style from './MainSlider.module.css';
 
 /**
  * Компонент "Слайдер-шапка"
@@ -30,10 +31,10 @@ const MainSlider = ({slides}) => {
                     return (
                         <Slide key={index} image={<img alt="Слайд" src={slide.image}/>}>
                             <Caption style={{backgroundColor: "rgba(0,0,0,0.8)", padding: "80px 0"}} placement="center">
-                                <h3>
+                                <h3 className={style.title}>
                                     {slide.title}
                                 </h3>
-                                <h5 className="light white-text text-lighten-3"
+                                <h5 className={`${style.text} light white-text text-lighten-3`}
                                     dangerouslySetInnerHTML={{__html: slide.text}}></h5>
                             </Caption>
                         </Slide>)

@@ -44,3 +44,9 @@
 .pagination{
     padding: 14px 0;
 }
+
+@media screen and (max-width: 378px) {
+    .cardText {
+        display: none;
+    }
+}
