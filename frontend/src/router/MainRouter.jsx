@@ -1,5 +1,5 @@
 import React from 'react';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 
 /**
  * Страницы
@@ -15,6 +15,7 @@ import Place from "../pages/Place/Place";
 import Persons from "../pages/Persons/Persons";
 import Application from "../pages/Application/Application";
 import User from "../pages/User/User";
+import OuterRedirect from "../components/OuterRedirect/OuterRedirect";
 
 /**
  * Главный роутер
@@ -41,6 +42,7 @@ const MainRouter = () => {
             <Route path="/user" element={<User/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/admin" element={<OuterRedirect/>}></Route>
             <Route exact path="/" element={<Main/>}/>
         </Routes>
     );
