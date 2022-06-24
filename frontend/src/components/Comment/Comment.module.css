@@ -65,6 +65,7 @@
 @media screen and (max-width: 768px) {
     .comment {
         flex-direction: column;
+        padding: 10px;
     }
     .commentText {
         left: 0;
