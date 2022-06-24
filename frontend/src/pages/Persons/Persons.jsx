@@ -137,7 +137,7 @@ const Persons = () => {
                             <NoRecords/>
                         }
                         <Pagination
-                            onSelect={e=>paginationHandler(e)}
+                            onSelect={paginationHandler}
                             className={style.pagination}
                             activePage={1}
                             items={numOfPages + 1}

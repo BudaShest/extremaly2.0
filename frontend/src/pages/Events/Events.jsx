@@ -9,6 +9,7 @@ import {
     fetchEventsWithPagination,
     fetchNumOfPages
 } from "../../asyncActions/events/fetchEvents";
+import {fetchPersonsWithPagination} from "../../asyncActions/persons/fetchPersons";
 
 /**
  * Странииа "События"
