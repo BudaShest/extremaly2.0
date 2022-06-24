@@ -1,5 +1,5 @@
 import React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchPlace} from "../../asyncActions/places/fetchPlace";
 import {useParams, NavLink} from 'react-router-dom';
@@ -10,6 +10,7 @@ import places from "../Places/Places";
 import {fetchEventsByPlace} from "../../asyncActions/places/fetchEventsByPlace";
 
 const Place = () => {
+    const [numOfRenders, setNumOfRenders] = useState(0);
     const dispatch = useDispatch();
     const requestParams = useParams();
     const id = requestParams.id;
@@ -17,10 +18,10 @@ const Place = () => {
     const place = useSelector(state => state.placesReducer.place);
     const placeEvents = useSelector(state => state.placesReducer.placeEvents);
     console.log(place)
-
     useEffect(() => {
         const script = document.createElement('script');
-        if (place.map) {
+        if (place.map && numOfRenders === 0) {
+            setNumOfRenders(1);
             script.src = `https://api-maps.yandex.ru/services/constructor/1.0/js/?um=${place.map}&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true`;
             script.charSet = "utf-8";
             script.async = true;
@@ -48,7 +49,7 @@ const Place = () => {
                 <Container>
                     <h1 className="white-text">{place.name}</h1>
                     <Row>
-                        <Col className={style.placeBadge} s={4}>
+                        <Col className={style.placeBadge} s={12} l={4}>
                             <h5 className="white-text center-align">Характеристики</h5>
                             <Row className={style.placeBadgeRow}>
                                 <Col s={4}><b>Климат:</b></Col>
@@ -69,7 +70,7 @@ const Place = () => {
                                 <Col s={8}>{place.address}</Col>
                             </Row>
                         </Col>
-                        <Col s={8}>
+                        <Col s={12} l={8}>
                             <h4 className="white-text">Описание</h4>
                             <p className="white-text" dangerouslySetInnerHTML={{__html: place.description}}></p>
                         </Col>
