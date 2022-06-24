@@ -41,7 +41,7 @@ const Comments = ({numOfPages, comments, children}) => {
                     }
                 </Row>
                 <Row>
-                    <Col offset={"s3"} s={12} m={6}>
+                    <Col s={12} m={6}>
                         <Pagination
                             onSelect={paginationHandler}
                             className={style.pagination}

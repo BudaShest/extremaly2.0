@@ -1,6 +1,7 @@
 /* Глобальные стили */
 body {
     background-color: #222;
+    /*overflow-y: hidden;*/
 }
 
 .select-dropdown {
@@ -44,7 +45,7 @@ main {
 }
 
 #root {
-    overflow: hidden;
+    width: 100%;
 }
 
 #mobile-nav {

@@ -5,10 +5,8 @@
     justify-content: center;
     flex-direction: column;
     padding: 40px;
-    /*/../public/img/place-parallax.jpeg*/
     background-attachment: fixed;
-    /*background-image: url('http://localhost:3000/img/place-parallax.jpeg');todo*/
-    background-image: url('http://185.182.111.121/img/place-parallax.jpeg');
+    background-image: url('http://extremly.ru/img/place-parallax.jpeg');
 }
 .topOfferText{
     padding: 30px;

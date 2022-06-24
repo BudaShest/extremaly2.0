@@ -1,7 +1,6 @@
 .parallaxBlock {
     height: 500px;
-    /*background-image: url('http://localhost:3000/img/place-parallax.jpeg'); todo */
-    background-image: url("http://185.182.111.121/img/place-parallax.jpeg");
+    background-image: url("http://extremly.ru/img/place-parallax.jpeg");
     background-attachment: fixed;
 }
 
@@ -11,6 +10,14 @@
     height: 400px;
     background-color: #DE4564;
 
+}
+
+.aboutUsImage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 20px;
+    left: 20px;
 }
 
 .firstAdvantage {
@@ -47,5 +54,14 @@
     .aboutUsImageConvex {
         width: auto;
         height: auto;
+    }
+    .aboutUsImage {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 378px) {
+    .parallaxBlock {
+        background-image: url("https://a.d-cd.net/668d532s-960.jpg");
     }
 }

@@ -1,8 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import style from './Person.module.css';
-import {Col} from 'react-materialize';
-
-
 
 const Person = ({person,index, isActive, clickHandler, order}) => {
     const [className, setClassName] = useState(`${style.person} hoverable`);

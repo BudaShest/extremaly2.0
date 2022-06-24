@@ -67,7 +67,7 @@ const User = () => {
                     <Col s={12} m={4}>
                         {/*todo url*/}
                         <form method="post" style={{display:'flex', flexDirection: 'column'}} encType="multipart/form-data" onSubmit={submitFileHandler}
-                              action="http://185.182.111.121:8000/user/update-avatar">
+                              action="http://extremly.ru:8000/user/update-avatar">
                             <img src={user.avatar} alt="Аватар"/>
                             <input name="user_id" type="text" value={user.id} hidden={true}/>
                             <label htmlFor="">Файлы:</label>

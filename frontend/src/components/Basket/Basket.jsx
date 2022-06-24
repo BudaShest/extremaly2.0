@@ -21,7 +21,7 @@ const Basket = ({applications}) => {
         <div>
             <h2 className="white-text">Неподтверждённые заявки</h2>
             {/*todo url*/}
-            <form style={{margin: '40px 0'}} method="post" action="http://185.182.111.121:8000/application/create-application">
+            <form style={{margin: '40px 0'}} method="post" action="http://extremly.ru:8000/application/create-application">
                 <Row>
                     <Col s={9}>
                         <Row style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>

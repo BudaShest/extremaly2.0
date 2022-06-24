@@ -19,8 +19,7 @@ const Header = () => {
      */
     async function handleLogout() {
         await logoutUser();
-        // window.location.href = 'http://localhost:3000/' //todo
-        window.location.href = 'http://185.182.111.121/';
+        window.location.href = 'http://extremly.ru/';
     }
 
     return (

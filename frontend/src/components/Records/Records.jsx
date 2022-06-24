@@ -263,30 +263,30 @@ const Records = ({records, numOfPages}) => {
                         s={12}
                         icon="search"
                         id="TextInput-33"
-                        label="Имя или фамилия"
+                        label="Название или место"
                     />
                     <Button onClick={search}>Поиск</Button>
                 </form>
             </Col>
             <Col l={8}>
                 <Row>
-                    <Col l={4}>
+                    <Col l={6}>
                         <div onClick={kidsClickHandler} data-age="18"
                              className={`${style.filterBadge} filter-badge hoverable`}>
                             Для детей
                         </div>
                     </Col>
-                    <Col l={4}>
+                    <Col l={6}>
                         <div onClick={oldsClickHandler} data-age="100"
                              className={`${style.filterBadge} filter-badge hoverable`}>
                             Для взрослых
                         </div>
                     </Col>
-                    <Col l={4}>
-                        <div onClick={badgeClickHandler} className={`${style.filterBadge} filter-badge hoverable`}>
-                            Природные
-                        </div>
-                    </Col>
+                    {/*<Col l={4}>*/}
+                    {/*    <div onClick={badgeClickHandler} className={`${style.filterBadge} filter-badge hoverable`}>*/}
+                    {/*        Природные*/}
+                    {/*    </div>*/}
+                    {/*</Col>*/}
                 </Row>
                 <Col s={12}>
                     {

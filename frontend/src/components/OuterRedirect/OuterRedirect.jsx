@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 const OuterRedirect = () => {
 
     useEffect(()=>{
-        window.location = 'http://185.182.111.121:8000/admin/main/login';
+        window.location = 'http://extremly.ru:8000/admin/main/login';
     }, [])
 
     return (

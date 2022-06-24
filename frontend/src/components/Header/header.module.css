@@ -37,7 +37,10 @@
         font-size: 3em !important;
     }
     .logo{
-        max-width: 240px;
+        max-width: 200px;
+    }
+    .logoSpan{
+        font-size: 0.8em;
     }
     .logoText{
         display: none;

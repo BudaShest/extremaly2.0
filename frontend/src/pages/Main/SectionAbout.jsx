@@ -57,7 +57,6 @@ const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, re
 
     return (
         <section className={mainStyle.sectionAbout}>
-
             <Container>
                 <Row style={{padding: "34px 25px", backgroundColor: '#101010', marginBottom: '60px'}}>
                     <Col s={12} m={4} className="push white-text">
@@ -78,8 +77,7 @@ const SectionAbout = ({numOfPages, socialLinks, aboutUs, advantages, persons, re
                     </Col>
                     <Col s={12} m={4} className="push-m1">
                         <div className={mainStyle.aboutUsImageConvex}><img
-                            className="hoverable"
-                            style={{width: "100%", height: "100%", position: 'relative', top: "20px", left: "20px"}}
+                            className={mainStyle.aboutUsImage}
                             src={aboutUs.image} alt="О нас"/></div>
                     </Col>
                 </Row>

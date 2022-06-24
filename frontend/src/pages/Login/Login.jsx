@@ -17,8 +17,7 @@ const Login = () => {
         let response = await loginUser({login: loginRef.current.value, password: passwordRef.current.value});
         if(response.status == 200){
             sessionStorage.setItem('userInfo', JSON.stringify({"login": response.login, "token": response.token, "id": response.id, "isAuth": true}));
-            // window.location.href = 'http://localhost:3000' //todo
-            window.location.href = 'http://185.182.111.121';
+            window.location.href = 'http://extremly.ru';
         }
     }
 
