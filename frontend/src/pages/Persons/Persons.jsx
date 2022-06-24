@@ -140,7 +140,7 @@ const Persons = () => {
                             onSelect={paginationHandler}
                             className={style.pagination}
                             activePage={1}
-                            items={numOfPages + 1}
+                            items={numOfPages}
                             leftBtn={<Icon>chevron_left</Icon>}
                             rightBtn={<Icon>chevron_right</Icon>}
                         />

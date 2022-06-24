@@ -98,7 +98,7 @@ export const fetchPersonsByEvent = (eventId) => {
  */
 export const fetchPersonsWithPagination = (page) => {
     return (dispatch) => {
-        axios.get(`${url}/person/get-persons-with-pagination?page=${page}&per-page=5`)
+        axios.get(`${url}/person/get-persons-with-pagination?page=${page}&per-page=3`)
             .then(response => response.data)
             .then(data => dispatch(getPersonsAction(data)))
             .catch(console.error)
