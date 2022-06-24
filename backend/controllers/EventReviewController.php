@@ -43,7 +43,7 @@ class EventReviewController extends ActiveController
      */
     public function actionGetEventReviews(int $eventId): array
     {
-        $query = EventReview::find();
+        $query = EventReview::find()->where(['event_id' => $eventId]);
 
         $pagination = new Pagination([
             'totalCount' => $query->count(),

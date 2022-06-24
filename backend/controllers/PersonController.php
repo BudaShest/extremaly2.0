@@ -153,6 +153,7 @@ class PersonController extends ActiveController
 
         $pagination = new Pagination([
             'totalCount' => $query->count(),
+            'pageSize' => 5
         ]);
         $models = $query->offset($pagination->offset)->limit($pagination->limit)->all();
         return $models;

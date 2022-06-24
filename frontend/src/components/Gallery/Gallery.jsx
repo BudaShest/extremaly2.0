@@ -10,7 +10,7 @@ const Gallery = ({photos}) => {
                 {
                     photos.map((photo, index) => {
                         return (
-                            <Col key={index} l={4} m={4} s={12} style={{margin: "10px 0"}}>
+                            <Col className={style.img} key={index} l={4} m={4} s={12} style={{margin: "10px 0"}}>
                                 <MediaBox
                                     id="MediaBoxGallery"
                                     options={{

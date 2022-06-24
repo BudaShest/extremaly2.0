@@ -192,78 +192,78 @@ const Records = ({records, numOfPages}) => {
                             places.map(place => (<option key={place.id} value={place.id}>{place.name}</option>))
                         }
                     </Select>
-                    <h5 className={style.filterBlock_headlines}>Период: </h5>
-                    <DatePicker
-                        id="DatePicker-7"
-                        label="Дата начала: "
-                        options={{
-                            autoClose: false,
-                            disableWeekends: false,
-                            events: [],
-                            firstDay: 0,
-                            format: 'mmm dd, yyyy',
-                            i18n: {
-                                cancel: 'Cancel',
-                                clear: 'Clear',
-                                done: 'Ok',
-                                months: [
-                                    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-                                ],
-                                monthsShort: [
-                                    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                                ],
-                                nextMonth: '›',
-                                previousMonth: '‹',
-                                weekdays: [
-                                    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-                                ],
-                                weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S'
-                                ],
-                                weekdaysShort: [
-                                    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-                                ]
-                            },
-                            isRTL: false,
-                            setDefaultDate: false,
-                            showClearBtn: false,
-                            showDaysInNextAndPreviousMonths: false,
-                            showMonthAfterYear: false,
-                            yearRange: 10
-                        }}
-                    />
-                    <DatePicker
-                        id="DatePicker-7"
-                        label="Дата конца: "
-                        options={{
-                            autoClose: false,
-                            disableWeekends: false,
-                            events: [],
-                            firstDay: 0,
-                            format: 'mmm dd, yyyy',
-                            i18n: {
-                                cancel: 'Cancel',
-                                clear: 'Clear',
-                                done: 'Ok',
-                                months: [
-                                    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-                                ],
-                                monthsShort: [
-                                    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                                ],
-                                nextMonth: '›',
-                                previousMonth: '‹',
-                                weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-                                weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                                weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-                            },
-                            isRTL: false,
-                            setDefaultDate: false,
-                            showClearBtn: false,
-                            showDaysInNextAndPreviousMonths: false,
-                            showMonthAfterYear: false,
-                            yearRange: 10
-                        }}
-                    />
+                    {/*<h5 className={style.filterBlock_headlines}>Период: </h5>*/}
+                    {/*<DatePicker*/}
+                    {/*    id="DatePicker-7"*/}
+                    {/*    label="Дата начала: "*/}
+                    {/*    options={{*/}
+                    {/*        autoClose: false,*/}
+                    {/*        disableWeekends: false,*/}
+                    {/*        events: [],*/}
+                    {/*        firstDay: 0,*/}
+                    {/*        format: 'mmm dd, yyyy',*/}
+                    {/*        i18n: {*/}
+                    {/*            cancel: 'Cancel',*/}
+                    {/*            clear: 'Clear',*/}
+                    {/*            done: 'Ok',*/}
+                    {/*            months: [*/}
+                    {/*                'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'*/}
+                    {/*            ],*/}
+                    {/*            monthsShort: [*/}
+                    {/*                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'*/}
+                    {/*            ],*/}
+                    {/*            nextMonth: '›',*/}
+                    {/*            previousMonth: '‹',*/}
+                    {/*            weekdays: [*/}
+                    {/*                'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'*/}
+                    {/*            ],*/}
+                    {/*            weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S'*/}
+                    {/*            ],*/}
+                    {/*            weekdaysShort: [*/}
+                    {/*                'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'*/}
+                    {/*            ]*/}
+                    {/*        },*/}
+                    {/*        isRTL: false,*/}
+                    {/*        setDefaultDate: false,*/}
+                    {/*        showClearBtn: false,*/}
+                    {/*        showDaysInNextAndPreviousMonths: false,*/}
+                    {/*        showMonthAfterYear: false,*/}
+                    {/*        yearRange: 10*/}
+                    {/*    }}*/}
+                    {/*/>*/}
+                    {/*<DatePicker*/}
+                    {/*    id="DatePicker-7"*/}
+                    {/*    label="Дата конца: "*/}
+                    {/*    options={{*/}
+                    {/*        autoClose: false,*/}
+                    {/*        disableWeekends: false,*/}
+                    {/*        events: [],*/}
+                    {/*        firstDay: 0,*/}
+                    {/*        format: 'mmm dd, yyyy',*/}
+                    {/*        i18n: {*/}
+                    {/*            cancel: 'Cancel',*/}
+                    {/*            clear: 'Clear',*/}
+                    {/*            done: 'Ok',*/}
+                    {/*            months: [*/}
+                    {/*                'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'*/}
+                    {/*            ],*/}
+                    {/*            monthsShort: [*/}
+                    {/*                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'*/}
+                    {/*            ],*/}
+                    {/*            nextMonth: '›',*/}
+                    {/*            previousMonth: '‹',*/}
+                    {/*            weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],*/}
+                    {/*            weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],*/}
+                    {/*            weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']*/}
+                    {/*        },*/}
+                    {/*        isRTL: false,*/}
+                    {/*        setDefaultDate: false,*/}
+                    {/*        showClearBtn: false,*/}
+                    {/*        showDaysInNextAndPreviousMonths: false,*/}
+                    {/*        showMonthAfterYear: false,*/}
+                    {/*        yearRange: 10*/}
+                    {/*    }}*/}
+                    {/*/>*/}
                     <Button style={{backgroundColor: "#EE6E73"}} onClick={resetFiltersHandler}>Стереть фильтры</Button>
                     <h5 className="white-text">Поиск: </h5>
                     <TextInput
