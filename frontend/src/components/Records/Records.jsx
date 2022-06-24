@@ -292,6 +292,7 @@ const Records = ({records, numOfPages}) => {
                     {
                         records.length ?
                             records.map(record => {
+                                console.log(record);
                                 return (
                                     <Card
                                         key={record.id}

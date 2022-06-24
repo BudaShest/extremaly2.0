@@ -86,7 +86,9 @@ class EventController extends ActiveController
         }
         $result = [];
         foreach ($models as $model) {
-            $result[] = $model->events;
+            foreach ($model->events as $event){
+                $result[] = $event;
+            }
         }
         return $result;
     }
@@ -103,7 +105,9 @@ class EventController extends ActiveController
         }
         $result = [];
         foreach ($models as $model) {
-            $result[] = $model->events;
+            foreach ($model->events as $event){
+                $result[] = $event;
+            }
         }
         return $result;
     }
@@ -127,7 +131,9 @@ class EventController extends ActiveController
         if ($models = Place::find()->where(['ilike', 'name', $requestedString])->all()) {
             $result = [];
             foreach ($models as $model) {
-                $result[] = $model->events;
+                foreach ($model->events as $event){
+                    $result[] = $event;
+                }
             }
             return $result;
         }
