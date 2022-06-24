@@ -3,7 +3,12 @@ import {Container} from 'react-materialize';
 import Services from "../../components/Services/Services";
 import Records from '../../components/Records/Records';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchEvents, fetchEventsByPriority, fetchEventsWithPagination} from "../../asyncActions/events/fetchEvents";
+import {
+    fetchEvents,
+    fetchEventsByPriority,
+    fetchEventsWithPagination,
+    fetchNumOfPages
+} from "../../asyncActions/events/fetchEvents";
 
 /**
  * Странииа "События"
@@ -18,6 +23,7 @@ const Events = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(fetchNumOfPages());
         dispatch(fetchEventsByPriority());
         dispatch(fetchEventsWithPagination(1));
     }, [])

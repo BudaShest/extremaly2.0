@@ -36,6 +36,14 @@ const Records = ({records, numOfPages}) => {
         dispatch(fetchNumOfPages());
     }, [])
 
+    useEffect(()=>{
+        if(window.innerWidth < 768){
+            let cards = document.querySelectorAll('.card.horizontal');
+            console.log(cards);
+            cards.forEach(card => card.classList.remove('horizontal'));
+        }
+    })
+
     function search(e) {
         e.preventDefault();
         dispatch(fetchEventsByFounded(requestedStringRef.current.value))
@@ -292,7 +300,6 @@ const Records = ({records, numOfPages}) => {
                     {
                         records.length ?
                             records.map(record => {
-                                console.log(record);
                                 return (
                                     <Card
                                         key={record.id}
@@ -319,7 +326,7 @@ const Records = ({records, numOfPages}) => {
                         onSelect={paginationHandler}
                         className={style.pagination}
                         activePage={1}
-                        items={numOfPages + 1}
+                        items={numOfPages}
                         leftBtn={<Icon>chevron_left</Icon>}
                         rightBtn={<Icon>chevron_right</Icon>}
                     />

@@ -43,17 +43,17 @@ const BasketItem = ({item, countChange}) => {
 
     return (
         <Row>
-            <Col s={6} l={3}>
+            <Col style={{height:'70px'}} s={6} l={3}>
                 <NavLink to={`/events/${item.event_id}`} className={`white-text ${style.itemLink}`} style={{textDecoration: 'underline'}}>{item.event_name}</NavLink>
                 <input name={`tickets[ticket${item.id}][id]`} value={item.id} type="hidden"/>
             </Col>
-            <Col s={6} l={3}><span className={style.itemPrice}>{item.price} руб.</span></Col>
-            <Col s={6} l={3} className={style.countInputBlock}>
+            <Col style={{height:'70px'}} s={6} l={3}><span className={style.itemPrice}>{item.price} руб.</span></Col>
+            <Col style={{height:'70px'}} s={6} l={3} className={style.countInputBlock}>
                 <button type="button" onClick={minusHandler} className={`${style.controlBtn} ${style.minusBtn}`}>-</button>
                 <input name={`tickets[ticket${item.id}][cnt]`} className={style.controlInput} min={0} max={10} value={itemCount} type="number"/>
                 <button type="button" onClick={plusHandler} className={`${style.controlBtn} ${style.plusBtn}`}>+</button>
             </Col>
-            <Col s={6} l={3}>
+            <Col style={{height:'70px'}} s={6} l={3}>
                 <span className={`${style.itemPrice} summary`}>{summary} руб.</span>
             </Col>
         </Row>

@@ -1,6 +1,7 @@
 import {getEventsAction, getTopEventsAction} from "../../store/eventsReducer";
 import axios from 'axios';
 import {getApiUrl} from "../helpers";
+import {getNumOfPagesAction} from "../../store/mainReducer";
 
 let url = getApiUrl();
 
@@ -122,6 +123,15 @@ export const fetchEventsWithPagination = (page) => {
         axios.get(`${url}/event/get-events-with-pagination?page=${page}&per-page=3`)
             .then(response => response.data)
             .then(data => dispatch(getEventsAction(data)))
+            .catch(console.error)
+    }
+}
+
+export const fetchNumOfPages = () => {
+    return (dispatch) => {
+        axios.get(`${url}/event/get-num-of-pages`)
+            .then(response => response.data)
+            .then(data => dispatch(getNumOfPagesAction(data)))
             .catch(console.error)
     }
 }

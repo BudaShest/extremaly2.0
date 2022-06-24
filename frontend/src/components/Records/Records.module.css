@@ -34,7 +34,12 @@
     color: #F2733C;
 }
 
-
+.cardImg {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    object-fit: contain;
+}
 
 .record{
     background-color: #111;
@@ -45,7 +50,10 @@
     padding: 14px 0;
 }
 
-@media screen and (max-width: 378px) {
+@media screen and (max-width: 768px) {
+    .cardImg {
+        max-width: 150px;
+    }
     .cardText {
         display: none;
     }

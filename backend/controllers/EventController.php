@@ -175,7 +175,7 @@ class EventController extends ActiveController
     {
         $query = Event::find();
 
-        $pagination = new Pagination(['totalCount' => $query->count()]);
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 3]);
         return $pagination->pageCount;
     }
 }
