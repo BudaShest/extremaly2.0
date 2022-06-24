@@ -35,7 +35,7 @@ const Basket = ({applications}) => {
                                                                         item={application}/>)
                         }
                     </Col>
-                    <Col className={style.summaryBlock} s={12} m={9}>
+                    <Col className={style.summaryBlock} s={12} m={3}>
                         <h4 className="white-text">Итого:</h4>
                         <span className={style.totalSpan}>{totalValue} руб.</span>
                         <Button className={style.submitForm} large>Подтвердить</Button>
