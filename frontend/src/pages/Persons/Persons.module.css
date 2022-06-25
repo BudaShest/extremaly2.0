@@ -34,7 +34,8 @@
     flex-direction: column;
     padding: 40px;
     background-attachment: fixed;
-    background-image: url('http://extremly.ru/img/place-parallax.jpeg');
+    /*background-image: url('http://extremly.ru/img/place-parallax.jpeg');*/
+    background-image: url("https://images.wallpaperscraft.ru/image/single/palatka_zvezdnoe_nebo_koster_134960_1920x1080.jpgs");
 }
 .topOfferText{
     padding: 30px;

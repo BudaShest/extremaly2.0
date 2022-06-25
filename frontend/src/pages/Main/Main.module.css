@@ -1,6 +1,7 @@
 .parallaxBlock {
     height: 500px;
-    background-image: url("http://extremly.ru/img/place-parallax.jpeg");
+    /*background-image: url("http://extremly.ru/img/place-parallax.jpeg");*/
+    background-image: url("https://images.wallpaperscraft.ru/image/single/palatka_zvezdnoe_nebo_koster_134960_1920x1080.jpg");
     background-attachment: fixed;
 }
 
